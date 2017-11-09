@@ -19,6 +19,10 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $dbAdapter      = $serviceManager->get('Zend\Db\Adapter\Adapter');
+        \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
     }
 
     public function getConfig()

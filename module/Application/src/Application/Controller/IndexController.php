@@ -14,10 +14,6 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        return new ViewModel();
-    }
 
     public function saludaAction(){
     	$response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
@@ -27,4 +23,5 @@ class IndexController extends AbstractActionController
         return $response;
     	exit;
     }
+
 }
