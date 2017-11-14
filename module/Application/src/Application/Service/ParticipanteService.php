@@ -22,7 +22,15 @@ class ParticipanteService
 
 		return $participantes;
 	}
-
+	
+	public function addParticipante($dataParticipante)
+	{
+	    $participante = $this->getParticipanteModel()->addParticipante($dataParticipante);
+	    print_r($participante);
+	    exit;
+	    
+	    return $participante;
+	}
 
 }
 ?>

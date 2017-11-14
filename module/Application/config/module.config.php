@@ -76,7 +76,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
-            'Application\Controller\Participante' => Controller\ParticipanteController::class
+            'Application\Controller\Participante' => Controller\ParticipanteController::class,
+            'Application\Controller\Prueba' => Controller\PruebaController::class
         ),
     ),
     'view_manager' => array(

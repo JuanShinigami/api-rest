@@ -6,14 +6,14 @@ use Zend\Db\TableGateway\Feature;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 
-class ParticipanteModel extends TableGateway
+class SismoGrupoModel extends TableGateway
 {
 	private $dbAdapter;
 
 	public function __construct()
 	{
 		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'participante';
+    	$this->table      = 'sismogrupo';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -27,8 +27,8 @@ class ParticipanteModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'alias'))
-			->from(array('p' => $this->table));
+			->columns(array('id', 'ubicacion', 'fecha', 'hora', 'participantes', 'idUsuarios'))
+			->from(array('s' => $this->table));
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		//print_r($selectString); exit;
 		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
@@ -38,27 +38,30 @@ class ParticipanteModel extends TableGateway
 		return $result;
 	}
 	
-	public function addParticipante($dataParticipante){
-	    
-	    $sql = new Sql($this->dbAdapter);
-	    $insertar = $sql->insert('participante');
-	    $array=array(
-	        
-	        'alias'=>$dataParticipante["alias"]
-	        
-	    );
-	    //		print_r($array);
-	    //		exit;
-	    $insertar->values($array);
-	    $selectString = $sql->getSqlStringForSqlObject($insertar);
-	    $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	    print_r($results);
-	    exit;
-	    return $results;
-	    
-	    
-	    
-	}
+	
 
+	public function addSismoGrupo($dataSismoGrupo){
+		
+		$sql = new Sql($this->dbAdapter);
+		$insertar = $sql->insert('sismogrupo');
+		$array=array(
+			
+			'ubicacion'=>$dataSismoGrupo["ubicacion"],
+			'fecha'=>$dataSismoGrupo["fecha"],
+			'hora'=>$dataSismoGrupo["hora"],
+			'participantes'=>$dataSismoGrupo["participantes"],
+			'idUsuarios'=>$dataSismoGrupo["idUsuarios"]
+		);
+		print_r($array);
+		exit;
+		$insertar->values($array);
+		$selectString = $sql->getSqlStringForSqlObject($insertar);
+		$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+		print_r($results);
+		exit;
+		return $results;
+
+	}
+	
 }
 ?>
