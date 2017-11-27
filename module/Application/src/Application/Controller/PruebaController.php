@@ -56,20 +56,11 @@ class PruebaController extends AbstractActionController
 //        return $response;
 //        exit;
 //    }
-    
-//	public function listaUsuariosAction(){
-//
-//        $usuarios = $this->getUsuariosService()->getAll();
-//        $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-//                "response" => $usuarios,
-//            )));
-//            
-//        return $response;
-//        exit;
-//    }
+
     
     public function addUserAction(){
-    	$arrayUser = array("folio"=>2342,"nombre"=>"Pepe shfjhsjkhfkjshdkfjhsdkjfhskjdfhksjdfhkjsdhjjkhdfkjshdkfjhskdjfhskjdfhksjdhfkjsdhfkjshdkjfhskdjfhksjdfhskjdfhkjh", "telefono"=>"34534534", "correo"=>"kdjsk@gmail.com");
+    	$arrayUser = array("nombre"=>"Thaili", "telefono"=>"777777", "correo"=>"thaili@gmail.com");
+//     	$result = $this->getUsuarioService()->addUsuario($arrayUser);
     	$result = $this->getUsuarioService()->addUsuario($arrayUser);
     	echo "Este es el resultado de agregar usuario ---> ".$result;
     	exit;
@@ -83,8 +74,8 @@ class PruebaController extends AbstractActionController
     	exit;
     }
     
-    public function addParticipanteAction(){
-        $arrayParticipante = array("idParticipante"=>1232323,"alias"=>"Allison");
+public function addParticipanteAction(){
+        $arrayParticipante = array("idParticipante"=>111,"alias"=>"Pamela");
         $result = $this->getParticipanteService()->addParticipante($arrayParticipante);
         echo "Este es el resultado de agregar usuario ---> ".$result;
         exit;
@@ -103,6 +94,42 @@ class PruebaController extends AbstractActionController
         echo "Este es el resultado de agregar usuario ---> ".$result;
         exit;
     }
+    
+    
+    public function buscarMensajeAction(){
+        
+        $buscaMsj = $this->getParticipanteService()->getAll();
+        $buscaMsj = $this->getMensajeService()->buscarMensaje(1);
+        $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+            "response" => $buscaMsj,
+        )));
+    
+       return $response;
+       exit;
+    }
+    public function buscarDetallesAction(){
+        
+        $buscaDetalle = $this->getSismoGrupoService()->buscarDetalles(1);
+        $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+            "response" => $buscaDetalle,
+        )));
+        
+        return $response;
+        exit;
+    }
+    
+    public function buscarDetallesParticipanteAction(){
+        
+        $buscaDetalleParticipante = $this->getParticipanteSismoService()->buscarDetalleParticipante(1);
+        $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+            "response" => $buscaDetalleParticipante,
+        )));
+        
+        return $response;
+        exit;
+    }
+    
+    
 }
 
 

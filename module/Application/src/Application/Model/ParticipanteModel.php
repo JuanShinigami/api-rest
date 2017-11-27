@@ -45,7 +45,6 @@ class ParticipanteModel extends TableGateway
 	    $array=array(
 	        
 	        'alias'=>$dataParticipante["alias"]
-	        
 	    );
 	    //		print_r($array);
 	    //		exit;
@@ -55,8 +54,6 @@ class ParticipanteModel extends TableGateway
 	    print_r($results);
 	    exit;
 	    return $results;
-	    
-	    
 	    
 	}
 

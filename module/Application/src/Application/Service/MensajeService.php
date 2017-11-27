@@ -32,5 +32,12 @@ class MensajeService
 
 		return $mensaje;
 	}
+	
+	public function buscarMensaje($id)
+	{
+	    $mensaje = $this->getMensajeModel()->buscarMensaje($id);
+	    
+	    return $mensaje;
+	}
 }
 ?>

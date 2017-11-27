@@ -57,6 +57,29 @@ class MensajeModel extends TableGateway
 		return $results;
 		
 	}
+	
+	public function buscarMensaje($id) {
+	    
+	    $sql = new Sql($this->dbAdapter);
+	    $select = $sql->select();
+	    $select
+	    ->columns(array('id', 'mensajeCreador' , 'idSismogrupo'))
+	    ->from(array('m' => $this->table))
+	    ->where(array('idSismogrupo'=>$id));
+	    $selectString = $sql->getSqlStringForSqlObject($select);
+	    //print_r($selectString); exit;
+	    $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	    $result       = $execute->toArray();
+	    //echo "<pre>"; print_r($result); exit;
+	    
+	    print_r($result);
+	    exit;
+	    
+	    return $result;;
+	    	    
+	}
+	
+	
 
 }
 ?>

@@ -62,5 +62,26 @@ class ParticipanteSismoModel extends TableGateway
 
 	}
 	
+	public function buscarDetalleParticipante($id){
+	    $sql = new Sql($this->dbAdapter);
+	    	    $select = $sql->select();
+	    	    $select
+	    	    ->from(array('t1'=>'participante_sismo_grupo'), array())
+	    	    ->join(array('t2'=>'sismogrupo'), 't1.idSismo = t2.id', array())
+	    	    ->join(array('t3'=>'participante'), 't3.id=t1.idParticipante' , array());
+	    
+	            	        
+	            $selectString = $sql->getSqlStringForSqlObject($select);
+	            	        //print_r($selectString); exit;
+	            $execute = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	            $result = $execute->toArray();
+	            	        //echo "<pre>"; print_r($result); exit;
+	            
+	            // 	        print_r($result);
+	            // 	        exit;
+	            
+	            	        return $result;
+	}
+	
 }
 ?>

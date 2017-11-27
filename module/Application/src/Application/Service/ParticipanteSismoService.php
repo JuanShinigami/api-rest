@@ -35,5 +35,11 @@ class ParticipanteSismoService
 
 	}
 
+	public function buscarDetalleParticipante($id){
+	    
+	    $detallesParticipante = $this->getParticipanteSismoModel()->buscarDetalleParticipante($id);
+	    
+	    return $detallesParticipante;
+	}
 }
 ?>

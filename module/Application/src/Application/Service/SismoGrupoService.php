@@ -3,6 +3,8 @@
 namespace Application\Service;
 
 use Application\Model\SismoGrupoModel;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class SismoGrupoService
 {
@@ -35,5 +37,17 @@ class SismoGrupoService
 
 	}
 
+	public function buscarDetalles($id) {
+	    
+	    $detalles = $this->getSismoGrupoModel()->buscarDetalles($id);
+	    
+	    return $detalles;
+
+	    
+	}
+	
+	
+	
+	
 }
 ?>

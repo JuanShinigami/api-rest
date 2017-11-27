@@ -20,7 +20,7 @@ class SismoGrupoModel extends TableGateway
 	}
 
 	/**
-	* OBTEMOS TODOS los imeis
+	* OBTEMOS TODOS los sismos
 	*/
 	public function getAll()
 	{
@@ -61,6 +61,43 @@ class SismoGrupoModel extends TableGateway
 		exit;
 		return $results;
 
+	}
+	
+	public function buscarDetalles($id) {
+	    
+	    $sql = new Sql($this->dbAdapter);
+	    $select = $sql->select();
+
+	        
+// 	    $select
+// 	    ->from(array('t1'=>'sismogrupo'), array('id'))
+// 	    ->join(array('t2'=>'participante_sismo_grupo'), 't1.id = t2.idSismo' , array('tiempo_inicio', 'tiempo_estoy_listo'))
+// 	    ->join(array('t3'=>'participante'), 't2.idParticipante = t3.id' , array('alias'))
+// 	    ->where(array('t1.id'=> $id));
+	    
+	    
+	    
+	    $select
+	    ->from(array('t1'=>'participante'), array('alias'))
+	    ->join(array('t2'=>'participante_sismo_grupo'), 't1.id = t2.idParticipante' , array('tiempo_inicio', 'tiempo_estoy_listo'))
+	    ->join(array('t3'=>'sismogrupo'), 't2.idSismo = t3.id' , array());
+	    
+// 	        print_r($result);
+// 	        exit;
+	        $selectString = $sql->getSqlStringForSqlObject($select);
+	        //print_r($selectString); exit;
+	        $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $result       = $execute->toArray();
+	        //echo "<pre>"; print_r($result); exit;
+	        
+// 	        print_r($result);
+// 	        exit;
+	        
+	        return $result;
+
+	
+	       
+	    
 	}
 	
 }
