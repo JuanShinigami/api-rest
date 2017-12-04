@@ -58,7 +58,7 @@ class SismoGrupoModel extends TableGateway
 		$selectString = $sql->getSqlStringForSqlObject($insertar);
 		$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 		print_r($results);
-		exit;
+		
 		return $results;
 
 	}
@@ -74,9 +74,7 @@ class SismoGrupoModel extends TableGateway
 // 	    ->join(array('t2'=>'participante_sismo_grupo'), 't1.id = t2.idSismo' , array('tiempo_inicio', 'tiempo_estoy_listo'))
 // 	    ->join(array('t3'=>'participante'), 't2.idParticipante = t3.id' , array('alias'))
 // 	    ->where(array('t1.id'=> $id));
-	    
-	    
-	    
+	        
 	    $select
 	    ->from(array('t1'=>'participante'), array('alias'))
 	    ->join(array('t2'=>'participante_sismo_grupo'), 't1.id = t2.idParticipante' , array('tiempo_inicio', 'tiempo_estoy_listo'))
@@ -94,10 +92,6 @@ class SismoGrupoModel extends TableGateway
 // 	        exit;
 	        
 	        return $result;
-
-	
-	       
-	    
 	}
 	
 }

@@ -67,7 +67,7 @@ class ParticipanteSismoModel extends TableGateway
 	    	    $select = $sql->select();
 	    	    $select
 	    	    ->from(array('t1'=>'participante_sismo_grupo'), array())
-	    	    ->join(array('t2'=>'sismogrupo'), 't1.idSismo = t2.id', array())
+	    	    ->join(array('t2'=>'sismogrupo'), 't1.idSismo = t2.id', array('ubicacion','fecha','hora'))
 	    	    ->join(array('t3'=>'participante'), 't3.id=t1.idParticipante' , array());
 	    
 	            	        

@@ -59,7 +59,7 @@ class PruebaController extends AbstractActionController
 
     
     public function addUserAction(){
-    	$arrayUser = array("nombre"=>"Thaili", "telefono"=>"777777", "correo"=>"thaili@gmail.com");
+    	$arrayUser = array("nombre"=>"Pamela", "telefono"=>"888888", "correo"=>"pamela@gmail.com");
 //     	$result = $this->getUsuarioService()->addUsuario($arrayUser);
     	$result = $this->getUsuarioService()->addUsuario($arrayUser);
     	echo "Este es el resultado de agregar usuario ---> ".$result;

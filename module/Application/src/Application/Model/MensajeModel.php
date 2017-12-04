@@ -53,7 +53,7 @@ class MensajeModel extends TableGateway
 		$selectString = $sql->getSqlStringForSqlObject($insertar);
 		$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 		print_r($results);
-		exit;
+		
 		return $results;
 		
 	}
@@ -73,7 +73,7 @@ class MensajeModel extends TableGateway
 	    //echo "<pre>"; print_r($result); exit;
 	    
 	    print_r($result);
-	    exit;
+	  
 	    
 	    return $result;;
 	    	    

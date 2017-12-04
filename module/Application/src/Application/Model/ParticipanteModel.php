@@ -52,7 +52,7 @@ class ParticipanteModel extends TableGateway
 	    $selectString = $sql->getSqlStringForSqlObject($insertar);
 	    $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 	    print_r($results);
-	    exit;
+	   
 	    return $results;
 	    
 	}
