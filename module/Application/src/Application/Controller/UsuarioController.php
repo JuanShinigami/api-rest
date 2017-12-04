@@ -28,16 +28,16 @@ class UsuarioController extends AbstractActionController
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $decodePostData,
             )));
-            echo print_r($decodePostData);exit;
+            //echo print_r($decodePostData);exit;
         	//return $response; exit;
             
             // PARSEAMOS JSON A ARRAY PHP
+            $result = $this->getUsuarioService()->addUsuario($decodePostData);
+
+            echo print_r($result);exit;
     	}
 
-    	$arrayUser = array("folio"=>2342,"nombre"=>"", "telefono"=>"34534534", "correo"=>"kdjsk@gmail.com");
-    	$result = $this->getUsuarioService()->addUsuario($arrayUser);
-    	echo "Este es el resultado de agregar usuario ---> ".$result;
-    	exit;
+    	
     }
 
 }
