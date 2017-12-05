@@ -40,20 +40,36 @@ class ParticipanteModel extends TableGateway
 	
 	public function addParticipante($dataParticipante){
 	    
-	    $sql = new Sql($this->dbAdapter);
-	    $insertar = $sql->insert('participante');
-	    $array=array(
-	        
-	        'alias'=>$dataParticipante["alias"]
-	    );
+	    $flag = false;
+	    $respuesta = array();
+	    
+	    
+	    try {
+	    	$sql = new Sql($this->dbAdapter);
+	    	$insertar = $sql->insert('participante');
+		    $array=array(
+		        'id'=>$dataParticipante["id"],
+		        'alias'=>$dataParticipante["alias"]
+		    );
 	    //		print_r($array);
 	    //		exit;
-	    $insertar->values($array);
-	    $selectString = $sql->getSqlStringForSqlObject($insertar);
-	    $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	    print_r($results);
+		    $insertar->values($array);
+		    $selectString = $sql->getSqlStringForSqlObject($insertar);
+	    	$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	    	$flag = true;
+	    	//echo "BIEN";
+	    }catch (\PDOException $e) {
+        	//echo "First Message " . $e->getMessage() . "<br/>";
+        	$flag = false;
+    	}catch (\Exception $e) {
+        	//echo "Second Message: " . $e->getMessage() . "<br/>";
+    	}
+    	$respuesta['status'] = $flag;
+	    //echo print_r($results->toArray());
+	    
+	    //$results = $execute->toArray();
 	   
-	    return $results;
+	    return $respuesta;
 	    
 	}
 
