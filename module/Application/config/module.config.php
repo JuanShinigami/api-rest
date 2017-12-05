@@ -78,7 +78,8 @@ return array(
             'Application\Controller\Index' => Controller\IndexController::class,
             'Application\Controller\Participante' => Controller\ParticipanteController::class,
             'Application\Controller\Prueba' => Controller\PruebaController::class,
-            'Application\Controller\Usuario' => Controller\UsuarioController::class
+            'Application\Controller\Usuario' => Controller\UsuarioController::class,
+            'Application\Controller\SismoGrupo' => Controller\SismoGrupoController::class
         ),
     ),
     'view_manager' => array(
