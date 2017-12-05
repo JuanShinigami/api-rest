@@ -26,8 +26,6 @@ class UsuarioService
 
 	public function addUsuario($dataUser)
 	{
-	    
-	    // $arrayResponse;
 // 	    print_r($dataUser['nombre']);
 	   
 // 	    $nombre=$dataUser['nombre'];
@@ -55,40 +53,40 @@ class UsuarioService
 	   //echo  $folioNuevo;
 	   
 	   
-	   $usuarioCorreo = $this->getUsuarioModel()->existeCorreo($dataUser);
-	   
-	   //print_r($usuarioCorreo);
-	   if(!empty($usuarioCorreo)){
-	       $arrayResponse = array("flag"=>'false');
-	   }else{
-	       $usuario = $this->getUsuarioModel()->existe($folioNuevo);
-	       
-	       
-	       if (!empty($usuario[0]['id'])){
-	           
-	           $folioExtrae = substr($folioNuevo,2);
-	           
-	           echo "Extracion ".$folioExtrae."\n";
-	           
-	           $folioAct=$folioExtrae + 100;
-	           
-	           echo "Suma ". $folioAct;
-	           
-	           
-	           $folioNuevo=substr($folioNuevo,0,2). $folioAct;
-	           echo" \n";
-	           echo "folio Actualizado ".$folioNuevo;
-	           
-	       }
-	       
-	       $usuario = $this->getUsuarioModel()->addUsuarios($dataUser, $folioNuevo);
-	       
-	       $arrayResponse = array("flag"=>'true', "usuario"=>$usuario);
-	   }
-	   echo print_r($arrayResponse);
+	    
+	   $usuario = $this->getUsuarioModel()->existe($folioNuevo);
+		
+		//print_r($dataUser['nombre']);
+		
 	   exit;
-	   
-	   return $arrayResponse;
+	  
+		if (empty($usuario[0]['id'])){
+		    
+
+		   $usuario = $this->getUsuarioModel()->addUsuarios($dataUser, $folioNuevo);
+ 
+		}else {
+		    
+ 
+		    $folioExtrae = substr($folioNuevo,2);
+		   
+		    echo "Extracion ".$folioExtrae."\n";
+		    
+		    $folioAct=$folioExtrae + 100;
+		    
+		    echo "Suma ". $folioAct;
+		   
+		    
+		    $folioNuevo=substr($folioNuevo,0,2). $folioAct;
+		    echo" \n";
+		    echo "folio Actualizado ".$folioNuevo;
+		  
+		
+// 	   $usuario = $this->getUsuarioModel()->updateUsuarios($usuario,$folioNuevo);
+		    $usuario = $this->getUsuarioModel()->addUsuarios($dataUser, $folioNuevo);
+		}
+
+		return $usuario;
 	}
 }
 ?>

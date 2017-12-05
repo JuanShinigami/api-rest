@@ -8,7 +8,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Update;
 use Zend\Filter\Null;
 
-class UsuarioModel extends TableGateway
+class RecuperarFolioModel extends TableGateway
 {
 	private $dbAdapter;
 
@@ -47,18 +47,8 @@ class UsuarioModel extends TableGateway
 	    $res=$consulta->toArray();
 	    print_r($res);
 	    
-	    return $res;
-	}
-	
-	public function existeCorreo($dataUser){
-	    // 	    $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-	    $consulta=$this->dbAdapter->query("select id , folio, correo FROM usuarios where correo = '" . $dataUser['correo']."'" ,Adapter::QUERY_MODE_EXECUTE);
-	    
-	    $res=$consulta->toArray();
-	  
-	   // print_r($res);
-	   
-	    
+	   exit;
+	     	    
 	    return $res;
 	}
 	
