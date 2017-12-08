@@ -34,7 +34,7 @@ class UsuarioController extends AbstractActionController
             // PARSEAMOS JSON A ARRAY PHP
             $result = $this->getUsuarioService()->addUsuario($decodePostData);
 
-            echo print_r($result);exit;
+            //echo print_r($result);exit;
     	}
 
     	
