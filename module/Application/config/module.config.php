@@ -79,7 +79,9 @@ return array(
             'Application\Controller\Participante' => Controller\ParticipanteController::class,
             'Application\Controller\Prueba' => Controller\PruebaController::class,
             'Application\Controller\Usuario' => Controller\UsuarioController::class,
-            'Application\Controller\SismoGrupo' => Controller\SismoGrupoController::class
+            'Application\Controller\SismoGrupo' => Controller\SismoGrupoController::class,
+            'Application\Controller\Mensaje' => Controller\MensajeController::class,
+            'Application\Controller\ParticipanteSismo' => Controller\ParticipanteSismoController::class
         ),
     ),
     'view_manager' => array(
