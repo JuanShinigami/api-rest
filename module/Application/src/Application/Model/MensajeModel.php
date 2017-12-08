@@ -65,7 +65,7 @@ class MensajeModel extends TableGateway
 	    }
 	    $respuesta['status'] = $flag;
 
-		return $results;
+		return $respuesta;
 		
 	}
 	

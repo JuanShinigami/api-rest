@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\MensajeService;
 
-class ParticipanteController extends AbstractActionController
+class MensajeController extends AbstractActionController
 {
 
     private $mensajeService;
