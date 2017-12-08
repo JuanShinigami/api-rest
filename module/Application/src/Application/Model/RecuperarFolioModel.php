@@ -40,9 +40,9 @@ class RecuperarFolioModel extends TableGateway
 		return $result;
 	}
 	
-	public function existe($folioNuevo){
+	public function recuperaCorreo($dataUser){
 // 	    $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-	    $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where folio = '" . $folioNuevo."'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $consulta=$this->dbAdapter->query("select id , folio, correo FROM usuarios where correo = '" . $dataUser['correo']."'" ,Adapter::QUERY_MODE_EXECUTE);
 	   
 	    $res=$consulta->toArray();
 	    print_r($res);
@@ -51,55 +51,6 @@ class RecuperarFolioModel extends TableGateway
 	     	    
 	    return $res;
 	}
-	
-	public function addUsuarios($dataUser,$folioNuevo){
-
-	        
-	        $sql = new Sql($this->dbAdapter);
-	        $insertar = $sql->insert('usuarios');
-	        
-	        $array=array(
-	            
-	            'folio'=>$folioNuevo,
-	            'nombre'=>$dataUser["nombre"],
-	            'telefono'=>$dataUser["telefono"],
-	            'correo'=>$dataUser["correo"]
-	        );
-	        
-	        $insertar->values($array);
-	        
-	        $selectString = $sql->getSqlStringForSqlObject($insertar);
-	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	        
-	        print_r($array);
- 	 }
- 	    
- 	    
- 	    
- 	 public function updateUsuarios($usuario,$folioNuevo){
- 	     
- 	     print_r($usuario[0]['id']);
- 	    
- 	   
-	        $sql = new Sql($this->dbAdapter);
-	        $update = $sql->update();
-	        $update->table('usuarios');
-	        
-	        $array=array(
-	            
-	            'folio'=>$folioNuevo
-	        );
-	        
-	        $update->set($array);
-	        $update->where(array('id' => $usuario[0]['id']));
-	        
-	        $selectString = $sql->getSqlStringForSqlObject($update);
-	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	        
-	        print_r($array);
- 	 }
-	
-
 }
 
 ?>
