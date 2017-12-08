@@ -64,7 +64,10 @@ class UsuarioModel extends TableGateway
 	
 	public function addUsuarios($dataUser,$folioNuevo){
 
-	        
+	    $flag = false;
+	    $respuesta = array();
+	    
+	    try {
 	        $sql = new Sql($this->dbAdapter);
 	        $insertar = $sql->insert('usuarios');
 	        
@@ -80,35 +83,55 @@ class UsuarioModel extends TableGateway
 	        
 	        $selectString = $sql->getSqlStringForSqlObject($insertar);
 	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $flag = true;
+	    }catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
 	        
-	        print_r($array);
+	    return $respuesta;
  	 }
  	    
  	    
  	    
  	 public function updateUsuarios($usuario,$folioNuevo){
  	     
- 	     print_r($usuario[0]['id']);
+//  	     print_r($usuario[0]['id']);
  	    
  	   
-	        $sql = new Sql($this->dbAdapter);
-	        $update = $sql->update();
-	        $update->table('usuarios');
+ 	     $flag = false;
+ 	     $respuesta = array();
+ 	     
+ 	     
+ 	     try {
+ 	         $sql = new Sql($this->dbAdapter);
+ 	         $update = $sql->update();
+ 	         $update->table('usuarios');
+ 	         
+ 	         $array=array(
+ 	             
+ 	             'folio'=>$folioNuevo
+ 	         );
+ 	         
+ 	         $update->set($array);
+ 	         $update->where(array('id' => $usuario[0]['id']));
+ 	         
+ 	         $selectString = $sql->getSqlStringForSqlObject($update);
+ 	         $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+ 	         
+ 	     }catch (\PDOException $e) {
+ 	         //echo "First Message " . $e->getMessage() . "<br/>";
+ 	         $flag = false;
+ 	     }catch (\Exception $e) {
+ 	         //echo "Second Message: " . $e->getMessage() . "<br/>";
+ 	     }
+ 	     $respuesta['status'] = $flag;
+ 	     return $respuesta;
 	        
-	        $array=array(
-	            
-	            'folio'=>$folioNuevo
-	        );
-	        
-	        $update->set($array);
-	        $update->where(array('id' => $usuario[0]['id']));
-	        
-	        $selectString = $sql->getSqlStringForSqlObject($update);
-	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	        
-	        print_r($array);
  	 }
-	
 
 }
 

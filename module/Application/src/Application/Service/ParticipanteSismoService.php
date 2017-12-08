@@ -29,8 +29,7 @@ class ParticipanteSismoService
 		
 		$participantesSismo = $this->getParticipanteSismoModel()->addParticipanteSismo($dataPartSismo);
 		print_r($participantesSismo);
-		exit;
-
+		
 		return $participantesSismo;
 
 	}

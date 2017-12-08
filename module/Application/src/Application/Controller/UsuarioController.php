@@ -19,25 +19,37 @@ class UsuarioController extends AbstractActionController
     	return $this->usuarioService = new UsuarioService();
     }
 
+    public function listaAction(){
+        
+        $usuario = $this->getUsuarioService()->getAll();
+        $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+            "response" => $usuario,
+        )));
+        
+        return $response;
+        //exit;
+    }
     public function agregarAction(){
 
     	$request = $this->getRequest();
     	if ($request->isPost()) {
     		$postData       = $this->getRequest()->getContent();
     		$decodePostData = json_decode($postData, true);
+          
+    		$result = $this->getUsuarioService()->addUsuario($decodePostData);
+    		
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $decodePostData,
             )));
+            
+            return $response;
             //echo print_r($decodePostData);exit;
         	//return $response; exit;
-            
             // PARSEAMOS JSON A ARRAY PHP
-            $result = $this->getUsuarioService()->addUsuario($decodePostData);
-
             //echo print_r($result);exit;
     	}
 
-    	
+    	exit;
     }
 
 }

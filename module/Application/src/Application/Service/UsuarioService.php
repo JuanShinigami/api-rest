@@ -85,8 +85,8 @@ class UsuarioService
 	       
 	       $arrayResponse = array("flag"=>'true', "usuario"=>$usuario);
 	   }
-	   echo print_r($arrayResponse);
-	   exit;
+// 	   echo print_r($arrayResponse);
+// 	   exit;
 	   
 	   return $arrayResponse;
 	}

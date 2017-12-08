@@ -2,33 +2,33 @@
 namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Service\ParticipanteService;
+use Application\Service\ParticipanteSismoService;
 
-class ParticipanteController extends AbstractActionController
+class ParticipanteSismoController extends AbstractActionController
 {
 
-    private $participanteService;
+    private $participanteSismoService;
 
     /**
      * Instanciamos el servicio de participantes
      */
-    public function getParticipanteService()
+    public function getParticipanteSismoService()
     {
-        return $this->participanteService = new ParticipanteService();
+        return $this->participanteSismoService = new ParticipanteSismoService();
     }
 
     public function listaAction(){
 
-        $participantes = $this->getParticipanteService()->getAll();
+        $participantesSismo = $this->getParticipanteSismoService()->getAll();
         $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-                "response" => $participantes,
+                "response" => $participantesSismo,
             )));
             
         return $response;
         //exit;
     }
 
-    public function addParticipanteAction(){
+    public function addParticipanteSismoAction(){
 
 
         $request = $this->getRequest();
@@ -37,7 +37,7 @@ class ParticipanteController extends AbstractActionController
             $decodePostData = json_decode($postData, true);
 
             
-            $result = $this->getParticipanteService()->addParticipante($decodePostData);
+            $result = $this->getParticipanteSismoService()->addParticipanteSismo($decodePostData);
                    
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,

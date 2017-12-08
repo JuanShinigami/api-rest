@@ -41,25 +41,41 @@ class SismoGrupoModel extends TableGateway
 	
 
 	public function addSismoGrupo($dataSismoGrupo){
+	    
+	    $flag = false;
+	    $respuesta = array();
+	    
+	    try {
+	        
+	        $sql = new Sql($this->dbAdapter);
+	        $insertar = $sql->insert('sismogrupo');
+	        $array=array(
+	            
+	            'ubicacion'=>$dataSismoGrupo["ubicacion"],
+	            'fecha'=>$dataSismoGrupo["fecha"],
+	            'hora'=>$dataSismoGrupo["hora"],
+	            'participantes'=>$dataSismoGrupo["participantes"],
+	            'idUsuarios'=>$dataSismoGrupo["idUsuarios"]
+	        );
+// 	        print_r($array);
+// 	        exit;
+	        $insertar->values($array);
+	        $selectString = $sql->getSqlStringForSqlObject($insertar);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $flag = true;
+	        
+	    }
+	    catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+	    
+// 		print_r($results);
 		
-		$sql = new Sql($this->dbAdapter);
-		$insertar = $sql->insert('sismogrupo');
-		$array=array(
-			
-			'ubicacion'=>$dataSismoGrupo["ubicacion"],
-			'fecha'=>$dataSismoGrupo["fecha"],
-			'hora'=>$dataSismoGrupo["hora"],
-			'participantes'=>$dataSismoGrupo["participantes"],
-			'idUsuarios'=>$dataSismoGrupo["idUsuarios"]
-		);
-		print_r($array);
-		exit;
-		$insertar->values($array);
-		$selectString = $sql->getSqlStringForSqlObject($insertar);
-		$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-		print_r($results);
-		
-		return $results;
+		return $respuesta;
 
 	}
 	

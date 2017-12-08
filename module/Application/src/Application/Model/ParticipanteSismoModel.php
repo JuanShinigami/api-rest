@@ -41,24 +41,38 @@ class ParticipanteSismoModel extends TableGateway
 	
 
 	public function addParticipanteSismo($dataPartSismo){
+	   
+	    $flag = false;
+	    $respuesta = array();
+	    
+	    try {
+	        $sql = new Sql($this->dbAdapter);
+	        $insertar = $sql->insert('participante_sismo_grupo');
+	        $array=array(
+	            
+	            'idParticipante'=>$dataPartSismo["idParticipante"],
+	            'idSismo'=>$dataPartSismo["idSismo"],
+	            'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
+	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"]
+	        );
+	        
+	        $insertar->values($array);
+	        $selectString = $sql->getSqlStringForSqlObject($insertar);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $flag = true;
+	        
+	    }catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
 		
-		$sql = new Sql($this->dbAdapter);
-		$insertar = $sql->insert('participante_sismo_grupo');
-		$array=array(
-			
-			'idParticipante'=>$dataPartSismo["idParticipante"],
-			'idSismo'=>$dataPartSismo["idSismo"],
-			'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
-			'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"]
-		);
-		print_r($array);
-		exit;
-		$insertar->values($array);
-		$selectString = $sql->getSqlStringForSqlObject($insertar);
-		$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-		print_r($results);
-		exit;
-		return $results;
+// 		print_r($array);
+// 		exit;
+	
+	    return $respuesta;
 
 	}
 	

@@ -2,33 +2,33 @@
 namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Service\ParticipanteService;
+use Application\Service\MensajeService;
 
 class ParticipanteController extends AbstractActionController
 {
 
-    private $participanteService;
+    private $mensajeService;
 
     /**
      * Instanciamos el servicio de participantes
      */
-    public function getParticipanteService()
+    public function getMensajeService()
     {
-        return $this->participanteService = new ParticipanteService();
+        return $this->mensajeService = new MensajeService();
     }
 
     public function listaAction(){
 
-        $participantes = $this->getParticipanteService()->getAll();
+        $mensaje = $this->getMensajeService()->getAll();
         $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-                "response" => $participantes,
+                "response" => $mensaje,
             )));
             
         return $response;
         //exit;
     }
 
-    public function addParticipanteAction(){
+    public function addMensajeAction(){
 
 
         $request = $this->getRequest();
@@ -37,7 +37,7 @@ class ParticipanteController extends AbstractActionController
             $decodePostData = json_decode($postData, true);
 
             
-            $result = $this->getParticipanteService()->addParticipante($decodePostData);
+            $result = $this->getMensajeService()->addMensaje($decodePostData);
                    
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,

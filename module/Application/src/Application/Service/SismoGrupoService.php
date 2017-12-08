@@ -30,9 +30,6 @@ class SismoGrupoService
 	{
 		
 		$sismoGrupo = $this->getSismoGrupoModel()->addSismoGrupo($dataSismoGrupo);
-		print_r($sismoGrupo);
-		exit;
-
 		return $sismoGrupo;
 
 	}

@@ -40,20 +40,31 @@ class MensajeModel extends TableGateway
 	
 	public function addMensaje($dataMensaje){
 		
-		$sql = new Sql($this->dbAdapter);
-		$insertar = $sql->insert('mensajes');
-		$array=array(
-			
-		    'mensajeCreador'=>$dataMensaje["mensajeCreador"],
-		    'idSismogrupo'=>$dataMensaje["idSismogrupo"]
-		);
-//		print_r($array);
-//		exit;
-		$insertar->values($array);
-		$selectString = $sql->getSqlStringForSqlObject($insertar);
-		$results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-		print_r($results);
-		
+	    $flag = false;
+	    $respuesta = array();
+	    try {
+	        $sql = new Sql($this->dbAdapter);
+	        $insertar = $sql->insert('mensajes');
+	        $array=array(
+	            
+	            'mensajeCreador'=>$dataMensaje["mensajeCreador"],
+	            'idSismogrupo'=>$dataMensaje["idSismogrupo"]
+	        );
+	        //		print_r($array);
+	        //		exit;
+	        $insertar->values($array);
+	        $selectString = $sql->getSqlStringForSqlObject($insertar);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $flag = true;
+	    }
+	    catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+
 		return $results;
 		
 	}
@@ -72,9 +83,7 @@ class MensajeModel extends TableGateway
 	    $result       = $execute->toArray();
 	    //echo "<pre>"; print_r($result); exit;
 	    
-	    print_r($result);
-	  
-	    
+// 	    print_r($result);
 	    return $result;;
 	    	    
 	}

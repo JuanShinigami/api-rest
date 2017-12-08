@@ -27,10 +27,7 @@ class MensajeService
 	public function addMensaje($dataMensaje)
 	{
 	    $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
-	    print_r($mensaje);
-		exit;
-
-		return $mensaje;
+	  	return $mensaje;
 	}
 	
 	public function buscarMensaje($id)
