@@ -37,4 +37,21 @@ class SismoGrupoController extends AbstractActionController
         }
         exit();
     }
+    public function buscarSismoDetalleAction(){
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            
+            $result = $this->getSismoService()->buscarDetalles($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
 }

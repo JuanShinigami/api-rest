@@ -5,6 +5,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\Feature;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Where;
 
 class ParticipanteSismoModel extends TableGateway
 {
@@ -90,14 +91,14 @@ class ParticipanteSismoModel extends TableGateway
 	
 
 	
-	public function buscarDetalleParticipante($id){
+	public function buscarDetalleParticipante($decodePostData){
 	    $sql = new Sql($this->dbAdapter);
 	    	    $select = $sql->select();
 	    	    $select
 	    	    ->from(array('t1'=>'participante_sismo_grupo'), array())
 	    	    ->join(array('t2'=>'sismogrupo'), 't1.idSismo = t2.id', array('ubicacion','fecha','hora'))
-	    	    ->join(array('t3'=>'participante'), 't3.id=t1.idParticipante' , array());
-	    
+	    	    ->join(array('t3'=>'participante'), 't3.id=t1.idParticipante' , array())
+	    	    ->Where(array('t1.idSismo'=>$decodePostData['idSismo']));
 	            	        
 	            $selectString = $sql->getSqlStringForSqlObject($select);
 	            	        //print_r($selectString); exit;

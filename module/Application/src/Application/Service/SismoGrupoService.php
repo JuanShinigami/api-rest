@@ -35,9 +35,9 @@ class SismoGrupoService
 
 	}
 
-	public function buscarDetalles($id) {
+	public function buscarDetalles($decodePostData) {
 	    
-	    $detalles = $this->getSismoGrupoModel()->buscarDetalles($id);
+	    $detalles = $this->getSismoGrupoModel()->buscarDetalles($decodePostData);
 	    
 	    return $detalles;
 

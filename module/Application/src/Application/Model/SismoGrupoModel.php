@@ -121,7 +121,7 @@ class SismoGrupoModel extends TableGateway
         return $respuesta;
     }
 
-    public function buscarDetalles($id)
+    public function buscarDetalles($decodePostData)
     {
         $sql = new Sql($this->dbAdapter);
         $select = $sql->select();
@@ -129,7 +129,7 @@ class SismoGrupoModel extends TableGateway
         $select->from(array(
             't1' => 'sismogrupo'
         ), array())->where(array(
-            'idUsuarios' => $id
+            'idUsuarios' => $decodePostData['id']
         ));
         
         // print_r($result);

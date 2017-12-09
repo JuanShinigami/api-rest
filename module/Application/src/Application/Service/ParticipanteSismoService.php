@@ -44,9 +44,9 @@ class ParticipanteSismoService
 	
 	
 
-	public function buscarDetalleParticipante($id){
+	public function buscarDetalleParticipante($decodePostData){
 	    
-	    $detallesParticipante = $this->getParticipanteSismoModel()->buscarDetalleParticipante($id);
+	    $detallesParticipante = $this->getParticipanteSismoModel()->buscarDetalleParticipante($decodePostData);
 	    
 	    return $detallesParticipante;
 	}
