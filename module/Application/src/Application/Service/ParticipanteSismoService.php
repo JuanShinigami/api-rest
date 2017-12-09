@@ -3,15 +3,23 @@
 namespace Application\Service;
 
 use Application\Model\ParticipanteSismoModel;
+use Application\Model\SismoGrupoModel;
 
 class ParticipanteSismoService
 {
 	private $participanteSismoModel;
+	private $sismoGrupoModel;
 	
 	private function getParticipanteSismoModel()
 	{
 		return $this->participanteSismoModel = new ParticipanteSismoModel();
 	}
+	
+	private function getSismoGrupoModel()
+	{
+	    return $this->sismoGrupoModel = new SismoGrupoModel();
+	}
+	
 
 	/**
 	* Obtenermos todos los participantes
@@ -28,11 +36,13 @@ class ParticipanteSismoService
 	{
 		
 		$participantesSismo = $this->getParticipanteSismoModel()->addParticipanteSismo($dataPartSismo);
-		print_r($participantesSismo);
-		
+		$buscaTotalParticipante=$this->getParticipanteSismoModel()->numeroParticipantes($dataPartSismo);
+		$actualizaParticipates=$this->getSismoGrupoModel()->updateNumeroParticipante($buscaTotalParticipante, $dataPartSismo);
 		return $participantesSismo;
 
 	}
+	
+	
 
 	public function buscarDetalleParticipante($id){
 	    

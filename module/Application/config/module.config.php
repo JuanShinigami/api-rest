@@ -81,7 +81,8 @@ return array(
             'Application\Controller\Usuario' => Controller\UsuarioController::class,
             'Application\Controller\SismoGrupo' => Controller\SismoGrupoController::class,
             'Application\Controller\Mensaje' => Controller\MensajeController::class,
-            'Application\Controller\ParticipanteSismo' => Controller\ParticipanteSismoController::class
+            'Application\Controller\ParticipanteSismo' => Controller\ParticipanteSismoController::class,
+            'Application\Controller\RecuperaFolio' => Controller\RecuperaFolioController::class
         ),
     ),
     'view_manager' => array(

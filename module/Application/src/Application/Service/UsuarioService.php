@@ -68,27 +68,25 @@ class UsuarioService
 	           
 	           $folioExtrae = substr($folioNuevo,2);
 	           
-	           echo "Extracion ".$folioExtrae."\n";
+// 	           echo "Extracion ".$folioExtrae."\n";
 	           
 	           $folioAct=$folioExtrae + 100;
 	           
-	           echo "Suma ". $folioAct;
+// 	           echo "Suma ". $folioAct;
 	           
 	           
 	           $folioNuevo=substr($folioNuevo,0,2). $folioAct;
-	           echo" \n";
-	           echo "folio Actualizado ".$folioNuevo;
+// 	           echo" \n";
+// 	           echo "folio Actualizado ".$folioNuevo;
 	           
 	       }
-	       
 	       $usuario = $this->getUsuarioModel()->addUsuarios($dataUser, $folioNuevo);
 	       
-	       $arrayResponse = array("flag"=>'true', "usuario"=>$usuario);
 	   }
 // 	   echo print_r($arrayResponse);
 // 	   exit;
 	   
-	   return $arrayResponse;
+	   return $usuario;
 	}
 }
 ?>

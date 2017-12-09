@@ -76,6 +76,20 @@ class ParticipanteSismoModel extends TableGateway
 
 	}
 	
+	public function numeroParticipantes($dataPartSismo){
+	    
+	    $consulta=$this->dbAdapter->query("select COUNT(*) as totalParticipante FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+	    
+	    $res=$consulta->toArray();
+	    
+	    return $res;
+// 	    print_r($res);
+// 	    exit;
+
+	}
+	
+
+	
 	public function buscarDetalleParticipante($id){
 	    $sql = new Sql($this->dbAdapter);
 	    	    $select = $sql->select();

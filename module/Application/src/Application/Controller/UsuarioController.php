@@ -29,7 +29,7 @@ class UsuarioController extends AbstractActionController
         return $response;
         //exit;
     }
-    public function agregarAction(){
+    public function addUsuariosAction(){
 
     	$request = $this->getRequest();
     	if ($request->isPost()) {
@@ -39,14 +39,11 @@ class UsuarioController extends AbstractActionController
     		$result = $this->getUsuarioService()->addUsuario($decodePostData);
     		
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-                "response" => $decodePostData,
+                "response" => $result,
             )));
             
             return $response;
-            //echo print_r($decodePostData);exit;
-        	//return $response; exit;
-            // PARSEAMOS JSON A ARRAY PHP
-            //echo print_r($result);exit;
+     
     	}
 
     	exit;

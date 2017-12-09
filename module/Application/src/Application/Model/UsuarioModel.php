@@ -45,7 +45,7 @@ class UsuarioModel extends TableGateway
 	    $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where folio = '" . $folioNuevo."'" ,Adapter::QUERY_MODE_EXECUTE);
 	   
 	    $res=$consulta->toArray();
-	    print_r($res);
+	    
 	    
 	    return $res;
 	}
@@ -66,6 +66,7 @@ class UsuarioModel extends TableGateway
 
 	    $flag = false;
 	    $respuesta = array();
+	 
 	    
 	    try {
 	        $sql = new Sql($this->dbAdapter);
@@ -84,8 +85,9 @@ class UsuarioModel extends TableGateway
 	        $selectString = $sql->getSqlStringForSqlObject($insertar);
 	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 	        $flag = true;
+	        
 	    }catch (\PDOException $e) {
-	        //echo "First Message " . $e->getMessage() . "<br/>";
+// 	        echo "First Message " . $e->getMessage() . "<br/>";
 	        $flag = false;
 	    }catch (\Exception $e) {
 	        //echo "Second Message: " . $e->getMessage() . "<br/>";
