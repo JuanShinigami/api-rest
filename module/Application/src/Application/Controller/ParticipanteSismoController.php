@@ -68,5 +68,45 @@ class ParticipanteSismoController extends AbstractActionController
         
         exit;
     }
+    
+    public function listaParticipanteAction(){
+        
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            
+            $result = $this->getParticipanteSismoService()->listaParticipante($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
+    
+    public function eliminarPartDeSismoAction(){
+        
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            
+            $result = $this->getParticipanteSismoService()->eliminarPartDeSismo($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
 }
 ?>

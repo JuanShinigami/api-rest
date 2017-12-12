@@ -87,7 +87,7 @@ class SismoGrupoModel extends TableGateway
         return $respuesta;
     }
 
-    public function updateNumeroParticipante($total, $dataPartSismo)
+    public function updateNumeroParticipante($total, $idSismo)
     {
         $flag = false;
         $respuesta = array();
@@ -105,7 +105,7 @@ class SismoGrupoModel extends TableGateway
             
             $update->set($array);
             $update->where(array(
-                'id' => $dataPartSismo['idSismo']
+                'id' => $idSismo
             ));
             
             $selectString = $sql->getSqlStringForSqlObject($update);
@@ -145,5 +145,34 @@ class SismoGrupoModel extends TableGateway
         
         return $result;
     }
+    
+    public function eliminarSismo($dataPartSismo)
+    {
+        $flag = false;
+        $respuesta = array();
+        
+        
+        try {
+            //$consulta=$this->dbAdapter->query("DELETE FROM sismogrupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+            $sql = new Sql($this->dbAdapter);
+            $delete = $sql->delete('sismogrupo');
+            $delete->where(array('id' => $dataPartSismo["idSismo"]));
+            
+            $selectString = $sql->getSqlStringForSqlObject($delete);
+            $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+          
+            $flag = true;
+            
+        } catch (\PDOException $e) {
+            // echo "First Message " . $e->getMessage() . "<br/>";
+            $flag = false;
+        } catch (\Exception $e) {
+            // echo "Second Message: " . $e->getMessage() . "<br/>";
+        }
+        $respuesta['status'] = $flag;
+        return $respuesta;
+    }
+    
+    
 }
 ?>

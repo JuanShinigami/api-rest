@@ -79,7 +79,7 @@ class ParticipanteSismoModel extends TableGateway
 	
 	public function numeroParticipantes($dataPartSismo){
 	    
-	    $consulta=$this->dbAdapter->query("select COUNT(*) as totalParticipante FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $consulta=$this->dbAdapter->query("select COUNT(*) as totalParticipante FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo."'" ,Adapter::QUERY_MODE_EXECUTE);
 	    
 	    $res=$consulta->toArray();
 	    
@@ -111,6 +111,101 @@ class ParticipanteSismoModel extends TableGateway
 	            
 	            	        return $result;
 	}
+	
+	
+	public function listaParticipantes($dataPartSismo){
+	   
+	    $consulta=$this->dbAdapter->query("select idParticipante FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $res=$consulta->toArray();
+	    
+	    return $res;
+	    // 	    print_r($res);
+	    // 	    exit;
+	    
+	}
+	
+	public function eliminaParticipantes($dataPartSismo){
+	    
+	    $flag = false;
+	    $respuesta = array();
+	    try {
+	        
+	        $sql = new Sql($this->dbAdapter);
+	        $delete = $sql->delete('participante_sismo_grupo');
+	        $delete->where(array('idSismo' => $dataPartSismo["idSismo"]));
+	        
+	        $selectString = $sql->getSqlStringForSqlObject($delete);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        
+	        
+	       // $consulta=$this->dbAdapter->query("DELETE FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+// 	        $res=$consulta->toArray();
+	        $flag = true;
+	    }catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+	    
+	    return $respuesta;
+	    
+	    
+	    
+	    // 	    print_r($res);
+	    // 	    exit;
+	    
+	}
+	public function eliminarPartDeSismo($dataPartSismo){
+	    
+	    $flag = false;
+	    $respuesta = array();
+	    try {
+// 	        $consulta=$this->dbAdapter->query("DELETE FROM participante_sismo_grupo where idParticipante = '" . $dataPartSismo["idParticipante"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+// 	        $res=$consulta->toArray();
+
+	        
+	        
+	        $sql = new Sql($this->dbAdapter);
+	        $delete = $sql->delete('participante_sismo_grupo');
+	        $delete->where(array('idParticipante' => $dataPartSismo["id"]));
+	        
+	        $selectString = $sql->getSqlStringForSqlObject($delete);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        
+	        $flag = true;
+	    }
+	    catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+	    
+	    return $respuesta;
+	    // 	    print_r($res);
+	    // 	    exit;
+	    
+	}
+	
+	public function buscarSismo($id){
+	    
+	    $consulta=$this->dbAdapter->query("select idSismo FROM participante_sismo_grupo where idParticipante = '" . $id."'" ,Adapter::QUERY_MODE_EXECUTE);
+	    
+	    $res=$consulta->toArray();
+	    
+	    return $res;
+	    // 	    print_r($res);
+	    // 	    exit;
+	    
+	}
+	
+	
+	
+	
+	
 	
 }
 ?>
