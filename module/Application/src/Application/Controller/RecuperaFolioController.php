@@ -20,7 +20,6 @@ class RecuperaFolioController extends AbstractActionController
     
     public function recuperaCorreoAction(){
         
-        
         $request = $this->getRequest();
         if ($request->isPost()) {
             $postData       = $this->getRequest()->getContent();
