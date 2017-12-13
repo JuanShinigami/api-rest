@@ -69,7 +69,7 @@ class ParticipanteSismoController extends AbstractActionController
         exit;
     }
     
-    public function listaParticipanteAction(){
+    public function deletelistaParticipanteAction(){
         
         
         $request = $this->getRequest();

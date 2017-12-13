@@ -28,7 +28,7 @@ class ParticipanteSismoModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'idParticipante', 'idSismo', 'tiempo_inicio', 'tiempo_estoy_listo'))
+			->columns(array('id', 'idParticipante', 'idSismo', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeParticipante'))
 			->from(array('s' => $this->table));
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		//print_r($selectString); exit;
@@ -54,7 +54,8 @@ class ParticipanteSismoModel extends TableGateway
 	            'idParticipante'=>$dataPartSismo["idParticipante"],
 	            'idSismo'=>$dataPartSismo["idSismo"],
 	            'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
-	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"]
+	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"],
+	            'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
 	        );
 	        
 	        $insertar->values($array);

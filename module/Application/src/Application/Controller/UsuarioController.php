@@ -48,5 +48,25 @@ class UsuarioController extends AbstractActionController
 
     	exit;
     }
+    
+    public function existeUsuariosAction(){
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            $result = $this->getUsuarioService()->existeUsuario($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            
+            return $response;
+            
+        }
+        
+        exit;
+    }
 
 }
