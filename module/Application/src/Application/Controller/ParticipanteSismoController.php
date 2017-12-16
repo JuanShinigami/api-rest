@@ -48,6 +48,25 @@ class ParticipanteSismoController extends AbstractActionController
         exit;
     }
     
+    public function updateParticipanteSismoAction(){
+        
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            
+            $result = $this->getParticipanteSismoService()->updateParticipante($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
     
     public function buscarDetalleParticipanteAction(){
         

@@ -100,7 +100,7 @@ class SismoGrupoModel extends TableGateway
             
             $array = array(
                 
-                'participantes' => $total[0]["totalParticipante"]
+                'participantes' => $total[0]["totalParticipante"] + 1
             );
             
             $update->set($array);

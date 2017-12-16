@@ -52,10 +52,10 @@ class ParticipanteSismoModel extends TableGateway
 	        $array=array(
 	            
 	            'idParticipante'=>$dataPartSismo["idParticipante"],
-	            'idSismo'=>$dataPartSismo["idSismo"],
-	            'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
-	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"],
-	            'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
+	            'idSismo'=>$dataPartSismo["idSismo"]
+// 	            'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
+// 	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"],
+// 	            'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
 	        );
 	        
 	        $insertar->values($array);
@@ -70,12 +70,64 @@ class ParticipanteSismoModel extends TableGateway
 	        //echo "Second Message: " . $e->getMessage() . "<br/>";
 	    }
 	    $respuesta['status'] = $flag;
+	   
+	    $respuesta['id'] = $this->existe($dataPartSismo)[0]['id'];
 		
-// 		print_r($array);
-// 		exit;
+// 		print_r($respuesta);
 	
 	    return $respuesta;
 
+	}
+	
+	public function updateParticipante($dataPartSismo)
+	{
+	    $flag = false;
+	    $respuesta = array();
+	    
+	    
+	    try {
+	        $sql = new Sql($this->dbAdapter);
+	        $update = $sql->update();
+	        $update->table('participante_sismo_grupo');
+	        
+	        $array = array(
+	            
+	            'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
+	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"],
+	        	'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
+	        );
+	        
+	        $update->set($array);
+	        $update->where(array(
+	            'idParticipante' => $dataPartSismo['idParticipante'],
+	            'idSismo'=>$dataPartSismo['idSismo']
+	        ));
+	        
+	        $selectString = $sql->getSqlStringForSqlObject($update);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $flag = true;
+	    } catch (\PDOException $e) {
+	        // echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    } catch (\Exception $e) {
+	        // echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+	    return $respuesta;
+	}
+	
+	
+	public function existe($dataPartSismo)
+	{
+	    
+	    // print_r($folioNuevo);
+	    // $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $consulta = $this->dbAdapter->query("select id FROM participante_sismo_grupo where idParticipante = '" . $dataPartSismo['idParticipante'] . "' and idSismo = '".$dataPartSismo['idSismo']."'", Adapter::QUERY_MODE_EXECUTE);
+	    
+	    $res = $consulta->toArray();
+	    // echo "res ";
+	    
+	    return $res;
 	}
 	
 	public function numeroParticipantes($dataPartSismo){
@@ -98,7 +150,7 @@ class ParticipanteSismoModel extends TableGateway
 	    	    $select
 	    	    ->from(array('t1'=>'participante_sismo_grupo'), array())
 	    	    ->join(array('t2'=>'sismogrupo'), 't1.idSismo = t2.id', array('ubicacion','fecha','hora'))
-	    	    ->join(array('t3'=>'participante'), 't3.id=t1.idParticipante' , array())
+	    	    ->join(array('t3'=>'participante'), 't3.id=t1.idParticipante' , array('alias'))
 	    	    ->Where(array('t1.idSismo'=>$decodePostData['idSismo']));
 	            	        
 	            $selectString = $sql->getSqlStringForSqlObject($select);
@@ -116,6 +168,7 @@ class ParticipanteSismoModel extends TableGateway
 	
 	public function listaParticipantes($dataPartSismo){
 	   
+	    
 	    $consulta=$this->dbAdapter->query("select idParticipante FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
 	    $res=$consulta->toArray();
 	    
@@ -158,30 +211,24 @@ class ParticipanteSismoModel extends TableGateway
 	    // 	    exit;
 	    
 	}
+	
+	
+	
+	
+	
+	
 	public function eliminarPartDeSismo($dataPartSismo){
-	    
 	    $flag = false;
 	    $respuesta = array();
 	    try {
-// 	        $consulta=$this->dbAdapter->query("DELETE FROM participante_sismo_grupo where idParticipante = '" . $dataPartSismo["idParticipante"]."'" ,Adapter::QUERY_MODE_EXECUTE);
-// 	        $res=$consulta->toArray();
-
-	        
-	        
-	        $sql = new Sql($this->dbAdapter);
-	        $delete = $sql->delete('participante_sismo_grupo');
-	        $delete->where(array('idParticipante' => $dataPartSismo["id"]));
-	        
-	        $selectString = $sql->getSqlStringForSqlObject($delete);
-	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	        
+	        $consulta=$this->dbAdapter->query("DELETE FROM participante_sismo_grupo where idParticipante = '" . $dataPartSismo["idParticipante"]."' and idSismo = '".$dataPartSismo['idSismo']."'" ,Adapter::QUERY_MODE_EXECUTE);
 	        $flag = true;
 	    }
 	    catch (\PDOException $e) {
-	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        echo "First Message " . $e->getMessage() . "<br/>";
 	        $flag = false;
 	    }catch (\Exception $e) {
-	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	        echo "Second Message: " . $e->getMessage() . "<br/>";
 	    }
 	    $respuesta['status'] = $flag;
 	    

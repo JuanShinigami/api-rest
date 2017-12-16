@@ -89,6 +89,40 @@ class MensajeModel extends TableGateway
 	}
 	
 	
+	public function eliminaMensaje($dataPartSismo){
+	    
+	    $flag = false;
+	    $respuesta = array();
+	    try {
+	        
+	        $sql = new Sql($this->dbAdapter);
+	        $delete = $sql->delete('mensajes');
+	        $delete->where(array('idSismogrupo' => $dataPartSismo));
+	        
+	        $selectString = $sql->getSqlStringForSqlObject($delete);
+	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        
+	        // $consulta=$this->dbAdapter->query("DELETE FROM participante_sismo_grupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+	        // 	        $res=$consulta->toArray();
+	        $flag = true;
+	    }catch (\PDOException $e) {
+	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    }catch (\Exception $e) {
+	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+	    
+	    return $respuesta;
+	    
+	    
+	    
+	    // 	    print_r($res);
+	    // 	    exit;
+	    
+	}
+	
+	
 
 }
 ?>

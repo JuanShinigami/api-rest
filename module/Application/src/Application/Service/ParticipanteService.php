@@ -25,7 +25,15 @@ class ParticipanteService
 	
 	public function addParticipante($dataParticipante)
 	{
-	    $participante = $this->getParticipanteModel()->addParticipante($dataParticipante);
+	    $participante = $this->getParticipanteModel()->existe($dataParticipante);
+	    
+	   
+	    
+	    if(empty($participante)){
+	        $participante = $this->getParticipanteModel()->addParticipante($dataParticipante);
+	    }else {
+	        $participante="Usted ya esta registrado con el alias: ".$participante[0]['alias'];
+	    }
 	    return $participante;
 	}
 

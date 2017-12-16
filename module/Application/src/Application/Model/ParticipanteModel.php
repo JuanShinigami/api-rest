@@ -38,6 +38,20 @@ class ParticipanteModel extends TableGateway
 		return $result;
 	}
 	
+	public function existe($dataParticipante)
+	{
+	    
+	    // print_r($folioNuevo);
+	    // $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $consulta = $this->dbAdapter->query("select id , alias FROM participante where id = '" . $dataParticipante['id'] . "'", Adapter::QUERY_MODE_EXECUTE);
+	    
+	    $res = $consulta->toArray();
+	    // echo "res ";
+// 	    print_r($res);
+// 	    exit;
+	    
+	    return $res;
+	}
 	public function addParticipante($dataParticipante){
 	    
 	    $flag = false;
