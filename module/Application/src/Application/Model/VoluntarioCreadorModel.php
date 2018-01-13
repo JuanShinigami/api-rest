@@ -6,7 +6,7 @@ use Zend\Db\TableGateway\Feature;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 
-class UsuarioModel extends TableGateway
+class VoluntarioCreadorModel extends TableGateway
 {
 
     private $dbAdapter;
@@ -14,7 +14,7 @@ class UsuarioModel extends TableGateway
     public function __construct()
     {
         $this->dbAdapter = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-        $this->table = 'usuarios';
+        $this->table = 'voluntarioCreador';
         $this->featureSet = new Feature\FeatureSet();
         $this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
         $this->initialize();
@@ -34,7 +34,7 @@ class UsuarioModel extends TableGateway
             'telefono',
             'correo'
         ))->from(array(
-            'u' => $this->table
+            'v' => $this->table
         ));
         $selectString = $sql->getSqlStringForSqlObject($select);
         // print_r($selectString); exit;
@@ -49,8 +49,8 @@ class UsuarioModel extends TableGateway
     {
         
         // print_r($folioNuevo);
-        // $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM usuarios where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
+        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM voluntarioCreador where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
         // echo "res ";
@@ -62,8 +62,8 @@ class UsuarioModel extends TableGateway
     public function maxFolio($folioNuevo)
     {
         
-        // $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        $consulta = $this->dbAdapter->query("select max(folio) as maxFolio FROM usuarios where folio like '" . $folioNuevo . "%'", Adapter::QUERY_MODE_EXECUTE);
+        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select max(folio) as maxFolio FROM voluntarioCreador where folio like '" . $folioNuevo . "%'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
         return $res;
@@ -71,8 +71,8 @@ class UsuarioModel extends TableGateway
 
     public function existeCorreo($dataUser)
     {
-        // $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        $consulta = $this->dbAdapter->query("select id , folio, correo FROM usuarios where correo = '" . $dataUser['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
+        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select id , folio, correo FROM voluntarioCreador where correo = '" . $dataUser['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
         // echo "existe correo";
@@ -81,21 +81,21 @@ class UsuarioModel extends TableGateway
         return $res;
     }
 
-    public function addUsuarios($dataUser, $folioNuevo)
+    public function addVolCreador($dataVolCreador, $folioNuevo)
     {
         $flag = false;
         $respuesta = array();
         
         try {
             $sql = new Sql($this->dbAdapter);
-            $insertar = $sql->insert('usuarios');
+            $insertar = $sql->insert('voluntarioCreador');
             
             $array = array(
                 
                 'folio' => $folioNuevo,
-                'nombre' => $dataUser["nombre"],
-                'telefono' => $dataUser["telefono"],
-                'correo' => $dataUser["correo"]
+                'nombre' => $dataVolCreador["nombre"],
+                'telefono' => $dataVolCreador["telefono"],
+                'correo' => $dataVolCreador["correo"]
             );
             
             $insertar->values($array);
@@ -115,7 +115,7 @@ class UsuarioModel extends TableGateway
         return $respuesta;
     }
 
-    public function updateUsuarios($usuario, $folioNuevo)
+    public function updateVoluntarioCreador($volCreador, $folioNuevo)
     {
         
         // print_r($usuario[0]['id']);
@@ -125,7 +125,7 @@ class UsuarioModel extends TableGateway
         try {
             $sql = new Sql($this->dbAdapter);
             $update = $sql->update();
-            $update->table('usuarios');
+            $update->table('voluntarioCreador');
             
             $array = array(
                 
@@ -134,7 +134,7 @@ class UsuarioModel extends TableGateway
             
             $update->set($array);
             $update->where(array(
-                'id' => $usuario[0]['id']
+                'id' => $volCreador[0]['id']
             ));
             
             $selectString = $sql->getSqlStringForSqlObject($update);

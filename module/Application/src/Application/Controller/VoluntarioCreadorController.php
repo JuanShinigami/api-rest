@@ -1,42 +1,44 @@
 <?php
 /**
  * @autor JuanMS
- * Controlador para las peticiones de usuarios
+ * Controlador para las peticiones de voluntario Creador
  */
 
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Service\UsuarioService;
+use Application\Service\VoluntarioCreadorService;
 
-class UsuarioController extends AbstractActionController
+class VoluntarioCreadorController extends AbstractActionController
 {
 
-    private $usuarioService;
+    private $voluntCreadorService;
 
-    public function getUsuarioService(){
-    	return $this->usuarioService = new UsuarioService();
+    public function getVoluntCreadorService(){
+    	return $this->voluntCreadorService = new VoluntarioCreadorService();
     }
 
     public function listaAction(){
         
-        $usuario = $this->getUsuarioService()->getAll();
+        $voluntCreador = $this->getvoluntCreadorService()->getAll();
         $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-            "response" => $usuario,
+            "response" => $voluntCreador,
         )));
         
         return $response;
         //exit;
     }
-    public function addUsuariosAction(){
+    public function addVoluntCreadorAction(){
 
     	$request = $this->getRequest();
     	if ($request->isPost()) {
     		$postData       = $this->getRequest()->getContent();
     		$decodePostData = json_decode($postData, true);
           
-    		$result = $this->getUsuarioService()->addUsuario($decodePostData);
+    		$result = $this->getVoluntCreadorService()->addVolCreador($decodePostData);
+//     		print_r($result);
+//     		exit;
     		
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,
@@ -49,14 +51,14 @@ class UsuarioController extends AbstractActionController
     	exit;
     }
     
-    public function existeUsuariosAction(){
+    public function existeVoluntCreadorAction(){
         
         $request = $this->getRequest();
         if ($request->isPost()) {
             $postData       = $this->getRequest()->getContent();
             $decodePostData = json_decode($postData, true);
             
-            $result = $this->getUsuarioService()->existeUsuario($decodePostData);
+            $result = $this->getVoluntCreadorService()->existeVolCreador($decodePostData);
             
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,

@@ -27,7 +27,7 @@ class MensajeModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'mensajeCreador' , 'idSismogrupo'))
+			->columns(array('id', 'mensajeCreador' , 'idSimulacrogrupo'))
 			->from(array('m' => $this->table));
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		//print_r($selectString); exit;
@@ -74,7 +74,7 @@ class MensajeModel extends TableGateway
 	    $sql = new Sql($this->dbAdapter);
 	    $select = $sql->select();
 	    $select
-	    ->columns(array('id', 'mensajeCreador' , 'idSismogrupo'))
+	    ->columns(array('id', 'mensajeCreador' , 'idSimulacrogrupo'))
 	    ->from(array('m' => $this->table))
 	    ->where(array('idSismogrupo'=>$id));
 	    $selectString = $sql->getSqlStringForSqlObject($select);
@@ -97,7 +97,7 @@ class MensajeModel extends TableGateway
 	        
 	        $sql = new Sql($this->dbAdapter);
 	        $delete = $sql->delete('mensajes');
-	        $delete->where(array('idSismogrupo' => $dataPartSismo));
+	        $delete->where(array('idSimulacrogrupo' => $dataPartSismo));
 	        
 	        $selectString = $sql->getSqlStringForSqlObject($delete);
 	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);

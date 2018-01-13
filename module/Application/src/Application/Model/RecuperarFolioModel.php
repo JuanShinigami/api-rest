@@ -15,7 +15,7 @@ class RecuperarFolioModel extends TableGateway
 	public function __construct()
 	{
 		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'usuarios';
+    	$this->table      = 'voluntarioCreador';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -43,8 +43,8 @@ class RecuperarFolioModel extends TableGateway
 	public function recuperaCorreo($dataUser){
 	    
 	    
-// 	    $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-	    $consulta=$this->dbAdapter->query("select id , folio, correo FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "' and telefono = '".$dataUser['telefono']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+// 	    $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $consulta=$this->dbAdapter->query("select id , folio, correo FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "' and telefono = '".$dataUser['telefono']. "'" ,Adapter::QUERY_MODE_EXECUTE);
 	   
 	    $res=$consulta->toArray();
 	    

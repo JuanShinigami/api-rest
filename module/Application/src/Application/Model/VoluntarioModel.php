@@ -6,14 +6,14 @@ use Zend\Db\TableGateway\Feature;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 
-class ParticipanteModel extends TableGateway
+class VoluntarioModel extends TableGateway
 {
 	private $dbAdapter;
 
 	public function __construct()
 	{
 		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'participante';
+    	$this->table      = 'voluntario';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -38,12 +38,12 @@ class ParticipanteModel extends TableGateway
 		return $result;
 	}
 	
-	public function existe($dataParticipante)
+	public function existe($dataVoluntario)
 	{
 	    
 	    // print_r($folioNuevo);
 	    // $consulta=$this->dbAdapter->query("select id , folio FROM usuarios where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-	    $consulta = $this->dbAdapter->query("select id , alias FROM participante where id = '" . $dataParticipante['id'] . "'", Adapter::QUERY_MODE_EXECUTE);
+	    $consulta = $this->dbAdapter->query("select id , alias FROM voluntario where id = '" . $dataVoluntario['id'] . "'", Adapter::QUERY_MODE_EXECUTE);
 	    
 	    $res = $consulta->toArray();
 	    // echo "res ";
@@ -52,7 +52,7 @@ class ParticipanteModel extends TableGateway
 	    
 	    return $res;
 	}
-	public function addParticipante($dataParticipante){
+	public function addVoluntario($dataVoluntario){
 	    
 	    $flag = false;
 	    $respuesta = array();
@@ -60,10 +60,10 @@ class ParticipanteModel extends TableGateway
 	    
 	    try {
 	    	$sql = new Sql($this->dbAdapter);
-	    	$insertar = $sql->insert('participante');
+	    	$insertar = $sql->insert('voluntario');
 		    $array=array(
-		        'id'=>$dataParticipante["id"],
-		        'alias'=>$dataParticipante["alias"]
+		        'id'=>$dataVoluntario["id"],
+		        'alias'=>$dataVoluntario["alias"]
 		    );
 	    //		print_r($array);
 	    //		exit;

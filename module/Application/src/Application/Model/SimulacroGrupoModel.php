@@ -6,7 +6,7 @@ use Zend\Db\TableGateway\Feature;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 
-class SismoGrupoModel extends TableGateway
+class SimulacroGrupoModel extends TableGateway
 {
 
     private $dbAdapter;
@@ -14,7 +14,7 @@ class SismoGrupoModel extends TableGateway
     public function __construct()
     {
         $this->dbAdapter = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-        $this->table = 'sismogrupo';
+        $this->table = 'simulacrogrupo';
         $this->featureSet = new Feature\FeatureSet();
         $this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
         $this->initialize();
@@ -32,8 +32,8 @@ class SismoGrupoModel extends TableGateway
             'ubicacion',
             'fecha',
             'hora',
-            'participantes',
-            'idUsuarios'
+            'voluntario',
+            'idVoluntarioCreador'
         ))->from(array(
             's' => $this->table
         ));
@@ -46,7 +46,7 @@ class SismoGrupoModel extends TableGateway
         return $result;
     }
 
-    public function addSismoGrupo($dataSismoGrupo)
+    public function addSimulacroGrupo($dataSimulacroGrupo)
     {
         $flag = false;
         $respuesta = array();
@@ -55,17 +55,17 @@ class SismoGrupoModel extends TableGateway
             
             $sql = new Sql($this->dbAdapter);
             
-            $insertar = $sql->insert('sismogrupo');
+            $insertar = $sql->insert('simulacrogrupo');
             
             $array = array(
                 
-                'ubicacion' => $dataSismoGrupo["ubicacion"],
-                'latitud' => $dataSismoGrupo["latitud"],
-                'longitud' => $dataSismoGrupo["longitud"],
-                'fecha' => $dataSismoGrupo["fecha"],
-                'hora' => $dataSismoGrupo["hora"],
-                'participantes' => 1,
-                'idUsuarios' => $dataSismoGrupo["idUsuarios"]
+                'ubicacion' => $dataSimulacroGrupo["ubicacion"],
+                'latitud' => $dataSimulacroGrupo["latitud"],
+                'longitud' => $dataSimulacroGrupo["longitud"],
+                'fecha' => $dataSimulacroGrupo["fecha"],
+                'hora' => $dataSimulacroGrupo["hora"],
+                'voluntario' => 1,
+                'idVoluntarioCreador' => $dataSimulacroGrupo["idVoluntarioCreador"]
             );
             // print_r($array);
             // exit;
@@ -87,7 +87,7 @@ class SismoGrupoModel extends TableGateway
         return $respuesta;
     }
 
-    public function updateNumeroParticipante($total, $idSismo)
+    public function updateNumeroVoluntario($total, $idSimulacro)
     {
         $flag = false;
         $respuesta = array();
@@ -96,16 +96,16 @@ class SismoGrupoModel extends TableGateway
         try {
             $sql = new Sql($this->dbAdapter);
             $update = $sql->update();
-            $update->table('sismogrupo');
+            $update->table('simulacrogrupo');
             
             $array = array(
                 
-                'participantes' => $total[0]["totalParticipante"] + 1
+                'voluntario' => $total[0]["totalVoluntario"] + 1
             );
             
             $update->set($array);
             $update->where(array(
-                'id' => $idSismo
+                'id' => $idSimulacro
             ));
             
             $selectString = $sql->getSqlStringForSqlObject($update);
@@ -127,9 +127,9 @@ class SismoGrupoModel extends TableGateway
         $select = $sql->select();
         
         $select->from(array(
-            't1' => 'sismogrupo'
+            't1' => 'simulacrogrupo'
         ), array())->where(array(
-            'idUsuarios' => $decodePostData['id']
+            'idVoluntarioCreador' => $decodePostData['id']
         ));
         
         // print_r($result);
@@ -146,17 +146,17 @@ class SismoGrupoModel extends TableGateway
         return $result;
     }
     
-    public function eliminarSismo($dataPartSismo)
+    public function eliminarSimulacro($dataPartSimulacro)
     {
         $flag = false;
         $respuesta = array();
         
         
         try {
-            //$consulta=$this->dbAdapter->query("DELETE FROM sismogrupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+            //$consulta=$this->dbAdapter->query("DELETE FROM simulacrogrupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
             $sql = new Sql($this->dbAdapter);
-            $delete = $sql->delete('sismogrupo');
-            $delete->where(array('id' => $dataPartSismo["idSismo"]));
+            $delete = $sql->delete('simulacrogrupo');
+            $delete->where(array('id' => $dataPartSimulacro["idSimulacro"]));
             
             $selectString = $sql->getSqlStringForSqlObject($delete);
             $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);

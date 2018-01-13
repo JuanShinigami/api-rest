@@ -29,7 +29,7 @@ return array(
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/api-rest',
+                    'route'    => '/voluntario',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
@@ -76,12 +76,12 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
-            'Application\Controller\Participante' => Controller\ParticipanteController::class,
+            'Application\Controller\Voluntario' => Controller\VoluntarioController::class,
             'Application\Controller\Prueba' => Controller\PruebaController::class,
-            'Application\Controller\Usuario' => Controller\UsuarioController::class,
-            'Application\Controller\SismoGrupo' => Controller\SismoGrupoController::class,
+            'Application\Controller\VoluntarioCreador' => Controller\VoluntarioCreadorController::class,
+            'Application\Controller\SimulacroGrupo' => Controller\SimulacroGrupoController::class,
             'Application\Controller\Mensaje' => Controller\MensajeController::class,
-            'Application\Controller\ParticipanteSismo' => Controller\ParticipanteSismoController::class,
+            'Application\Controller\VoluntarioSimulacro' => Controller\VoluntarioSimulacroController::class,
             'Application\Controller\RecuperaFolio' => Controller\RecuperaFolioController::class
         ),
     ),

@@ -2,33 +2,33 @@
 namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Service\ParticipanteService;
+use Application\Service\VoluntarioService;
 
-class ParticipanteController extends AbstractActionController
+class VoluntarioController extends AbstractActionController
 {
 
-    private $participanteService;
+    private $voluntarioService;
 
     /**
-     * Instanciamos el servicio de participantes
+     * Instanciamos el servicio de voluntarios
      */
-    public function getParticipanteService()
+    public function getVoluntarioService()
     {
-        return $this->participanteService = new ParticipanteService();
+        return $this->voluntarioService = new VoluntarioService();
     }
 
     public function listaAction(){
 
-        $participantes = $this->getParticipanteService()->getAll();
+        $voluntarios = $this->getVoluntarioService()->getAll();
         $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-                "response" => $participantes,
+                "response" => $voluntarios,
             )));
             
         return $response;
         //exit;
     }
 
-    public function addParticipanteAction(){
+    public function addVoluntarioAction(){
 
 
         $request = $this->getRequest();
@@ -37,7 +37,7 @@ class ParticipanteController extends AbstractActionController
             $decodePostData = json_decode($postData, true);
 
             
-            $result = $this->getParticipanteService()->addParticipante($decodePostData);
+            $result = $this->getVoluntarioService()->addVoluntario($decodePostData);
                    
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,

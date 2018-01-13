@@ -16,45 +16,15 @@ use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mime\Part;
+use Zend\View\View;
 
 class IndexController extends AbstractActionController
 {
     
     public function indexAction()
     {
-        $config = $this->getServiceLocator()->get('Config');
-        print_r($config);
-        exit;
-        $emailConfig = $config['email'];
-        
-        $html = new Part('<h3>Estou enviando este mensagem para você</h3>');
-        $html->type = "text/html";
-        
-        $body = new Message();
-        $body->setParts(array($html));
-        
-        
-        $message = new Message();
-        $message->addTo('vane.velascogtz@gmail.com')
-        ->addFrom('pakodiazcastillo@gmail.com')
-        ->setSubject('Enviando e-mail teste')
-        ->setBody($body);
-        
-        $transport = new SmtpTransport();
-        $options = new SmtpOptions([
-            'name' => $emailConfig['host'],
-            'host' => $emailConfig['host'],
-            'connection_class' => $emailConfig['auth'],
-            'port' => $emailConfig['port'],
-            'connection_config' => [
-                'username' => $emailConfig['username'],
-                'password' => $emailConfig['password'],
-                'ssl' => $emailConfig['ssl']
-            ]
-        ]);
-        
-        $transport->setOptions($options);
-        $transport->send($message);
+//         echo "HOLA";exit();
+        return new ViewModel();
     }
     
     public function correoAction(){
