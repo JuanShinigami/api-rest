@@ -9,7 +9,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\SimulacroGrupoService;
 
-class SimulacroGrupoController extends AbstractActionController
+class SimulacrumGroupController extends AbstractActionController
 {
 
     private $simulacroGrupoService;
@@ -23,7 +23,7 @@ class SimulacroGrupoController extends AbstractActionController
         $simulacroGrupo = $this->getSimulacroService()->getAll();    
     }
     
-    public function addSimulacroGrupoAction()
+    public function addSimulacrumGroupAction()
     {
         $request = $this->getRequest();
         
@@ -41,7 +41,7 @@ class SimulacroGrupoController extends AbstractActionController
         }
         exit();
     }
-    public function buscarSimulacroDetalleAction(){
+    public function searchSimulacrumDetailAction(){
         $request = $this->getRequest();
         if ($request->isPost()) {
             $postData       = $this->getRequest()->getContent();

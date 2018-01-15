@@ -48,7 +48,7 @@ class MensajeModel extends TableGateway
 	        $array=array(
 	            
 	            'mensajeCreador'=>$dataMensaje["mensajeCreador"],
-	            'idSismogrupo'=>$dataMensaje["idSismogrupo"]
+	            'idSimulacrogrupo'=>$dataMensaje["idSimulacrogrupo"]
 	        );
 	        //		print_r($array);
 	        //		exit;
@@ -76,7 +76,7 @@ class MensajeModel extends TableGateway
 	    $select
 	    ->columns(array('id', 'mensajeCreador' , 'idSimulacrogrupo'))
 	    ->from(array('m' => $this->table))
-	    ->where(array('idSismogrupo'=>$id));
+	    ->where(array('idSimulacrogrupo'=>$id));
 	    $selectString = $sql->getSqlStringForSqlObject($select);
 	    //print_r($selectString); exit;
 	    $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);

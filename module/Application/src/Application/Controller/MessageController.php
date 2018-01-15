@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\MensajeService;
 
-class MensajeController extends AbstractActionController
+class MessageController extends AbstractActionController
 {
 
     private $mensajeService;
@@ -28,7 +28,7 @@ class MensajeController extends AbstractActionController
         //exit;
     }
 
-    public function addMensajeAction(){
+    public function addMessageAction(){
 
 
         $request = $this->getRequest();
@@ -47,7 +47,7 @@ class MensajeController extends AbstractActionController
 
         exit;
     }
-    public function buscarMensajeAction(){
+    public function searchMessageAction(){
         $request = $this->getRequest();
         if ($request->isPost()) {
             $postData       = $this->getRequest()->getContent();

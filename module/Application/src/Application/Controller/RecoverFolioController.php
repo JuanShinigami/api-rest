@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Application\Service\RecuperarFolioService;
 
 
-class RecuperaFolioController extends AbstractActionController
+class RecoverFolioController extends AbstractActionController
 {
     
     private $recuperaFolioService;
@@ -21,7 +21,7 @@ class RecuperaFolioController extends AbstractActionController
         $recuperaFolio = $this->getRecuperaFolioService()->getAll();
         
     }
-    public function recuperaCorreoAction(){
+    public function recoveraEmailAction(){
         
         $request = $this->getRequest();
         if ($request->isPost()) {

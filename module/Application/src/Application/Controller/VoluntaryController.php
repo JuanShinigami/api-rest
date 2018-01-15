@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\VoluntarioService;
 
-class VoluntarioController extends AbstractActionController
+class VoluntaryController extends AbstractActionController
 {
 
     private $voluntarioService;
@@ -28,7 +28,7 @@ class VoluntarioController extends AbstractActionController
         //exit;
     }
 
-    public function addVoluntarioAction(){
+    public function addVoluntaryAction(){
 
 
         $request = $this->getRequest();

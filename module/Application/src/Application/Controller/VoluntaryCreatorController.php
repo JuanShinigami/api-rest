@@ -10,7 +10,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\VoluntarioCreadorService;
 
-class VoluntarioCreadorController extends AbstractActionController
+class VoluntaryCreatorController extends AbstractActionController
 {
 
     private $voluntCreadorService;
@@ -29,7 +29,7 @@ class VoluntarioCreadorController extends AbstractActionController
         return $response;
         //exit;
     }
-    public function addVoluntCreadorAction(){
+    public function addVoluntaryCreatorAction(){
 
     	$request = $this->getRequest();
     	if ($request->isPost()) {
@@ -51,7 +51,7 @@ class VoluntarioCreadorController extends AbstractActionController
     	exit;
     }
     
-    public function existeVoluntCreadorAction(){
+    public function existsVoluntaryCreatorAction(){
         
         $request = $this->getRequest();
         if ($request->isPost()) {

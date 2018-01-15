@@ -4,7 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\VoluntarioSimulacroService;
 
-class VoluntarioSimulacroController extends AbstractActionController
+class VoluntarySimulacrumController extends AbstractActionController
 {
 
     private $voluntarioSimulacroService;
@@ -28,7 +28,7 @@ class VoluntarioSimulacroController extends AbstractActionController
         //exit;
     }
 
-    public function addVoluntarioSimulacroAction(){
+    public function addVoluntarySimulacrumAction(){
 
 
         $request = $this->getRequest();
@@ -48,7 +48,7 @@ class VoluntarioSimulacroController extends AbstractActionController
         exit;
     }
     
-    public function updateVoluntarioSimulacroAction(){
+    public function updateVoluntarySimulacrumAction(){
         
         
         $request = $this->getRequest();
@@ -68,7 +68,7 @@ class VoluntarioSimulacroController extends AbstractActionController
         exit;
     }
     
-    public function buscarDetalleVoluntarioAction(){
+    public function searchDetailVoluntaryAction(){
         
         
         $request = $this->getRequest();
@@ -88,7 +88,7 @@ class VoluntarioSimulacroController extends AbstractActionController
         exit;
     }
     
-    public function deletelistaVoluntarioAction(){
+    public function deletelistVoluntaryAction(){
         
         
         $request = $this->getRequest();
@@ -108,7 +108,7 @@ class VoluntarioSimulacroController extends AbstractActionController
         exit;
     }
     
-    public function eliminarVolDeSimulacroAction(){
+    public function deteleVoluntaryOfSimulacrumAction(){
         
         
         $request = $this->getRequest();
