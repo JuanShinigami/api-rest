@@ -25,7 +25,7 @@ class RecuperarFolioService
      */
     public function getAll()
     {
-        $usuario = $this->getUsuarioModel()->getAll();
+        $usuario = $this->getRecuperarFolioModel()->getAll();
         
         return $usuario;
     }

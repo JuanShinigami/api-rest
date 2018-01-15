@@ -19,6 +19,10 @@ class SimulacroGrupoController extends AbstractActionController
         return $this->simulacroGrupoService = new SimulacroGrupoService();
     }
 
+    public function getAll(){
+        $simulacroGrupo = $this->getSimulacroService()->getAll();    
+    }
+    
     public function addSimulacroGrupoAction()
     {
         $request = $this->getRequest();
