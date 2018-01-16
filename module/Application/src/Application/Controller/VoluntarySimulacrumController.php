@@ -36,7 +36,6 @@ class VoluntarySimulacrumController extends AbstractActionController
             $postData       = $this->getRequest()->getContent();
             $decodePostData = json_decode($postData, true);
 
-            
             $result = $this->getVoluntarioSimulacroService()->addVoluntarioSimulacro($decodePostData);
                    
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(

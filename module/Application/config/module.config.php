@@ -76,13 +76,13 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
-            'Application\Controller\Voluntario' => Controller\VoluntarioController::class,
+            'Application\Controller\Voluntary' => Controller\VoluntaryController::class,
             'Application\Controller\Prueba' => Controller\PruebaController::class,
-            'Application\Controller\VoluntarioCreador' => Controller\VoluntarioCreadorController::class,
-            'Application\Controller\SimulacroGrupo' => Controller\SimulacroGrupoController::class,
-            'Application\Controller\Mensaje' => Controller\MensajeController::class,
-            'Application\Controller\VoluntarioSimulacro' => Controller\VoluntarioSimulacroController::class,
-            'Application\Controller\RecuperaFolio' => Controller\RecuperaFolioController::class
+            'Application\Controller\VoluntaryCreator' => Controller\VoluntaryCreatorController::class,
+            'Application\Controller\SimulacrumGroup' => Controller\SimulacrumGroupController::class,
+            'Application\Controller\Message' => Controller\MessageController::class,
+            'Application\Controller\VoluntarySimulacrum' => Controller\VoluntarySimulacrumController::class,
+            'Application\Controller\RecoverFolio' => Controller\RecoverFolioController::class
         ),
     ),
     'view_manager' => array(

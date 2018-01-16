@@ -42,13 +42,14 @@ class VoluntarioSimulacroService
     public function addVoluntarioSimulacro($dataVolSimulacro)
     {
         $voluntariosSimulacro = $this->getVoluntarioSimulacroModel()->existe($dataVolSimulacro);
+       
         
         if (empty($voluntariosSimulacro)) {
             $voluntariosSimulacro = $this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro);
-            $buscaTotalVoluntario = $this->getVoluntarioSimulacroModel()->numeroVoluntario($dataVolSimulacro["idSismo"]);
-            $actualizaParticipates = $this->getSimulacroGrupoModel()->updateNumeroVoluntario($buscaTotalVoluntario, $dataVolSimulacro["idSismo"]);
+            $buscaTotalVoluntario = $this->getVoluntarioSimulacroModel()->numeroVoluntario($dataVolSimulacro["idSimulacro"]);
+            $actualizaParticipates = $this->getSimulacroGrupoModel()->updateNumeroVoluntario($buscaTotalVoluntario, $dataVolSimulacro["idSimulacro"]);
         } else {
-            $voluntariosSimulacro = "Ya esta registrado en este sismo ";
+            $voluntariosSimulacro = "Ya esta registrado en este simulacro ";
         }
         return $voluntariosSimulacro;
     }
@@ -76,10 +77,10 @@ class VoluntarioSimulacroService
         $eliminaVoluntario = $this->getVoluntarioSimulacroModel()->eliminaVoluntario($decodePostData);
         $eliminaMensaje = $this->getMensajeModel()->eliminaMensaje($decodePostData['idSimulacro']);
         
-        $eliminaSismo = $this->getSimulacroGrupoModel()-> eliminarSimulacro($decodePostData);
+        $eliminaSimulacro = $this->getSimulacroGrupoModel()-> eliminarSimulacro($decodePostData);
         
         $arrayRespuesta['lista'] = $listaVoluntario;
-        $arrayRespuesta['sismo'] = $eliminaSismo;
+        $arrayRespuesta['simulacro'] = $eliminaSimulacro;
         
         return $arrayRespuesta;
     }
