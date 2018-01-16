@@ -70,7 +70,7 @@ class VoluntarioSimulacroModel extends TableGateway
 	        echo "Second Message: " . $e->getMessage() . "<br/>";
 	    }
 	    $respuesta['status'] = $flag;
-	    $respuesta['idVoluntario'] = $this->existe($dataVolSimulacro)[0]['idVoluntario'];
+	    $respuesta['idVoluntario'] = $this->existe($dataVolSimulacro);//[0]['idVoluntario']
 		
 // 		print_r($respuesta);
 	
