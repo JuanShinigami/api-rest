@@ -7,12 +7,18 @@ use Application\Model\SimulacroGrupoModel;
 class SimulacroGrupoService
 {
 	private $simulacroGrupoModel;
+	private $voluntCreadorService;
 	
 	private function getSimulacroGrupoModel()
 	{
 	    return $this->simulacroGrupoModel = new SimulacroGrupoModel();
 	}
 
+	
+	
+	public function getVoluntCreadorService(){
+	    return $this->voluntCreadorService = new VoluntarioCreadorService();
+	}
 	/**
 	* Obtenermos todos los participantes
 	*/
@@ -26,8 +32,13 @@ class SimulacroGrupoService
 
 	public function addSimulacro($dataSimulacroGrupo)
 	{
+	    $token = $this->getVoluntCreadorService()->validaToken($dataSimulacroGrupo);
+		if($token == true){
+		  $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo);  
+		}else {
+		    $simulacroGrupo = "token incorrecto";
+		}
 		
-		$simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo);
 		
 		return $simulacroGrupo;
 
@@ -35,8 +46,12 @@ class SimulacroGrupoService
 
 	public function buscarDetalles($decodePostData) {
 	    
+	    $token = $this->getVoluntCreadorService()->validaToken($decodePostData);
+	    if($token == true){
 	    $detalles = $this->getSimulacroGrupoModel()->buscarDetalles($decodePostData);
-	    
+	    }else {
+	        $detalles = "token incorrecto";
+	    }
 	    return $detalles;
 	    
 	}

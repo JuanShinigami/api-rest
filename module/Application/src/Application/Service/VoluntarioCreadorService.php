@@ -2,6 +2,7 @@
 namespace Application\Service;
 
 use Application\Model\VoluntarioCreadorModel;
+use Zend\Validator\Identical;
 
 class VoluntarioCreadorService
 {
@@ -22,7 +23,6 @@ class VoluntarioCreadorService
         
         return $volCreador;
     }
-
 
     public function addVolCreador($dataVolCreador)
     {
@@ -87,7 +87,8 @@ class VoluntarioCreadorService
                 } else {
                     $folioNuevo = $extraeNombre . 100;
                 }
-                 
+//                 $token = $this->validaToken($dataVolCreador);
+                
                 $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador, $folioNuevo);
                 $arrayResponse = array(
                     "flag" => 'true',
@@ -101,15 +102,52 @@ class VoluntarioCreadorService
             echo "Second Message: " . $e->getMessage() . "<br/>";
         }
         
-//         echo print_r($arrayresponse);
-//         exit;
+        // echo print_r($arrayresponse);
+        // exit;
         
         return $arrayResponse;
     }
 
+    public function validaToken($decodePostData)
+    {
+//         print_r($decodePostData);
+       
+        $token = false;
+        $valid = new Identical(array('token' => 'token'));//, 'strict' => FALSE)
+        
+        if ($valid->isValid($decodePostData['token'])) {
+            $token=true;
+        }
+//         print_r($token);
+//          exit;
+        return $token;
+        
+    }
+    
+//     public function hacerToken(){
+       
+//         $ config  =  array (
+//             'callbackUrl'  =>  'http://example.com/callback.php' ,
+//             'siteUrl'  =>  'http://twitter.com/oauth' ,
+//             'consumerKey'  =>  'gg3DsFTW9OU9eWPnbuPzQ' ,
+//             'consumerSecret'  =>  'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
+//         );
+//         $ consumer  =  new  ZendOAuth \ Consumer ( $ config );
+//     }
+
     public function existeVolCreador($decodePostData)
     {
-        $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
+        $token = $this->validaToken($decodePostData['token']);
+        
+        
+        if ($token==true){
+            
+             $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
+        }else {
+            $existeVolCreador = "token incorrecto";
+        }
+        
+       
         return $existeVolCreador;
     }
 }

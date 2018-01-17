@@ -13,7 +13,8 @@ class VoluntarioSimulacroService
     private $simulacroGrupoModel;
 
     private $mensajeModel;
-
+    private $voluntCreadorService;
+    
     private function getVoluntarioSimulacroModel()
     {
         return $this->voluntarioSimulacroModel = new VoluntarioSimulacroModel();
@@ -29,6 +30,12 @@ class VoluntarioSimulacroService
         return $this->mensajeModel = new MensajeModel();
     }
 
+    
+    
+    public function getVoluntCreadorService(){
+        return $this->voluntCreadorService = new VoluntarioCreadorService();
+    }
+    
     /**
      * Obtenermos todos los Voluntarios
      */
@@ -63,13 +70,21 @@ class VoluntarioSimulacroService
 
     public function buscarDetalleVoluntario($decodePostData)
     {
+        $token = $this->getVoluntCreadorService()->validaToken($decodePostData);
+        if($token == true){
         $detallesVoluntario = $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntario($decodePostData);
-        
+        }else {
+            $detallesVoluntario = "token incorrecto";
+        }
         return $detallesVoluntario;
     }
 
     public function listaVoluntario($decodePostData)
     {
+        $token = $this->getVoluntCreadorService()->validaToken($decodePostData);
+        if($token == true){
+            
+       
         $arrayRespuesta = array();
         
         $listaVoluntario = $this->getVoluntarioSimulacroModel()->listaVoluntario($decodePostData);
@@ -81,7 +96,10 @@ class VoluntarioSimulacroService
         
         $arrayRespuesta['lista'] = $listaVoluntario;
         $arrayRespuesta['simulacro'] = $eliminaSimulacro;
-        
+         }else {
+             $arrayRespuesta['token'] = "token incorrecto";
+             
+         }
         return $arrayRespuesta;
     }
 

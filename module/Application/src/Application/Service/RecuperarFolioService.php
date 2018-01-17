@@ -19,6 +19,12 @@ class RecuperarFolioService
     {
         return $this->recuperarFolioModel = new RecuperarFolioModel();
     }
+    private $voluntCreadorService;
+    
+    
+    public function getVoluntCreadorService(){
+        return $this->voluntCreadorService = new VoluntarioCreadorService();
+    }
 
     /**
      * Obtenermos todos los participantes
@@ -32,8 +38,14 @@ class RecuperarFolioService
 
     public function recuperaCorreo($dataUser)
     {
-        $usuario = $this->getRecuperarFolioModel()->recuperaCorreo($dataUser);
-        $completo = $this->correo($usuario);
+        $token = $this->getVoluntCreadorService()->validaToken($dataUser);
+        if($token == true){
+            $usuario = $this->getRecuperarFolioModel()->recuperaCorreo($dataUser);
+            $completo = $this->correo($usuario);
+        }else {
+            $completo = "token incorrecto";
+        }
+        
         
         return $completo;
     }

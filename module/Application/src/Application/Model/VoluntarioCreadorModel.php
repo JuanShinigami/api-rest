@@ -50,6 +50,8 @@ class VoluntarioCreadorModel extends TableGateway
         
         // print_r($folioNuevo);
         // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+       
+        
         $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM voluntarioCreador where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();

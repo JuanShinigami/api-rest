@@ -13,6 +13,12 @@ class MensajeService
 		return $this->mensajeModel = new MensajeModel();
 	}
 
+	private $voluntCreadorService;
+	
+	
+	public function getVoluntCreadorService(){
+	    return $this->voluntCreadorService = new VoluntarioCreadorService();
+	}
 	/**
 	* Obtenermos todos los participantes
 	*/
@@ -26,14 +32,26 @@ class MensajeService
 
 	public function addMensaje($dataMensaje)
 	{
-	    $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
+	    $token = $this->getVoluntCreadorService()->validaToken($dataMensaje);
+	    if($token == true){
+	         $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
+	    }else {
+	        $mensaje = "token incorrecto";
+	    }
+
 	  	return $mensaje;
 	}
 	
 	public function buscarMensaje($id)
 	{
-	    $mensaje = $this->getMensajeModel()->buscarMensaje($id);
+	    $token = $this->getVoluntCreadorService()->validaToken($id);
 	    
+	    if($token == true){
+	        $mensaje = $this->getMensajeModel()->buscarMensaje($id['idSimulacrogrupo']);
+	    }else {
+	        $mensaje = "token incorrecto";
+	    }
+
 	    return $mensaje;
 	}
 }
