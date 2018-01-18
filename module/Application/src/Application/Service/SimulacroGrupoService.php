@@ -33,6 +33,7 @@ class SimulacroGrupoService
 	public function addSimulacro($dataSimulacroGrupo)
 	{
 	    $token = $this->getVoluntCreadorService()->validaToken($dataSimulacroGrupo);
+	   
 		if($token == true){
 		  $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo);  
 		}else {
@@ -42,6 +43,18 @@ class SimulacroGrupoService
 		
 		return $simulacroGrupo;
 
+	}
+	
+	public function updateEstatus($decodePostData) {
+	    
+	    $token = $this->getVoluntCreadorService()->validaToken($decodePostData);
+	    if($token == true){
+	        $detalles = $this->getSimulacroGrupoModel()->updateEstatusSimulacro($decodePostData);
+	    }else {
+	        $detalles = "token incorrecto";
+	    }
+	    return $detalles;
+	    
 	}
 
 	public function buscarDetalles($decodePostData) {

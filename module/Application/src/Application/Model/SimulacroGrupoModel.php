@@ -65,7 +65,8 @@ class SimulacroGrupoModel extends TableGateway
                 'fecha' => $dataSimulacroGrupo["fecha"],
                 'hora' => $dataSimulacroGrupo["hora"],
                 'voluntario' => 1,
-                'idVoluntarioCreador' => $dataSimulacroGrupo["idVoluntarioCreador"]
+                'idVoluntarioCreador' => $dataSimulacroGrupo["idVoluntarioCreador"],
+                'estatus' => $dataSimulacroGrupo["estatus"]
             );
             // print_r($array);
             // exit;
@@ -121,6 +122,42 @@ class SimulacroGrupoModel extends TableGateway
         return $respuesta;
     }
 
+    
+    public function updateEstatusSimulacro($decodePostData)
+    {
+       
+        $flag = false;
+        $respuesta = array();
+        
+        
+        try {
+            $sql = new Sql($this->dbAdapter);
+            $update = $sql->update();
+            $update->table('simulacrogrupo');
+            
+            $array = array(
+                
+                'estatus' => $decodePostData['estatus']
+            );
+            
+            $update->set($array);
+            $update->where(array(
+                'id' => $decodePostData['id']
+            ));
+            
+            $selectString = $sql->getSqlStringForSqlObject($update);
+            $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+            $flag = true;
+        } catch (\PDOException $e) {
+            // echo "First Message " . $e->getMessage() . "<br/>";
+            $flag = false;
+        } catch (\Exception $e) {
+            // echo "Second Message: " . $e->getMessage() . "<br/>";
+        }
+        $respuesta['status'] = $flag;
+        return $respuesta;
+    }
+    
     public function buscarDetalles($decodePostData)
     {
         $sql = new Sql($this->dbAdapter);

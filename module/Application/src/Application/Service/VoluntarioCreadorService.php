@@ -2,7 +2,9 @@
 namespace Application\Service;
 
 use Application\Model\VoluntarioCreadorModel;
+use Zend\Config\Factory;
 use Zend\Validator\Identical;
+use Zend\Config\Config;
 
 class VoluntarioCreadorService
 {
@@ -105,24 +107,78 @@ class VoluntarioCreadorService
         // echo print_r($arrayresponse);
         // exit;
         
+        
         return $arrayResponse;
     }
 
+    
+    public function generarToken($arrayResponse){
+        
+        print_r($arrayResponse);
+//         $integer = Rand::getInteger(0,1000);
+//         //         printf("Random integer in [0-1000]: %d\n", $integer);
+        
+//         $guarda = $this->guardaToken($integer);
+//         return $integer;
+//        $conf = new Factory();
+       
+//         $config = Factory::fromFile('config/config.php', true); // Create a Zend Config Object
+        
+       
+//         echo "config: ";
+//         print_r($config);
+        
+        if ($arrayResponse == true) {
+            
+            $tokenId    = base64_encode(mcrypt_create_iv(32));
+            $issuedAt   = time();
+            $notBefore  = $issuedAt + 10;             //Adding 10 seconds
+            $expire     = $notBefore + 60;            // Adding 60 seconds
+//             $serverName = $config->get('serverName'); // Retrieve the server name from config file
+            
+            /*
+             * Create the token as an array
+             */
+            $data = [
+                'iat'  => $issuedAt,         // Issued at: time when the token was generated
+                'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
+//                 'iss'  => $serverName,       // Issuer
+                'nbf'  => $notBefore,        // Not before
+                'exp'  => $expire,           // Expire
+//                 'data' => [                  // Data related to the signer user
+//                     'id'   => $arrayResponse['id'], // userid from the users table
+//                     'userName' => $username, // User name
+//                 ]
+            ];
+        }
+        
+        print_r($data);
+        return $data;
+             
+    }
+    
+
+    
     public function validaToken($decodePostData)
     {
 //         print_r($decodePostData);
-       
+        
         $token = false;
-        $valid = new Identical(array('token' => 'token'));//, 'strict' => FALSE)
+        
+        $valid = new Identical(array('token' => 'token','strict' => FALSE));//, )
         
         if ($valid->isValid($decodePostData['token'])) {
+           
             $token=true;
+            
         }
-//         print_r($token);
+//          print_r($token);
 //          exit;
         return $token;
         
     }
+    
+    
     
 //     public function hacerToken(){
        
@@ -137,9 +193,36 @@ class VoluntarioCreadorService
 
     public function existeVolCreador($decodePostData)
     {
-        $token = $this->validaToken($decodePostData['token']);
         
+//         print_r($decodePostData);
+       
         
+//         $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
+        
+// //         print_r($existeVolCreador);
+// //     echo "<br />";
+        
+//         if (empty($existeVolCreador)) {
+            
+//             $arrayResponse = array(
+//                 "flag" => 'false'
+//             );
+//         } else {
+            
+//             $arrayResponse = array(
+//                 "flag" => 'true',
+//                 "id" => $existeVolCreador
+//             );
+//         }
+
+//         $generaToken =$this->generarToken($arrayResponse);
+// //        print_r($generaToken);
+//         print_r($arrayResponse);
+//         exit;
+
+        $token = $this->validaToken($decodePostData);
+        
+              
         if ($token==true){
             
              $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);

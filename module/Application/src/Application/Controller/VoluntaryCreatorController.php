@@ -51,6 +51,15 @@ class VoluntaryCreatorController extends AbstractActionController
     	exit;
     }
     
+//     public function addGenerateTokenAction(){
+//         $voluntCreador = $this->getvoluntCreadorService()->generarToken($arrayResponse);
+//         $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+//             "response" => $voluntCreador,
+//         )));
+        
+//         return $response;
+//     }
+    
     public function existsVoluntaryCreatorAction(){
         
         $request = $this->getRequest();
