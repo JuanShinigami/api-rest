@@ -3,17 +3,23 @@
 namespace Application\Service;
 
 use Application\Model\SimulacroGrupoModel;
+use Application\Model\VoluntarioSimulacroModel;
 
 class SimulacroGrupoService
 {
 	private $simulacroGrupoModel;
 	private $voluntCreadorService;
+	private $voluntarioSimulacroModel;
 	
 	private function getSimulacroGrupoModel()
 	{
 	    return $this->simulacroGrupoModel = new SimulacroGrupoModel();
 	}
 
+	private function getVoluntarioSimulacroModel()
+	{
+	    return $this->voluntarioSimulacroModel = new VoluntarioSimulacroModel();
+	}
 	
 	
 	public function getVoluntCreadorService(){
@@ -45,6 +51,13 @@ class SimulacroGrupoService
 
 	}
 	
+	
+	public function countVoluntario($decodePostData)
+	{
+	    $countVoluntary = $this->getVoluntarioSimulacroModel()->numeroVoluntario($decodePostData['idSimulacro']);
+	    return $countVoluntary;
+	    
+	}
 	public function updateEstatus($decodePostData) {
 	    
 	    $token = $this->getVoluntCreadorService()->validaToken($decodePostData);

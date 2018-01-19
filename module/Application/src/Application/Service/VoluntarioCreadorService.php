@@ -122,7 +122,7 @@ class VoluntarioCreadorService
 //         return $integer;
 //        $conf = new Factory();
        
-//         $config = Factory::fromFile('config/config.php', true); // Create a Zend Config Object
+        $config = Factory::fromFile('config/module.config.php', true); // Create a Zend Config Object
         
        
 //         echo "config: ";
@@ -134,7 +134,7 @@ class VoluntarioCreadorService
             $issuedAt   = time();
             $notBefore  = $issuedAt + 10;             //Adding 10 seconds
             $expire     = $notBefore + 60;            // Adding 60 seconds
-//             $serverName = $config->get('serverName'); // Retrieve the server name from config file
+            $serverName = $config->get('serverName'); // Retrieve the server name from config file
             
             /*
              * Create the token as an array
@@ -142,7 +142,7 @@ class VoluntarioCreadorService
             $data = [
                 'iat'  => $issuedAt,         // Issued at: time when the token was generated
                 'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
-//                 'iss'  => $serverName,       // Issuer
+                'iss'  => $serverName,       // Issuer
                 'nbf'  => $notBefore,        // Not before
                 'exp'  => $expire,           // Expire
 //                 'data' => [                  // Data related to the signer user
@@ -220,6 +220,7 @@ class VoluntarioCreadorService
 //         print_r($arrayResponse);
 //         exit;
 
+        
         $token = $this->validaToken($decodePostData);
         
               
@@ -232,6 +233,8 @@ class VoluntarioCreadorService
         
        
         return $existeVolCreador;
+        
+        
     }
 }
 ?>

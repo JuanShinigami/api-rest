@@ -158,6 +158,24 @@ class SimulacroGrupoModel extends TableGateway
         return $respuesta;
     }
     
+    public function idSimulacro($folioNuevo)
+    {
+        
+        // print_r($folioNuevo);
+        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+        
+        
+        $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM voluntarioCreador where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
+        
+        $res = $consulta->toArray();
+        // echo "res ";
+        // print_r($res);
+        
+        return $res;
+    }
+    
+    
+    
     public function buscarDetalles($decodePostData)
     {
         $sql = new Sql($this->dbAdapter);
