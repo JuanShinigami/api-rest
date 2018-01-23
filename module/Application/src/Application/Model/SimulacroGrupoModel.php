@@ -66,7 +66,8 @@ class SimulacroGrupoModel extends TableGateway
                 'hora' => $dataSimulacroGrupo["hora"],
                 'voluntario' => 1,
                 'idVoluntarioCreador' => $dataSimulacroGrupo["idVoluntarioCreador"],
-                'estatus' => $dataSimulacroGrupo["estatus"]
+                'estatus' => $dataSimulacroGrupo["estatus"],
+                'tiempoPreparacion' => $dataSimulacroGrupo["tiempoPreparacion"]
             );
             // print_r($array);
             // exit;
