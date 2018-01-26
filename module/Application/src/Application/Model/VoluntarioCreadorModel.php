@@ -50,8 +50,6 @@ class VoluntarioCreadorModel extends TableGateway
         
         // print_r($folioNuevo);
         // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-       
-        
         $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM voluntarioCreador where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
@@ -141,6 +139,7 @@ class VoluntarioCreadorModel extends TableGateway
             
             $selectString = $sql->getSqlStringForSqlObject($update);
             $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+            $flag = true;
         } catch (\PDOException $e) {
             // echo "First Message " . $e->getMessage() . "<br/>";
             $flag = false;
@@ -149,6 +148,34 @@ class VoluntarioCreadorModel extends TableGateway
         }
         $respuesta['status'] = $flag;
         // $respuesta['folio'] = $folioNuevo;
+        return $respuesta;
+    }
+
+    public function registroVoluntario($folioNuevo)
+    {
+        
+        $flag = false;
+        $respuesta = array();
+        
+        try {
+            
+            $consulta = $this->dbAdapter->query("select * FROM voluntarioCreador where folio = '" . $folioNuevo['folio'] . "' and correo = '" . $folioNuevo['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
+            
+            $res = $consulta->toArray();
+          
+           if(!empty($res)){ 
+              
+               $flag = true;
+               
+           } 
+        } catch (\PDOException $e) {
+            // echo "First Message " . $e->getMessage() . "<br/>";
+            $flag = false;
+        } catch (\Exception $e) {
+            // echo "Second Message: " . $e->getMessage() . "<br/>";
+        }
+        $respuesta['status'] = $flag;
+        $respuesta['datos'] = $res;
         return $respuesta;
     }
 }

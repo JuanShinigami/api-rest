@@ -233,8 +233,21 @@ class VoluntarioCreadorService
         
        
         return $existeVolCreador;
-        
-        
+ 
+    }
+    
+    public function registroVoluntario($decodePostData){
+
+        $token = $this->validaToken($decodePostData);
+      
+        if ($token==true){
+            
+            $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData);
+        }else {
+            $registroVoluntario = "token incorrecto";
+        }
+
+        return $registroVoluntario;
     }
 }
 ?>
