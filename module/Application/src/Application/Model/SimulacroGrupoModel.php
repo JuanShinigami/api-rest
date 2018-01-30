@@ -84,11 +84,37 @@ class SimulacroGrupoModel extends TableGateway
         }
         $respuesta['status'] = $flag;
         
-        // print_r($results);
+//         print_r($results);
+//         exit;
         
         return $respuesta;
     }
 
+    public function idSimulacro($dataUser)
+    {
+        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select max(id) as id FROM simulacrogrupo", Adapter::QUERY_MODE_EXECUTE);
+        
+        $res = $consulta->toArray();
+        // echo "existe correo";
+//          print_r($);
+//          exit;
+        
+        return $res[0]['id'];
+
+//where 
+//        ubicacion = '" . $dataUser['ubicacion'] . "'
+//         and latitud = '" . $dataUser['latitud'] . "'
+//         and longitud = '" . $dataUser['longitud'] . "'
+//         and fecha = '" . $dataUser['fecha'] . "' 
+//         and hora = '" . $dataUser['hora'] . "'
+//         and idVoluntarioCreador = '" . $dataUser['idVoluntarioCreador'] . "'
+//         and estatus = '" . $dataUser['estatus'] . "'
+//         and tiempoPreparacion  = '" . $dataUser['tiempoPreparacion'] . "'"
+    }
+    
+    
+    
     public function updateNumeroVoluntario($total, $idSimulacro)
     {
         $flag = false;
@@ -158,25 +184,7 @@ class SimulacroGrupoModel extends TableGateway
         $respuesta['status'] = $flag;
         return $respuesta;
     }
-    
-    public function idSimulacro($folioNuevo)
-    {
-        
-        // print_r($folioNuevo);
-        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        
-        
-        $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM voluntarioCreador where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
-        
-        $res = $consulta->toArray();
-        // echo "res ";
-        // print_r($res);
-        
-        return $res;
-    }
-    
-    
-    
+      
     public function buscarDetalles($decodePostData)
     {
         $sql = new Sql($this->dbAdapter);

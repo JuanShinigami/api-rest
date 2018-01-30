@@ -39,15 +39,24 @@ class SimulacroGrupoService
 	public function addSimulacro($dataSimulacroGrupo)
 	{
 	    $token = $this->getVoluntCreadorService()->validaToken($dataSimulacroGrupo);
-	   
+	   $resArray= array();
 		if($token == true){
-		  $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo);  
+		  $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo); 
+		  $idSimulacro = $this->getSimulacroGrupoModel()->idSimulacro($dataSimulacroGrupo); 
+		  $dataVolSimulacro = array();
+		  $dataVolSimulacro['idVoluntario'] = $dataSimulacroGrupo['idVoluntarioCreador'];
+		  $dataVolSimulacro['idSimulacro'] = $idSimulacro;
+		  $dataVolSimulacro['tipoSimulacro'] = $dataSimulacroGrupo['tipoSimulacro'];
+		  $voluntarioSimulacroId = $this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro);
+		  
+// 		  $resArray['agrego']= $simulacroGrupo;
+		  $resArray['id']= $idSimulacro;
 		}else {
-		    $simulacroGrupo = "token incorrecto";
+		    $resArray['token'] = "token incorrecto";
 		}
 		
 		
-		return $simulacroGrupo;
+		return $resArray;
 
 	}
 	

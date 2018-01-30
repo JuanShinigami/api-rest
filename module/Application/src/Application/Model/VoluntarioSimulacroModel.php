@@ -42,7 +42,11 @@ class VoluntarioSimulacroModel extends TableGateway
 	
 
 	public function addVoluntarioSimulacro($dataVolSimulacro){
-	   
+	    
+// 	    print_r($dataVolSimulacro);
+	    
+// 	    exit;
+	  
 	    $flag = false;
 	    $respuesta = array();
 	    
@@ -51,10 +55,11 @@ class VoluntarioSimulacroModel extends TableGateway
 	        $insertar = $sql->insert('voluntario_simulacro_grupo');
 	        $array=array(
 	            
-	            'idVoluntario'=>$dataVolSimulacro["idVoluntario"],
-	            'idSimulacro'=>$dataVolSimulacro["idSimulacro"]
-// 	            'tiempo_inicio'=>$dataPartSismo["tiempo_inicio"],
-// 	            'tiempo_estoy_listo'=>$dataPartSismo["tiempo_estoy_listo"],
+	            'idVoluntario'=>$dataVolSimulacro['idVoluntario'],
+	            'idSimulacro'=>$dataVolSimulacro['idSimulacro'],
+	            'tipoSimulacro'=>$dataVolSimulacro['tipoSimulacro'],
+ 	            'tiempo_inicio'=>"",
+ 	            'tiempo_estoy_listo'=>"",
 // 	            'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
 	        );
 	        
@@ -70,7 +75,7 @@ class VoluntarioSimulacroModel extends TableGateway
 	        echo "Second Message: " . $e->getMessage() . "<br/>";
 	    }
 	    $respuesta['status'] = $flag;
-	    $respuesta['idVoluntario'] = $this->existe($dataVolSimulacro);//[0]['idVoluntario']
+// 	    $respuesta['idVoluntario'] = $this->existe($dataVolSimulacro);//[0]['idVoluntario']
 		
 // 		print_r($respuesta);
 	
