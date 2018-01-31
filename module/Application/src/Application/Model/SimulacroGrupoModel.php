@@ -204,8 +204,33 @@ class SimulacroGrupoModel extends TableGateway
         
         // echo "<pre>"; print_r($result); exit;
         
+        //print_r($result);
+        //exit;
+        
+        return $result;
+    }
+
+    public function searchSimulacrum($data)
+    {
+        $sql = new Sql($this->dbAdapter);
+        $select = $sql->select();
+        
+        $select->from(array(
+            't' => 'simulacrogrupo'
+        ), array())->where(array(
+            't.id' => $data['idSimulacro']
+        ));
+        
         // print_r($result);
         // exit;
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $execute = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+        $result = $execute->toArray();
+        
+        // echo "<pre>"; print_r($result); exit;
+        
+        //print_r($result[0]);
+        //exit;
         
         return $result;
     }

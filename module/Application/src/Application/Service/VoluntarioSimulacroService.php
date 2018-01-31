@@ -46,6 +46,47 @@ class VoluntarioSimulacroService
         return $voluntariosSimulacro;
     }
 
+    public function getAllByClient($id){
+        //$response = array();
+        $arrayListSimulacrumCreate = array();
+        $arrayListSimulacrumJoin = array();
+        $listSimulacrumCreate = $this->getVoluntarioSimulacroModel()->getAllByClientCreate($id);
+        $listSimulacrumJoin = $this->getVoluntarioSimulacroModel()->getAllByClientJoin($id);
+
+
+
+        foreach ($listSimulacrumCreate as &$simulacrum) {
+            //echo $simulacrum['id'];
+            //$data = array();
+            //$data['id'] = $simulacrum['id'];
+
+            $simulacrumDetails[0] = $this->getSimulacroGrupoModel()->searchSimulacrum($simulacrum);
+            $result = array_merge($simulacrum, $simulacrumDetails[0]);
+            array_push($arrayListSimulacrumCreate, $result);
+
+        }
+
+        foreach ($listSimulacrumJoin as &$simulacrum) {
+            //echo $simulacrum['id'];
+            //$data = array();
+            //$data['id'] = $simulacrum['id'];
+
+            $simulacrumDetails[0] = $this->getSimulacroGrupoModel()->searchSimulacrum($simulacrum);
+            $result = array_merge($simulacrum, $simulacrumDetails[0]);
+            array_push($arrayListSimulacrumJoin, $result);
+
+        }
+        //print_r($arrayLisSimulacrumCreate);
+        //echo count($arrayListSimulacrumJoin);
+
+        //$response['listSimulacrumCreate'] = $listSimulacrumCreate;
+        //$response['listSimulacrumJoin'] = $listSimulacrumJoin;
+        return array(
+                "listSimulacrumCreate" => $arrayListSimulacrumCreate,
+                "listSimulacrumJoin" => $arrayListSimulacrumJoin,
+            );
+    }
+
     public function addVoluntarioSimulacro($dataVolSimulacro)
     {
         $voluntariosSimulacro = $this->getVoluntarioSimulacroModel()->existe($dataVolSimulacro);

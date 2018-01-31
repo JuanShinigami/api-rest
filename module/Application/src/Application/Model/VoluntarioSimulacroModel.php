@@ -38,6 +38,35 @@ class VoluntarioSimulacroModel extends TableGateway
 
 		return $result;
 	}
+
+	public function getAllByClientCreate($id){
+		$sql = new Sql($this->dbAdapter);
+		$select = $sql->select();
+		$select
+			->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro'))
+			->from(array('s' => $this->table))
+			->Where(array('s.idVoluntario'=>$id, 's.tipoSimulacro' => 'creado'));
+		$selectString = $sql->getSqlStringForSqlObject($select);
+		
+		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+		$result       = $execute->toArray();
+
+		return $result;//print_r($result); exit;
+	}
+
+	public function getAllByClientJoin($id){
+		$sql = new Sql($this->dbAdapter);
+		$select = $sql->select();
+		$select
+			->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro'))
+			->from(array('s' => $this->table))
+			->Where(array('s.idVoluntario'=>$id, 's.tipoSimulacro' => 'unido'));
+		$selectString = $sql->getSqlStringForSqlObject($select);
+		//print_r($selectString); exit;
+		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+		$result       = $execute->toArray();
+		return $result;
+	}
 	
 	
 
