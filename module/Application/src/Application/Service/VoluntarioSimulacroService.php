@@ -60,8 +60,16 @@ class VoluntarioSimulacroService
             //$data = array();
             //$data['id'] = $simulacrum['id'];
 
-            $simulacrumDetails[0] = $this->getSimulacroGrupoModel()->searchSimulacrum($simulacrum);
-            $result = array_merge($simulacrum, $simulacrumDetails[0]);
+            $simulacrumDetails = $this->getSimulacroGrupoModel()->searchSimulacrum($simulacrum);
+            if($simulacrumDetails[0]['estatus'] == "Creada"){
+                $simulacrumDetails[0]['status'] = true;
+            }else{
+                $simulacrumDetails[0]['status'] = false;
+            }
+            $result = array_merge($simulacrumDetails[0], $simulacrum);
+            //$result = $simulacrum + $simulacrumDetails;
+            //print_r($simulacrumDetails[0]);
+            //exit;
             array_push($arrayListSimulacrumCreate, $result);
 
         }
@@ -70,9 +78,19 @@ class VoluntarioSimulacroService
             //echo $simulacrum['id'];
             //$data = array();
             //$data['id'] = $simulacrum['id'];
+            
 
-            $simulacrumDetails[0] = $this->getSimulacroGrupoModel()->searchSimulacrum($simulacrum);
-            $result = array_merge($simulacrum, $simulacrumDetails[0]);
+            $simulacrumDetails = $this->getSimulacroGrupoModel()->searchSimulacrum($simulacrum);
+            if($simulacrum['tiempo_inicio'] == ""){
+                $simulacrumDetails[0]['status'] = true;
+            }else{
+                $simulacrumDetails[0]['status'] = false;
+            }
+            $result = array_merge($simulacrumDetails[0], $simulacrum);
+
+            //$result = $simulacrum[''] + $simulacrumDetails[0];
+            //$result['simulacrum'] = $simulacrum;
+            //$result['detail'] = $simulacrumDetails[0];
             array_push($arrayListSimulacrumJoin, $result);
 
         }
