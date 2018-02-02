@@ -128,7 +128,7 @@ class SimulacroGrupoModel extends TableGateway
             
             $array = array(
                 
-                'voluntario' => $total[0]["totalVoluntario"] + 1
+                'voluntario' => $total[0]["totalVoluntario"]    // + 1
             );
             
             $update->set($array);

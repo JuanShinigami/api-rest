@@ -109,15 +109,22 @@ class VoluntarioSimulacroService
     {
         $voluntariosSimulacro = $this->getVoluntarioSimulacroModel()->existe($dataVolSimulacro);
        
+        $resArray = array();
         
         if (empty($voluntariosSimulacro)) {
             $voluntariosSimulacro = $this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro);
             $buscaTotalVoluntario = $this->getVoluntarioSimulacroModel()->numeroVoluntario($dataVolSimulacro["idSimulacro"]);
             $actualizaParticipates = $this->getSimulacroGrupoModel()->updateNumeroVoluntario($buscaTotalVoluntario, $dataVolSimulacro["idSimulacro"]);
+            
+            $resArray['voluntarioSimulacro'] = $voluntariosSimulacro;
+//             $resArray['status'] = "true";
+            
         } else {
-            $voluntariosSimulacro = "Ya esta registrado en este simulacro ";
+            $resArray['voluntarioSimulacro'] = "Ya esta registrado en este simulacro ";
+            $resArray['status'] = "false";
+         
         }
-        return $voluntariosSimulacro;
+        return $resArray;
     }
 
     public function updateVoluntario($decodePostData)
