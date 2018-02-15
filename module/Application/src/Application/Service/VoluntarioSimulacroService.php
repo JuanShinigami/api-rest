@@ -117,11 +117,11 @@ class VoluntarioSimulacroService
             $actualizaParticipates = $this->getSimulacroGrupoModel()->updateNumeroVoluntario($buscaTotalVoluntario, $dataVolSimulacro["idSimulacro"]);
             
             $resArray['voluntarioSimulacro'] = $voluntariosSimulacro;
-//             $resArray['status'] = "true";
+             //$resArray['status'] = "true";
             
         } else {
             $resArray['voluntarioSimulacro'] = "Ya esta registrado en este simulacro ";
-            $resArray['status'] = "false";
+            //$resArray['status'] = "false";
          
         }
         return $resArray;
