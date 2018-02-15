@@ -95,7 +95,19 @@ class VoluntarioSimulacroModel extends TableGateway
 	        $insertar->values($array);
 	        $selectString = $sql->getSqlStringForSqlObject($insertar);
 	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	        $consulta = $this->dbAdapter->query("select max(id) as id FROM voluntario_simulacro_grupo", Adapter::QUERY_MODE_EXECUTE);
+        
+        	$res = $consulta->toArray();
+        // echo "existe correo";
+//          print_r($);
+//          exit;
+        
+        //return $res[0]['id'];
+        	//echo $res[0]['id'];
+	        //print_r($results);
+	        //exit;
 	        $flag = true;
+
 	        
 	    }catch (\PDOException $e) {
 	        echo "First Message " . $e->getMessage() . "<br/>";
@@ -104,6 +116,7 @@ class VoluntarioSimulacroModel extends TableGateway
 	        echo "Second Message: " . $e->getMessage() . "<br/>";
 	    }
 	    $respuesta['status'] = $flag;
+	    $respuesta['idVoluntarioSimulacro'] = $res[0]['id'];
 // 	    $respuesta['idVoluntario'] = $this->existe($dataVolSimulacro);//[0]['idVoluntario']
 		
 // 		print_r($respuesta);
@@ -125,19 +138,18 @@ class VoluntarioSimulacroModel extends TableGateway
 	        $update->table('voluntario_simulacro_grupo');
 	        
 	        $array = array(
-	            
 	            'tiempo_inicio'=>$dataVolSimulacro["tiempo_inicio"],
-	            'tiempo_estoy_listo'=>$dataVolSimulacro["tiempo_estoy_listo"],
-	        	'mensajeVoluntario'=>$dataVolSimulacro["mensajeVoluntario"]
+	            'tiempo_estoy_listo'=>$dataVolSimulacro["tiempo_estoy_listo"]
 	        );
 	        
 	        $update->set($array);
 	        $update->where(array(
-	            'idVoluntario' => $dataVolSimulacro['idVoluntario'],
-	            'idSimulacro'=>$dataVolSimulacro['idSimulacro']
+	            'id' => $dataVolSimulacro['idVoluntarioSimulacro']
 	        ));
 	        
 	        $selectString = $sql->getSqlStringForSqlObject($update);
+	        //echo $selectString;
+	        //exit;
 	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 	        $flag = true;
 	    } catch (\PDOException $e) {

@@ -50,7 +50,8 @@ class SimulacroGrupoService
 		  $voluntarioSimulacroId = $this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro);
 		  
 // 		  $resArray['agrego']= $simulacroGrupo;
-		  $resArray['id']= $idSimulacro;
+		  $resArray['voluntarioSimulacro']= $voluntarioSimulacroId;
+		  $resArray['idSimulacrum'] = $idSimulacro;
 		}else {
 		    $resArray['token'] = "token incorrecto";
 		}
