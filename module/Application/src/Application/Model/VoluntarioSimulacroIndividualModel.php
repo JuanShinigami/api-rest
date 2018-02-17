@@ -36,5 +36,73 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
         return $result;
     }
     
+    public function addVoluntarioSimulacroIndividual($dataVolSimulacro){
+        
+        // 	    print_r($dataVolSimulacro);
+        
+        // 	    exit;
+        
+        $flag = false;
+        $respuesta = array();
+        
+        try {
+            $sql = new Sql($this->dbAdapter);
+            $insertar = $sql->insert('voluntario_simulacro_individual');
+            $array=array(
+                
+                'idVoluntario'=>$dataVolSimulacro['idVoluntario'],
+                'tiempo_inicio'=>$dataVolSimulacro['tiempo_inicio'],
+                'tiempo_estoy_listo'=>$dataVolSimulacro['tiempo_estoy_listo'],
+                //'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
+            );
+            
+            $insertar->values($array);
+            $selectString = $sql->getSqlStringForSqlObject($insertar);
+            $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+            
+            // echo "existe correo";
+            //          print_r($);
+            //          exit;
+            
+            //return $res[0]['id'];
+            //echo $res[0]['id'];
+            //print_r($results);
+            //exit;
+            $flag = true;
+            
+            
+        }catch (\PDOException $e) {
+            echo "First Message " . $e->getMessage() . "<br/>";
+            $flag = false;
+        }catch (\Exception $e) {
+            echo "Second Message: " . $e->getMessage() . "<br/>";
+        }
+        $respuesta['status'] = $flag;
+        
+        return $respuesta;
+        
+    }
+    
+    public function eliminarVolDeSimulacroIndividual($dataVolSimulacro){
+        $flag = false;
+        $respuesta = array();
+        try {
+            $consulta=$this->dbAdapter->query("DELETE FROM voluntario_simulacro_individual where idVoluntario = '" . $dataVolSimulacro["idVoluntario"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+            $flag = true;
+        }
+        catch (\PDOException $e) {
+            echo "First Message " . $e->getMessage() . "<br/>";
+            $flag = false;
+        }catch (\Exception $e) {
+            echo "Second Message: " . $e->getMessage() . "<br/>";
+        }
+        $respuesta['status'] = $flag;
+        
+        return $respuesta;
+        // 	    print_r($res);
+        // 	    exit;
+        
+    }
+    
     
 }

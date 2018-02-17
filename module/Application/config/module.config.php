@@ -82,7 +82,8 @@ return array(
             'Application\Controller\SimulacrumGroup' => Controller\SimulacrumGroupController::class,
             'Application\Controller\Message' => Controller\MessageController::class,
             'Application\Controller\VoluntarySimulacrum' => Controller\VoluntarySimulacrumController::class,
-            'Application\Controller\RecoverFolio' => Controller\RecoverFolioController::class
+            'Application\Controller\RecoverFolio' => Controller\RecoverFolioController::class,
+            'Application\Controller\VoluntarySimulacrumIndividual' => Controller\VoluntarySimulacrumIndividualController::class
         ),
     ),
     'view_manager' => array(
