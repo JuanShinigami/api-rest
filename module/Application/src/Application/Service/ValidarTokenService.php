@@ -1,9 +1,9 @@
 <?php
 namespace Application\Service;
 
+use Application\Model\TokenModel;
 use Zend\Filter\Decrypt;
 use Zend\Filter\Encrypt;
-use Application\Model\TokenModel;
 
 class ValidarTokenService
 {
@@ -23,7 +23,8 @@ class ValidarTokenService
         
         // exit;
         // ['datos'][0]['id']
-        $numero = random_int(1, 100);
+        $numero = rand(1, 100);
+//         var_dump(rand(1, 100));exit;
         
         $fi = new Encrypt();
         $fi->setKey('key');
@@ -43,6 +44,7 @@ class ValidarTokenService
 
     public function validaToken($decodePostData)
     {
+        
         try {
             $filter = new Decrypt();
             $filter->setKey('key');

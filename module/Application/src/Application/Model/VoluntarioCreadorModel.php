@@ -155,7 +155,7 @@ class VoluntarioCreadorModel extends TableGateway
 
     public function registroVoluntario($folioNuevo)
     {
-        
+       
         $flag = false;
         $respuesta = array();
         

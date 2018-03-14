@@ -81,7 +81,7 @@ class VoluntarioCreadorService
                 }
                 // $token = $this->validaToken($dataVolCreador);
                 
-        //********        $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador, $folioNuevo);
+              $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador, $folioNuevo);
 //                 print_r("usuario");
 //                 print_r($dataVolCreador);exit;
                 $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);

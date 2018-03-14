@@ -83,7 +83,6 @@ class VoluntaryCreatorController extends AbstractActionController
     }
     
     public function registryVoluntaryCreatorAction(){
-        print_r("hola ");
         
         $request = $this->getRequest();
         
@@ -108,8 +107,6 @@ class VoluntaryCreatorController extends AbstractActionController
            exit;
         }
         
-        
-   
     
     public function updateVoluntaryCreatorAction(){
         
