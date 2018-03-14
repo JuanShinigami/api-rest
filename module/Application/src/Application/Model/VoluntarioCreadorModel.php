@@ -112,6 +112,8 @@ class VoluntarioCreadorModel extends TableGateway
         $respuesta['status'] = $flag;
         $respuesta['folio'] = $folioNuevo;
         
+//         print_r($respuesta);exit;
+        
         return $respuesta;
     }
 
@@ -153,7 +155,7 @@ class VoluntarioCreadorModel extends TableGateway
 
     public function registroVoluntario($folioNuevo)
     {
-        
+       
         $flag = false;
         $respuesta = array();
         

@@ -41,7 +41,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '/[:controller[/:action]][/:token]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -82,7 +82,8 @@ return array(
             'Application\Controller\SimulacrumGroup' => Controller\SimulacrumGroupController::class,
             'Application\Controller\Message' => Controller\MessageController::class,
             'Application\Controller\VoluntarySimulacrum' => Controller\VoluntarySimulacrumController::class,
-            'Application\Controller\RecoverFolio' => Controller\RecoverFolioController::class
+            'Application\Controller\RecoverFolio' => Controller\RecoverFolioController::class,
+            'Application\Controller\VoluntarySimulacrumIndividual' => Controller\VoluntarySimulacrumIndividualController::class
         ),
     ),
     'view_manager' => array(
