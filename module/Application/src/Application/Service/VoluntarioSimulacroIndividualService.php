@@ -7,10 +7,16 @@ use Application\Model\VoluntarioSimulacroIndividualModel;
 class VoluntarioSimulacroIndividualService
 {
     private $voluntarioSimulacroIndividualModel;
+    private $validarToken;
     
     private function getVoluntarioSimulacroIndividualModel()
     {
         return $this->voluntarioSimulacroIndividualModel = new VoluntarioSimulacroIndividualModel();
+    }
+    
+    private function getValidarToken()
+    {
+        return $this->validarToken = new ValidarTokenService();
     }
     
     public function addVoluntarioSimulacro($dataVolSimulacro)
@@ -18,9 +24,15 @@ class VoluntarioSimulacroIndividualService
      
         $resArray = array();
         
+        if ($this->getValidarToken()->validaToken($dataVolSimulacro)) {
+        
         $voluntariosSimulacro = $this->getVoluntarioSimulacroIndividualModel()->addVoluntarioSimulacroIndividual($dataVolSimulacro);
         
         $resArray['voluntarioSimulacro'] = $voluntariosSimulacro;
+        }else{
+            $resArray["Mensaje :" ] ="Acceso denegado";
+            $resArray["flag :"] ='false';
+        }
         //$resArray['status'] = "true";
         
         
@@ -31,11 +43,15 @@ class VoluntarioSimulacroIndividualService
     public function eliminarVolDeSimulacroIndividual($decodePostData)
     {
     
-//         $arrayR = array();
-       
+        $arrayR = array();
+        if ($this->getValidarToken()->validaToken($dataVolSimulacro)) {
         $eliminarVoluntario = $this->getVoluntarioSimulacroIndividualModel()->eliminarVolDeSimulacroIndividual($decodePostData);
-       
-        return $eliminarVoluntario;
+        $arrayR=$eliminarVoluntario;
+        }else{
+            $arrayR["Mensaje :" ] ="Acceso denegado";
+            $arrayR["flag :"] ='false';
+        }
+        return $arrayR;
     }
     
 }

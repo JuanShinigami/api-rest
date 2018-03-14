@@ -1,0 +1,6 @@
+GitRepositoriesView.GitDirectories=/opt/lampp/htdocs/voluntarioSimulacro/api-rest/.git\:
+GitRepositoriesView.GitDirectories.relative=api-rest/.git\:
+RepositorySearchDialogDeepSearch=false
+RepositorySearchDialogSearchPath=/opt/lampp/htdocs/voluntarioSimulacro/api-rest
+RepositorySearchDialogSkipHidden=false
+eclipse.preferences.version=1

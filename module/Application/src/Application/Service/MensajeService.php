@@ -8,12 +8,19 @@ class MensajeService
 {
 	private $mensajeModel;
 	
+	private $validarToken;
+	
+	private $voluntCreadorService;
+	
 	private function getMensajeModel()
 	{
 		return $this->mensajeModel = new MensajeModel();
 	}
 
-	private $voluntCreadorService;
+	private function getValidarToken()
+	{
+	    return $this->validarToken = new ValidarTokenService();
+	}
 	
 	
 	public function getVoluntCreadorService(){
@@ -32,26 +39,23 @@ class MensajeService
 
 	public function addMensaje($dataMensaje)
 	{
-	    $token = $this->getVoluntCreadorService()->validaToken($dataMensaje);
-	    if($token == true){
-	         $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
-	    }else {
-	        $mensaje = "token incorrecto";
-	    }
-
+	  	if($this->getValidarToken()->validaToken($dataMensaje)){
+	  	    $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
+	  	}else {
+	  	    $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
+	  	}
+	  	
 	  	return $mensaje;
 	}
 	
 	public function buscarMensaje($id)
 	{
-	    $token = $this->getVoluntCreadorService()->validaToken($id);
-	    
-	    if($token == true){
+	    if($this->getValidarToken()->validaToken($id)){
 	        $mensaje = $this->getMensajeModel()->buscarMensaje($id['idSimulacrogrupo']);
 	    }else {
-	        $mensaje = "token incorrecto";
+	        $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
 	    }
-
+	    
 	    return $mensaje;
 	}
 }

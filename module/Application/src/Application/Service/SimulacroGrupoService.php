@@ -21,7 +21,12 @@ class SimulacroGrupoService
 	    return $this->voluntarioSimulacroModel = new VoluntarioSimulacroModel();
 	}
 	
+	private $validarToken;
 	
+	private function getValidarToken()
+	{
+	    return $this->validarToken = new ValidarTokenService();
+	}
 	public function getVoluntCreadorService(){
 	    return $this->voluntCreadorService = new VoluntarioCreadorService();
 	}
@@ -38,9 +43,10 @@ class SimulacroGrupoService
 
 	public function addSimulacro($dataSimulacroGrupo)
 	{
-	    $token = $this->getVoluntCreadorService()->validaToken($dataSimulacroGrupo);
 	   $resArray= array();
-		if($token == true){
+	   
+	   if($this->getValidarToken()->validaToken($dataSimulacroGrupo)){
+		    
 		  $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo); 
 		  $idSimulacro = $this->getSimulacroGrupoModel()->idSimulacro($dataSimulacroGrupo); 
 		  $dataVolSimulacro = array();
@@ -52,13 +58,13 @@ class SimulacroGrupoService
 // 		  $resArray['agrego']= $simulacroGrupo;
 		  $resArray['voluntarioSimulacro']= $voluntarioSimulacroId;
 		  $resArray['idSimulacrum'] = $idSimulacro;
+		
 		}else {
-		    $resArray['token'] = "token incorrecto";
+		    $resArray['Mensaje'] = "Acceso denegado";
+		    $resArray['flag']='false';
 		}
 		
-		
 		return $resArray;
-
 	}
 	
 	
@@ -70,11 +76,10 @@ class SimulacroGrupoService
 	}
 	public function updateEstatus($decodePostData) {
 	    
-	    $token = $this->getVoluntCreadorService()->validaToken($decodePostData);
-	    if($token == true){
+	    if($this->getValidarToken()->validaToken($decodePostData)){
 	        $detalles = $this->getSimulacroGrupoModel()->updateEstatusSimulacro($decodePostData);
 	    }else {
-	        $detalles = "token incorrecto";
+	        $detalles = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
 	    }
 	    return $detalles;
 	    
@@ -82,14 +87,12 @@ class SimulacroGrupoService
 
 	public function buscarDetalles($decodePostData) {
 	    
-	    $token = $this->getVoluntCreadorService()->validaToken($decodePostData);
-	    if($token == true){
-	    $detalles = $this->getSimulacroGrupoModel()->buscarDetalles($decodePostData);
+	    if($this->getValidarToken()->validaToken($decodePostData)){
+	        $detalles = $this->getSimulacroGrupoModel()->buscarDetalles($decodePostData);
 	    }else {
-	        $detalles = "token incorrecto";
+	        $detalles = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
 	    }
 	    return $detalles;
-	    
 	}
 	
 }

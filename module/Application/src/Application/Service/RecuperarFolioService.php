@@ -21,7 +21,12 @@ class RecuperarFolioService
     }
     private $voluntCreadorService;
     
+    private $validarToken;
     
+    private function getValidarToken()
+    {
+        return $this->validarToken = new ValidarTokenService();
+    }
     public function getVoluntCreadorService(){
         return $this->voluntCreadorService = new VoluntarioCreadorService();
     }
@@ -38,18 +43,64 @@ class RecuperarFolioService
 
     public function recuperaCorreo($dataUser)
     {
-        $token = $this->getVoluntCreadorService()->validaToken($dataUser);
-        if($token == true){
+        if($this->getValidarToken()->validaToken($dataUser)){
             $usuario = $this->getRecuperarFolioModel()->recuperaCorreo($dataUser);
             $completo = $this->correo($usuario);
         }else {
-            $completo = "token incorrecto";
+            $completo =  array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
         }
-        
         
         return $completo;
     }
 
+    
+    public function correoToken($response)
+    {
+//         print_r("hola");
+//         print_r($response['correo']);exit;
+        $flag = false;
+        try {
+            
+            // $destinatario='ejemplo@gmail.com';
+            $destinatario = $response['correo'];
+            $emisor = 'ejemplo@gmail.com';
+            
+            // Enviar email
+            $message = new Message();
+            $message->addTo($destinatario)
+            ->addFrom($emisor)
+            ->setEncoding("UTF-8")
+            ->setSubject('Cuenta registrada')
+            ->setBody("Te has registrado exitosamente en Voluntario");
+            
+            // Utilizamos el smtp de gmail con nuestras credenciales
+            $transport = new SmtpTransport();
+            $options = new SmtpOptions(array(
+                'name' => 'smtp.gmail.com',
+                'host' => 'smtp.gmail.com',
+                'port' => 587,
+                'connection_class' => 'login',
+                'connection_config' => array(
+                    'username' => 'ejemplo@gmail.com', // direccion de correo que mandara los correos
+                    'password' => '*********', // contraseña de correo
+                    'ssl' => 'tls'
+                )
+            ));
+            $transport->setOptions($options); // Establecemos la configuración
+            $transport->send($message); // Enviamos el correo
+            $flag=true;
+        } catch (Exception $e) {
+            $flag=false;
+            echo "First Message " . $e->getMessage() . "<br/>";
+            exit;
+        }
+        
+        $response['status'] = $flag;
+        return $response;
+        
+    }
+    
+    
     public function correo($response)
     {
         $flag = false;

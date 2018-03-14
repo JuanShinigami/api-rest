@@ -2,18 +2,30 @@
 namespace Application\Service;
 
 use Application\Model\VoluntarioCreadorModel;
-use Zend\Config\Factory;
-use Zend\Validator\Identical;
-use Zend\Config\Config;
+use Application\Service\RecuperarFolioService;
 
 class VoluntarioCreadorService
 {
 
     private $voluntarioCreadorModel;
 
+    private $validarToken;
+    
+    private $correoToken;
+    
+    private function getcorreoTokenl()
+    {
+        return $this->correoToken = new RecuperarFolioService();
+    }
+
     private function getVolCreadorModel()
     {
         return $this->voluntarioCreadorModel = new VoluntarioCreadorModel();
+    }
+
+    private function getValidarToken()
+    {
+        return $this->validarToken = new ValidarTokenService();
     }
 
     /**
@@ -28,30 +40,7 @@ class VoluntarioCreadorService
 
     public function addVolCreador($dataVolCreador)
     {
-        // $arrayResponse;
-        // print_r($dataUser['nombre']);
-        // $nombre=$dataUser['nombre'];
-        // $arrayName = split(' ', $nombre);
-        
-        // $arrayName = split(' ', $dataUser['nombre']);
-        
-        // // echo "\narray name ";
-        // // print_r($arrayName);
-        
-        // $extraeNombre = '';
-        // // echo "\nCount".count($arrayName);
-        
-        // for($i=0; $i<count($arrayName); $i++){
-        // // print_r($arrayName);
-        
-        // $extraeNombre .= substr($arrayName[$i],0,1);
-        // // $nuevo = substr($arrayName[0],0,2);
-        
-        // }
-        // // print_r($extraeNombre);
-        // // echo "\n";
-        // $folioNuevo=$extraeNombre . 100;
-        // //echo $folioNuevo;
+        // if ($this->getValidarToken()->validaToken($dataVolCreador)) {
         try {
             
             $usuarioCorreo = $this->getVolCreadorModel()->existeCorreo($dataVolCreador);
@@ -61,7 +50,8 @@ class VoluntarioCreadorService
             if (! empty($usuarioCorreo)) {
                 
                 $arrayResponse = array(
-                    "flag" => 'false'
+                    "flag" => 'false',
+                    "Mensaje" => 'Este correo ya esta dado de alta'
                 );
             } else {
                 
@@ -89,12 +79,16 @@ class VoluntarioCreadorService
                 } else {
                     $folioNuevo = $extraeNombre . 100;
                 }
-//                 $token = $this->validaToken($dataVolCreador);
+                // $token = $this->validaToken($dataVolCreador);
                 
-                $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador, $folioNuevo);
+        //********        $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador, $folioNuevo);
+//                 print_r("usuario");
+//                 print_r($dataVolCreador);exit;
+                $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
+                
                 $arrayResponse = array(
-                    "flag" => 'true',
-                    "usuario" => $usuario
+                    "flag" => 'true' //,
+                  //  "usuario" => $usuario
                 );
             }
         } catch (\PDOException $e) {
@@ -107,147 +101,79 @@ class VoluntarioCreadorService
         // echo print_r($arrayresponse);
         // exit;
         
+        // }else{
+        // $arrayResponse = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
+        // }
         
         return $arrayResponse;
     }
 
-    
-    public function generarToken($arrayResponse){
-        
-        print_r($arrayResponse);
-//         $integer = Rand::getInteger(0,1000);
-//         //         printf("Random integer in [0-1000]: %d\n", $integer);
-        
-//         $guarda = $this->guardaToken($integer);
-//         return $integer;
-//        $conf = new Factory();
-       
-        $config = Factory::fromFile('config/module.config.php', true); // Create a Zend Config Object
-        
-       
-//         echo "config: ";
-//         print_r($config);
-        
-        if ($arrayResponse == true) {
-            
-            $tokenId    = base64_encode(mcrypt_create_iv(32));
-            $issuedAt   = time();
-            $notBefore  = $issuedAt + 10;             //Adding 10 seconds
-            $expire     = $notBefore + 60;            // Adding 60 seconds
-            $serverName = $config->get('serverName'); // Retrieve the server name from config file
-            
-            /*
-             * Create the token as an array
-             */
-            $data = [
-                'iat'  => $issuedAt,         // Issued at: time when the token was generated
-                'jti'  => $tokenId,          // Json Token Id: an unique identifier for the token
-                'iss'  => $serverName,       // Issuer
-                'nbf'  => $notBefore,        // Not before
-                'exp'  => $expire,           // Expire
-//                 'data' => [                  // Data related to the signer user
-//                     'id'   => $arrayResponse['id'], // userid from the users table
-//                     'userName' => $username, // User name
-//                 ]
-            ];
-        }
-        
-        print_r($data);
-        return $data;
-             
-    }
-    
-
-    
-    public function validaToken($decodePostData)
-    {
-//         print_r($decodePostData);
-        
-        $token = false;
-        
-        $valid = new Identical(array('token' => 'token','strict' => FALSE));//, )
-        
-        if ($valid->isValid($decodePostData['token'])) {
-           
-            $token=true;
-            
-        }
-//          print_r($token);
-//          exit;
-        return $token;
-        
-    }
-    
-    
-    
-//     public function hacerToken(){
-       
-//         $ config  =  array (
-//             'callbackUrl'  =>  'http://example.com/callback.php' ,
-//             'siteUrl'  =>  'http://twitter.com/oauth' ,
-//             'consumerKey'  =>  'gg3DsFTW9OU9eWPnbuPzQ' ,
-//             'consumerSecret'  =>  'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
-//         );
-//         $ consumer  =  new  ZendOAuth \ Consumer ( $ config );
-//     }
-
     public function existeVolCreador($decodePostData)
     {
         
-//         print_r($decodePostData);
-       
-        
-//         $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
-        
-// //         print_r($existeVolCreador);
-// //     echo "<br />";
-        
-//         if (empty($existeVolCreador)) {
+        // $token=$this->getValidarToken()->validaToken($decodePostData);
+        // print_r($decodePostData);
+        // exit;
+        if ($this->getValidarToken()->validaToken($decodePostData)) {
             
-//             $arrayResponse = array(
-//                 "flag" => 'false'
-//             );
-//         } else {
+            $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
+            $existeVolCreador['token'] = $decodePostData['token'];
             
-//             $arrayResponse = array(
-//                 "flag" => 'true',
-//                 "id" => $existeVolCreador
-//             );
-//         }
-
-//         $generaToken =$this->generarToken($arrayResponse);
-// //        print_r($generaToken);
-//         print_r($arrayResponse);
-//         exit;
-
-        
-        $token = $this->validaToken($decodePostData);
-        
-              
-        if ($token==true){
-            
-             $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
-        }else {
-            $existeVolCreador = "token incorrecto";
+            // print_r($existeVolCreador);
+        } else {
+            $existeVolCreador = array(
+                "Mensaje :" => "Acceso denegado",
+                "flag :" => 'false'
+            );
         }
         
-       
         return $existeVolCreador;
- 
     }
-    
-    public function registroVoluntario($decodePostData){
 
-        $token = $this->validaToken($decodePostData);
-      
-        if ($token==true){
+    public function registroVoluntario($decodePostData)
+    {
+        
+        // if ($this->getValidarToken()->validaToken($decodePostData)){
+        $array = array();
+        
+        $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData);
+        
+        // var_dump($registroVoluntario['status'] === true);exit;
+        if ($registroVoluntario['status'] === true) {
+            $generaToken = $this->getValidarToken()->generarToken($decodePostData, $registroVoluntario);
             
-            $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData);
-        }else {
-            $registroVoluntario = "token incorrecto";
+            $array['registro'] = $registroVoluntario;
+            $array['token'] = $generaToken;
+        } else {
+            $array['mensaje'] = "No existe usuario";
         }
+        
+        // }else {
+        // $registroVoluntario = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
+        // }
+        
+        return $array;
+    }
 
-        return $registroVoluntario;
+    public function updateToken($decodePostData)
+    {
+        if ($this->getValidarToken()->validaToken($decodePostData)) {
+            
+            // var_dump($registroVoluntario['status'] === true);exit;
+            
+            $updateToken = $this->getValidarToken()->updateToken($decodePostData);
+//             print_r("***********");
+//            print_r($updateToken['status']);exit;
+           
+            $array = $updateToken;
+            
+        } else {
+            $array = array(
+                "Mensaje :" => "Acceso denegado",
+                "flag :" => 'false'
+            );
+        }
+        return $array;
     }
 }
 ?>

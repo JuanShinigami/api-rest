@@ -9,6 +9,8 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Service\VoluntarioCreadorService;
+use Zend\Http\Request;
+use Zend\Http\Header\Cookie;
 
 class VoluntaryCreatorController extends AbstractActionController
 {
@@ -81,13 +83,42 @@ class VoluntaryCreatorController extends AbstractActionController
     }
     
     public function registryVoluntaryCreatorAction(){
+        print_r("hola ");
+        
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+
+            $result = $this->getVoluntCreadorService()->registroVoluntario($decodePostData);
+            
+//             print_r($result['token']);exit;
+            
+//             $token=$this->params()->fromRoute(,null);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+        
+         return $response;
+        }
+            
+            
+           exit;
+        }
+        
+        
+   
+    
+    public function updateVoluntaryCreatorAction(){
         
         $request = $this->getRequest();
         if ($request->isPost()) {
             $postData       = $this->getRequest()->getContent();
             $decodePostData = json_decode($postData, true);
             
-            $result = $this->getVoluntCreadorService()->registroVoluntario($decodePostData);
+            $result = $this->getVoluntCreadorService()->updateToken($decodePostData);
             
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,
