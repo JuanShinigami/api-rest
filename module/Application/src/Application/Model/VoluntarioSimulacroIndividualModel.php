@@ -55,10 +55,6 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
     
     public function addVoluntarioSimulacroIndividual($dataVolSimulacro){
         
-        // 	    print_r($dataVolSimulacro);
-        
-        // 	    exit;
-        
         $flag = false;
         $respuesta = array();
         
@@ -70,6 +66,8 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
                 'idVoluntario'=>$dataVolSimulacro['idVoluntario'],
                 'tiempo_inicio'=>$dataVolSimulacro['tiempo_inicio'],
                 'tiempo_estoy_listo'=>$dataVolSimulacro['tiempo_estoy_listo'],
+                'fecha'=>$dataVolSimulacro['fecha'],
+                'hora'=>$dataVolSimulacro['hora']
                 //'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
             );
             

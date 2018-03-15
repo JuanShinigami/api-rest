@@ -97,6 +97,7 @@ class TokenModel extends TableGateway
     public function validaToken($id)
     {
         try {
+          
             
             $flag = false;
             $res=array();
@@ -104,6 +105,7 @@ class TokenModel extends TableGateway
             $datos = explode('/', $id, 4);
             $resultado = count($datos);
             
+          
             if ($resultado == 4) {
                 $consulta = $this->dbAdapter->query("SELECT * FROM voluntarioCreador WHERE id='" . $datos[2] . "' and folio='" . $datos[1] . "' and correo='" . $datos[0] . "'", Adapter::QUERY_MODE_EXECUTE);
                 $res = $consulta->toArray();
@@ -112,10 +114,10 @@ class TokenModel extends TableGateway
             
         } catch (\PDOException $e) {
             $flag = false;
-            
-            print_r("---*--flag  ".$flag);
+            print_r($e->getMessage());
         } catch (\Exception $e) {
             $flag = false;
+            print_r($e->getMessage());
         }
         
         

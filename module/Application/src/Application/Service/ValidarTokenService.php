@@ -44,12 +44,14 @@ class ValidarTokenService
 
     public function validaToken($decodePostData)
     {
+//         print_r($decodePostData);
+//         exit;
         
         try {
             $filter = new Decrypt();
             $filter->setKey('key');
             $result = $filter->filter($decodePostData['token']);
-            
+//             print_r($result);exit;
             $res = array();
             $validaToken = $this->getGuardarTokenModel()->validaToken($result);
         } catch (\Exception $e) {
