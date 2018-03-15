@@ -36,6 +36,23 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
         return $result;
     }
     
+    public function getAllSimulacrumByCreator($idVoluntaryCreator)
+    {
+        $sql = new Sql($this->dbAdapter);
+        $select = $sql->select();
+        $select
+        ->columns(array('id', 'idVoluntario', 'tiempo_inicio', 'tiempo_estoy_listo', 'fecha', 'hora'))
+        ->from(array('s' => $this->table))
+        ->where(array('s.idVoluntario'=>$idVoluntaryCreator));
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        //print_r($selectString); exit;
+        $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+        $result       = $execute->toArray();
+        //echo "<pre>"; print_r($result); exit;
+        
+        return $result;
+    }
+    
     public function addVoluntarioSimulacroIndividual($dataVolSimulacro){
         
         // 	    print_r($dataVolSimulacro);

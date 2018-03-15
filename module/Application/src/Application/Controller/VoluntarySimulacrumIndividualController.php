@@ -12,6 +12,24 @@ class VoluntarySimulacrumIndividualController extends AbstractActionController
         return $this->voluntarioSimulacroIndividualService = new VoluntarioSimulacroIndividualService();
     }
     
+    public function getAllSimulacrumByCreatorAction(){
+              
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            $result = $this->getVoluntarioSimulacroIndivudualService()->getAllSimulacrumByCreator($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
+
     public function addVoluntarySimulacrumIndividualAction(){
               
         $request = $this->getRequest();

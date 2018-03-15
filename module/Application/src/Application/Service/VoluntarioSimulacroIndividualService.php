@@ -18,6 +18,13 @@ class VoluntarioSimulacroIndividualService
     {
         return $this->validarToken = new ValidarTokenService();
     }
+
+    public function getAllSimulacrumByCreator($data)
+    {
+        $resultSelect = $this->getVoluntarioSimulacroIndividualModel()->getAllSimulacrumByCreator($data['idVoluntaryCreator']);
+
+        return $resultSelect;
+    }
     
     public function addVoluntarioSimulacro($dataVolSimulacro)
     {
