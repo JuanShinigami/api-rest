@@ -63,8 +63,8 @@ class VoluntarioCreadorService
                 $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
                 
                 $arrayResponse = array(
-                    "flag" => 'true' //,
-                  //  "usuario" => $usuario
+                    "flag" => 'true',
+                    "usuario" => $usuario
                 );
             }
         } catch (\PDOException $e) {
