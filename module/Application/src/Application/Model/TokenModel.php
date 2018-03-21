@@ -107,7 +107,7 @@ class TokenModel extends TableGateway
             
           
             if ($resultado == 4) {
-                $consulta = $this->dbAdapter->query("SELECT * FROM voluntarioCreador WHERE id='" . $datos[2] . "' and folio='" . $datos[1] . "' and correo='" . $datos[0] . "'", Adapter::QUERY_MODE_EXECUTE);
+                $consulta = $this->dbAdapter->query("SELECT * FROM voluntarioCreador WHERE id='" . $datos[2] . "' and contrasena='" . $datos[1] . "' and correo='" . $datos[0] . "'", Adapter::QUERY_MODE_EXECUTE);
                 $res = $consulta->toArray();
                $flag = true;
             }

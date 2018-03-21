@@ -29,6 +29,8 @@ class SimulacroGrupoModel extends TableGateway
         $select = $sql->select();
         $select->columns(array(
             'id',
+            'folioSimulacro',
+            'piso',
             'ubicacion',
             'fecha',
             'hora',
@@ -48,6 +50,7 @@ class SimulacroGrupoModel extends TableGateway
 
     public function addSimulacroGrupo($dataSimulacroGrupo, $folioNuevo)
     {
+        
         $flag = false;
         $respuesta = array();
         
@@ -59,7 +62,7 @@ class SimulacroGrupoModel extends TableGateway
             
             $array = array(
                 
-                'folio' => $folioNuevo,
+                'folioSimulacro' => $folioNuevo,
                 'piso' => $dataSimulacroGrupo["piso"],
                 'ubicacion' => $dataSimulacroGrupo["ubicacion"],
                 'latitud' => $dataSimulacroGrupo["latitud"],
@@ -79,10 +82,10 @@ class SimulacroGrupoModel extends TableGateway
             $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
             $flag = true;
         } catch (\PDOException $e) {
-            // echo "First Message " . $e->getMessage() . "<br/>";
+             echo "First Message " . $e->getMessage() . "<br/>";
             $flag = false;
         } catch (\Exception $e) {
-            // echo "Second Message: " . $e->getMessage() . "<br/>";
+             echo "Second Message: " . $e->getMessage() . "<br/>";
         }
         $respuesta['status'] = $flag;
         
@@ -99,7 +102,7 @@ class SimulacroGrupoModel extends TableGateway
     {
         
         // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        $consulta = $this->dbAdapter->query("select max(folio) as maxFolio FROM simulacrogrupo where folio like '" . $folioNuevo . "%'", Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select max(folioSimulacro) as maxFolio FROM simulacrogrupo where folioSimulacro like '" . $folioNuevo . "%'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
         return $res;

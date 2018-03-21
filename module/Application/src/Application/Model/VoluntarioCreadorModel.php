@@ -71,8 +71,9 @@ class VoluntarioCreadorModel extends TableGateway
 
     public function existeCorreo($dataUser)
     {
+        
         // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        $consulta = $this->dbAdapter->query("select id , folio, correo FROM voluntarioCreador where correo = '" . $dataUser['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select id , correo FROM voluntarioCreador where correo = '" . $dataUser['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
         // echo "existe correo";
@@ -81,7 +82,7 @@ class VoluntarioCreadorModel extends TableGateway
         return $res;
     }
 
-    public function addVolCreador($dataVolCreador, $folioNuevo)
+    public function addVolCreador($dataVolCreador)
     {
         $flag = false;
         $respuesta = array();
@@ -92,7 +93,7 @@ class VoluntarioCreadorModel extends TableGateway
             
             $array = array(
                 
-                'folio' => $folioNuevo,
+                'contrasena' => $dataVolCreador["contrasena"],
                 'nombre' => $dataVolCreador["nombre"],
                 'telefono' => $dataVolCreador["telefono"],
                 'correo' => $dataVolCreador["correo"]
@@ -110,7 +111,7 @@ class VoluntarioCreadorModel extends TableGateway
             // echo "Second Message: " . $e->getMessage() . "<br/>";
         }
         $respuesta['status'] = $flag;
-        $respuesta['folio'] = $folioNuevo;
+//         $respuesta['folio'] = $folioNuevo;
         
 //         print_r($respuesta);exit;
         

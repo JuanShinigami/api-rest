@@ -55,33 +55,9 @@ class VoluntarioCreadorService
                 );
             } else {
                 
-                $arrayName = explode(' ', $dataVolCreador['nombre']);
-                $extraeNombre = '';
-                // echo "\nCount".count($arrayName);
-                
-                for ($i = 0; $i < count($arrayName); $i ++) {
-                    // print_r($arrayName);
-                    
-                    $extraeNombre .= strtoupper(substr($arrayName[$i], 0, 1));
-                    // $nuevo = substr($arrayName[0],0,2);
-                }
-                // print_r($extraeNombre);
-                // echo "\n";
-                $maxFolio = $this->getVolCreadorModel()->maxFolio($extraeNombre);
-                
-                if (! empty($maxFolio[0]["maxFolio"])) {
-                    
-                    $folioExtrae = substr($maxFolio[0]["maxFolio"], 2);
-                    
-                    $folioAct = $folioExtrae + 100;
-                    
-                    $folioNuevo = substr($maxFolio[0]["maxFolio"], 0, 2) . $folioAct;
-                } else {
-                    $folioNuevo = $extraeNombre . 100;
-                }
                 // $token = $this->validaToken($dataVolCreador);
                 
-              $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador, $folioNuevo);
+              $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador);
 //                 print_r("usuario");
 //                 print_r($dataVolCreador);exit;
                 $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
