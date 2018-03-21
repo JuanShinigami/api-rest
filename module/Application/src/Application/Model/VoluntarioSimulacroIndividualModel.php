@@ -102,7 +102,7 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
         $flag = false;
         $respuesta = array();
         try {
-            $consulta=$this->dbAdapter->query("DELETE FROM voluntario_simulacro_individual where idVoluntario = '" . $dataVolSimulacro["idVoluntario"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+            $consulta=$this->dbAdapter->query("DELETE FROM voluntario_simulacro_individual where id = '" . $dataVolSimulacro["id"]."'" ,Adapter::QUERY_MODE_EXECUTE);
             $flag = true;
         }
         catch (\PDOException $e) {

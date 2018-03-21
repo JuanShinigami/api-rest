@@ -21,9 +21,21 @@ class VoluntarioSimulacroIndividualService
 
     public function getAllSimulacrumByCreator($data)
     {
-        $resultSelect = $this->getVoluntarioSimulacroIndividualModel()->getAllSimulacrumByCreator($data['idVoluntario']);
+        $resArray = array();
+        $resultSelect = null;
+        $flag = false;
+        
+        if($this->getValidarToken()->validaToken($data)){
+            $resultSelect = $this->getVoluntarioSimulacroIndividualModel()->getAllSimulacrumByCreator($data['idVoluntaryCreator']);
+            $flag = true;
+        } else{
+            $flag = false;
+        }       
+        $resArray['status'] = $flag;
+        $resArray['list'] = $resultSelect;
+        
 
-        return $resultSelect;
+        return $resArray;
     }
     
     public function addVoluntarioSimulacro($dataVolSimulacro)
