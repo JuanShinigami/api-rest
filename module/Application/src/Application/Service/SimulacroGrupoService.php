@@ -45,21 +45,58 @@ class SimulacroGrupoService
 	{
 	   $resArray= array();
 	   
+	   
 	   if($this->getValidarToken()->validaToken($dataSimulacroGrupo)){
-		    
-		  $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo); 
+		 
+	           $arrayName = explode(' ', $dataSimulacroGrupo['piso']);
+	           $extraeNombre = '';
+// 	           echo "\nCount".count($arrayName);
+	           
+	           for ($i = 0; $i < count($arrayName); $i ++) {
+// 	               print_r($arrayName);
+	               
+	               $extraeNombre .= strtoupper(substr($arrayName[$i], 0, 1));
+	               // $nuevo = substr($arrayName[0],0,2);
+	           }
+// 	           print_r($extraeNombre);
+// 	           exit;
+	           // echo "\n";
+	           $maxFolio = $this->getSimulacroGrupoModel()->maxFolio($extraeNombre);
+	           
+// 	           print_r($maxFolio);exit;
+	           
+	           if (! empty($maxFolio[0]["maxFolio"])) {
+	               
+	               $folioExtrae = substr($maxFolio[0]["maxFolio"], 2);
+	               
+	               $folioAct = $folioExtrae + 100;
+	               
+	               $folioNuevo = substr($maxFolio[0]["maxFolio"], 0, 2) . $folioAct;
+	           } else {
+	               $folioNuevo = $extraeNombre . 100;
+// 	               print_r($folioNuevo);exit;
+	           }
+	       
+	       $simulacroGrupo = $this->getSimulacroGrupoModel()->addSimulacroGrupo($dataSimulacroGrupo, $folioNuevo); 
+		  
+// 	       print_r($dataSimulacroGrupo);
+// 	       print_r(" ------- > ");
 		  $idSimulacro = $this->getSimulacroGrupoModel()->idSimulacro($dataSimulacroGrupo); 
+		  
 		  $dataVolSimulacro = array();
 		  $dataVolSimulacro['idVoluntario'] = $dataSimulacroGrupo['idVoluntarioCreador'];
 		  $dataVolSimulacro['idSimulacro'] = $idSimulacro;
 		  $dataVolSimulacro['tipoSimulacro'] = $dataSimulacroGrupo['tipoSimulacro'];
+		  
+// 		  print_r($dataVolSimulacro);exit;
+		  
 		  $voluntarioSimulacroId = $this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro);
 		  
-// 		  $resArray['agrego']= $simulacroGrupo;
+		  $resArray['agrego']= $simulacroGrupo;
 		  $resArray['voluntarioSimulacro']= $voluntarioSimulacroId;
 		  $resArray['idSimulacrum'] = $idSimulacro;
-		
-		}else {
+
+	   }else {
 		    $resArray['Mensaje'] = "Acceso denegado";
 		    $resArray['flag']='false';
 		}

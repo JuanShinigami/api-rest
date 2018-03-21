@@ -46,7 +46,7 @@ class SimulacroGrupoModel extends TableGateway
         return $result;
     }
 
-    public function addSimulacroGrupo($dataSimulacroGrupo)
+    public function addSimulacroGrupo($dataSimulacroGrupo, $folioNuevo)
     {
         $flag = false;
         $respuesta = array();
@@ -59,6 +59,8 @@ class SimulacroGrupoModel extends TableGateway
             
             $array = array(
                 
+                'folio' => $folioNuevo,
+                'piso' => $dataSimulacroGrupo["piso"],
                 'ubicacion' => $dataSimulacroGrupo["ubicacion"],
                 'latitud' => $dataSimulacroGrupo["latitud"],
                 'longitud' => $dataSimulacroGrupo["longitud"],
@@ -89,6 +91,22 @@ class SimulacroGrupoModel extends TableGateway
         
         return $respuesta;
     }
+    
+    
+    
+    
+    public function maxFolio($folioNuevo)
+    {
+        
+        // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select max(folio) as maxFolio FROM simulacrogrupo where folio like '" . $folioNuevo . "%'", Adapter::QUERY_MODE_EXECUTE);
+        
+        $res = $consulta->toArray();
+        return $res;
+    }
+    
+    
+    
 
     public function idSimulacro($dataUser)
     {
