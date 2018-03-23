@@ -28,7 +28,7 @@ class VoluntarioSimulacroModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario'))
+			->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario','tipoSimulacro ', 'altitud','tagVoluntario'))
 			->from(array('s' => $this->table));
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		//print_r($selectString); exit;
@@ -43,7 +43,7 @@ class VoluntarioSimulacroModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro'))
+		->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro', 'altitud','tagVoluntario'))
 			->from(array('s' => $this->table))
 			->Where(array('s.idVoluntario'=>$id, 's.tipoSimulacro' => 'creado'));
 		$selectString = $sql->getSqlStringForSqlObject($select);
@@ -58,7 +58,7 @@ class VoluntarioSimulacroModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro'))
+		->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro', 'altitud','tagVoluntario'))
 			->from(array('s' => $this->table))
 			->Where(array('s.idVoluntario'=>$id, 's.tipoSimulacro' => 'unido'));
 		$selectString = $sql->getSqlStringForSqlObject($select);
@@ -89,6 +89,8 @@ class VoluntarioSimulacroModel extends TableGateway
 	            'tipoSimulacro'=>$dataVolSimulacro['tipoSimulacro'],
  	            'tiempo_inicio'=>"",
  	            'tiempo_estoy_listo'=>"",
+	            'altitud' =>$dataVolSimulacro['altitud'],
+	            'tagVoluntario'=>$dataVolSimulacro['tagVoluntario']
 // 	            'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
 	        );
 	        

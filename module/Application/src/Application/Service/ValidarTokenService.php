@@ -28,7 +28,7 @@ class ValidarTokenService
         
         $fi = new Encrypt();
         $fi->setKey('key');
-        $result = $fi($arrayResponse['correo'] . "/" . $arrayResponse['folio'] . "/" . $id['datos'][0]['id'] . "/" . $numero);
+        $result = $fi($arrayResponse['correo'] . "/" .  $id['datos'][0]['nombre']. "/" . $id['datos'][0]['id'] . "/" . $numero);
         
         $guardaToken = $this->getGuardarTokenModel()->addToken($result, $id['datos'][0]['id']);
   

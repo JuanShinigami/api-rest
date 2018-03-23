@@ -107,8 +107,8 @@ class RecuperarFolioService
         try {
             
             // $destinatario='ejemplo@gmail.com';
-            $destinatario = $response[0]['correo'];
-            $emisor = 'ejemplo@gmail.com';
+            $destinatario = 'pakodiazcastillo@gmail.com';//$response[0]['correo'];
+            $emisor = 'vane.velascogtz@gmail.com';
             
             // Enviar email
             $message = new Message();
@@ -116,7 +116,7 @@ class RecuperarFolioService
                 ->addFrom($emisor)
                 ->setEncoding("UTF-8")
                 ->setSubject('Envio de Folio')
-                ->setBody("Tu folio es: " . $response[0]['folio']);
+                ->setBody("Tu folio es: " . $response[0]['folioSimulacro']);
             
             // Utilizamos el smtp de gmail con nuestras credenciales
             $transport = new SmtpTransport();
@@ -126,8 +126,8 @@ class RecuperarFolioService
                 'port' => 587,
                 'connection_class' => 'login',
                 'connection_config' => array(
-                    'username' => 'ejemplo@gmail.com', // direccion de correo que mandara los correos
-                    'password' => '*********', // contraseña de correo
+                    'username' => 'vane.velascogtz@gmail.com', // direccion de correo que mandara los correos
+                    'password' => 'blood@_92_', // contraseña de correo
                     'ssl' => 'tls'
                 )
             ));

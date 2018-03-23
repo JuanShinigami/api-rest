@@ -29,7 +29,7 @@ class VoluntarioCreadorModel extends TableGateway
         $select = $sql->select();
         $select->columns(array(
             'id',
-            'folio',
+            'contrasena',
             'nombre',
             'telefono',
             'correo'
@@ -50,7 +50,7 @@ class VoluntarioCreadorModel extends TableGateway
         
         // print_r($folioNuevo);
         // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-        $consulta = $this->dbAdapter->query("select id , folio , nombre, correo FROM voluntarioCreador where folio = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
+        $consulta = $this->dbAdapter->query("select id , nombre, correo FROM voluntarioCreador where correo = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
         
         $res = $consulta->toArray();
         // echo "res ";
@@ -162,7 +162,7 @@ class VoluntarioCreadorModel extends TableGateway
         
         try {
             
-            $consulta = $this->dbAdapter->query("select * FROM voluntarioCreador where folio = '" . $folioNuevo['folio'] . "' and correo = '" . $folioNuevo['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
+            $consulta = $this->dbAdapter->query("select * FROM voluntarioCreador where contrasena = '" . $folioNuevo['contrasena'] . "' and correo = '" . $folioNuevo['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
             
             $res = $consulta->toArray();
           

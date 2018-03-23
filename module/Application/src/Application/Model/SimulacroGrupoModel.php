@@ -30,7 +30,7 @@ class SimulacroGrupoModel extends TableGateway
         $select->columns(array(
             'id',
             'folioSimulacro',
-            'piso',
+            'tagGrupal',
             'ubicacion',
             'fecha',
             'hora',
@@ -63,7 +63,7 @@ class SimulacroGrupoModel extends TableGateway
             $array = array(
                 
                 'folioSimulacro' => $folioNuevo,
-                'piso' => $dataSimulacroGrupo["piso"],
+                'tagGrupal' => $dataSimulacroGrupo["tagGrupal"],
                 'ubicacion' => $dataSimulacroGrupo["ubicacion"],
                 'latitud' => $dataSimulacroGrupo["latitud"],
                 'longitud' => $dataSimulacroGrupo["longitud"],
@@ -240,6 +240,33 @@ class SimulacroGrupoModel extends TableGateway
             't' => 'simulacrogrupo'
         ), array())->where(array(
             't.id' => $data['idSimulacro']
+        ));
+        
+        // print_r($result);
+        // exit;
+        $selectString = $sql->getSqlStringForSqlObject($select);
+        $execute = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+        $result = $execute->toArray();
+        
+        // echo "<pre>"; print_r($result); exit;
+        
+        //print_r($result[0]);
+        //exit;
+        
+        return $result;
+    }
+    
+    
+    
+    public function searchSimulacrumFolio($data)
+    {
+        $sql = new Sql($this->dbAdapter);
+        $select = $sql->select();
+        
+        $select->from(array(
+            't' => 'simulacrogrupo'
+        ), array())->where(array(
+            't.folioSimulacro' => $data['folioSimulacro']
         ));
         
         // print_r($result);

@@ -88,11 +88,11 @@ class VoluntarioCreadorService
     {
         
         // $token=$this->getValidarToken()->validaToken($decodePostData);
-        // print_r($decodePostData);
-        // exit;
+//         print_r($decodePostData);
+//         exit;
         if ($this->getValidarToken()->validaToken($decodePostData)) {
             
-            $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['folio']);
+            $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['correo']);
             $existeVolCreador['token'] = $decodePostData['token'];
             
             // print_r($existeVolCreador);

@@ -42,7 +42,7 @@ class RecuperarFolioModel extends TableGateway
 	    
 	    
 // 	    $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-	    $consulta=$this->dbAdapter->query("select id , folio, correo FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "' and telefono = '".$dataUser['telefono']. "'" ,Adapter::QUERY_MODE_EXECUTE);
+	    $consulta=$this->dbAdapter->query("select id , folioSimulacro FROM simulacrogrupo where tagGrupal = '" . $dataUser['tagGrupal']."' and ubicacion = '".$dataUser['ubicacion']. "' and fecha = '".$dataUser['fecha']. "' and hora = '".$dataUser['hora']. "'" ,Adapter::QUERY_MODE_EXECUTE);
 	   
 	    $res=$consulta->toArray();
 	    
