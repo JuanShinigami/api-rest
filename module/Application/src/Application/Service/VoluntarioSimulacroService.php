@@ -145,11 +145,42 @@ class VoluntarioSimulacroService
         
         return $updateVoluntario;
     }
+    
+    
+    public function listaVoluntarioUnidos($decodePostData)
+    {
+        if ($this->getValidarToken()->validaToken($decodePostData)) {
+            $updateVoluntario = $this->getVoluntarioSimulacroModel()->listaVoluntarioUnidos($decodePostData);
+        } else {
+            $updateVoluntario = array(
+                "Mensaje :" => "Acceso denegado",
+                "flag :" => 'false'
+            );
+        }
+        
+        return $updateVoluntario;
+    }
 
     public function buscarDetalleVoluntario($decodePostData)
     {
         if ($this->getValidarToken()->validaToken($decodePostData)) {
             $detallesVoluntario = $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntario($decodePostData);
+        } else {
+            $detallesVoluntario = array(
+                "Mensaje :" => "Acceso denegado",
+                "flag :" => 'false'
+            );
+        }
+        return $detallesVoluntario;
+    }
+    
+    
+    public function buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData)
+    {
+        
+//         print_r($decodePostData);exit;
+        if ($this->getValidarToken()->validaToken($decodePostData)) {
+            $detallesVoluntario = $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",

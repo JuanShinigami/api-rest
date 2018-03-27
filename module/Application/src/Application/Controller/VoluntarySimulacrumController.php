@@ -64,6 +64,25 @@ class VoluntarySimulacrumController extends AbstractActionController
         exit;
     }
     
+    public function listaVoluntarySimulacrumUnidosAction(){
+        
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            $result = $this->getVoluntarioSimulacroService()->listaVoluntarioUnidos($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
+    
     public function updateVoluntarySimulacrumAction(){
         
         
@@ -94,6 +113,26 @@ class VoluntarySimulacrumController extends AbstractActionController
             
             
             $result = $this->getVoluntarioSimulacroService()->buscarDetalleVoluntario($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            return $response;
+        }
+        
+        exit;
+    }
+    
+    public function searchDetailVoluntaryOfVoluntaryCreatorAction(){
+        
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            
+            $result = $this->getVoluntarioSimulacroService()->buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData);
             
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,

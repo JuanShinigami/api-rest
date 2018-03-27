@@ -12,6 +12,7 @@
         "zendframework/zendframework": "~2.5",
         "firebase/php-jwt": "dev-master",
         "zendframework/zend-config": "~2.3",
-        "zendframework/zend-http": "~2.3"
+        "zendframework/zend-http": "~2.3",
+        "swiftmailer/swiftmailer": "^5.0"
     }
 }

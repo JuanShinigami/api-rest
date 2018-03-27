@@ -57,14 +57,18 @@ class VoluntarioCreadorService
                 
                 // $token = $this->validaToken($dataVolCreador);
                 
-              $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador);
+//  ******************* 
+$usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador);
+
 //                 print_r("usuario");
 //                 print_r($dataVolCreador);exit;
-                $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
+//                 $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
                 
                 $arrayResponse = array(
-                    "flag" => 'true',
-                    "usuario" => $usuario
+                    "flag" => 'true' //
+                        ,
+//    ******************** 
+"usuario" => $usuario
                 );
             }
         } catch (\PDOException $e) {

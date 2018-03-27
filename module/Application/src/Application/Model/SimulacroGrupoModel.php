@@ -69,7 +69,7 @@ class SimulacroGrupoModel extends TableGateway
                 'longitud' => $dataSimulacroGrupo["longitud"],
                 'fecha' => $dataSimulacroGrupo["fecha"],
                 'hora' => $dataSimulacroGrupo["hora"],
-                'voluntario' => 1,
+                'voluntario' => 0,
                 'idVoluntarioCreador' => $dataSimulacroGrupo["idVoluntarioCreador"],
                 'estatus' => $dataSimulacroGrupo["estatus"],
                 'tiempoPreparacion' => $dataSimulacroGrupo["tiempoPreparacion"]
@@ -214,7 +214,7 @@ class SimulacroGrupoModel extends TableGateway
         $select->from(array(
             't1' => 'simulacrogrupo'
         ), array())->where(array(
-            'idVoluntarioCreador' => $decodePostData['id']
+            't1.idVoluntarioCreador' => $decodePostData['idVoluntarioCreador']
         ));
         
         // print_r($result);

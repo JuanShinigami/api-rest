@@ -66,7 +66,7 @@ class VoluntarioSimulacroModel extends TableGateway
 		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 		$result       = $execute->toArray();
 		return $result;
-	}
+	} 
 	
 	
 
@@ -126,6 +126,22 @@ class VoluntarioSimulacroModel extends TableGateway
 	    return $respuesta;
 
 	}
+	
+	
+	
+	public function listaVoluntarioUnidos($decodePostData){
+	    $sql = new Sql($this->dbAdapter);
+	    $select = $sql->select();
+	    $select
+	    ->columns(array('id', 'idVoluntario', 'idSimulacro', 'tiempo_inicio', 'tiempo_estoy_listo','mensajeVoluntario', 'tipoSimulacro', 'altitud','tagVoluntario'))
+	    ->from(array('s' => $this->table))
+	    ->Where(array('s.idVoluntario'=>$decodePostData['idVoluntario'], 's.tipoSimulacro' => 'unido'));
+	    $selectString = $sql->getSqlStringForSqlObject($select);
+	    //print_r($selectString); exit;
+	    $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	    $result       = $execute->toArray();
+	    return $result;
+	} 
 	
 	public function updateVoluntario($dataVolSimulacro)
 	{
@@ -209,6 +225,29 @@ class VoluntarioSimulacroModel extends TableGateway
 	            // 	        exit;
 	            
 	            	        return $result;
+	}
+	
+	
+	public function buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData){
+// 	    print_r($decodePostData);
+	    $sql = new Sql($this->dbAdapter);
+	    $select = $sql->select();
+	    $select
+	    ->from(array('t1'=>'voluntario_simulacro_grupo'), array('idVoluntarioSimulacroGrupo'=> 'id', 'idVoluntario','idSimulacro','tiempo_inicio','tiempo_estoy_listo','mensajeVoluntario','tipoSimulacro','altitud','tagVoluntario'))                                      
+	    ->join(array('t2'=>'simulacrogrupo'), 't1.idVoluntario = t2.idVoluntarioCreador', array('idSimulacroGrupo'=>'id','folioSimulacro','tagGrupal','ubicacion','latitud','longitud','fecha','hora','voluntario','idVoluntarioCreador','estatus','tiempoPreparacion'))                                                        
+// 	    ->join(array('t3'=>'voluntarioCreador'), 't3.id=t1.idVoluntario' , array('alias'))
+	    ->Where(array('t1.idVoluntario'=>$decodePostData['idVoluntario']));
+	    ;
+	    $selectString = $sql->getSqlStringForSqlObject($select);
+	    //print_r($selectString); exit;
+	    $execute = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	    $result = $execute->toArray();
+	    //echo "<pre>"; print_r($result); exit;
+	    
+// 	    	        print_r($result);
+// 	    	        exit;
+	    
+	    return $result;
 	}
 	
 	
