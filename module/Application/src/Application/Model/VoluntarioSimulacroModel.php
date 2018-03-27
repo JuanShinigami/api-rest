@@ -234,7 +234,7 @@ class VoluntarioSimulacroModel extends TableGateway
 	    $select = $sql->select();
 	    $select
 	    ->from(array('t1'=>'voluntario_simulacro_grupo'), array('idVoluntarioSimulacroGrupo'=> 'id', 'idVoluntario','idSimulacro','tiempo_inicio','tiempo_estoy_listo','mensajeVoluntario','tipoSimulacro','altitud','tagVoluntario'))                                      
-	    ->join(array('t2'=>'simulacrogrupo'), 't1.idVoluntario = t2.idVoluntarioCreador', array('idSimulacroGrupo'=>'id','folioSimulacro','tagGrupal','ubicacion','latitud','longitud','fecha','hora','voluntario','idVoluntarioCreador','estatus','tiempoPreparacion'))                                                        
+	    ->join(array('t2'=>'simulacrogrupo'), 't1.idSimulacro = t2.id', array('idSimulacroGrupo'=>'id','folioSimulacro','tagGrupal','ubicacion','latitud','longitud','fecha','hora','voluntario','idVoluntarioCreador','estatus','tiempoPreparacion'))                                                        
 // 	    ->join(array('t3'=>'voluntarioCreador'), 't3.id=t1.idVoluntario' , array('alias'))
 	    ->Where(array('t1.idVoluntario'=>$decodePostData['idVoluntario']));
 	    ;
