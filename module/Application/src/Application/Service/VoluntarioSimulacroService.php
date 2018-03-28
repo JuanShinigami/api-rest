@@ -190,6 +190,21 @@ class VoluntarioSimulacroService
         return $detallesVoluntario;
     }
 
+    public function searchDateAndHourSimulacrum($decodePostData)
+    {
+        
+//         print_r($decodePostData);exit;
+        if ($this->getValidarToken()->validaToken($decodePostData)) {
+            $detallesVoluntario = $this->getVoluntarioSimulacroModel()->searchDateAndHourSimulacrum($decodePostData['idSimulacrumGroup']);
+        } else {
+            $detallesVoluntario = array(
+                "Mensaje :" => "Acceso denegado",
+                "flag :" => 'false'
+            );
+        }
+        return $detallesVoluntario;
+    }
+
     public function listaVoluntario($decodePostData)
     {
         $arrayRespuesta = array();

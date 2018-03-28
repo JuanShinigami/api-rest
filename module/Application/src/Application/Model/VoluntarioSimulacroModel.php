@@ -157,7 +157,8 @@ class VoluntarioSimulacroModel extends TableGateway
 	        
 	        $array = array(
 	            'tiempo_inicio'=>$dataVolSimulacro["tiempo_inicio"],
-	            'tiempo_estoy_listo'=>$dataVolSimulacro["tiempo_estoy_listo"]
+	            'tiempo_estoy_listo'=>$dataVolSimulacro["tiempo_estoy_listo"],
+	            'tagVoluntario'=>$dataVolSimulacro["tagVoluntario"]
 	        );
 	        
 	        $update->set($array);
@@ -237,6 +238,29 @@ class VoluntarioSimulacroModel extends TableGateway
 	    ->join(array('t2'=>'simulacrogrupo'), 't1.idSimulacro = t2.id', array('idSimulacroGrupo'=>'id','folioSimulacro','tagGrupal','ubicacion','latitud','longitud','fecha','hora','voluntario','idVoluntarioCreador','estatus','tiempoPreparacion'))                                                        
 // 	    ->join(array('t3'=>'voluntarioCreador'), 't3.id=t1.idVoluntario' , array('alias'))
 	    ->Where(array('t1.idVoluntario'=>$decodePostData['idVoluntario']));
+	    ;
+	    $selectString = $sql->getSqlStringForSqlObject($select);
+	    //print_r($selectString); exit;
+	    $execute = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	    $result = $execute->toArray();
+	    //echo "<pre>"; print_r($result); exit;
+	    
+// 	    	        print_r($result);
+// 	    	        exit;
+	    
+	    return $result;
+	}
+
+
+	public function searchDateAndHourSimulacrum($idSimulacrumGroup){
+// 	    print_r($decodePostData);
+	    $sql = new Sql($this->dbAdapter);
+	    $select = $sql->select();
+	    $select
+	    ->from(array('t1'=>'voluntario_simulacro_grupo'), array('id','tagVoluntario'))                                      
+	    ->join(array('t2'=>'simulacrogrupo'), 't1.idSimulacro = t2.id', array('fecha','hora'))                                                        
+// 	    ->join(array('t3'=>'voluntarioCreador'), 't3.id=t1.idVoluntario' , array('alias'))
+	    ->Where(array('t1.id'=> $idSimulacrumGroup));
 	    ;
 	    $selectString = $sql->getSqlStringForSqlObject($select);
 	    //print_r($selectString); exit;
