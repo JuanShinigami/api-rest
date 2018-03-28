@@ -3,6 +3,7 @@ namespace Application\Service;
 
 use Application\Model\VoluntarioCreadorModel;
 use Application\Service\RecuperarFolioService;
+use Zend\Crypt\Password\Bcrypt;
 
 class VoluntarioCreadorService
 {
@@ -44,8 +45,10 @@ class VoluntarioCreadorService
         try {
             
             $usuarioCorreo = $this->getVolCreadorModel()->existeCorreo($dataVolCreador);
+            $securePass=$this->password($dataVolCreador['contrasena']);
             
-            // print_r($usuarioCorreo);
+//             print_r($securePass);exit;
+            
             
             if (! empty($usuarioCorreo)) {
                 
@@ -58,7 +61,7 @@ class VoluntarioCreadorService
                 // $token = $this->validaToken($dataVolCreador);
                 
 //  ******************* 
-$usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador);
+                $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador,$securePass);
 
 //                 print_r("usuario");
 //                 print_r($dataVolCreador);exit;
@@ -88,6 +91,31 @@ $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador);
         return $arrayResponse;
     }
 
+    
+    public function password($dataVolCreador){
+        
+        try{
+            
+            //         $bcrypt = new Bcrypt();
+            $bcrypt = new Bcrypt(array(
+                'salt' => 'aleatorio_salt_voluntario_simulacros',
+                'cost' => 13
+                
+            ));
+            
+            $securePass = $bcrypt->create($dataVolCreador);
+            
+        } catch (\PDOException $e) {
+            echo "First Message " . $e->getMessage() . "<br/>";
+            $flag = false;
+        } catch (\Exception $e) {
+            echo "Second Message: " . $e->getMessage() . "<br/>";
+        }
+        return $securePass;
+    }
+    
+    
+    
     public function existeVolCreador($decodePostData)
     {
         
@@ -115,8 +143,8 @@ $usuario = $this->getVolCreadorModel()->addVolCreador($dataVolCreador);
         
         // if ($this->getValidarToken()->validaToken($decodePostData)){
         $array = array();
-        
-        $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData);
+        $pass=$this->password($decodePostData['contrasena']);
+        $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData, $pass);
         
         // var_dump($registroVoluntario['status'] === true);exit;
         if ($registroVoluntario['status'] === true) {
