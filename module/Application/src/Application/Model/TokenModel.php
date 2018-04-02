@@ -44,7 +44,7 @@ class TokenModel extends TableGateway
         return $result;
     }
 
-    public function addToken($dataToken, $id)
+    public function addToken($dataToken, $id, $arrayResponse)
     {
         $flag = false;
         $respuesta = array();
@@ -57,7 +57,9 @@ class TokenModel extends TableGateway
             $array = array(
                 'idVoluntario' => $id,
                 'token' => $dataToken,
-                'estatus' => 1
+                'estatus' => 1,
+                'fecha'=>$arrayResponse['fecha'],
+                'hora'=>$arrayResponse['hora']
             );
             // print_r($array);
             // exit;
@@ -124,5 +126,41 @@ class TokenModel extends TableGateway
         $res['status'] = $flag;
         return $res;
     }
+    
+    public function validaFechaHora($id, $decodePostData)
+    {
+        try {
+            
+            
+            $flag = false;
+            $res=array();
+            
+            $datos = explode('/', $id, 4);
+            $resultado = count($datos);
+            
+            //             print_r($decodePostData);
+            //             print_r($datos);exit;
+            
+            if ($resultado == 4) {
+                $consulta = $this->dbAdapter->query("SELECT * FROM token WHERE idVoluntario='" . $datos[2] . "' and token='" . $decodePostData['token'] . "'", Adapter::QUERY_MODE_EXECUTE);
+                $res = $consulta->toArray();
+                $flag = true;
+            }
+            
+            //             print_r($res);exit;
+            
+        } catch (\PDOException $e) {
+            $flag = false;
+            print_r($e->getMessage());
+        } catch (\Exception $e) {
+            $flag = false;
+            print_r($e->getMessage());
+        }
+        
+        
+        $res['status'] = $flag;
+        return $res;
+    }
+    
 }
 ?>
