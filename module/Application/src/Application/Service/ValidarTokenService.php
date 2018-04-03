@@ -76,7 +76,7 @@ class ValidarTokenService
                 $hora = (date_format($date, 'Y-m-d H:i:s'));
                 //             print_r(date_format($date, 'Y-m-d H:i:s'));
                 
-//                 $datos = explode('/', $id, 4);
+                $datos = explode('/', $result, 4);
 //                 $resultado = count($datos);
                 
 //                 print_r($datos);
@@ -87,10 +87,10 @@ class ValidarTokenService
                         $validaToken = $this->getGuardarTokenModel()->validaToken($result);
                        
 //                        print_r($result);
-//                        if($validaToken){
-//                            $actualiza= $this->getGuardarTokenModel()->updateFechaHora($decodePostData,$datos);
+                       if($validaToken){
+                           $actualiza= $this->getGuardarTokenModel()->updateFechaHora($decodePostData,$datos);
                            $res['status'] = true;
-//                        }
+                       }
                         
                     }
                     //                 $res['status'] = false;

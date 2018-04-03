@@ -102,10 +102,10 @@ class TokenModel extends TableGateway
     {
         try {
             
-            print_r($datos[2]);exit;
+//             print_r($datos[2]);exit;
             
             $consulta = $this->dbAdapter->query(
-                "UPDATE token SET fecha= '" . $id["fecha"] . "' , hora= '" . $id["hora"] . "'  WHERE idVoluntario= '" . $id["idVoluntario"] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
+                "UPDATE token SET fecha= '" . $id["fecha"] . "' , hora= '" . $id["hora"] . "'  WHERE idVoluntario= '" . $datos[2] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
             $flag = true;
         } catch (\PDOException $e) {
             $flag = false;
