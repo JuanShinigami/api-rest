@@ -96,6 +96,23 @@ class TokenModel extends TableGateway
         return $res;
     }
 
+    
+    
+    public function updateFechaHora($id,$datos)
+    {
+        try {
+            
+            print_r($datos[2]);exit;
+            
+            $consulta = $this->dbAdapter->query(
+                "UPDATE token SET fecha= '" . $id["fecha"] . "' , hora= '" . $id["hora"] . "'  WHERE idVoluntario= '" . $id["idVoluntario"] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
+            $flag = true;
+        } catch (\PDOException $e) {
+            $flag = false;
+        } catch (\Exception $e) {}
+        $res['status'] = $flag;
+        return $res;
+    }
     public function validaToken($id)
     {
         try {
