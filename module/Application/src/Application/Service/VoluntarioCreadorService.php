@@ -125,7 +125,16 @@ class VoluntarioCreadorService
         if ($this->getValidarToken()->validaToken($decodePostData)) {
             
             $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['correo']);
-            $existeVolCreador['token'] = $decodePostData['token'];
+           
+            if(!empty($existeVolCreador)){
+                $existeVolCreador['token'] = $decodePostData['token'];
+            }else{
+                $existeVolCreador = array(
+                    "Mensaje :" => "Correo incorrecto",
+                    "flag :" => 'false'
+                );
+            }
+            
             
             // print_r($existeVolCreador);
         } else {

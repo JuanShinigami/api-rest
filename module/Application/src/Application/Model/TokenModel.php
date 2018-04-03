@@ -161,7 +161,10 @@ class TokenModel extends TableGateway
             if ($resultado == 4) {
                 $consulta = $this->dbAdapter->query("SELECT * FROM token WHERE idVoluntario='" . $datos[2] . "' and token='" . $decodePostData['token'] . "'", Adapter::QUERY_MODE_EXECUTE);
                 $res = $consulta->toArray();
-                $flag = true;
+//                 print_r($res); exit;
+                if(!empty($res)){
+                    $flag=true;
+                }
             }
             
             //             print_r($res);exit;
@@ -176,6 +179,7 @@ class TokenModel extends TableGateway
         
         
         $res['status'] = $flag;
+        
         return $res;
     }
     
