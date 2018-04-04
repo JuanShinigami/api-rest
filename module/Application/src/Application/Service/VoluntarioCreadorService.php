@@ -65,7 +65,7 @@ class VoluntarioCreadorService
 
 //                 print_r("usuario");
 //                 print_r($dataVolCreador);exit;
-//                 $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
+                $correo=$this->getcorreoTokenl()->correoToken($dataVolCreador);
                 
                 $arrayResponse = array(
                     "flag" => 'true' //
