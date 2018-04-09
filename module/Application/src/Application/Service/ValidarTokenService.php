@@ -90,7 +90,11 @@ class ValidarTokenService
                                 $actualiza = $this->getGuardarTokenModel()->updateFechaHora($decodePostData, $datos);
                                 $res['status'] = true;
                             }
+                        }else {
+                            $res['mensaje'] = "Hora incorrecta, su tiempo expiro";
                         }
+                    }else{
+                        $res['mensaje'] = "fecha incorrecta";
                     }
                 }
             }

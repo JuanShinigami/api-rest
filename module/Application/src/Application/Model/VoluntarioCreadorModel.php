@@ -154,7 +154,7 @@ class VoluntarioCreadorModel extends TableGateway
         return $respuesta;
     }
 
-    public function registroVoluntario($folioNuevo, $pass)
+    public function registroVoluntario($folioNuevo)
     {
        
         $flag = false;
@@ -162,7 +162,7 @@ class VoluntarioCreadorModel extends TableGateway
         
         try {
             
-            $consulta = $this->dbAdapter->query("select * FROM voluntarioCreador where contrasena = '" . $pass . "' and correo = '" . $folioNuevo['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
+            $consulta = $this->dbAdapter->query("select * FROM voluntarioCreador where correo = '" . $folioNuevo['correo'] . "'", Adapter::QUERY_MODE_EXECUTE);
             
             $res = $consulta->toArray();
           
