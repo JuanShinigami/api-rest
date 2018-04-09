@@ -222,7 +222,7 @@ class VoluntarioCreadorService
 //             }
             
         } else {
-            $array['mensaje'] = "No existe usuario";
+            $array['mensaje'] = "Usuario y Contrasena incorrectos";
         }
 //         exit;
         // }else {
