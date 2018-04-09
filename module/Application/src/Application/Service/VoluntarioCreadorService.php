@@ -2,8 +2,8 @@
 namespace Application\Service;
 
 use Application\Model\VoluntarioCreadorModel;
-use Application\Service\RecuperarFolioService;
 use Zend\Crypt\Password\Bcrypt;
+use Zend\Crypt\Password\Apache;
 
 class VoluntarioCreadorService
 {
@@ -95,7 +95,30 @@ class VoluntarioCreadorService
     public function password($dataVolCreador){
         
         try{
+          
+            $apache = new Apache();
             
+//             $apache->setFormat('crypt');
+//             printf ("CRYPT output: %s\n", $apache->create('password'));
+            
+            $apache->setFormat('sha1');
+//             printf ("SHA1 output: %s\n   ----->   ", $apache->create($dataVolCreador));
+//             print_r("SHA1 output: ----->   ". $apache->create($dataVolCreador));
+           
+//             $apache->setFormat('md5');
+//             printf ("MD5 output: %s\n", $apache->create('password'));
+            
+            $apache->setFormat('digest');
+            $apache->setUserName('enrico');
+            $apache->setAuthName('test');
+//             print_r("   ----- >   ");
+//             print_r("Digest output: %s\n". $apache->create($dataVolCreador));
+            
+            $securePass = $apache->create($dataVolCreador);
+            
+            /*
+             * 
+             * 
             //         $bcrypt = new Bcrypt();
 //             print_r("   Contrasena dada por usuario:  ");
 //             print_r($dataVolCreador);
@@ -113,7 +136,11 @@ class VoluntarioCreadorService
 //             print_r("   Contrasena encriptada:  ");
 //             print_r($securePass);
 //             print_r("     ------   ");
-            
+            *
+            *
+            *
+            *
+            */
             
         } catch (\PDOException $e) {
             echo "First Message " . $e->getMessage() . "<br/>";
@@ -166,9 +193,10 @@ class VoluntarioCreadorService
         $array = array();
         $pass=$this->password($decodePostData['contrasena']);
        
-        $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData);
+        $registroVoluntario = $this->getVolCreadorModel()->registroVoluntario($decodePostData,$pass);
         
 //         print_r($registroVoluntario);
+//         exit;
 //         print_r(" contrasena en base:   --------> ");
 //         print_r($registroVoluntario['datos'][0]['contrasena']);
 //         exit;
@@ -176,10 +204,11 @@ class VoluntarioCreadorService
         
         // var_dump($registroVoluntario['status'] === true);exit;
         if ($registroVoluntario['status'] === true) {
-            $securePass = $registroVoluntario['datos'][0]['contrasena'];
-            $password = $decodePostData['contrasena'];
             
-            if ($bcrypt->verify($password, $securePass)) {
+//             $securePass = $registroVoluntario['datos'][0]['contrasena'];
+//             $password = $decodePostData['contrasena'];
+            
+           // if ($bcrypt->verify($password, $securePass)) {
 //                 echo "\nThe password is correct! \n";
                 
                 $generatoken = $this->getvalidartoken()->generartoken($decodePostData, $registroVoluntario);
@@ -187,10 +216,10 @@ class VoluntarioCreadorService
                 $array['registro'] = $registroVoluntario;
                 $array['token'] = $generatoken;
                 
-            }else {
-//                 echo "\nThe password is NOT correct.\n";
-                $array['mensaje'] = "Contraseña incorrecta";
-            }
+//             }else {
+// //                 echo "\nThe password is NOT correct.\n";
+//                 $array['mensaje'] = "Contraseña incorrecta";
+//             }
             
         } else {
             $array['mensaje'] = "No existe usuario";
