@@ -129,12 +129,12 @@ class VoluntarioCreadorService
     public function existeVolCreador($decodePostData)
     {
         
-        // $token=$this->getValidarToken()->validaToken($decodePostData);
-//         print_r($decodePostData);
-//         exit;
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+
+        
+        if ($token['status']) {
             
-            exit;
+//             print_r($decodePostData);exit;
             $existeVolCreador = $this->getVolCreadorModel()->existe($decodePostData['correo']);
            
             if(!empty($existeVolCreador)){
@@ -146,12 +146,13 @@ class VoluntarioCreadorService
                 );
             }
             
-            
             // print_r($existeVolCreador);
         } else {
+            
             $existeVolCreador = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         
@@ -204,8 +205,10 @@ class VoluntarioCreadorService
 
     public function updateToken($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
-            
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        
+        
+        if ($token['status']) {
             // var_dump($registroVoluntario['status'] === true);exit;
             
             $updateToken = $this->getValidarToken()->updateToken($decodePostData);
@@ -217,7 +220,8 @@ class VoluntarioCreadorService
         } else {
             $array = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $array;

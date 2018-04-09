@@ -112,8 +112,9 @@ class VoluntarioSimulacroService
 
     public function addVoluntarioSimulacro($dataVolSimulacro)
     {
-        if ($this->getValidarToken()->validaToken($dataVolSimulacro)) {
-            
+        $token=$this->getValidarToken()->validaToken($dataVolSimulacro);
+        
+        if ($token['status']) {
             $voluntariosSimulacro = $this->getVoluntarioSimulacroModel()->existe($dataVolSimulacro);
             
             if (empty($voluntariosSimulacro)) {
@@ -126,7 +127,8 @@ class VoluntarioSimulacroService
         } else {
             $voluntariosSimulacro = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $voluntariosSimulacro;
@@ -134,12 +136,14 @@ class VoluntarioSimulacroService
 
     public function updateVoluntario($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        if ($token['status']) {
             $updateVoluntario = $this->getVoluntarioSimulacroModel()->updateVoluntario($decodePostData);
         } else {
             $updateVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         
@@ -149,12 +153,14 @@ class VoluntarioSimulacroService
     
     public function listaVoluntarioUnidos($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        if ($token['status']) {
             $updateVoluntario = $this->getVoluntarioSimulacroModel()->listaVoluntarioUnidos($decodePostData);
         } else {
             $updateVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         
@@ -163,12 +169,14 @@ class VoluntarioSimulacroService
 
     public function buscarDetalleVoluntario($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        if ($token['status']) {
             $detallesVoluntario = $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntario($decodePostData);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detallesVoluntario;
@@ -179,12 +187,14 @@ class VoluntarioSimulacroService
     {
         
 //         print_r($decodePostData);exit;
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        if ($token['status']) {
             $detallesVoluntario = $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detallesVoluntario;
@@ -194,12 +204,15 @@ class VoluntarioSimulacroService
     {
         
 //         print_r($decodePostData);exit;
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        
+        if ($token['status']) {
             $detallesVoluntario = $this->getVoluntarioSimulacroModel()->searchDateAndHourSimulacrum($decodePostData['idSimulacrumGroup']);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detallesVoluntario;
@@ -208,8 +221,8 @@ class VoluntarioSimulacroService
     public function listaVoluntario($decodePostData)
     {
         $arrayRespuesta = array();
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
-            
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        if ($token['status']) {
             $listaVoluntario = $this->getVoluntarioSimulacroModel()->listaVoluntario($decodePostData);
             
             $eliminaVoluntario = $this->getVoluntarioSimulacroModel()->eliminaVoluntario($decodePostData);
@@ -222,6 +235,7 @@ class VoluntarioSimulacroService
         } else {
             $arrayRespuesta['Mensaje'] = "Acceso denegado";
             $arrayRespuesta['flag'] = "false";
+            $arrayRespuesta['token'] = $token;
         }
         return $arrayRespuesta;
     }
@@ -237,8 +251,9 @@ class VoluntarioSimulacroService
         // return $eliminarVoluntario;
         $arrayR = array();
         
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
-            
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        
+        if ($token['status']) {
             // print_r($decodePostData['id']);
             // --$idSismo = $this->getVoluntarioSismoModel()->buscarSismo($decodePostData['id']);
             
@@ -250,6 +265,7 @@ class VoluntarioSimulacroService
         } else {
             $arrayR['Mensaje'] = "Acceso denegado";
             $arrayR['flag'] = "false";
+            $arrayR['token'] = $token;
         }
         return $arrayR;
     }

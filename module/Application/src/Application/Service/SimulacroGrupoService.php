@@ -50,9 +50,9 @@ class SimulacroGrupoService
         try {
             $resArray = array();
             
-           
-            
-            if ($this->getValidarToken()->validaToken($dataSimulacroGrupo)) {
+            $token=$this->getValidarToken()->validaToken($dataSimulacroGrupo);
+            if ($token['status']) {
+                
 //                 print_r("entro al token   ");
 //                 print_r($dataSimulacroGrupo);exit;
 
@@ -141,6 +141,8 @@ class SimulacroGrupoService
             } else {
                 $resArray['Mensaje'] = "Acceso denegado";
                 $resArray['flag'] = 'false';
+                $resArray['token'] = $token;
+                
             }
         } catch (\PDOException $e) {
             echo "First Message " . $e->getMessage() . "<br/>";
@@ -173,12 +175,17 @@ class SimulacroGrupoService
 
     public function updateEstatus($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        
+        if ($token['status']) {
+            
+            
             $detalles = $this->getSimulacroGrupoModel()->updateEstatusSimulacro($decodePostData);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detalles;
@@ -186,12 +193,15 @@ class SimulacroGrupoService
 
     public function buscarDetalles($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+            
+         if ($token['status']) {
             $detalles = $this->getSimulacroGrupoModel()->buscarDetalles($decodePostData);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detalles;
@@ -200,12 +210,15 @@ class SimulacroGrupoService
     
     public function buscarPorIdSimulacro($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        
+        if ($token['status']) {
             $detalles = $this->getSimulacroGrupoModel()->searchSimulacrum($decodePostData);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detalles;
@@ -213,12 +226,15 @@ class SimulacroGrupoService
     
     public function buscarPorFolioSimulacro($decodePostData)
     {
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        
+        if ($token['status']) {
             $detalles = $this->getSimulacroGrupoModel()->searchSimulacrumFolio($decodePostData);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
-                "flag :" => 'false'
+                "flag :" => 'false',
+                "token" =>$token
             );
         }
         return $detalles;

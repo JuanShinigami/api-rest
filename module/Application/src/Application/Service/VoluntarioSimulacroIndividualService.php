@@ -25,7 +25,9 @@ class VoluntarioSimulacroIndividualService
         $resultSelect = null;
         $flag = false;
         
-        if($this->getValidarToken()->validaToken($data)){
+        $token=$this->getValidarToken()->validaToken($data);
+            
+        if ($token['status']) {
             $resultSelect = $this->getVoluntarioSimulacroIndividualModel()->getAllSimulacrumByCreator($data['idVoluntaryCreator']);
             $flag = true;
         } else{
@@ -33,6 +35,7 @@ class VoluntarioSimulacroIndividualService
         }       
         $resArray['status'] = $flag;
         $resArray['list'] = $resultSelect;
+        $resArray['token'] = $token;
         
 
         return $resArray;
@@ -43,14 +46,17 @@ class VoluntarioSimulacroIndividualService
       
         $resArray = array();
         
-        if ($this->getValidarToken()->validaToken($dataVolSimulacro)) {
+        $token=$this->getValidarToken()->validaToken($dataVolSimulacro);
         
+        
+        if ($token['status']) {
         $voluntariosSimulacro = $this->getVoluntarioSimulacroIndividualModel()->addVoluntarioSimulacroIndividual($dataVolSimulacro);
         
         $resArray['voluntarioSimulacro'] = $voluntariosSimulacro;
         }else{
             $resArray["Mensaje :" ] ="Acceso denegado";
             $resArray["flag :"] ='false';
+            $resArray["flag :"] =$token;
         }
         //$resArray['status'] = "true";
         
@@ -63,12 +69,14 @@ class VoluntarioSimulacroIndividualService
     {
     
         $arrayR = array();
-        if ($this->getValidarToken()->validaToken($decodePostData)) {
+        $token=$this->getValidarToken()->validaToken($decodePostData);
+        if ($token['status']) {
         $eliminarVoluntario = $this->getVoluntarioSimulacroIndividualModel()->eliminarVolDeSimulacroIndividual($decodePostData);
         $arrayR=$eliminarVoluntario;
         }else{
             $arrayR["Mensaje :" ] ="Acceso denegado";
             $arrayR["flag :"] ='false';
+            $arrayR["flag :"] =$token;
         }
         return $arrayR;
     }

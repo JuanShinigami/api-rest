@@ -61,6 +61,8 @@ class ValidarTokenService
             $result = $filter->filter($decodePostData['token']);
             // print_r($result);exit;
             $res = array();
+            $res['status'] = false;
+            
             if (! empty($result)) {
                 // print_r("tiene token");
                 $validaToken = $this->getGuardarTokenModel()->validaToken($result);
@@ -89,21 +91,25 @@ class ValidarTokenService
                             if ($validaToken) {
                                 $actualiza = $this->getGuardarTokenModel()->updateFechaHora($decodePostData, $datos);
                                 $res['status'] = true;
+//                                 print_r($res);
                             }
                         }else {
                             $res['mensaje'] = "Hora incorrecta, su tiempo expiro";
+//                             print_r($res);
                         }
                     }else{
                         $res['mensaje'] = "fecha incorrecta";
+//                         print_r($res);
                     }
                 }
             }
         } catch (\Exception $e) {
             $res['status'] = false;
+//             $res['mensaje'] = "Su tiempo expiro";
             print_r("Error");
         }
         
-        // print_r($res);exit;
+//         print_r($res);exit;
         return $res;
     }
 

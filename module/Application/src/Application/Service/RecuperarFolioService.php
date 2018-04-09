@@ -43,11 +43,14 @@ class RecuperarFolioService
 
     public function recuperaCorreo($dataUser)
     {
-        if($this->getValidarToken()->validaToken($dataUser)){
+        $token=$this->getValidarToken()->validaToken($dataUser);
+        
+        if ($token['status']) {
+            
             $usuario = $this->getRecuperarFolioModel()->recuperaCorreo($dataUser);
             $completo = $this->correo($usuario);
         }else {
-            $completo =  array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
+            $completo =  array("Mensaje :" => "Acceso denegado" , "flag :" => 'false', "token" =>$token);
         }
         
         return $completo;

@@ -39,10 +39,13 @@ class MensajeService
 
 	public function addMensaje($dataMensaje)
 	{
-	  	if($this->getValidarToken()->validaToken($dataMensaje)){
+	    $token=$this->getValidarToken()->validaToken($dataMensaje);
+	    
+	    
+	    if ($token['status']) {
 	  	    $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
 	  	}else {
-	  	    $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
+	  	    $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false', "token" =>$token);
 	  	}
 	  	
 	  	return $mensaje;
@@ -50,10 +53,13 @@ class MensajeService
 	
 	public function buscarMensaje($id)
 	{
-	    if($this->getValidarToken()->validaToken($id)){
+	    $token=$this->getValidarToken()->validaToken($id);
+	        
+	    if ($token['status']) {
+	            
 	        $mensaje = $this->getMensajeModel()->buscarMensaje($id['idSimulacrogrupo']);
 	    }else {
-	        $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false');
+	        $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false',"token" =>$token);
 	    }
 	    
 	    return $mensaje;
