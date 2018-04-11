@@ -138,6 +138,7 @@ class SimulacroGrupoService
                 $resArray['folio'] = $folioNuevo;
 //                 $resArray['voluntarioSimulacro'] = $voluntarioSimulacroId;
                 $resArray['idSimulacrum'] = $idSimulacro;
+                $resArray['StatusToken'] = $token;
             } else {
                 $resArray['Mensaje'] = "Acceso denegado";
                 $resArray['flag'] = 'false';
@@ -180,7 +181,9 @@ class SimulacroGrupoService
         if ($token['status']) {
             
             
-            $detalles = $this->getSimulacroGrupoModel()->updateEstatusSimulacro($decodePostData);
+            $detalles = array("update"=>$this->getSimulacroGrupoModel()->updateEstatusSimulacro($decodePostData), "StatusToken"=>$token);     
+            
+            
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
@@ -196,7 +199,7 @@ class SimulacroGrupoService
         $token=$this->getValidarToken()->validaToken($decodePostData);
             
          if ($token['status']) {
-            $detalles = $this->getSimulacroGrupoModel()->buscarDetalles($decodePostData);
+             $detalles = array("detalle"=> $this->getSimulacroGrupoModel()->buscarDetalles($decodePostData), "StatusToken"=>$token);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
@@ -213,7 +216,7 @@ class SimulacroGrupoService
         $token=$this->getValidarToken()->validaToken($decodePostData);
         
         if ($token['status']) {
-            $detalles = $this->getSimulacroGrupoModel()->searchSimulacrum($decodePostData);
+            $detalles = array("detalleSimulacro"=>$this->getSimulacroGrupoModel()->searchSimulacrum($decodePostData), "StatusToken"=>$token);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
@@ -229,7 +232,7 @@ class SimulacroGrupoService
         $token=$this->getValidarToken()->validaToken($decodePostData);
         
         if ($token['status']) {
-            $detalles = $this->getSimulacroGrupoModel()->searchSimulacrumFolio($decodePostData);
+            $detalles =array("detalleSimulacroFolio"=> $this->getSimulacroGrupoModel()->searchSimulacrumFolio($decodePostData),"StatusToken"=>$token);
         } else {
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",

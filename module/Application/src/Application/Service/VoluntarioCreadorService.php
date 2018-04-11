@@ -166,6 +166,7 @@ class VoluntarioCreadorService
            
             if(!empty($existeVolCreador)){
                 $existeVolCreador['token'] = $decodePostData['token'];
+                $existeVolCreador['StatusToken']=$token;
             }else{
                 $existeVolCreador = array(
                     "Mensaje :" => "Correo incorrecto",
@@ -244,7 +245,8 @@ class VoluntarioCreadorService
 //             print_r("***********");
 //            print_r($updateToken['status']);exit;
            
-            $array = $updateToken;
+            $array['update'] = $updateToken;
+            $array['StatusToken'] = $token;
             
         } else {
             $array = array(

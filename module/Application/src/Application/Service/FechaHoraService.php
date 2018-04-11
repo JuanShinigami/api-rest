@@ -4,7 +4,7 @@ namespace Application\Service;
 
 use Application\Model\MensajeModel;
 
-class MensajeService
+class FechaHoraService
 {
 	private $mensajeModel;
 	
@@ -31,9 +31,16 @@ class MensajeService
 	*/
 	public function getAll()
 	{
-		$mensaje = $this->getMensajeModel()->getAll();
+// 		$fechaHora = $this->getMensajeModel()->getAll();
+        $array=array();
+        
+	    $fecha=date("Y"."-"."m"."-"."d"); 
+	    $hora=date("G".":"."i".":"."s");
 
-		return $mensaje;
+	    $array['fecha']=$fecha;
+	    $array['hora']=$hora;
+	    
+		return $array;
 	}
 
 
@@ -41,17 +48,14 @@ class MensajeService
 	{
 	    $token=$this->getValidarToken()->validaToken($dataMensaje);
 	    
-	    $res=array();
+	    
 	    if ($token['status']) {
 	  	    $mensaje = $this->getMensajeModel()->addMensaje($dataMensaje);
-	  	  
-	  	    $res['mensaje'] = $mensaje;
-	  	    $res['StatusToken'] = $token;
 	  	}else {
-	  	    $res = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false', "token" =>$token);
+	  	    $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false', "token" =>$token);
 	  	}
 	  	
-	  	return $res;
+	  	return $mensaje;
 	}
 	
 	public function buscarMensaje($id)
@@ -60,7 +64,7 @@ class MensajeService
 	        
 	    if ($token['status']) {
 	            
-	        $mensaje = array("mensaje"=>$this->getMensajeModel()->buscarMensaje($id['idSimulacrogrupo']), "StatusToken"=>$token);
+	        $mensaje = $this->getMensajeModel()->buscarMensaje($id['idSimulacrogrupo']);
 	    }else {
 	        $mensaje = array("Mensaje :" => "Acceso denegado" , "flag :" => 'false',"token" =>$token);
 	    }
