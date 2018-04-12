@@ -142,7 +142,7 @@ class SimulacroGrupoService
             } else {
                 $resArray['Mensaje'] = "Acceso denegado";
                 $resArray['flag'] = 'false';
-                $resArray['token'] = $token;
+                $resArray['StatusToken'] = $token;
                 
             }
         } catch (\PDOException $e) {
@@ -188,7 +188,7 @@ class SimulacroGrupoService
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detalles;
@@ -204,7 +204,7 @@ class SimulacroGrupoService
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detalles;
@@ -221,7 +221,7 @@ class SimulacroGrupoService
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detalles;
@@ -237,7 +237,7 @@ class SimulacroGrupoService
             $detalles = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detalles;

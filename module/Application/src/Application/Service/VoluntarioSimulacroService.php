@@ -119,18 +119,18 @@ class VoluntarioSimulacroService
             if (empty($voluntariosSimulacro)) {
                 
                 
-                $voluntariosSimulacro =  array("voluntarioSimulacro"=>$this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro),  "Statustoken" =>$token);
+                $voluntariosSimulacro =  array("voluntarioSimulacro"=>$this->getVoluntarioSimulacroModel()->addVoluntarioSimulacro($dataVolSimulacro),  "StatusToken" =>$token);
                 $buscaTotalVoluntario = $this->getVoluntarioSimulacroModel()->numeroVoluntario($dataVolSimulacro["idSimulacro"]);
                 $actualizaParticipates = $this->getSimulacroGrupoModel()->updateNumeroVoluntario($buscaTotalVoluntario, $dataVolSimulacro["idSimulacro"]);
             
             } else {
-                $voluntariosSimulacro =  array("Mensaje"=>"Ya esta registrado en este simulacro ", "Statustoken" =>$token);
+                $voluntariosSimulacro =  array("Mensaje"=>"Ya esta registrado en este simulacro ", "StatusToken" =>$token);
             }
         } else {
             $voluntariosSimulacro = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $voluntariosSimulacro;
@@ -140,12 +140,12 @@ class VoluntarioSimulacroService
     {
         $token=$this->getValidarToken()->validaToken($decodePostData);
         if ($token['status']) {
-            $updateVoluntario =array("updateVoluntario"=> $this->getVoluntarioSimulacroModel()->updateVoluntario($decodePostData),"Statustoken" =>$token);
+            $updateVoluntario =array("updateVoluntario"=> $this->getVoluntarioSimulacroModel()->updateVoluntario($decodePostData),"StatusToken" =>$token);
         } else {
             $updateVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         
@@ -157,12 +157,12 @@ class VoluntarioSimulacroService
     {
         $token=$this->getValidarToken()->validaToken($decodePostData);
         if ($token['status']) {
-            $updateVoluntario = array("listaVoluntarioUnidos"=> $this->getVoluntarioSimulacroModel()->listaVoluntarioUnidos($decodePostData),"Statustoken" =>$token);
+            $updateVoluntario = array("listaVoluntarioUnidos"=> $this->getVoluntarioSimulacroModel()->listaVoluntarioUnidos($decodePostData),"StatusToken" =>$token);
         } else {
             $updateVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         
@@ -173,12 +173,12 @@ class VoluntarioSimulacroService
     {
         $token=$this->getValidarToken()->validaToken($decodePostData);
         if ($token['status']) {
-            $detallesVoluntario = array("detalleVoluntario"=> $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntario($decodePostData),"Statustoken" =>$token);
+            $detallesVoluntario = array("detalleVoluntario"=> $this->getVoluntarioSimulacroModel()->buscarDetalleVoluntario($decodePostData),"StatusToken" =>$token);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detallesVoluntario;
@@ -191,12 +191,12 @@ class VoluntarioSimulacroService
 //         print_r($decodePostData);exit;
         $token=$this->getValidarToken()->validaToken($decodePostData);
         if ($token['status']) {
-            $detallesVoluntario = array("detalleVoluntarioPorCreador"=>$this->getVoluntarioSimulacroModel()->buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData),"Statustoken" =>$token);
+            $detallesVoluntario = array("detalleVoluntarioPorCreador"=>$this->getVoluntarioSimulacroModel()->buscarDetalleVoluntarioPorVoluntarioCreador($decodePostData),"StatusToken" =>$token);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detallesVoluntario;
@@ -209,12 +209,12 @@ class VoluntarioSimulacroService
         $token=$this->getValidarToken()->validaToken($decodePostData);
         
         if ($token['status']) {
-            $detallesVoluntario = array("fechaHoraSimulacro"=> $this->getVoluntarioSimulacroModel()->searchDateAndHourSimulacrum($decodePostData['idSimulacrumGroup']),"Statustoken" =>$token);
+            $detallesVoluntario = array("fechaHoraSimulacro"=> $this->getVoluntarioSimulacroModel()->searchDateAndHourSimulacrum($decodePostData['idSimulacrumGroup']),"StatusToken" =>$token);
         } else {
             $detallesVoluntario = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $detallesVoluntario;
@@ -234,11 +234,11 @@ class VoluntarioSimulacroService
             
             $arrayRespuesta['lista'] = $listaVoluntario;
             $arrayRespuesta['simulacro'] = $eliminaSimulacro;
-            $arrayRespuesta['Statustoken'] = $token;
+            $arrayRespuesta['StatusToken'] = $token;
         } else {
             $arrayRespuesta['Mensaje'] = "Acceso denegado";
             $arrayRespuesta['flag'] = "false";
-            $arrayRespuesta['token'] = $token;
+            $arrayRespuesta['StatusToken'] = $token;
         }
         return $arrayRespuesta;
     }
@@ -265,11 +265,11 @@ class VoluntarioSimulacroService
             $actualizaParticipates = $this->getSimulacroGrupoModel()->updateNumeroVoluntario($buscaTotalVoluntario, $decodePostData['idSimulacro']);
             $arrayR['respuesta'] = $eliminarVoluntario;
             $arrayR['totalVoluntario'] = ($buscaTotalVoluntario[0]['totalVoluntario']) + 1;
-            $arrayR['Statustoken'] =$token;
+            $arrayR['StatusToken'] =$token;
         } else {
             $arrayR['Mensaje'] = "Acceso denegado";
             $arrayR['flag'] = "false";
-            $arrayR['token'] = $token;
+            $arrayR['StatusToken'] = $token;
         }
         return $arrayR;
     }

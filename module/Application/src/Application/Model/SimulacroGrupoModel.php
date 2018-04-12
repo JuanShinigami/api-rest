@@ -68,7 +68,7 @@ class SimulacroGrupoModel extends TableGateway
                 'latitud' => $dataSimulacroGrupo["latitud"],
                 'longitud' => $dataSimulacroGrupo["longitud"],
                 'fecha' => $dataSimulacroGrupo["fecha"],
-                'hora' => $dataSimulacroGrupo["hora"],
+                'hora' => $dataSimulacroGrupo["horaS"],
                 'voluntario' => 0,
                 'idVoluntarioCreador' => $dataSimulacroGrupo["idVoluntarioCreador"],
                 'estatus' => $dataSimulacroGrupo["estatus"],

@@ -51,7 +51,7 @@ class RecuperarFolioService
             $completo = array("correo"=>$this->correo($usuario), "StatusToken"=>$token);
             
         }else {
-            $completo =  array("Mensaje :" => "Acceso denegado" , "flag :" => 'false', "token" =>$token);
+            $completo =  array("Mensaje :" => "Acceso denegado" , "flag :" => 'false', "StatusToken" =>$token);
         }
         
         return $completo;

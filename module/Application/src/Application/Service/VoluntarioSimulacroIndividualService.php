@@ -55,7 +55,7 @@ class VoluntarioSimulacroIndividualService
         } else {
             $resArray["Mensaje :"] = "Acceso denegado";
             $resArray["flag :"] = 'false';
-            $resArray["flag :"] = $token;
+            $resArray["StatusToken"] = $token;
         }
         // $resArray['status'] = "true";
         
@@ -69,11 +69,11 @@ class VoluntarioSimulacroIndividualService
         if ($token['status']) {
             $eliminarVoluntario = $this->getVoluntarioSimulacroIndividualModel()->eliminarVolDeSimulacroIndividual($decodePostData);
             $arrayR["EliminaVoluntario :"] = $eliminarVoluntario;
-            $arrayR["StatusToken :"] = $token;
+            $arrayR["StatusToken"] = $token;
         } else {
             $arrayR["Mensaje :"] = "Acceso denegado";
             $arrayR["flag :"] = 'false';
-            $arrayR["flag :"] = $token;
+            $arrayR["StatusToken"] = $token;
         }
         return $arrayR;
     }

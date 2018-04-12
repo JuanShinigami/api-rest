@@ -180,7 +180,7 @@ class VoluntarioCreadorService
             $existeVolCreador = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         
@@ -252,7 +252,7 @@ class VoluntarioCreadorService
             $array = array(
                 "Mensaje :" => "Acceso denegado",
                 "flag :" => 'false',
-                "token" =>$token
+                "StatusToken" =>$token
             );
         }
         return $array;
