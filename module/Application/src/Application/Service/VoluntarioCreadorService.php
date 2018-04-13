@@ -235,7 +235,7 @@ class VoluntarioCreadorService
 
     public function updateToken($decodePostData)
     {
-        $token=$this->getValidarToken()->validaToken($decodePostData);
+        $token=$this->getValidarToken()->validaTokenCierreSesion($decodePostData);
         
         
         if ($token['status']) {
