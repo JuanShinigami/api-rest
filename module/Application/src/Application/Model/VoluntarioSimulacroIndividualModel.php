@@ -44,15 +44,13 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
         ->columns(array('id', 'idVoluntario', 'tiempo_inicio', 'tiempo_estoy_listo', 'fecha', 'hora'))
         ->from(array('s' => $this->table))
         ->where(array('s.idVoluntario'=>$idVoluntaryCreator))
-        ->order(array(
-            't1.fecha ASC'
-        ));
+        ->order(array('s.fecha ASC'));
         
         $selectString = $sql->getSqlStringForSqlObject($select);
         //print_r($selectString); exit;
         $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
         $result       = $execute->toArray();
-        //echo "<pre>"; print_r($result); exit;
+//         echo "<pre>"; print_r($result); exit;
         
         return $result;
     }

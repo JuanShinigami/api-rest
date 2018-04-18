@@ -22,12 +22,13 @@ class VoluntarioSimulacroIndividualService
 
     public function getAllSimulacrumByCreator($data)
     {
+       
         $resArray = array();
         $resultSelect = null;
         $flag = false;
         
         $token = $this->getValidarToken()->validaToken($data);
-        
+         
         if ($token['status']) {
             $resultSelect = $this->getVoluntarioSimulacroIndividualModel()->getAllSimulacrumByCreator($data['idVoluntario']);
             $flag = true;
