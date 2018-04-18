@@ -68,8 +68,8 @@ class VoluntarioSimulacroIndividualModel extends TableGateway
                 'idVoluntario'=>$dataVolSimulacro['idVoluntario'],
                 'tiempo_inicio'=>$dataVolSimulacro['tiempo_inicio'],
                 'tiempo_estoy_listo'=>$dataVolSimulacro['tiempo_estoy_listo'],
-                'fecha'=>$dataVolSimulacro['fecha'],
-                'hora'=>$dataVolSimulacro['hora']
+                'fecha'=>$dataVolSimulacro['fechaS'],
+                'hora'=>$dataVolSimulacro['horaS']
                 //'mensajeParticipante'=>$dataPartSismo["mensajeParticipante"]
             );
             
