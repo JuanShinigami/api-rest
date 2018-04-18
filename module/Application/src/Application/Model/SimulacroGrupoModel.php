@@ -50,7 +50,6 @@ class SimulacroGrupoModel extends TableGateway
 
     public function addSimulacroGrupo($dataSimulacroGrupo, $folioNuevo)
     {
-        
         $flag = false;
         $respuesta = array();
         
@@ -82,22 +81,19 @@ class SimulacroGrupoModel extends TableGateway
             $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
             $flag = true;
         } catch (\PDOException $e) {
-             echo "First Message " . $e->getMessage() . "<br/>";
+            echo "First Message " . $e->getMessage() . "<br/>";
             $flag = false;
         } catch (\Exception $e) {
-             echo "Second Message: " . $e->getMessage() . "<br/>";
+            echo "Second Message: " . $e->getMessage() . "<br/>";
         }
         $respuesta['status'] = $flag;
         
-//         print_r($results);
-//         exit;
+        // print_r($results);
+        // exit;
         
         return $respuesta;
     }
-    
-    
-    
-    
+
     public function maxFolio($folioNuevo)
     {
         
@@ -107,9 +103,6 @@ class SimulacroGrupoModel extends TableGateway
         $res = $consulta->toArray();
         return $res;
     }
-    
-    
-    
 
     public function idSimulacro($dataUser)
     {
@@ -118,29 +111,26 @@ class SimulacroGrupoModel extends TableGateway
         
         $res = $consulta->toArray();
         // echo "existe correo";
-//          print_r($);
-//          exit;
+        // print_r($);
+        // exit;
         
         return $res[0]['id'];
-
-//where 
-//        ubicacion = '" . $dataUser['ubicacion'] . "'
-//         and latitud = '" . $dataUser['latitud'] . "'
-//         and longitud = '" . $dataUser['longitud'] . "'
-//         and fecha = '" . $dataUser['fecha'] . "' 
-//         and hora = '" . $dataUser['hora'] . "'
-//         and idVoluntarioCreador = '" . $dataUser['idVoluntarioCreador'] . "'
-//         and estatus = '" . $dataUser['estatus'] . "'
-//         and tiempoPreparacion  = '" . $dataUser['tiempoPreparacion'] . "'"
+        
+        // where
+        // ubicacion = '" . $dataUser['ubicacion'] . "'
+        // and latitud = '" . $dataUser['latitud'] . "'
+        // and longitud = '" . $dataUser['longitud'] . "'
+        // and fecha = '" . $dataUser['fecha'] . "'
+        // and hora = '" . $dataUser['hora'] . "'
+        // and idVoluntarioCreador = '" . $dataUser['idVoluntarioCreador'] . "'
+        // and estatus = '" . $dataUser['estatus'] . "'
+        // and tiempoPreparacion = '" . $dataUser['tiempoPreparacion'] . "'"
     }
-    
-    
-    
+
     public function updateNumeroVoluntario($total, $idSimulacro)
     {
         $flag = false;
         $respuesta = array();
-        
         
         try {
             $sql = new Sql($this->dbAdapter);
@@ -149,7 +139,7 @@ class SimulacroGrupoModel extends TableGateway
             
             $array = array(
                 
-                'voluntario' => $total[0]["totalVoluntario"]    // + 1
+                'voluntario' => $total[0]["totalVoluntario"] // + 1
             );
             
             $update->set($array);
@@ -170,13 +160,10 @@ class SimulacroGrupoModel extends TableGateway
         return $respuesta;
     }
 
-    
     public function updateEstatusSimulacro($decodePostData)
     {
-       
         $flag = false;
         $respuesta = array();
-        
         
         try {
             $sql = new Sql($this->dbAdapter);
@@ -205,16 +192,21 @@ class SimulacroGrupoModel extends TableGateway
         $respuesta['status'] = $flag;
         return $respuesta;
     }
-      
+
     public function buscarDetalles($decodePostData)
     {
         $sql = new Sql($this->dbAdapter);
         $select = $sql->select();
         
-        $select->from(array(
+        $select
+        ->from(array(
             't1' => 'simulacrogrupo'
-        ), array())->where(array(
+              ), array())
+        ->where(array(
             't1.idVoluntarioCreador' => $decodePostData['idVoluntarioCreador']
+               ))
+          ->order(array(
+            't1.fecha ASC'
         ));
         
         // print_r($result);
@@ -225,8 +217,8 @@ class SimulacroGrupoModel extends TableGateway
         
         // echo "<pre>"; print_r($result); exit;
         
-        //print_r($result);
-        //exit;
+        // print_r($result);
+        // exit;
         
         return $result;
     }
@@ -250,14 +242,12 @@ class SimulacroGrupoModel extends TableGateway
         
         // echo "<pre>"; print_r($result); exit;
         
-        //print_r($result[0]);
-        //exit;
+        // print_r($result[0]);
+        // exit;
         
         return $result;
     }
-    
-    
-    
+
     public function searchSimulacrumFolio($data)
     {
         $sql = new Sql($this->dbAdapter);
@@ -277,29 +267,29 @@ class SimulacroGrupoModel extends TableGateway
         
         // echo "<pre>"; print_r($result); exit;
         
-        //print_r($result[0]);
-        //exit;
+        // print_r($result[0]);
+        // exit;
         
         return $result;
     }
-    
+
     public function eliminarSimulacro($dataPartSimulacro)
     {
         $flag = false;
         $respuesta = array();
         
-        
         try {
-            //$consulta=$this->dbAdapter->query("DELETE FROM simulacrogrupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
+            // $consulta=$this->dbAdapter->query("DELETE FROM simulacrogrupo where idSismo = '" . $dataPartSismo["idSismo"]."'" ,Adapter::QUERY_MODE_EXECUTE);
             $sql = new Sql($this->dbAdapter);
             $delete = $sql->delete('simulacrogrupo');
-            $delete->where(array('id' => $dataPartSimulacro["idSimulacro"]));
+            $delete->where(array(
+                'id' => $dataPartSimulacro["idSimulacro"]
+            ));
             
             $selectString = $sql->getSqlStringForSqlObject($delete);
             $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-          
-            $flag = true;
             
+            $flag = true;
         } catch (\PDOException $e) {
             // echo "First Message " . $e->getMessage() . "<br/>";
             $flag = false;
@@ -309,7 +299,5 @@ class SimulacroGrupoModel extends TableGateway
         $respuesta['status'] = $flag;
         return $respuesta;
     }
-    
-    
 }
 ?>

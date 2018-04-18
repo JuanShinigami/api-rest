@@ -31,12 +31,17 @@ class VoluntarioSimulacroIndividualService
         if ($token['status']) {
             $resultSelect = $this->getVoluntarioSimulacroIndividualModel()->getAllSimulacrumByCreator($data['idVoluntario']);
             $flag = true;
+            $resArray['status'] = $flag;
+            $resArray['list'] = $resultSelect;
+            $resArray['StatusToken'] = $token;
+            
         } else {
             $flag = false;
+            $resArray['status'] = $flag;
+            
+            $resArray['StatusToken'] = $token;
         }
-        $resArray['status'] = $flag;
-        $resArray['list'] = $resultSelect;
-        $resArray['token'] = $token;
+       
         
         return $resArray;
     }
