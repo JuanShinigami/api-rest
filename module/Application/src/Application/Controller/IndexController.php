@@ -70,20 +70,20 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         
-        
         $volCreador = $this->getVoluntCreadorService()->getAll();
-        $voluntarios = $this->getVoluntarioService()->getAll();
+//         $voluntarios = $this->getVoluntarioService()->getAll();
         $voluntariosSimulacro = $this->getVoluntarioSimulacroService()->getAll();
         $simulacroGrupo = $this->getSimulacroService()->getAll();
         $recuperaFolio = $this->getRecuperaFolioService()->getAll();
-        $mensaje = $this->getMensajeService()->getAll(); 
+        $mensaje = $this->getMensajeService()->getAll();
+
         
         $servicios = array();
         
         
 
         $servicios[0] = "Servicio de Voluntario creador -------> " . ((count($volCreador) >= 0)?'ok':'er');
-        $servicios[1] = "Servicio de Voluntario -------> " . ((count($voluntarios) >= 0)?'ok':'er');
+//         $servicios[1] = "Servicio de Voluntario -------> " . ((count($voluntarios) >= 0)?'ok':'er');
         $servicios[2] = "Servicio de Voluntario - Simulacro -------> " . ((count($voluntariosSimulacro) >= 0)?'ok':'er');
         $servicios[3] = "Servicio de Simulacro -------> " . ((count($simulacroGrupo) >= 0)?'ok':'er');
         $servicios[4] = "Servicio de Recuperar Folio -------> " . ((count($recuperaFolio) >= 0)?'ok':'er');

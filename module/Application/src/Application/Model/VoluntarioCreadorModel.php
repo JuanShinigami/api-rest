@@ -32,7 +32,8 @@ class VoluntarioCreadorModel extends TableGateway
             'contrasena',
             'nombre',
             'telefono',
-            'correo'
+            'correo',
+            'idPerfil'
         ))->from(array(
             'v' => $this->table
         ));
@@ -96,7 +97,8 @@ class VoluntarioCreadorModel extends TableGateway
                 'contrasena' => $securePass,
                 'nombre' => $dataVolCreador["nombre"],
                 'telefono' => $dataVolCreador["telefono"],
-                'correo' => $dataVolCreador["correo"]
+                'correo' => $dataVolCreador["correo"],
+                'idPerfil' => $dataVolCreador["idPerfil"]
             );
             
             $insertar->values($array);

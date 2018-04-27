@@ -27,7 +27,7 @@ class RecuperarFolioModel extends TableGateway
 		$sql = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'folio' , 'nombre', 'telefono', 'correo'))
+			->columns(array('id', 'contrasena' , 'nombre', 'telefono', 'correo', 'idPerfil'))
 			->from(array('u' => $this->table));
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		//print_r($selectString); exit;
