@@ -76,7 +76,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
-            'Application\Controller\Voluntary' => Controller\VoluntaryController::class,
+            'Application\Controller\Profile' => Controller\ProfileController::class,
             'Application\Controller\Prueba' => Controller\PruebaController::class,
             'Application\Controller\VoluntaryCreator' => Controller\VoluntaryCreatorController::class,
             'Application\Controller\SimulacrumGroup' => Controller\SimulacrumGroupController::class,

@@ -2,34 +2,33 @@
 namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Service\VoluntarioService;
+use Application\Service\PerfilService;
 
-class VoluntaryController extends AbstractActionController
+class ProfileController extends AbstractActionController
 {
 
-    private $voluntarioService;
+    private $perfilService;
 
     /**
      * Instanciamos el servicio de voluntarios
      */
-    public function getVoluntarioService()
+    public function getPerfilService()
     {
-        return $this->voluntarioService = new VoluntarioService();
+        return $this->perfilService = new PerfilService();
     }
 
     public function listaAction(){
 
-        $voluntarios = $this->getVoluntarioService()->getAll();
+        $perfil = $this->getPerfilService()->getAll();
         $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
-                "response" => $voluntarios,
+                "response" => $perfil,
             )));
             
         return $response;
         //exit;
     }
 
-    public function addVoluntaryAction(){
-
+    public function addProfileAction(){
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -37,7 +36,7 @@ class VoluntaryController extends AbstractActionController
             $decodePostData = json_decode($postData, true);
 
             
-            $result = $this->getVoluntarioService()->addVoluntario($decodePostData);
+            $result = $this->getPerfilService()->addPerfil($decodePostData);
                    
             $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
                 "response" => $result,
@@ -49,3 +48,11 @@ class VoluntaryController extends AbstractActionController
     }
 }
 ?>
+
+
+
+
+
+
+
+

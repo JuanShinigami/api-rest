@@ -25,14 +25,14 @@ class PerfilService
      */
     public function getAll()
     {
-        $participantes = $this->getVoluntariosModel()->getAll();
+        $perfil = $this->getPerfilModel()->getAll();
         
-        return $participantes;
+        return $perfil;
     }
 
-    public function addVoluntario($dataPerfil)
+    public function addPerfil($dataPerfil)
     {
-        $token=$this->getValidarToken()->validaToken($decodePostData);
+        $token=$this->getValidarToken()->validaToken($dataPerfil);
         
         
         if ($token['status']) {
@@ -42,7 +42,7 @@ class PerfilService
             if (empty($perfil)) {
                 $perfil = array("registro" =>$this->getPerfilModel()->addPerfil($dataPerfil),  "StatusToken" =>$token);
             } else {
-                $perfil= "Este perfil ya esta registrado ";
+                $perfil= "Este perfil ya esta registrado";
             }
         } else {
             $perfil = array(

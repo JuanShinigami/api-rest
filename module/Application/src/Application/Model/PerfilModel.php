@@ -13,7 +13,7 @@ class PerfilModel extends TableGateway
 	public function __construct()
 	{
 		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'idPerfil';
+    	$this->table      = 'perfil';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -39,16 +39,18 @@ class PerfilModel extends TableGateway
 	}
 	
 	public function addPerfil($dataPerfil){
-		
+// 		print_r($dataPerfil["perfil"]);exit;
 	    $flag = false;
 	    $respuesta = array();
+	    
 	    try {
+	        
+// 	        print_r($dataPerfil["perfil"]);exit;
 	        $sql = new Sql($this->dbAdapter);
 	        $insertar = $sql->insert('perfil');
 	        $array=array(
-	            
-	            'id'=>$dataPerfil["id"],
-	            'perfil '=>$dataPerfil["perfil"]
+	          
+	            'perfil'=>$dataPerfil["perfil"]
 	        );
 	        //		print_r($array);
 	        //		exit;
@@ -56,14 +58,17 @@ class PerfilModel extends TableGateway
 	        $selectString = $sql->getSqlStringForSqlObject($insertar);
 	        $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
 	        $flag = true;
+// 	        print_r($flag);
 	    }
 	    catch (\PDOException $e) {
-	        //echo "First Message " . $e->getMessage() . "<br/>";
+	        echo "First Message " . $e->getMessage() . "<br/>";
 	        $flag = false;
 	    }catch (\Exception $e) {
-	        //echo "Second Message: " . $e->getMessage() . "<br/>";
+	        echo "Second Message: " . $e->getMessage() . "<br/>";
 	    }
 	    $respuesta['status'] = $flag;
+	    
+// 	    print_r($respuesta);exit;
 
 		return $respuesta;
 		
@@ -125,9 +130,9 @@ class PerfilModel extends TableGateway
 	public function existe($folioNuevo)
 	{
 	    
-	    // print_r($folioNuevo);
+// 	    print_r($folioNuevo);
 	    // $consulta=$this->dbAdapter->query("select id , folio FROM voluntarioCreador where nombre = '" . $dataUser['nombre']."' and correo = '".$dataUser['correo']. "'" ,Adapter::QUERY_MODE_EXECUTE);
-	    $consulta = $this->dbAdapter->query("select id , perfil FROM perfil where perfil = '" . $folioNuevo . "'", Adapter::QUERY_MODE_EXECUTE);
+	    $consulta = $this->dbAdapter->query("select id , perfil FROM perfil where perfil = '" . $folioNuevo['perfil'] . "'", Adapter::QUERY_MODE_EXECUTE);
 	    
 	    $res = $consulta->toArray();
 	    // echo "res ";
