@@ -12,7 +12,7 @@ use Application\Service\MensajeService;
 use Application\Service\RecuperarFolioService;
 use Application\Service\SimulacroGrupoService;
 use Application\Service\VoluntarioCreadorService;
-use Application\Service\VoluntarioService;
+use Application\Service\PerfilService;
 use Application\Service\VoluntarioSimulacroService;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
@@ -43,7 +43,7 @@ class IndexController extends AbstractActionController
 
     public function getVoluntarioService()
     {
-        return $this->voluntarioService = new VoluntarioService();
+        return $this->voluntarioService = new PerfilService();
     }
 
     public function getVoluntarioSimulacroService()

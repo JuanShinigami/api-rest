@@ -1,21 +1,23 @@
 <?php
 return array(
-    'admin'=> array(
+    'application'=> array(
         "allow"=>array(
-               'usuarios'
+            'voluntario/',
+            'voluntario/profile',
+            'voluntario/voluntarySimulacrumIndividual'
         ),
         "deny"=>array(
                'crud'
         )
     ),
-    'voluntario'=> array(
-        "allow"=>array(
-            'crud',
-            'usuarios'
-        ),
-        "deny"=>array(
+//     'voluntario'=> array(
+//         "allow"=>array(
+//             'Application\Controller\Index',
+//             'Application\Controller\Profile'
+//         ),
+//         "deny"=>array(
   
-        )
-    ),
+//         )
+//     ),
 );
 ?>

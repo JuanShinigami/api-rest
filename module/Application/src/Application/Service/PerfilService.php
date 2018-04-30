@@ -42,7 +42,7 @@ class PerfilService
             if (empty($perfil)) {
                 $perfil = array("registro" =>$this->getPerfilModel()->addPerfil($dataPerfil),  "StatusToken" =>$token);
             } else {
-                $perfil= "Este perfil ya esta registrado";
+                $perfil="Este perfil ya esta registrado";
             }
         } else {
             $perfil = array(
