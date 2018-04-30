@@ -23,11 +23,13 @@ class Module
         $serviceManager = $e->getApplication()->getServiceManager();
         $dbAdapter      = $serviceManager->get('Zend\Db\Adapter\Adapter');
         \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+      
+        
         //Iniciamos la lista de control de acceso
-        $this->initAcl($e);
+//         $this->initAcl($e);
         
         //Comprobamos la lista de control de acceso
-        $e->getApplication()->getEventManager()->attach('route', array($this, 'checkAcl'));
+//         $e->getApplication()->getEventManager()->attach('route', array($this, 'checkAcl'));
     }
 
     public function getConfig()
