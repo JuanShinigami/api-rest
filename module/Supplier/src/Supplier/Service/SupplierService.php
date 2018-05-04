@@ -2,11 +2,11 @@
 namespace Supplier\Service;
 
 use Supplier\Model\SupplierModel;
-use Application\Services\AddressService;
+// use Application\Services\AddressService;
 use Supplier\Service\CompanyTypePetService;
 use Supplier\Service\CompanySectorActivityService;
 use Supplier\Service\CompanyNoticeService;
-use Users\Service\UsersService;
+// use Users\Service\UsersService;
 
 class SupplierService
 {
@@ -24,16 +24,16 @@ class SupplierService
 	}
 
 	// Instanciamos servicio de usuarios
-	private function getUserService()
-	{
-		return $this->userService = new UsersService();
-	}
+// 	private function getUserService()
+// 	{
+// 		return $this->userService = new UsersService();
+// 	}
 
-	// Instanciamos servicio de direccion
-	private function getAddressService()
-	{
-		return $addressService = new AddressService();
-	}
+// 	// Instanciamos servicio de direccion
+// 	private function getAddressService()
+// 	{
+// 		return $addressService = new AddressService();
+// 	}
 
 	// Instanciamos servicio de company type pet
 	private function getCompanyTypePetService()
