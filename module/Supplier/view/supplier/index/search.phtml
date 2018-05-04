@@ -1,0 +1,604 @@
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<style>
+	.input-field .prefix ~ .select-wrapper {
+	  margin-left:3rem; 
+	  width:92%; 
+	  width:calc(100% - 3rem);
+	}
+	.background-image-one {
+		/*background-image: url(https://images.pexels.com/photos/374825/pexels-photo-374825.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);*/
+		background-image: url('https://images.pexels.com/photos/341378/pexels-photo-341378.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+	.background-image-two {
+		background-image: url(https://images.pexels.com/photos/96428/pexels-photo-96428.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+	.background-image-three {
+		background-image: url(https://images.pexels.com/photos/34504/soldier-dog-companion-service.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+	.background-image-four {
+		background-image: url(https://images.pexels.com/photos/751671/pexels-photo-751671.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+	.title-carousel {
+		text-align: center;
+		font-size: 24px;
+		font-weight: 500;
+	}
+	.container-overlay {
+		background-color: rgba(0,0,0,0.5);
+	}
+
+	*:before, *:after { 
+		content: ''; 
+	}
+	hr {
+	  border: 0;
+	  margin: 1.35em auto;
+	  max-width: 100%;
+	  background-position: 50%;
+	  box-sizing: border-box;
+	}
+	.flair {
+	  width: 100%;
+	  height: 30px;
+	  border-style: solid;
+	  border-color: hsla(0, 0%, 75%, 0.9);
+	  border-width: 1px 0 0 0;
+	  border-radius: 15px;
+	}
+	.flair:before {
+	  display: block;
+	  height: 30px;
+	  margin-top: -31px;    
+	  border-style: solid;
+	  border-color: hsla(0, 0%, 75%, 0.9);
+	  border-width: 0 0 1px 0;
+	  border-radius: 15px;
+	}
+
+	/*.background-image-one:before, .background-image-two:before, .background-image-three:before, .background-image-four:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(to bottom right,rgba(255, 0, 0, 0.50),rgba(255, 0, 0, 0.50));
+		opacity: .6; 
+	}
+	ul.dropdown-content .select-dropdown .active {
+		z-index: 900 !important;
+	}*/
+</style>
+
+<div class="row">
+	<div class="col s12 m12 l12">
+		<nav>
+			<div class="nav-wrapper">
+				<div class="col s12">
+		        	<a href="#" class="breadcrumb">Proveedores</a>
+		        	<a href="#" class="breadcrumb">Buscar</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<!--<div class="row">
+	
+	<div class="col s12 m12 l12">
+
+		<div class="carousel carousel-slider">
+
+    		<div class="carousel-fixed-item">
+    			
+						
+						<h2 class="white-text title-carousel"></h2>
+      			
+		      			<?php
+						$form = $this->form;
+						//$form->prepare();
+						//echo $this->form()->openTag($form);
+						?>
+
+						<div class="row">
+							
+							<div class="input-field col s12 m6 l6 white-text">
+								<i class="material-icons prefix">location_on</i>
+		    					<?php //echo $this->formElement($form->get('state_of_mexico')); ?>
+		    					<label class="white-text">¿Que busca?</label>
+		  					</div>
+
+		  					<div class="input-field col s12 m6 l6 white-text">
+		  						<i class="material-icons prefix">location_on</i>
+		    					<?php //echo $this->formElement($form->get('pet_type')); ?>
+		    					<label class="white-text">Tipo de mascota</label>
+		  					</div>
+
+						</div>
+
+						<div class="row">
+							
+							<div class="input-field col s12 m6 l6 white-text">
+								<i class="material-icons prefix">location_on</i>
+		    					<?php //echo $this->formElement($form->get('state_of_mexico')); ?>
+		    					<label class="white-text">Estado</label>
+		  					</div>
+
+		  					<div class="input-field col s12 m6 l6 white-text">
+		  						<i class="material-icons prefix">location_on</i>
+		    					<?php //echo $this->formElement($form->get('district')); ?>
+		    					<label class="white-text">Delegaci&oacute;n / Municipio</label>
+		  					</div>
+
+						</div>
+
+						<div class="row" style="margin-bottom: 0;">
+							<div class="col s12 m12 l12 center">
+								<button type="submit" id="btn_register" class="waves-effect waves-light btn-large pink col s12 m6 l6 offset-m3 offset-l3">Buscar</button>
+							</div>
+						</div>
+
+						<?php
+						echo $this->form()->closeTag();
+						?>					
+
+    		</div>
+
+    		<div class="carousel-item grey darken-4 white-text background-image-one" href="#one!">
+    		</div>
+
+		    <div class="carousel-item grey darken-4 white-text background-image-two" href="#two!">
+		    </div>
+
+		    <div class="carousel-item grey darken-4 white-text background-image-three" href="#three!">
+		    </div>
+
+		    <div class="carousel-item grey darken-4 white-text background-image-four" href="#four!">
+		    </div>
+
+		</div>
+
+	</div>
+
+</div>-->
+
+<div class="row">
+
+	<div class="col  s12 m12 l12">
+		
+	
+		<div class="card background-image-one">
+			<div class="card-content container-overlay">
+				
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center white-text">La mejor guía para consentir a tus mascotas</h5>
+						<p class="center white-text">Los campos con * son obligatorios</p>
+					</div>
+				</div>
+
+				<?php
+				$form = $this->form;
+				$form->prepare();
+				echo $this->form()->openTag($form);
+				?>
+
+				<div class="row">
+								
+					<div class="input-field col s12 m6 l6 white-text">
+						<i class="material-icons prefix">location_on</i>
+			    		<?php echo $this->formElement($form->get('sector_activity')); ?>
+			    		<label class="white-text">* ¿Que busca?</label>
+			  		</div>
+
+			  		<div class="input-field col s12 m6 l6 white-text">
+			  			<i class="material-icons prefix">location_on</i>
+			    		<?php echo $this->formElement($form->get('pet_type')); ?>
+			    		<label class="white-text">* Tipo de mascota</label>
+			  		</div>
+
+				</div>
+
+				<div class="row">
+								
+					<div class="input-field col s12 m6 l6 white-text">
+						<i class="material-icons prefix">location_on</i>
+			    		<?php echo $this->formElement($form->get('state_of_mexico')); ?>
+			    		<label class="white-text">* Estado</label>
+			  		</div>
+
+			  		<div class="input-field col s12 m6 l6 white-text">
+			  			<i class="material-icons prefix">location_on</i>
+			    		<?php echo $this->formElement($form->get('district')); ?>
+			    		<label class="white-text">Delegaci&oacute;n / Municipio</label>
+			  		</div>
+
+				</div>
+
+				<div class="row" style="margin-bottom: 0;">
+					<div class="col s12 m12 l12 center">
+						<button type="submit" id="btn_serch" class="waves-effect waves-light btn-large pink col s12 m6 l6 offset-m3 offset-l3">Buscar</button>
+					</div>
+				</div>
+
+				<?php
+				echo $this->form()->closeTag();
+				?>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<!--<div class="row">
+
+	<div class="col s12 m12 l12">
+		
+		<div class="card">
+			
+			<div class="card-content">
+
+				<div class="row" style="margin-bottom: 0;">
+				
+					<div class="col s12 m4 l4">
+
+						<div class="carousel carousel-slider">
+				    		<a class="carousel-item" href="#"><img src="https://images.pexels.com/photos/257519/pexels-photo-257519.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"></a>
+				    		<a class="carousel-item" href="#"><img src="https://images.pexels.com/photos/97863/pexels-photo-97863.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"></a>
+				    		<a class="carousel-item" href="#"><img src="https://images.pexels.com/photos/39388/chihuahua-dog-puppy-cute-39388.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"></a>
+				    		<a class="carousel-item" href="#"><img src="https://images.pexels.com/photos/237692/pexels-photo-237692.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"></a>
+				    		<a class="carousel-item" href="#"><img src="https://images.pexels.com/photos/533079/pexels-photo-533079.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"></a>
+				    		<a class="carousel-item" href="#"><img src="https://images.pexels.com/photos/62640/pexels-photo-62640.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"></a>
+						</div>
+
+					</div>
+
+					<div class="col s12 m8 l8">
+						<h5>Empresa</h5>
+						<p>descripción</p>
+						<a class="waves-effect waves-light btn">Ver mas</a>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>	
+
+	</div>
+
+</div>-->
+
+<div class="row">
+	
+	<div class="col s12 m12 l12 container-company-search">
+		
+		<!--<div class="card">
+			<div class="col s4 m4 l14">
+				<img class="responsive-img" src="https://images.pexels.com/photos/351406/pexels-photo-351406.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+			</div>
+			<div class="col s8 m8 l8">
+				<h2>Empresa</h2>
+				<p class="truncate">Direccion</p>
+				<p class="">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur eaque maiores repudiandae harum, atque, soluta assumenda doloribus maxime? Iure animi accusamus officia quae! Porro fugit fuga sed, recusandae nesciunt repudiandae!
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem perspiciatis natus quibusdam minus velit ut impedit facere, quas delectus harum repudiandae eius aut maiores voluptatum quod dignissimos a quis perferendis.
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col s4 m4 l14">
+				<img class="responsive-img" src="https://images.pexels.com/photos/351406/pexels-photo-351406.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+			</div>
+			<div class="col s8 m8 l8">
+				<h2>Empresa</h2>
+				<p class="truncate">Direccion</p>
+				<p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem perspiciatis natus quibusdam minus velit ut impedit facere, quas delectus harum repudiandae eius aut maiores voluptatum quod dignissimos a quis perferendis.</p>
+			</div>
+		</div>-->
+
+	</div>
+
+</div>
+
+<script>
+
+	// ***********************************************************************
+	// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+	// ***********************************************************************
+	$(document)
+	.ajaxStart(function () {
+		// Iniciamos panel de carga
+		$.LoadingOverlay("show");
+	})
+	.ajaxStop(function () {
+		// ocultamos panel de carga
+		$.LoadingOverlay("hide");
+	});
+
+	// Inicializar combos
+	$('select').material_select();
+
+	$('.carousel.carousel-slider').carousel({
+		fullWidth : true,
+		indicators: true
+	});
+
+	$(document).ready(function() {
+		
+		// iniciar carousel
+		/*$('.carousel.carousel-slider').carousel({
+			fullWidth : true,
+			indicators: true,
+			onCycleTo: function(e) {
+				//console.log("CALLBACK CAROUSEL " + JSON.stringify(e));
+
+				var indexCurrent = parseInt($(e).index()); 
+				console.log('indexCurrent: ' + indexCurrent);
+
+				switch(indexCurrent) {
+				case 1:
+        			$('.title-carousel').text("La mejor guía para consentir a tus mascotas");
+        		break;
+    			case 2:
+        			$('.title-carousel').text("Encuentra todo para tu mascota");
+        		break;
+			    case 3:
+			        $('.title-carousel').text("Artículos para consentir a tu mascota");
+			        break;
+			    case 4:
+			    	$('.title-carousel').text("Entérate de todas nuestras promociones");
+			    	break;
+			    default:
+        			$('.title-carousel').text("Tu mascota es parte de tu familia");
+				} 
+			}
+		});*/
+
+		// Mostrar siguiente slider del carousel
+		/*setInterval(function(){
+			$('.carousel.carousel-slider').carousel('next');
+		}, 3000);*/
+
+		// AL HACER UN CAMBIO EN EL COMBO ESTADO
+		$("#state_of_mexico").change(function(event) {
+			
+			// Opcion seleccionada
+			var $optionSelected = $("#state_of_mexico option:selected").val();
+
+			// Validamos si se eligio un estado o no
+			if ($optionSelected != 0 && $optionSelected != "") {
+				// OBTENEMOS DELEGACIONES Y MUNICIPIOS
+				getAllDistrict($optionSelected);
+			} else {
+				// Limpiar combo de delegacion y municipio
+				$("#district").html('<option value="0">seleccione</option>');
+
+				// Limpiar combo de colonia
+				$("#neighborhood").html('<option value="0">seleccione</option>');
+
+				// Limpiar campo de codigo postal
+				$("#postal_code").val("");
+
+				// Inicializamos el combo
+				$("select").material_select();
+
+				// Quitamos foco al campo codigo postal
+				$("#postal_code").blur();
+			}
+		});
+
+		$("#btn_serch").click(function(event) {
+			
+			// SECTOR DE ACTIVIDAD
+			var $sectorActivity = $("#sector_activity").val();
+
+			// TIPO DE MASCOTA
+			var $petType 		= $("#pet_type").val();
+
+			// ESTADO
+			var $stateOfMexico 	= $("#state_of_mexico").val(); 
+
+			if($sectorActivity != 0 && $sectorActivity != ""
+				&& $petType != 0 && $petType != ""
+					&& $stateOfMexico != 0 && $stateOfMexico != "") {
+
+				$(".container-company-search").html("");
+
+				// DATOS DEL FORMULARIO
+				var $formDataSearch = new $('#search_form').serialize();
+				
+				// AJAX
+				$.ajax({
+					url 		: $basePath + "/supplier/search",
+					type 		: 'POST',
+					dataType 	: 'json',
+					data 		: $formDataSearch,
+				})
+				.done(function(response) {
+					console.log(JSON.stringify(response));
+					
+                	if(response.status == "ok") {
+
+                		//console.log("suppliers length: " + Object.keys(response.suppliers).length);
+                		// TAMANO DEL OBJETO
+                		var supppliersLength  = Object.keys(response.suppliers).length;
+
+                		// Validamos si existen datos a mostrar
+                		if(supppliersLength > 0) {
+
+	                		var $contentHtml = "";
+
+	                		// RECORREMOS LOS DATOS OBTENIDOS
+	                		$.each(response.suppliers, function(index, supplier) {
+
+	                			var $carouselHtml = "";
+
+	                			// Direccion
+	                			$addressCompany = supplier.name_district + ", " + supplier.name_state;
+
+	                			// Recorremo imagenes del proveedor
+	                			$.each(supplier.imgs_company, function(idx, notice) {
+
+	               					// Imagen por default
+									var $imageNotice = '<img src="' + $basePath + '/img/icon_pet_real.png' + '" style="height:250px;" />';
+
+	                				// Validar si existen imagenes
+	                				if(notice.img_name != '' && notice.img_name != null) {
+	                					// Asignamos una imagen
+	                					$imageNotice = '<img src="' + $basePath + '/images/supplier/' + notice.img_name + '" style="height:250px;" />';
+	                				}
+
+	                				// Imagenes del carusel
+	                				$carouselHtml 	+= 	'<a class="carousel-item" href="#">'
+	                								+ 		$imageNotice
+	    											+  	'</a>';
+
+	  							});
+
+	                			$contentHtml 	+= '<div class="card" style="border-bottom-width: 3px; border-bottom-color: #D41C76; border-bottom-style: solid; height: 300px;">'
+	                							+	'<div class="card-content" style="height: 100%;">'
+	                							+ 		'<div class="row" style="margin-bottom: 0; height: 100%;">'
+	                							+			'<div class="col s12 m4 l4" style="height: 100%;">'
+	                							+				'<div class="carousel carousel-slider">'
+	                							+				$carouselHtml
+	                							+				'</div>'
+	                							+			'</div>'
+	                							+			'<div class="col s12 m8 l8" style="height: 100%;">'
+	                							+				'<h5 class="center blue-grey-text text-darken-3">' + supplier.name_company + '</h5>'
+	                							/*+ 				'<hr class="flair">'*/
+	                							+ 				'<p style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">&#xE0C8;</i>' + $addressCompany + '<p/>'
+	                							+				'<p style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">&#xE873;</i>' + supplier.company_description + '</p>'
+	                							+				'<a href="' + $basePath + '/supplier/profile/' + supplier.id_company + '" class="waves-effect waves-light btn pink" style="position: absolute; bottom: 24px; right: 24px;">Ver mas</a>'
+	                							+			'</div>'
+	                							+		'</div>'
+	                							+	'</div>'
+	                							+ '</div>';
+	                			
+	                		});
+
+	                		$(".container-company-search").html($contentHtml);
+
+	                		// Iniciar carousel
+	                		$('.carousel.carousel-slider').carousel({
+								fullWidth : true,
+								indicators: true
+							});
+	                		
+	                		// Cambiar imagen del carousel
+	                		setInterval(function() {
+								$('.carousel.carousel-slider').carousel('next');
+							}, 3000);
+
+						} else {
+
+							swal(
+					  			'Opsss..',
+					  			'No existen resultados para esta busqueda',
+					  			'info'
+							).catch(swal.noop);
+
+						}
+
+                	}
+
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+			
+			} else {
+				swal(
+		  			'Atención',
+		  			'Los campos con * son obligatorios',
+		  			'warning'
+				).catch(swal.noop);
+			}
+
+			event.preventDefault();
+			
+		});
+
+	});
+
+	// OBTENEMOS TODAS LAS DELEGACIONES Y MUNICIPIOS
+	function getAllDistrict($id_state)
+	{
+		// Combo delegaciones y municipios
+		var $select_district 		= $('#district');
+		
+		// Opciones para agregar en el combo
+		var $optionsComboDistrict 	= '<option value="0">seleccione</option>';
+
+		// Llamada ajax
+		$.ajax({
+			url 		: $basePath + "/application/addresses/getalldistrict",
+			type 		: 'POST',
+			dataType 	: 'json',
+			data 		: {id_state : $id_state},
+		})
+		.done(function(response) {
+			//console.log("success");
+
+			// Validamos la respuesta
+			if (response.response == "ok") {
+				
+				// Recorremos datos
+				$.each(response.data, function(index, val) {
+
+					// Generamos opciones del combo
+					$optionsComboDistrict 	+= '<option value="' + val.id + '"  data-state="' + val.state_id + '">'
+								 	 		+ val.name 
+								 	 		+ '</option>' ;
+
+				});
+				
+				// Agregamos las opciones al combo
+				$select_district.html($optionsComboDistrict);
+
+				// Limpiar combo de colonia
+				$("#neighborhood").html('<option value="0">seleccione</option>');
+
+				// Inicializamos el combo
+				$("select").material_select();
+
+				// Limpiar campo de codigo postal
+				//$("#postal_code").val("");
+
+				// Quitamos foco al campo codigo postal
+				//$("#postal_code").blur();
+
+				// Inicializamos el combo
+				//$select_district.material_select();
+			}
+
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	}
+
+</script>

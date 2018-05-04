@@ -1,0 +1,170 @@
+<div class="row">
+	<div class="col s12 m12 l12">
+		<nav>
+			<div class="nav-wrapper">
+				<div class="col s12">
+		        	<a href="#" class="breadcrumb">Proveedores</a>
+		        	<a href="#" class="breadcrumb">Perfil</a>
+		        	<a href="#" class="breadcrumb"><?php echo $supplier['name_company']; ?></a>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12 m12 l12 center">
+		<h2 class="blue-grey-text text-darken-3"><?php echo $supplier['name_company']; ?></h2>
+		<p class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">&#xE0C8;</i><?php echo $supplier['street'] . $supplier['number'] . ', ' . $supplier['name_neighborhood'] . ', ' . $supplier['name_district'] . ', ' . $supplier['name_state']  ?></p>
+	</div>
+</div> 
+
+<div class="row">
+	<div class="col s12 m12 l12">
+  		
+  		<div class="carousel carousel-slider">
+
+  			<?php foreach ($supplier['imgs_company'] as $key => $notice) : ?>
+
+		    <a class="carousel-item" href="#">
+		    	<?php if($notice['img_name'] != '' && $notice['img_name'] != null) : ?>
+
+		    	<img src="<?php echo $this->basePath('/images/supplier/'.$notice['img_name']); ?>" alt="anuncio" style="height: 400px;" />
+
+		    	<?php else : ?>
+
+		    	<img src="<?php echo $this->basePath('/img/icon_pet_real.png'); ?>" alt="anuncio" style="height: 400px;" />
+
+		    	<?php endif; ?>
+		   	</a>
+
+			<?php endforeach; ?>
+		    
+  		</div>
+        
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12 m12 l12">
+
+		<div class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h4 class="center blue-grey-text text-darken-3">Detalles</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">face</i> Contacto: <?php echo $supplier['name'] . ' ' . $supplier['surname']; ?></h5>
+						<h5 class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">phone</i> Tel&eacute;fono: <?php echo $supplier['phone']; ?></h5>
+						<h5 class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">web</i> Sitio web: <?php echo $supplier['website']; ?></h5>
+						<h5 style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">description</i> Descripci&oacute;n: <?php echo $supplier['company_description']; ?></h5>
+					</div>
+				</div>
+				
+			</div>
+
+		</div>
+		
+	</div>
+</div>
+
+<div class="row center">
+	<div class="col s12 m12 l12">
+		
+		<div class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h4 class="center">Tipo de Mascota</h4>
+					</div>
+				</div>
+
+				<div class="row container-checkbox-pet-type">
+					<?php
+
+					foreach($this->pet_type as $key => $type) : 
+						if($type['status'] == 1) :
+					?>
+						
+						<div class="col s6 m4 l3" style="margin-top: 10px; margin-bottom: 10px;">
+							<p class="check_pet_type">
+	      						<input type="checkbox" id="<?php echo 'type_' . $type['id']; ?>" name="type_pet[]" value="<?php echo $type['id']; ?>" data-id-type-pet="<?php echo $type['id']; ?>" data-id-company="<?php echo $type['id_company']; ?>" data-status="<?php echo $type['status']; ?>" checked disabled />
+	      						<label class="blue-grey-text text-darken-2" for="<?php echo 'type_' . $type['id']; ?>"><?php echo $type['name_type']; ?></label>
+	    					</p>
+						</div>
+			
+					<?php
+						endif;
+					endforeach;
+					?>
+				</div>
+				
+			</div>
+			
+		</div>
+
+	</div>
+</div>
+
+<div class="row center">
+	<div class="col s12 m12 l12">
+		
+		<div class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h4 class="center">Sector de actividad</h4>
+					</div>
+				</div>
+
+				<div class="row container-checkbox-sector_activity">
+					<?php
+					foreach($this->sector_activity as $key => $sector) :
+						if($sector['status'] == 1) :
+					?>
+					
+						<div class="col s6 m4 l3" style="margin-top: 10px; margin-bottom: 10px;">
+							<p class="check_sector_activity">
+	      						<input type="checkbox" id="<?php echo 'sector_' . $sector['id']; ?>" name="activity_sector[]" value="<?php echo $sector['id']; ?>" data-id-sector-activity="<?php echo $sector['id']; ?>" data-id-company="<?php echo $sector['id_company']; ?>" data-status="<?php echo $sector['status']; ?>" checked disabled />
+	      						<label class="blue-grey-text text-darken-2" for="<?php echo 'sector_' . $sector['id']; ?>"><?php echo $sector['name_sector']; ?></label>
+	    					</p>
+						</div>
+			
+					<?php
+						endif;
+					endforeach;
+					?>
+				</div>
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+
+	$('.carousel.carousel-slider').carousel({
+		fullWidth : true,
+		indicators: true
+	});
+
+	// Cambiar imagen del carousel
+	setInterval(function(){
+		$('.carousel.carousel-slider').carousel('next');
+	}, 3000);
+
+	$(document).ready(function() {
+		
+	});
+</script>
+

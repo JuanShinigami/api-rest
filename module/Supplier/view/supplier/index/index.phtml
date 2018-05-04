@@ -1,0 +1,672 @@
+<link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+<link rel="stylesheet" href="<?php echo $this->basePath('/pegalinaslive/css/paw_dog.css'); ?>">
+
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<style>
+	.input-field .prefix ~ .select-wrapper {
+	  margin-left:3rem; 
+	  width:92%; 
+	  width:calc(100% - 3rem);
+	}
+	.background-image-pet {
+		background-color: transparent;
+		background-image: url(https://images.pexels.com/photos/46024/pexels-photo-46024.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb) ;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-attachment: initial;
+		background-size: cover;
+	}
+	.container-background-image-pet {
+		background-color: rgba(0,0,0,0.3);
+	}
+
+	.targetOuter {	
+		position :relative;
+	    text-align : center;
+	    background-color : #ffebee ;
+	    margin : 20px auto;
+	    width : 200px;
+	    height : 200px;
+		border-radius : 4px;
+	}
+	.icon-choose-image {
+	    position : absolute;
+	    opacity : 0.1;
+	    top : 50%;
+	    left : 50%;
+	    margin-top : -24px;
+	    margin-left : -24px;
+	    width : 48px;
+	    height : 48px;
+	}
+	.inputFile {
+	    padding : 5px 0px;
+		margin-top :8px;	
+	    background-color : #FFFFFF;
+	    width : 48px;	
+	    overflow : hidden;
+		opacity : 0;	
+		cursor :pointer;
+	}
+</style>
+
+<div class="row">
+	<div class="col s12 m12 l12">
+		<nav>
+			<div class="nav-wrapper">
+				<div class="col s12">
+		        	<a href="#" class="breadcrumb">Proveedores</a>
+		        	<a href="#" class="breadcrumb">Perfil</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>
+
+<div class="row" style="margin-top: 30px;">
+	<div class="col s12 m12 l12">
+
+		<!--<div class="card background-image-pet">
+
+			<div class="dog">
+				<div class="pad"></div>
+			    <div class="toe-1"></div>
+			    <div class="toe-2"></div>
+			    <div class="toe-3"></div>
+			    <div class="toe-4"></div>
+			</div>
+
+			<div class="card-content container-background-image-pet">
+
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<img class="responsive-img" src="<?php echo $this->basePath('/img/pets/logorecuperamascotaoutline.png') ?>" alt="logo-pegalinas" style="height: 150px;" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<h6 class="white-text text-darken-4">Recupera pet, el camino m&aacute;s corto entre tu mascota perdida y t&uacute;</h6>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>-->
+
+		<?php
+		$form = $this->form;
+		$form->prepare();
+		echo $this->form()->openTag($form);
+		echo $this->formElement($form->get('id'));
+		?>
+
+		<div id="container-data-sign" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			<div class="card-content">
+				
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center">Datos de acceso</h5>
+					</div>
+				</div>
+
+				<input type="text" id="type_user" name="type_user" placeholder="type user" style="display: none;" value="3" />
+
+				<div class="row center">
+					<div class="col s12 m6 l6">
+						
+						<a class="waves-effect waves-light btn-large modal-trigger" href="#modal_validate_pass"><i class="material-icons left">lock</i>Cambiar Contrase&ntilde;a</a>
+
+					</div>
+					<div class="col s12 m6 l6">
+						
+						<a class="waves-effect waves-light btn-large modal-trigger" href="#modal_validate_pass_email"><i class="material-icons left">email</i>Cambiar Correo Electronico</a>
+
+					</div>
+				</div>
+
+				<!--<div class="row">
+					
+					<div class="input-field col s12 m6 l6">
+						<i class="material-icons prefix">email</i>
+		          		<?php //echo $this->formElement($form->get('email_user')); ?>
+		          		<label for="email_user">Correo electr&oacute;nico</label>
+		        	</div>
+
+		        	<div class="input-field col s12 m6 l6">
+						<i class="material-icons prefix">email</i>
+		          		<?php //echo $this->formElement($form->get('repeat_email_user')); ?>
+		          		<label for="repeat_email_user">Repetir Correo electr&oacute;nico</label>
+		        	</div>
+
+				</div>-->
+
+				<!--<div class="row">
+
+					<div class="input-field col s12 m6 l6">
+						<i class="material-icons prefix">lock</i>
+		          		<?php //echo $this->formElement($form->get('password_user')); ?>
+		          		<label for="password_user">Contrase&ntilde;a</label>
+		        	</div>
+
+					<div class="input-field col s12 m6 l6">
+						<i class="material-icons prefix">lock</i>
+						<?php //echo $this->formElement($form->get('repeat_password_user')); ?>
+		          		<label for="repeat_password_user">Repetir Contrase&ntilde;a</label>
+		        	</div>
+
+				</div>-->
+
+			</div>
+		</div>
+
+		<div id="container-data-contact-personal" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center title-data-contact-personal">Datos de contacto</h5>
+					</div>
+				</div>
+				
+				<div class="row">
+
+					<div class="input-field col s12 m6 l6">
+						<i class="material-icons prefix">perm_identity</i>
+		          		<?php echo $this->formElement($form->get('name_user')); ?>
+		          		<label id="label_name_user" for="name_user">Nombre</label>
+		        	</div>
+
+		        	<div id="container_surname">
+						<div class="input-field col s12 m6 l6">
+							<i class="material-icons prefix">perm_identity</i>
+			       			<?php echo $this->formElement($form->get('surname')); ?>
+			        		<label for="surname">Apellido paterno</label>
+			        	</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="input-field col s12 m6 l6">
+						<i class="material-icons prefix">phone</i>
+			          	<?php echo $this->formElement($form->get('phone')); ?>
+			          	<label for="phone">Tel&eacute;fono </label>
+			        </div>
+
+					<div id="container_website">
+						<div class="input-field col s12 m6 l6">
+							<i class="material-icons prefix">web</i>
+			        		<?php echo $this->formElement($form->get('website')); ?>
+			        		<label for="website">Sitio web</label>
+			        	</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div id="container-data-company" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			<div class="card-content">
+				
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center">Datos de empresa</h5>
+					</div>
+				</div>
+
+				<?php echo $this->formElement($form->get('id_company')); ?>
+
+				<div class="row">
+					
+					<!--<div id="container_name_company">-->
+						<div class="input-field col s12 m12 l8">
+							<i class="material-icons prefix">store</i>
+			          		<?php echo $this->formElement($form->get('name_company')); ?>
+			          		<label for="name_company">Nombre de la empresa</label>
+			        	</div>
+					<!--</div>-->
+
+				</div>
+
+				<div class="row">
+					
+					<div class="input-field col s12 m4 l4">
+						<i class="material-icons prefix">location_on</i>
+    					<?php echo $this->formElement($form->get('state_of_mexico')); ?>
+    					<?php //echo $form->getElement("state_of_mexico")->setAttrib("disable", array(1)); ?>
+    					<label>Estado</label>
+  					</div>
+
+  					<div class="input-field col s12 m4 l4">
+  						<i class="material-icons prefix">location_on</i>
+    					<?php echo $this->formElement($form->get('district')); ?>
+    					<label>Delegaci&oacute;n / Municipio</label>
+  					</div>
+
+  					<div class="input-field col s12 m4 l4">
+  						<i class="material-icons prefix">location_on</i>
+    					<?php echo $this->formElement($form->get('neighborhood')); ?>
+    					<label>Colonia</label>
+  					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="input-field col s12 m6 l8">
+						<i class="material-icons prefix">streetview</i>
+						<?php echo $this->formElement($form->get('street')); ?>
+						<label for="street">Calle</label>
+					</div>
+
+					<div class="input-field col s6 m3 l2">
+			          	<?php echo $this->formElement($form->get('number_exterior')); ?>
+			          	<label for="number_exterior">Numero exterior</label>
+			        </div>
+					
+					<div class="input-field col s6 m3 l2">
+			          	<?php echo $this->formElement($form->get('postal_code')); ?>
+			          	<label for="postal_code">C&oacute;digo Postal</label>
+			        </div>
+
+				</div>
+
+				<div class="row">
+        			<!--<div class="input-field col s12">
+        				<i class="material-icons prefix">assignment</i>
+          				<textarea id="company_description" name="company_description" class="materialize-textarea"></textarea>
+          				<label for="company_description">Descripción de la empresa</label>
+        			</div>-->
+					<div class="input-field col s12">
+						<i class="material-icons prefix">assignment</i>
+			          	<?php echo $this->formElement($form->get('company_description')); ?>
+			          	<label for="company_description">Descripci&oacute;n de la empresa</label>
+			        </div>
+      			</div>
+
+			</div>
+		</div>
+
+		<div id="container-data-type-pet" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center">Tipo de Mascota</h5>
+					</div>
+				</div>
+				
+				<input type="hidden" id="pet_type_checkbox" name="pet_type_checkbox" />
+
+				<div class="row container-checkbox-pet-type">
+					<?php
+
+					foreach($this->pet_type as $key => $type) : 
+
+						if($type['status'] == 1) {
+							$selectedCheck = "checked";
+						} else if($type['status'] == 0) {
+							$selectedCheck = "";
+						}
+
+					?>
+						
+						<div class="col s6 m4 l3" style="margin-top: 10px; margin-bottom: 10px;">
+							<p class="check_pet_type">
+	      						<input type="checkbox" id="<?php echo 'type_' . $type['id']; ?>" name="type_pet[]" value="<?php echo $type['id']; ?>" data-id-type-pet="<?php echo $type['id']; ?>" data-id-company="<?php echo $type['id_company']; ?>" data-status="<?php echo $type['status']; ?>" <?php echo $selectedCheck; ?> />
+	      						<label for="<?php echo 'type_' . $type['id']; ?>"><?php echo $type['name_type']; ?></label>
+	    					</p>
+						</div>
+			
+					<?php endforeach; ?>
+				</div>
+				
+			</div>
+			
+		</div>
+
+		<div id="container-data-activity-sector" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center">Sector de actividad</h5>
+					</div>
+				</div>
+				
+
+				<input type="hidden" id="sector_activity_checkbox" name="sector_activity_checkbox" />
+
+				<div class="row container-checkbox-sector_activity">
+					<?php
+					foreach($this->sector_activity as $key => $sector) : 
+
+						if($sector['status'] == 1) {
+							$selectedCheck = "checked";
+						} else if($sector['status'] == 0) {
+							$selectedCheck = "";
+						}
+
+					?>
+					
+						<div class="col s6 m4 l3" style="margin-top: 10px; margin-bottom: 10px;">
+							<p class="check_sector_activity">
+	      						<input type="checkbox" id="<?php echo 'sector_' . $sector['id']; ?>" name="activity_sector[]" value="<?php echo $sector['id']; ?>" data-id-sector-activity="<?php echo $sector['id']; ?>" data-id-company="<?php echo $sector['id_company']; ?>" data-status="<?php echo $sector['status']; ?>" <?php echo $selectedCheck; ?> />
+	      						<label for="<?php echo 'sector_' . $sector['id']; ?>"><?php echo $sector['name_sector']; ?></label>
+	    					</p>
+						</div>
+			
+					<?php endforeach; ?>
+				</div>
+				
+			</div>
+		</div>
+
+		<div id="container-gallery-image" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center">Anuncios</h5>
+					</div>
+				</div>
+
+				<div class="row">
+
+				<!-- Anuncios de proveedor -->
+				<?php //var_dump($this->notice_company); echo "<br/>" ?>
+				<!--<h6><?php //echo ($notice['img_name'] != "") ? $notice['img_name'] : "no hay imGEN"; ?></h6>-->
+				<?php 
+				foreach($this->notice_company as $key => $notice) : 
+				
+				$numberImg = $key + 1;
+				?>
+
+					<div class="col s12 m4 l4">
+
+						<div class="targetOuter">
+
+							<div class="targetLayer" style="opacity: 0.7;">
+
+								<?php if($notice['img_name'] != "") : ?>
+
+								<img src="<?php echo $this->basePath("images/supplier/" . $notice['img_name']); ?>" style="width: 200px; height: 200px;" />								
+
+								<?php endif; ?>
+								
+							</div>
+
+							<img src="https://phppot.com/demo/jquery-ajax-image-upload/photo.png"  class="icon-choose-image" style="opacity: 0.5;" />
+
+							<div class="icon-choose-image" >
+								<input name="<?php echo "img_" . $numberImg; ?>" id="<?php echo "img_" . $numberImg; ?>" type="file" class="inputFile" onChange="showPreview(this);" />
+							</div>
+
+						</div>
+
+						<input type="hidden" name="<?php echo "id_img_" . $numberImg; ?>" placeholder="Id Img" value="<?php echo $notice['id_img']; ?>" />
+
+						<div class="input-field">
+			          		<input type="text" name="<?php echo "img_desc_" . $numberImg; ?>" id="<?php echo "img_desc_" . $numberImg; ?>" value="<?php echo $notice['img_desc']; ?>" />
+			          		<label for="<?php echo "img_desc_" . $numberImg; ?>">Descripci&oacute;n</label>
+			        	</div>
+						
+					</div>
+
+				<?php endforeach; ?>
+
+				</div>
+
+				<!--<div class="row">
+					
+					<div class="col s12 m4 l4">
+
+						<div class="targetOuter">
+							<div class="targetLayer"></div>
+							<img src="https://phppot.com/demo/jquery-ajax-image-upload/photo.png"  class="icon-choose-image" />
+							<div class="icon-choose-image" >
+							<input name="image_one" id="image_one" type="file" class="inputFile" onChange="showPreview(this);" />
+							</div>
+						</div>
+
+						<div class="input-field">
+			          		<input type="text" id="description_image_one" name="description_image_one" />
+			          		<label for="description_image_one">Descripci&oacute;n</label>
+			        	</div>
+						
+					</div>
+
+					<div class="col s12 m4 l4">
+
+						<div class="targetOuter">
+							<div class="targetLayer"></div>
+							<img src="https://phppot.com/demo/jquery-ajax-image-upload/photo.png"  class="icon-choose-image" />
+							<div class="icon-choose-image" >
+							<input name="image_two" id="image_two" type="file" class="inputFile" onChange="showPreview(this);" />
+							</div>
+						</div>
+
+						<div class="input-field">
+			          		<input type="text" id="description_image_two" name="description_image_two" />
+			          		<label for="description_image_two">Descripci&oacute;n</label>
+			        	</div>
+						
+					</div>
+
+					<div class="col s12 m4 l4">
+
+						<div class="targetOuter">
+							<div class="targetLayer"></div>
+							<img src="https://phppot.com/demo/jquery-ajax-image-upload/photo.png"  class="icon-choose-image" />
+							<div class="icon-choose-image" >
+							<input name="image_three" id="image_three" type="file" class="inputFile" onChange="showPreview(this);" />
+							</div>
+						</div>
+
+						<div class="input-field">
+			          		<input type="text" id="description_image_three" name="description_image_three" />
+			          		<label for="description_image_three">Descripci&oacute;n</label>
+			        	</div>
+
+					</div>
+
+				</div>-->
+
+			</div>
+			
+		</div>
+
+		<div id="container-all-actions" class="card" style="display: block;">
+			<div class="card-content">
+
+				<div class="row" style="margin-bottom: 0;">
+					<div class="col s12 m12 l12 center">
+						<button type="submit" id="btn_register" class="waves-effect waves-light btn-large pink col s12 m6 l6 offset-m3 offset-l3">Guardar</button>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<?php
+		echo $this->form()->closeTag();
+		?>
+
+	</div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal_validate_pass" class="modal">
+	<div class="modal-content">
+						      
+		<img src="<?php echo $this->basePath('img/pets/recupera pet logo 500px.png'); ?>" alt="pegalinas" style="width: 150px; height: 50px; position: absolute; left: 20px; top: 20px;" />
+		<h4 class="center">Cambiar contrase&ntilde;a</h4>
+		<p class="center">En esta ventana podrás cambiar la contraseña con la que inicias sesión en recupera pet</p>
+
+		<div class="row" style="margin-top: 20px;">
+			<div class="col s12 m12 l12">
+						      		
+				<form id="form_validate_pass" method="post">
+        			<div id="div_pass_actual" class="row">
+
+			        	<div class="col s12 m6 l6 offset-m3 offset-l3 left-align">
+			          		<div class="input-field col s12 m12 l12">
+			                	<input id="password" type="password" name="password" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+			              		<label for="password">Contrase&ntilde;a actual</label>
+			            	 </div>
+			    		</div>
+
+                    	<div class="col s12 m6 l6 offset-m3 offset-l3" style="margin-top: 20px;">
+                                
+				        	<div class="col s12 m6 l6">
+				            	<button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+				            	Aceptar
+				                </button>
+				        	</div>
+
+				        	<div class="col s12 m6 l6">
+				        		<a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+				       		</div>
+                                
+                    	</div>
+                                
+             		</div>
+				</form>
+
+            	<form id="form_update_pass" method="post">
+            		<div id="div_update_pass" style="display:none;" class="row">
+
+                    	<div class="col s12 m6 l6 offset-m3 offset-l3 left-align">
+			                                    
+			            	<div class="input-field col s12 m12 l12">
+			                	<input id="change_pass" type="password" name="change_pass" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+			                 	<label for="password1">Nueva Contrase&ntilde;a</label>
+			            	</div>
+
+			        		<div class="input-field col s12 m12 l12">
+			            		<input id="change_pass2" type="password" name="change_pass2" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+			                	<label for="password2">Repite Contrase&ntilde;a</label>
+			           		</div>
+
+                 		</div>
+
+                      	<div class="col s12 m6 l6 offset-m3 offset-l3" style="margin-top: 20px;">
+                                
+				        	<div class="col s12 m6 l6">
+				            	<button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+				           		Aceptar
+				              	</button>
+				        	</div>
+
+				         	<div class="col s12 m6 l6">
+				            	<a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+				          	</div>
+                                
+                    	</div>
+                                
+                	</div>
+            	</form>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div id="modal_validate_pass_email" class="modal">
+	<div class="modal-content">
+						      
+		<img src="<?php echo $this->basePath('img/pets/recupera pet logo 500px.png'); ?>" alt="pegalinas" style="width: 150px; height: 50px; position: absolute; left: 20px; top: 20px;" />
+		<h4 class="center">Cambiar correo electr&oacute;nico</h4>
+		<p class="center">En esta ventana podrás cambiar tu cuenta de correo electrónico con la que inicias sesión en recupera pet</p>
+
+		<div class="row" style="margin-top: 20px;">
+			<div class="col s12 m12 l12">
+						      		
+				<form id="form_validate_email">
+                            			<div id="div_pass_actual_2" class="row">
+
+			                                <div class="col s12 m6 l6 offset-m3 offset-l3 left-align">
+			                                    <div class="input-field col s12 m12 l12">
+			                                        <input id="password" type="password" name="password" class="validate" data-validetta="required" data-vd-message-required="Ingresa la contrase&ntilde;a">
+			                                        <label for="password">Contrase&ntilde;a actual</label>
+			                                    </div>
+			                                </div>
+
+                                 			<div class="col s12 m6 l6 offset-m3 offset-l3" style="margin-top: 20px;">
+                                
+				                                <div class="col s12 m6 l6">
+				                                    <button type="submit" id="btn_validate_pass" class="waves-effect waves-green btn-large teal col s12">
+				                                    Aceptar
+				                                    </button>
+				                                </div>
+
+				                                <div class="col s12 m6 l6">
+				                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+				                                </div>
+                                
+                            				</div>
+                                
+                            			</div>
+                </form>
+
+				<form id="form_update_email">
+                             			<div id="div_update_email" style="display:none;" class="row">
+
+                                			<div class="col s12 m6 l6 offset-m3 offset-l3 left-align">
+			                                    
+			                                    <div class="input-field col s12 m12 l12">
+                                        			<input id="change_email" type="email" name="change_email" class="validate" data-validetta="required" data-vd-message-required="Ingresa la nueva cuenta de correo electr&oacute;nico">
+                                        			<label for="email1">Nuevo Correo Electr&oacute;nico</label>
+                                    			</div>
+
+			                                    <div class="input-field col s12 m12 l12">
+                                        			<input id="change_email2" type="email" name="change_email2" class="validate" data-validetta="required" data-vd-message-required="Repite la nueva cuenta de correo electr&oacute;nico">
+                                        			<label for="email2">Repite Nuevo Correo Electr&oacute;nico</label>
+                                    			</div>
+
+                                			</div>
+
+                                 			<div class="col s12 m6 l6 offset-m3 offset-l3" style="margin-top: 20px;">
+                                
+				                                <div class="col s12 m6 l6">
+				                            		<button type="submit" id="btn_validate_email" class="waves-effect waves-green btn-large teal col s12">
+                                    				Aceptar
+                                    				</button>
+				                                </div>
+
+				                                <div class="col s12 m6 l6">
+				                                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn-large red col s12">Cerrar</a>
+				                                </div>
+                                
+                            				</div>
+                                
+                            			</div>
+                </form>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script src="<?php echo $this->basePath('/pegalinaslive/js/register/company.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/js/addresses/addresses.js'); ?>"></script>
+
+<script>
+// BasePath of project
+var $basePath 		= '<?php echo $this->basePath(); ?>';
+var $district    	= "<?php echo $this->district; ?>";
+var $neighborhood 	= "<?php echo $this->neighborhood; ?>";
+
+// Variable para saber en que vista nos encontramos y validar en el archivo js
+var currentView 	= "profileSupplier"
+</script>
