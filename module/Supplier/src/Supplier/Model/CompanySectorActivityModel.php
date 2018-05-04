@@ -44,7 +44,7 @@ class CompanySectorActivityModel extends TableGateway
 			->from(array('e_s_a' => $this->table))
 
 			// JOIN A LA TABLA DE SECTOR ACTIVITY
-			->join(array('p_a_s' => 'pet_activity_sector'), 'c_a_s.id_activity_sector = p_a_s.id', array('name_sector' => 'sector', 'sector_order'), 'Inner')
+			->join(array('s_a_s' => 'sector_actividad'), 'c_a_s.id_activity_sector = p_a_s.id', array('name_sector' => 'sector', 'sector_order'), 'Inner')
 
 			->order('p_a_s.sector_order ASC')
 			->where(array('c_a_s.id_company' => $idCompny));
