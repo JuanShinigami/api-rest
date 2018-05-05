@@ -14,7 +14,7 @@ class CompanyNoticeModel extends TableGateway
 	public function __construct()
    	{
    		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'images_company';
+    	$this->table      = 'imagenes_empresa';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -27,15 +27,17 @@ class CompanyNoticeModel extends TableGateway
 	{
 		$sql    = new Sql($this->dbAdapter);
 		$select = $sql->select();
-		$select
-			->columns(array('id', 'id_company', 'id_type_pet', 'status'))
+		$select 
+		//************************************ id_tipe_pet
+		
+			->columns(array('id', 'id_empresa', 'id_type_pet', 'estatus'))
 			->from(array('c_n' => $this->table))
 
 			// JOIN A LA TABLA DE TYPE PET
 			//->join(array('p_t' => 'pet_type'), 'c_n.id_type_pet = p_t.id', array('name_type' => 'type', 'orde_type' => 'order_pet'), 'Inner')
 
 			//->order('p_t.order_pet ASC')
-			->where(array('c_n.id_company' => $idCompny));
+			->where(array('c_n.id_empresa' => $idCompny));
 	
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
