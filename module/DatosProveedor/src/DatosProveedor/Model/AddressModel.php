@@ -1,5 +1,5 @@
 <?php
-namespace Application\Model;
+namespace DatosProveedor\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\Feature;
