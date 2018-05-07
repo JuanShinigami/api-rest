@@ -55,7 +55,7 @@ class SupplierModel extends TableGateway
       		//->join(array('c_a_s' => 'company_activity_sector'), 'c.id_company = c_a_s.id_company', array('id_activity_sector', 'a_s_status' => 'status'), 'Inner')
 
       		// JOIN TABLA DE ANUNCIOS DE PROVEEDOR
-			->join(array('imagenes_empresa' => 'imagenes_empresa'), 'c.id_empresa = imagenes_empresa.id_empresa', array('id' => 'id', 'img_nombre' => 'nombre', 'img_desc' => 'descripcion'), 'Inner')
+			->join(array('imagenes_empresa' => 'imagenes_empresa'), 'c.id = imagenes_empresa.id_empresa', array('id' => 'id', 'img_nombre' => 'nombre', 'img_desc' => 'descripcion'), 'Inner')
 
       		// JOIN TABLE USERS
       		->join(array('u' => 'usuarioProveedor'), 'c.id = u.id', array('correo', 'nombre' => 'nombre'), 'Inner')
