@@ -119,8 +119,8 @@ class UsersService
 
 		// Arreglo de datos
 		$dataUser = array(
-			'email'    => $data['email_user'],
-			'password' => $securityPass,			
+			'correo'    => $data['correo_usuario'],
+			'contrasena' => $securityPass,			
 			'perfil'   => $data['type_user']
 		);
 
@@ -141,13 +141,13 @@ class UsersService
 
 			// Arreglo de datos
 			$dataUserDetails = array(
-				'id_user'       => $addUser,
-				'name'          => $data['name_user'],
-				'surname'       => $data['surname'],
+				'id'       => $addUser,
+				'nombre'          => $data['nombre_usuario'],
+				//**********'surname'       => $data['surname'],
 				//'campus'        => $data['campus'],
 				//'key_inventory' => $securityKey,
 				//'pin'           => $securityPin,
-				'phone'         => $data['phone']
+				//*****'phone'         => $data['phone']
 			);
 			//echo "<pre>"; print_r($dataUserDetails); exit;
 			// Agregamos detalle de un usuario

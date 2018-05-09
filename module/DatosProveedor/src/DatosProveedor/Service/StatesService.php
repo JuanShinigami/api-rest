@@ -1,6 +1,7 @@
 <?php
 namespace DatosProveedor\Services;
 
+// use DatosProveedor\Model\StatesModel;
 use DatosProveedor\Model\StatesModel;
 
 class StatesService

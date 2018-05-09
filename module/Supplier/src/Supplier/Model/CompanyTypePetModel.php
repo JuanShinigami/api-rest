@@ -1,4 +1,4 @@
-    <?php
+<?php
 namespace Supplier\Model;
 
 use Zend\Db\TableGateway\TableGateway;
@@ -13,7 +13,7 @@ class CompanyTypePetModel extends TableGateway
 	public function __construct()
    	{
    		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'empresa_tipo_aticulo';
+    	$this->table      = 'company_type_pet';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -25,8 +25,8 @@ class CompanyTypePetModel extends TableGateway
 		$sql    = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->from(array('e_t_a' => $this->table))
-			->order('e_t_a.id ASC');
+			->from(array('c_t_p' => $this->table))
+			->order('c_t_p.id ASC');
 	
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
@@ -40,14 +40,14 @@ class CompanyTypePetModel extends TableGateway
 		$sql    = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'id_empresa', 'id_tipo_aticulo', 'estatus'))
-			->from(array('e_t_a' => $this->table))
+			->columns(array('id', 'id_company', 'id_type_pet', 'status'))
+			->from(array('c_t_p' => $this->table))
 
 			// JOIN A LA TABLA DE TYPE PET
-			->join(array('t_a' => 'tipo_aticulo'), 'e_t_a.id_tipo_aticulo = t_a.id', array('nombre_tipo' => 'tipo', 'orden_articulo' => 'orden_articulo'), 'Inner')
+			->join(array('p_t' => 'pet_type'), 'c_t_p.id_type_pet = p_t.id', array('name_type' => 'type', 'orde_type' => 'order_pet'), 'Inner')
 
-			->order('t_a.orden_articulo ASC')
-			->where(array('e_t_a.id_empresa' => $idCompny));
+			->order('p_t.order_pet ASC')
+			->where(array('c_t_p.id_company' => $idCompny));
 	
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);

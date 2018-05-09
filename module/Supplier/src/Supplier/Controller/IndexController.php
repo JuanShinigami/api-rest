@@ -4,21 +4,14 @@ namespace Supplier\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-// use Application\Controller\BaseController;
-// use Application\Services\TypePetService;
-// use Application\Services\PetActivitySectorService;
-// use Users\Form\UsersForm;
-// use Users\Service\UsersService;
-use Supplier\Service\SupplierService;
-use Supplier\Service\CompanyTypePetService;
-use Supplier\Service\CompanySectorActivityService;
-
 use DatosProveedor\Controller\BaseController;
 use DatosProveedor\Services\TypePetService;
 use DatosProveedor\Services\PetActivitySectorService;
 use DatosProveedor\Form\UsersForm;
 use DatosProveedor\Service\UsersService;
-
+use Supplier\Service\SupplierService;
+use Supplier\Service\CompanyTypePetService;
+use Supplier\Service\CompanySectorActivityService;
 
 class IndexController extends BaseController
 {
@@ -28,13 +21,13 @@ class IndexController extends BaseController
     private $companyTypePetService;
     private $companySectorActivityService;
 
-//     Instnciamos servicio de proveedores
+    // Instnciamos servicio de proveedores
     private function getSupplierService()
     {
         return $this->supplierService = new SupplierService();
     }
 
-// 	Instanciamos servicio de companias
+	// Instanciamos servicio de companias
     public function getUsersServices()
     {
         return $this->usersServices = new UsersService();
@@ -64,16 +57,9 @@ class IndexController extends BaseController
         return $this->companySectorActivityService = new CompanySectorActivityService();
     }
 
-    
-    public function getAllAction(){
-        return $this->supplierService->fetchAll();
-    }
 	public function indexAction()
 	{
         // ID DE USUARIO DE SESION
-        echo "noooo ";
-// 	    var_dump(" hola");exit;
-	    
         $form           = new UsersForm("company_update_form");
 
         $idUser         = (int) $this->getIdUserSesion();
@@ -87,7 +73,7 @@ class IndexController extends BaseController
 
         // OBTENER PROVEEDOR POR ID
         $supplier       = $this->getSupplierService()->getSupplierById($idUser);
-//         echo "<pre>"; print_r($supplier); exit;
+        //echo "<pre>"; print_r($supplier); exit;
 
         // Anuncios de compania
         $getCompanyNotice           = $supplier[0]['imgs_company'];
@@ -173,12 +159,10 @@ class IndexController extends BaseController
 
 	public function registerAction()
 	{
-	    
-	    print_r("hola resgistro ");exit;
 		$layout   = $this->layout();
 		$layout->setTemplate('layout/layoutPets');
 
-// 		$form     = new UsersForm("company_form");
+		$form     = new UsersForm("company_form");
 
         // Obtenemos lista de typos de mascota
         $getAllTypePet = $this->getTypePetService()->fetchAll();
@@ -241,7 +225,7 @@ class IndexController extends BaseController
 
     public function searchAction()
     {
-//         $form       = new UsersForm("search_form");
+        $form       = new UsersForm("search_form");
         $view       = array("form" => $form);
         $request    = $this->getRequest();
 

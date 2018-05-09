@@ -13,7 +13,7 @@ class CompanySectorActivityModel extends TableGateway
 	public function __construct()
    	{
    		$this->dbAdapter  = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-    	$this->table      = 'empresa_sector_actividad';
+    	$this->table      = 'company_activity_sector';
        	$this->featureSet = new Feature\FeatureSet();
      	$this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
     	$this->initialize();
@@ -25,8 +25,8 @@ class CompanySectorActivityModel extends TableGateway
 		$sql    = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->from(array('e_s_a' => $this->table))
-			->order('e_s_a.id ASC');
+			->from(array('c_a_s' => $this->table))
+			->order('c_a_s.id ASC');
 	
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
@@ -40,11 +40,11 @@ class CompanySectorActivityModel extends TableGateway
 		$sql    = new Sql($this->dbAdapter);
 		$select = $sql->select();
 		$select
-			->columns(array('id', 'id_empresa', 'id_sector_actividad', 'estatus'))
-			->from(array('e_s_a' => $this->table))
+			->columns(array('id', 'id_company', 'id_activity_sector', 'status'))
+			->from(array('c_a_s' => $this->table))
 
 			// JOIN A LA TABLA DE SECTOR ACTIVITY
-			->join(array('s_a_s' => 'sector_actividad'), 'c_a_s.id_activity_sector = p_a_s.id', array('name_sector' => 'sector', 'sector_order'), 'Inner')
+			->join(array('p_a_s' => 'pet_activity_sector'), 'c_a_s.id_activity_sector = p_a_s.id', array('name_sector' => 'sector', 'sector_order'), 'Inner')
 
 			->order('p_a_s.sector_order ASC')
 			->where(array('c_a_s.id_company' => $idCompny));

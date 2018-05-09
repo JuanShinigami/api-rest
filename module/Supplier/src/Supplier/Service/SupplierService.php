@@ -2,11 +2,11 @@
 namespace Supplier\Service;
 
 use Supplier\Model\SupplierModel;
-// use Application\Services\AddressService;
+use DatosProveedor\Services\AddressService;
 use Supplier\Service\CompanyTypePetService;
 use Supplier\Service\CompanySectorActivityService;
 use Supplier\Service\CompanyNoticeService;
-// use Users\Service\UsersService;
+use DatosProveedor\Service\UsersService;
 
 class SupplierService
 {
@@ -24,16 +24,16 @@ class SupplierService
 	}
 
 	// Instanciamos servicio de usuarios
-// 	private function getUserService()
-// 	{
-// 		return $this->userService = new UsersService();
-// 	}
+	private function getUserService()
+	{
+		return $this->userService = new UsersService();
+	}
 
-// 	// Instanciamos servicio de direccion
-// 	private function getAddressService()
-// 	{
-// 		return $addressService = new AddressService();
-// 	}
+	// Instanciamos servicio de direccion
+	private function getAddressService()
+	{
+		return $addressService = new AddressService();
+	}
 
 	// Instanciamos servicio de company type pet
 	private function getCompanyTypePetService()
@@ -84,23 +84,23 @@ class SupplierService
 			{
 				// Agregamos datos al arreglo
 				$new_result[$value['id_company']] = array(
-					'id' 		=> $value['id'],
-					'nombre_empresa' 		=> $value['nombre_empresa'],
-					'descripcion_empresa' => $value['descripcion_empresa'],
-					'sitioWeb' 	=> $value['sitioWeb'],
-					'id_direccion' 		=> $value['id_direccion'],
-					'id_estado' 			=> $value['id_estado'],
-					'distrito' 			=> $value['distrito'],
-					'colonia' 		=> $value['colonia'],
-					'calle' 			=> $value['calle'],
-					'numero' 			=> $value['numero'],
-					'codigoPostal' 		=> $value['codigoPostal'],
-					'nombre_estado' 		=> $value['nombre_estado'],
-					'nombre_distrito' 	=> $value['nombre_distrito'],
+					'id_company' 		=> $value['id_company'],
+					'name_company' 		=> $value['name_company'],
+					'company_description' => $value['company_description'],
+					'website_company' 	=> $value['website'],
+					'id_address' 		=> $value['id_address'],
+					'state_id' 			=> $value['state_id'],
+					'district' 			=> $value['district'],
+					'neighborhood' 		=> $value['neighborhood'],
+					'street' 			=> $value['street'],
+					'number' 			=> $value['number'],
+					'postalcode' 		=> $value['postalcode'],
+					'name_state' 		=> $value['name_state'],
+					'name_district' 	=> $value['name_district'],
 					'imgs_company' 		=> array(
 						array(
 							'id_img' 	=> $value['id_img'],
-							'img_nombre' 	=> $value['img_nombre'],
+							'img_name' 	=> $value['img_name'],
 							'img_desc' 	=> $value['img_desc']
 						)
 					)
@@ -109,9 +109,9 @@ class SupplierService
 				//$new_result[$value['id_company']]['id_company'] 		= $value['id_company'];
 				//$new_result[$value['id_company']]['name_company'] 		= $value['name_company'];
 				//$new_result[$value['id_company']]['website_company'] 	= $value['website'];
-				$new_result[$value['id']]['imagenes_empresa'][] 	= array(
+				$new_result[$value['id_company']]['imgs_company'][] 	= array(
 						'id_img' 	=> $value['id_img'],
-						'img_nombre' 	=> $value['img_nombre'],
+						'img_name' 	=> $value['img_name'],
 						'img_desc' 	=> $value['img_desc']
 				);
 			}
@@ -140,18 +140,21 @@ class SupplierService
 			//print_r(empty($new_result[$value['id_company']]));
 			
 			// Validamos si elindice en el arreglo esta definido
-			if(empty($new_result[$value['id']]))
+			if(empty($new_result[$value['id_company']]))
 			{
 				// Agregamos datos al arreglo
-				$new_result[$value['id']] = array(
-				    'id' 		=> $value['id'],
-				    'nombre_empresa' 		=> $value['nombre_empresa'],
-				    'descripcion_empresa' => $value['descripcion_empresa'],
-				    'sitioWeb' 	=> $value['sitioWeb'],
-				    'id_direccion' 		=> $value['id_direccion'],
-				    'id_estado' 			=> $value['id_estado'],
-				    'distrito' 			=> $value['distrito'],
-				    'colonia' 		=> $value['colonia'],
+				$new_result[$value['id_company']] = array(
+					'id_company' 			=> $value['id_company'],
+					'name_company' 			=> $value['name_company'],
+					'company_description' 	=> $value['company_description'],
+					'website' 				=> $value['website'],
+					'id_address' 			=> $value['id_address'],
+					'street' 				=> $value['street'],
+					'postalcode' 			=> $value['postalcode'],
+					'number' 				=> $value['number'],
+					'state_id' 				=> $value['state_id'],
+					'district' 				=> $value['district'],
+					'neighborhood' 			=> $value['neighborhood'],
 					'email' 				=> $value['email'],
 					'profile' 				=> $value['profile'],
 					'id_user' 				=> $value['id_user'],

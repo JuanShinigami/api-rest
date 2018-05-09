@@ -9,6 +9,8 @@ use DatosProveedor\Services\StatesService;
 // use Application\Services\PetActivitySectorService;
 use DatosProveedor\Services\TypePetService;
 use DatosProveedor\Services\PetActivitySectorService;
+use DatosProveedor\Model\TypePetModel;
+use DatosProveedor\Model\PetActivitySectorModel;
 
 class UsersForm extends Form
 {
@@ -340,7 +342,7 @@ class UsersForm extends Form
 	// Obtener los tipos de mascotas
 	private function getAllPetType()
 	{
-		$typePetService 	= new TypePetService();
+		$typePetService 	= new TypePetModel();
 		$typePet 			= $typePetService->fetchAll();
 		$result 			= array();
 
@@ -355,7 +357,7 @@ class UsersForm extends Form
 	// Obtener los sectores de actividad
 	private function getAllActivitySector()
 	{
-		$sectorActivityService 	= new PetActivitySectorService();
+		$sectorActivityService 	= new PetActivitySectorModel();
 		$sectorActivity 		= $sectorActivityService->fetchAll();
 		$result 				= array();
 
