@@ -68,11 +68,11 @@ class IndexController extends BaseController
         $profileUser    = (int) $this->getPerfilUserSesion();
 
         // PERFIL
-        $profile        = $this->getUsersServices()->getAll($idUser);
+        $profile        = $this->getUsersServices()->getAll(14); //($idUser);
         //echo "<pre>"; print_r($profile); exit;
 
         // OBTENER PROVEEDOR POR ID
-        $supplier       = $this->getSupplierService()->getSupplierById($idUser);
+        $supplier       = $this->getSupplierService()->getSupplierById(14); //($idUser);
         //echo "<pre>"; print_r($supplier); exit;
 
         // Anuncios de compania
