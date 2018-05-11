@@ -38,7 +38,7 @@ class SupplierModel extends TableGateway
 	// Obtener proveedor por id de usuraio
 	public function getSupplierById($idUser)
 	{
-	    print_r($idUser);
+// 	    print_r($idUser);
 
 		$sql = new Sql($this->dbAdapter);
     	$select = $sql->select();
