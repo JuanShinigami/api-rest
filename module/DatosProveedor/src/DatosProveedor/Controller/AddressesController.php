@@ -1,14 +1,14 @@
 <?php
 namespace DatosProveedor\Controller;
 
-use Zend\View\Model\ViewModel;
-use DatosProveedor\Controller\BaseController;
 use DatosProveedor\Services\DistrictService;
 use DatosProveedor\Services\NeighborhoodService;
 
 class AddressesController extends BaseController
 {
-	
+	public function indexAction(){
+	    echo "index Addresses";exit;
+	}
 	// Municipios y delegaciones
     public function getalldistrictAction()
     {
