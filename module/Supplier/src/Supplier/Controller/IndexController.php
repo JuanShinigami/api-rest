@@ -1,17 +1,15 @@
 <?php
 namespace Supplier\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-
 use DatosProveedor\Controller\BaseController;
-use DatosProveedor\Services\TypePetService;
-use DatosProveedor\Services\PetActivitySectorService;
 use DatosProveedor\Form\UsersForm;
 use DatosProveedor\Service\UsersService;
-use Supplier\Service\SupplierService;
-use Supplier\Service\CompanyTypePetService;
+use DatosProveedor\Services\PetActivitySectorService;
+use DatosProveedor\Services\TypePetService;
 use Supplier\Service\CompanySectorActivityService;
+use Supplier\Service\CompanyTypePetService;
+use Supplier\Service\SupplierService;
+use Zend\View\Model\ViewModel;
 
 class IndexController extends BaseController
 {

@@ -99,7 +99,7 @@ function getAllDistrict($id_state)
 
 	// Llamada ajax
 	$.ajax({
-		url 		: $basePath + "/application/addresses/getalldistrict",
+		url 		: $basePath + "/datosProveedor/addresses/getalldistrict",
 		type 		: 'POST',
 		dataType 	: 'json',
 		data 		: {id_state : $id_state},
