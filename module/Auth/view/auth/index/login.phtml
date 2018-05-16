@@ -1,0 +1,211 @@
+<link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+<link rel="stylesheet" href="<?php echo $this->basePath('/pegalinaslive/css/paw_dog.css'); ?>">
+
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+
+<style>
+.background-image-pet {
+	background-color: transparent;
+	background-image: url(https://images.pexels.com/photos/46024/pexels-photo-46024.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb) ;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: initial;
+	background-size: cover;
+}
+
+.container-background-image-pet {
+	background-color: rgba(0,0,0,0.3);
+}
+</style>
+    <style>
+  .fb-share-button
+{
+transform: scale(1.5);
+-ms-transform: scale(1.5);
+-webkit-transform: scale(1.5);
+-o-transform: scale(1.5);
+-moz-transform: scale(1.5);
+transform-origin: top left;
+-ms-transform-origin: top left;
+-webkit-transform-origin: top left;
+-moz-transform-origin: top left;
+-webkit-transform-origin: top left;
+}
+</style>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=1822789111305850";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="row" style="margin-top: 130px; margin-bottom: 50px;">
+	<div class="col s12 m8 offset-m2 l4 offset-l4">
+
+		<div class="card background-image-pet">
+
+			<div class="dog">
+				<div class="pad"></div>
+		        <div class="toe-1"></div>
+		        <div class="toe-2"></div>
+		        <div class="toe-3"></div>
+		        <div class="toe-4"></div>
+			</div>
+
+			<div class="card-content container-background-image-pet">
+				
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<img class="responsive-img" src="<?php echo $this->basePath('/img/pets/logorecuperamascotaoutline.png') ?>" alt="logo-pegalinas" style="height: 150px;" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<h6 class="white-text text-darken-4"><?php echo $this->translate('Recupera pet, the shortest path between your lost pet and you.')?><!--Recupera pet, el camino m&aacute;s corto entre tu mascota perdida y t&uacute;--></h6>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid;">
+			<div class="card-content">
+
+				<?php
+	            $form = $this->loginForm;
+	            $form->prepare();
+	            echo $this->form()->openTag($form);
+	            echo $this->formRow($form->get('loginCsrf'));
+	            ?>
+
+					<div class="row">
+						<div class="input-field col s12 m12 l12">
+							<i class="material-icons prefix">account_circle</i>
+		          			<?php echo $this->formElement($form->get('email_user')); ?>
+		          			<label for="email_user"><?php echo $this->translate('E-mail')?><!--Correo Electr&oacute;nico--></label>
+		        		</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 5px;">
+						<div class="input-field col s12 m12 l12">
+							<i class="material-icons prefix">lock</i>
+		          			<?php echo $this->formElement($form->get('password_user')); ?>
+		          			<label for="password_user"><?php echo $this->translate('Password')?><!--Contrase&ntilde;a--></label>
+		        		</div>
+					</div>
+
+					<div class="row">
+						<div class="col s12 right-align">
+							<a href="<?php echo $this->basePath('/auth/forgot-password'); ?>"><?php echo $this->translate('Did you forget your password?')?><!--¿Olvidaste tu contrase&ntilde;a?--></a>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<button class="waves-effect waves-light btn-large pink col s12 m12 l12"><?php echo $this->translate('Enter')?><!--Ingresa--></button>
+						</div>
+					</div>
+
+					<div class="row" style="margin-bottom: 0;">
+						<div class="col s12 m12 l12">
+							<p class="center-align" style="font-size:22px;">
+								<a href="<?php echo $this->basePath('/users/register'); ?>"><?php echo $this->translate('Register now!')?><!--¡Reg&iacute;strate ahora!-->
+								</a>
+							</p>
+						</div>
+					</div>
+
+	            <?php echo $this->form()->closeTag($form); ?>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+	<script>
+
+	// BasePath
+	var $basePath           = '<?php echo $this->basePath(); ?>';
+
+	// Formulario
+	var $form_auth          = $("#loginForm");
+
+	// Campo email
+	var $email_user         = $("#email_user");
+
+	// Campo contrasena
+	var $password_user      = $("#password_user");
+
+	// Cuando el documento esta listo
+	// ******************************************************************
+		// Validamos el formulario de inicio de sesion
+		// ******************************************************************
+		$form_auth.validetta({
+        	bubblePosition: 'bottom',
+        	bubbleGapTop: 10,
+        	bubbleGapLeft: 5,
+        	realTime : true,
+        	onValid : function( event ) {
+
+        		event.preventDefault();
+
+        		$.ajax({
+        			url: $basePath + '/auth/login',
+        			type: 'POST',
+        			dataType: 'json',
+        			data: $(this.form).serialize(),
+        		})
+        		.done(function(response) {
+        			console.log(JSON.stringify(response));
+
+        			//console.log("success");
+        			// VALIDAMOS EL CODIGO DE AUTENTICACION
+        			if (response.data.code == 1) {
+
+        				// VALIDAMOS EL TIPO DE PERFIL
+        				if(response.data.perfil == 1) {
+        					
+        					localStorage.setItem("type_user","personal");
+
+        					// Redirigimos a la lista de articulos
+        					window.location = $basePath + '/pets';
+
+        				}
+        				else if(response.data.perfil == 3) {
+                       
+                       		localStorage.setItem("type_user","supplier");
+
+        					// Redirigimos al perfil del proeevedor
+        					window.location = $basePath + '/supplier';
+
+        				}
+        				
+        			} else {
+        				swal(
+		  					'Opsss..',
+		  					'¡Credenciales invalidas!',
+		  					'error'
+						);
+        			}
+
+        		})
+        		.fail(function() {
+        			console.log("error");
+        		})
+        		.always(function() {
+        			console.log("complete");
+        		});
+        		
+
+        	}
+    	});
+
+
+		</script>

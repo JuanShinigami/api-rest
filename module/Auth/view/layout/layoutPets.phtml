@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <!-- Title -->
+    <title>Recupera</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="application-name" content="Volkan"/>
+     <!--meta para compartir en facebook-->
+     <meta property="og:url"           content="https://desarrollo.recupera.pet" />
+     <meta property="og:type"          content="website" />
+     <meta property="og:title"         content="Recupera Pet" />
+     <meta property="og:description"   content="Your description" />
+     <meta property="og:image"         content="http://ondaspequenitas.com/wp-content/uploads/2017/09/Recupera-pet-logo.jpg" rel="image_src"/>
+     <!--<link href="http://hosting.recupera.net/public/img/RecuperaIcon.png" rel="image_src" / >-->
+
+    <!-- Stylesheet -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,400italic,500,300italic,500italic,700,700italic' rel='stylesheet' type='text/css'>
+        <link href="<?php echo $this->basePath('css/materialize.min.css');?>" rel="stylesheet">
+        <link href="<?php echo $this->basePath('css/slider.css" rel="stylesheet');?>" type="text/css">
+        <link href="<?php echo $this->basePath('css/animate.css" rel="stylesheet');?>" type="text/css">
+        <link href="<?php echo $this->basePath('css/ionicons.min.css" rel="stylesheet');?>" type="text/css">
+        <link href="<?php echo $this->basePath('css/style.css" rel="stylesheet');?>" type="text/css">
+        <link type="text/css" rel="stylesheet" href="<?php echo $this->basePath('/pegalinaslive/sweetalert2/sweetalert2.min.css'); ?>" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+        <link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+        
+
+        <script src="<?php echo $this->basePath('js/modernizr.custom.js');?>"></script>
+        <!-- Favicons -->
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="icon" type="image/x-icon" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" />
+        <link rel="icon" type="image/png" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" sizes="196x196" />
+        <link rel="icon" type="image/png" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" sizes="96x96" />
+        <link rel="icon" type="image/png" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" sizes="32x32" />
+        <link rel="icon" type="image/png" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" sizes="16x16" />
+        <link rel="icon" type="image/png" href="<?php echo $this->basePath('img/icons/favicons/icono app.ico');?>" sizes="128x128" />
+        <!-- pagina index-->
+        <link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+
+<style>
+
+.block_br {
+    background: #74C1DC none repeat scroll 0 0;
+}
+  .fb-share-button
+{
+transform: scale(0.5);
+-ms-transform: scale(0.5);
+-webkit-transform: scale(0.5);
+-o-transform: scale(0.5);
+-moz-transform: scale(0.5);
+transform-origin: top left;
+-ms-transform-origin: top left;
+-webkit-transform-origin: top left;
+-moz-transform-origin: top left;
+-webkit-transform-origin: top left;
+}
+
+   
+    body.welcome {
+        background: #fff;
+        /*overflow: hidden;*/
+        -webkit-font-smoothing: antialiased;
+    }
+    .welcome .splash {
+        height: 0px;
+        padding: 0px;
+        border: 130em solid #26a69a;
+        position: fixed;
+        left: 50%;
+        top: 100%;
+        display: block;
+        box-sizing: initial;
+        overflow: hidden;
+
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: puff 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
+    }
+    .welcome #welcome {
+        background: #03a9f4 ;
+        width: 106px/*56px*/;
+        height: 106px/*56px*/;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        overflow: hidden;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards, hide 2s 2.9s ease forwards;
+    }
+    /* moveIn */
+    .welcome header, footer,
+    .welcome a.btn,
+    /*div.row,*/
+    div.box_anim,
+    div.slider {
+        opacity: 0;
+        animation: moveIn 2s 3s ease forwards;
+    }
+    @keyframes init {
+        0% {
+            width: 0px;
+            height: 0px;
+        }
+        100% {
+            width: 106px;
+            height: 106px;
+            margin-top: 0px;
+            opacity: 1;
+        }
+    }
+    @keyframes puff {
+        0% {
+            top: 100%;
+            height: 0px;
+            padding: 0px;
+        }
+        100% {
+            top: 50%;
+            height: 100%;
+            padding: 0px 100%;
+        }
+    }
+
+    @keyframes borderRadius {
+        0% {
+            border-radius: 50%;
+        }
+        100% {
+            border-radius: 0px;
+        }
+    }
+
+    @keyframes moveDown {
+        0% {
+            top: 50%;
+        }
+        50% {
+            top: 40%;
+        }
+        100% {
+            top: 100%;
+        }
+    }
+
+    @keyframes moveUp {
+        0% {
+            background: #03a9f4;
+            top: 100%;
+        }
+        50% {
+            top: 40%;
+        }
+        100% {
+            top: 50%;
+            background: #26a69a;
+        }
+    }
+
+    @keyframes materia {
+        0% {
+            background: #26a69a;
+        }
+        50% {
+            background: #26a69a;
+            top: 26px;
+        }
+        100% {
+            background: #03a9f4;
+            width: 100%;
+            height: 64px;
+            border-radius: 0px;
+            top: 26px;
+        }
+    }
+
+    @keyframes moveIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes hide {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .nav-wrapper .brand-logo img {
+                height: 64px;
+        }
+            @media (max-width: 600px) {
+                .nav-wrapper .brand-logo img {
+                    height: 56px;
+                }
+            }
+
+hr.hr-footer { 
+   border-top: 2px solid #03a9f4; 
+   border-bottom: 2px solid #8cb400; 
+   border-left:none; 
+   border-right:none; 
+   height: 6px; 
+ } 
+hr {border: 1px solid red; height: 2px; width: 70%;}
+
+
+    </style>
+</head>
+<body class="welcome">
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/materialize/js/materialize.min.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/sweetalert2/sweetalert2.min.js'); ?>"></script>
+
+    <span id="splash-overlay" class="splash"></span>
+
+    <span id="welcome" class="z-depth-4"></span>
+
+    <!-- Site navigation -->
+        <div id="navigation">
+            <nav>
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <!-- Replace 'src' attribute with the path to your Brand logo -->
+                        <a href="<?php echo $this->basePath('/auth/indexpets'); ?>" class="brand-logo"><img src="<?php echo $this->basePath('img/pets/recupera pet logo 500px.png'); ?>" style="margin-top:12px; margin-left: 12px; " alt="logo recupera"></a>
+                      
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="ion-android-menu"></i></a>
+                        <!-- Main navigation -->
+                        <ul class="right main-nav">
+                           <li><a class="waves-effect waves-light" href="<?php echo $this->basePath("/auth/communitypets"); ?>"><?php echo $this->translate('Community/press')?><!--Comunidad/prensa--></a></li>
+                            <li><a class="waves-effect waves-light" href="<?php echo $this->basePath('auth/indexpets#pricepets');?>">
+                                <?php echo $this->translate('Buy here')?><!--Compra aquí--></a></li>
+                            <li><a class="waves-effect waves-light" href="#modal1"><?php echo $this->translate('Contact')?><!--Contacto--></a></li>
+                            <li><a class="waves-effect waves-light" href="<?php echo $this->basePath('/auth/faqpet'); ?>"><?php echo $this->translate('FAQs')?><!--FAQs--></a></li>
+                            <li><a href="<?php echo $this->basePath('/auth/login'); ?>"  class="nav-btn-download waves-effect waves-light btn #8BC400 light-green white-text"><i class="ion-android-unlock left"></i><?php echo $this->translate('Enter')?><!--Ingresa--></a></li>
+                            <li><a href="<?php echo $this->basePath('/users/register'); ?>" class="nav-btn-download waves-effect waves-light btn #8BC400 light-green white-text"><i class="ion-android-person-add left"></i><?php echo $this->translate('Sign up')?><!--Registrate--></a></li>
+                            <li><a href="<?php echo $this->basePath('/supplier/register'); ?>" class="nav-btn-download waves-effect waves-light btn #8BC400 light-green white-text"><i class="ion-android-person-add left"></i><?php echo $this->translate('Companies area')?><!--Área empresas--></a></li>
+                        </ul>
+                        <!--<form action="<?php echo $this->basePath("auth/indexpets/lang"); ?>" method="post" style="float:right;margin-top:10px">
+                            <select class="browser-default" name="lang" onchange="this.form.submit();">
+                                <option  disabled selected>Idiomas</option>
+                                <option value="es_ES">Español</option>
+                                <option value="en_US">Inglés</option>
+                            </select>
+                            <label>Selecciona idioma</label>                            
+                        </form>-->
+
+                        <!-- Mobile sidebar navigation -->
+                        <ul class="side-nav" id="mobile-demo">
+                            
+                            <li><a class="waves-effect waves-light" href="<?php echo $this->basePath('/auth/communitypets'); ?>"><?php echo $this->translate('Community/press')?><!--Comunidad/prensa--></a></li>
+                            <li><a class="waves-effect waves-light" href="<?php echo $this->basePath('auth/indexpets#pricepets');?>"><?php echo $this->translate('Buy here')?><!--Compra aquí--></a></li>
+                            <li><a class="waves-effect waves-light" href="#modal1"><?php echo $this->translate('Contact')?><!--Contacto--></a></li>
+                            <li><a class="waves-effect waves-light" href="<?php echo $this->basePath('/auth/faq'); ?>"><?php echo $this->translate('FAQs')?><!--FAQs--></a></li>
+                            <li><a href="<?php echo $this->basePath('/auth/login'); ?>"  class="nav-btn-download waves-effect waves-light btn #8BC400 white-text"><i class="ion-android-unlock left"></i><?php echo $this->translate('Enter')?><!--Ingresa--></a></li>
+                            <li><a href="<?php echo $this->basePath('/users/register'); ?>" class="nav-btn-download waves-effect waves-light btn #8BC400 white-text"><i class="ion-android-person-add left"></i><?php echo $this->translate('Sign up')?><!--Registrate--></a></li>
+                            <li><a href="<?php echo $this->basePath('/supplier/register'); ?>" class="nav-btn-download waves-effect waves-light btn #8BC400 white-text"><i class="ion-android-person-add left"></i><?php echo $this->translate('Companies area')?><!--Área empresas--></a></li>
+                        </ul>
+                    </div><!-- Nav-wrapper ends -->
+                </div><!-- Container ends -->
+            </nav><!-- Nav ends -->
+        </div><!-- Navigation ends -->
+
+
+
+
+    <?php echo $this->content; ?>
+
+    <!-- Footer -->
+        <footer id="footer" class="footer-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m8 l8 offset-m2 offset-l2 center">
+                        <!-- Replace 'src' attribute with the path to your Brand logo -->
+                        <a href="<?php echo $this->basePath('/auth'); ?>"><img src="<?php echo $this->basePath('img/pets/logorecuperamascotaoutline.png'); ?>" alt="logo recupera"></a>
+                        <div class="clearfix"></div>
+                        <ul class="list-inline footer-social">
+                            <!-- Add links to your social profiles here -->
+                            <li><a href="https://www.facebook.com/recuperapetMx/" target="_blank"><i class="ion-social-facebook waves-effect waves-light"></i></a></li>
+                            <li><a href="https://twitter.com/pegalinas" target="_blank"><i class="ion-social-twitter waves-effect waves-light"></i></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCnzEiknp5FrTbw3zAUaNpjg" target="_blank"><i class="ion-social-youtube waves-effect waves-light"></i></a></li> 
+                            <li>
+                         <div class="fb-share-button" data-href="https://recupera.net/auth/indexpets" data-layout="button" data-size="large" data-mobile-iframe="true">
+                         <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frecupera.net%2F&amp;src=sdkpreparse">Compartir</a></div>   
+                        </li>                     
+                        </ul>
+                        
+                        <hr class="hr-footer">
+                        <span class="copyrights">&copy;<?php echo $this->translate('Recupera, All rights reserved')?><!-- Recupera, Todos los derechos reservados--> <a class="_m4qul" href="<?php echo $this->basePath('/Documents/Política de privacidad Recupera.net.pdf')?>" target="_blank"><?php echo $this->translate('Privacy Policy')?><!--Política de privacidad--></a></p>y <a  href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>" target="_blank"><?php echo $this->translate('Terms')?><!--Condiciones--></a>
+                        </span>
+                    </div>
+                </div>
+            </div><!-- Container ends -->
+        </footer><!-- Footer ends -->
+
+         <div style="background-color: #263238;">
+      <div class="container">
+           <div class="row" style="margin-bottom: 0;">
+              <center>
+                   <div class="col s12 m12 l12">
+                   <!-- webbot  bot="HTMLMarkup" startspan -->
+                   <!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
+                   <script language="javascript" type="text/javascript" src="//smarticon.geotrust.com/si.js"></script>
+                   <!-- end  GeoTrust Smart Icon tag -->
+                   <!-- webbot  bot="HTMLMarkup" endspan -->
+                    </div>
+              </center>
+            </div>
+      </div>
+    </div>
+
+
+    <!-- Modal Structure -->
+  <div id="modal1" class="modal" style="max-height: 84% !important;">
+    <div class="modal-content" style="padding-bottom: 4px !important;">
+        <div class="row pagetitle-row" style="margin-left: 10px">
+    <div class="col s12 m2 l2">
+        <img src="<?php echo $this->basePath('/img/Recupera logo OK.png') ?>" alt="pegalinas"
+        style="with: 45px; height: 45px;" />
+        </div>
+        <div class="col s12 m10 l10">
+        <h4 class="center-align"><?php echo $this->translate('GIVE US YOUR DATA AND WE CONTACT YOU')?><!--DÉJANOS TUS DATOS Y TE CONTACTAMOS--></h4>
+        </div>
+        </div>
+        
+        <p class="center-align"><?php echo $this->translate('We would love to hear from you. Get in touch with us now.')?><!--Nos encantaría saber de ti. Ponte en contacto con nosotros ahora.--></p>
+        <div class="row" style="margin-top: 20px;">
+            <form id="form_contact" method="POST" action="#" class="col s12 m12 l12">
+
+                <div class="row">
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="name_p" type="text" class="validate" name="name_p" data-validetta="required" data-vd-message-required="Ingresa tu nombre" />
+                        <label for="name_p"><?php echo $this->translate('Full name')?><!--Nombre completo--></label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="puesto_p" type="text" class="validate" name="puesto_p" data-validetta="required" data-vd-message-required="Ingresa el puesto que ejerces dentro de la institución" />
+                        <label for="puesto_p"><?php echo $this->translate('Position')?><!--Puesto--></label>
+                    </div>
+                    <div class="input-field col s12 m6 l6">
+                        <input id="name_empresa" type="text" class="validate" name="name_empresa" data-validetta="required" data-vd-message-required="Ingresa el nombre de la institución" />
+                        <label for="name_empresa"><?php echo $this->translate('Name of the company or institution')?><!--Nombre de la empresa o institución--></label>
+                    </div>
+                    
+                    <div class="input-field col s12 m6 l6">
+                        <input id="phone_p" type="text" class="validate" name="phone_p" data-validetta="required" data-vd-message-required="Ingresa tu teléfono" />
+                        <label for="phone_p"><?php echo $this->translate('Phone')?><!--
+                            Tel&eacute;fono--></label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <input id="email_p" type="email" class="validate" name="email_p" data-validetta="required" data-vd-message-required="Ingresa tu correo electrónico" />
+                        <label for="email_p"><?php echo $this->translate('E-mail')?><!--Correo Electr&oacute;nico--></label>
+                    </div>
+
+                    
+
+                    <div id="div_rew"  class="input-field col s12 m6 l6" >
+                    </div>
+
+                    
+                    
+                
+                    <div class="input-field col s12 m12 l12">                   
+                        <textarea id="comment_p" class="materialize-textarea" name="comment_p" data-validetta="required" data-vd-message-required="Comparte algún comentario, duda o sugerencia">
+                            
+                        </textarea>
+                        <label for="comment_p"><?php echo $this->translate('Leave your comment')?><!--Deja tu comentario--></label>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <button type="submit" class="waves-effect waves-light btn-large teal col s12 m12 l12"><?php echo $this->translate('Send')?>
+                            <!--<i class="material-icons left">send</i>--> <!--Enviar-->
+                        </button>
+                    </div>
+
+                    <div class="input-field col s12 m6 l6">
+                        <a href="javascript:void(0)" id="btn_close_modal_contact" class=" modal-action modal-close waves-effect waves-light btn-large red col s12"><?php echo $this->translate('Close')?><!--Cerrar--></a>
+                    </div>  
+
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!--<div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>-->
+</div>
+
+ <script src="<?php echo $this->basePath('/js/materialize.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.smoothscroll.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/typed.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/wow.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/waypoint.min..js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.counterup.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/owl.carousel.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.flexslider-min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.validate.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/classie.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/config.js" type="text/javascript');?>"></script>
+
+        <!-- pagina index-->
+        <script src="<?php echo $this->basePath('/js/materialize.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.smoothscroll.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/typed.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/wow.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/waypoint.min..js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.counterup.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/owl.carousel.min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.flexslider-min.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/jquery.validate.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/classie.js" type="text/javascript');?>"></script>
+        <script src="<?php echo $this->basePath('/js/config.js" type="text/javascript');?>"></script>
+
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+        <!-- pagina index arriba-->
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+       
+    <script>
+
+
+    // FORMULARIO DE CONTACTO
+    var $form_contact = $("#form_contact");
+
+     $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  
+
+     $('#btn_close_modal_contact').on('click', function(event) {
+            event.preventDefault();
+            
+            // OCULTAMOS MODAL DE ENCONTRASTE UN ARTICULO
+            $("#modal1").modal('close');
+
+            // LIMPIAMOS CAMPO
+            $('#name_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#name_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#name_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#puesto_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#puesto_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#puesto_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#name_empresa').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#name_empresa').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#name_empresa').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#phone_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#phone_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#phone_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#email_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#email_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#email_p').next().next().remove();
+
+            // LIMPIAMOS CAMPO
+            $('#comment_p').val('');
+            // QUITAMOS FOCO AL INPUT
+            $('#comment_p').blur();
+            // REMOVEMOS VALIDACION DEL INPUT
+            $('#comment_p').next().next().remove();
+            
+        });
+
+
+         // ******************************************************************
+        // VALIDAR FORMULARIO DE CONTACTAR AL DUENO DE UN ARTICULO
+        // ******************************************************************
+        $form_contact.validetta({
+            bubblePosition : 'bottom',
+            bubbleGapTop   : 10,
+            bubbleGapLeft  : 5,
+            realTime : true,
+            onValid  : function(event){
+                event.preventDefault();
+
+                $.ajax({
+                    url      : $basePath + '/auth/contact',
+                    type     : 'POST',
+                    dataType : 'json',
+                    data     : $(this.form).serialize(),
+                })
+                .done(function(response) {
+                    console.log(JSON.stringify(response));
+                    //console.log("success");
+
+                    // Validamos la respuesta
+                    if (response.status == 'ok') {
+
+                        swal(
+                            'Gracias...',
+                            '¡Tu mensaje ha sido enviado!',
+                            'success'
+                        ).catch(swal.noop).then(function (result) {
+                                
+                            // OCULTAMOS MODAL DE ENCONTRASTE UN ARTICULO
+                            $("#modal1").modal('close');
+
+                            // LIMPIAMOS CAMPO
+                        $('#name_p').val('');
+                        // QUITAMOS FOCO AL INPUT
+                        $('#name_p').blur();
+                        // REMOVEMOS VALIDACION DEL INPUT
+                        $('#name_p').next().next().remove();
+            
+                        // LIMPIAMOS CAMPO
+                        $('#puesto_p').val('');
+                        // QUITAMOS FOCO AL INPUT
+                        $('#puesto_p').blur();
+                        // REMOVEMOS VALIDACION DEL INPUT
+                        $('#puesto_p').next().next().remove();
+            
+                        // LIMPIAMOS CAMPO
+                        $('#name_empresa').val('');
+                        // QUITAMOS FOCO AL INPUT
+                        $('#name_empresa').blur();
+                        // REMOVEMOS VALIDACION DEL INPUT
+                        $('#name_empresa').next().next().remove();
+            
+                        // LIMPIAMOS CAMPO
+                        $('#phone_p').val('');
+                        // QUITAMOS FOCO AL INPUT
+                        $('#phone_p').blur();
+                        // REMOVEMOS VALIDACION DEL INPUT
+                        $('#phone_p').next().next().remove();
+            
+                        // LIMPIAMOS CAMPO
+                        $('#email_p').val('');
+                        // QUITAMOS FOCO AL INPUT
+                        $('#email_p').blur();
+                        // REMOVEMOS VALIDACION DEL INPUT
+                        $('#email_p').next().next().remove();
+            
+                         // LIMPIAMOS CAMPO
+                        $('#comment_p').val('');
+                        // QUITAMOS FOCO AL INPUT
+                        $('#comment_p').blur();
+                        // REMOVEMOS VALIDACION DEL INPUT
+                        $('#comment_p').next().next().remove();
+
+                        });
+                       
+                    } else {
+                        swal(
+                            'Opsss..',
+                            '¡Ocurrio un error, intentalo de nuevo!',
+                            'error'
+                        ).catch(swal.noop);
+                    }
+
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            }
+        });
+  }); 
+    </script>
+</body>
+</html>
