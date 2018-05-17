@@ -1,0 +1,309 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.css'); ?>" rel="stylesheet" type="text/css" media="screen" >
+<link rel="stylesheet" href="<?php echo $this->basePath('/pegalinaslive/css/paw_dog.css'); ?>">
+<link rel="stylesheet" href="<?php echo $this->basePath('/css/materialize.min.css'); ?>">
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/dist/validetta.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $this->basePath('/pegalinaslive/validetta-1.0.1/localization/validettaLang-es-ES.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/js/materialize.min.js'); ?>"></script>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<!--<script src='https://www.google.com/recaptcha/api.js?hl=es'></script>-->
+
+<style>
+.input-field .prefix ~ .select-wrapper {
+  margin-left:3rem; 
+  width:92%; 
+  width:calc(100% - 3rem);
+}
+.background-image-pet {
+	background-color: transparent;
+	background-image: url(https://images.pexels.com/photos/46024/pexels-photo-46024.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb) ;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: initial;
+	background-size: cover;
+}
+.container-background-image-pet {
+	background-color: rgba(0,0,0,0.3);
+}
+.image-preview {
+	position: relative;
+	width: 250px;
+	height: 250px;
+	background-color: #ccc;
+	overflow: hidden;
+}
+</style>
+
+<div class="row" style="margin-top: 130px; margin-bottom: 50px;">
+	<div class="col s12 m8 offset-m2 l8 offset-l2">
+
+		<div class="card background-image-pet">
+
+			<div class="dog">
+				<div class="pad"></div>
+		        <div class="toe-1"></div>
+		        <div class="toe-2"></div>
+		        <div class="toe-3"></div>
+		        <div class="toe-4"></div>
+			</div>
+
+			<div class="card-content container-background-image-pet">
+				
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<img class="responsive-img" src="<?php echo $this->basePath('/img/pets/logorecuperamascotaoutline.png') ?>" alt="logo-pegalinas" style="height: 150px;" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<h6 class="white-text text-darken-4"><?php echo $this->translate('Recupera pet, the shortest path between your lost pet and you.')?><!--Recupera pet, el camino m&aacute;s corto entre tu mascota perdida y t&uacute;--></h6>
+					</div>
+				</div>
+
+				<!--<div class="row">
+					<div class="col s12 m12 l12 center">
+						<h4 class="white-text">Tipo de cuenta:</h4>
+						<p style="margin-top: 12px;">
+      						<input class="with-gap" name="radio_type_user" type="radio" id="type_user_1" value="1" />
+      						<label class="white-text" for="type_user_1">Persona</label>
+
+      						<input class="with-gap" name="radio_type_user" type="radio" id="type_user_2" value="2" />
+      						<label class="white-text" for="type_user_2">Proveedor</label>
+    					</p>
+					</div>
+				</div>-->
+
+			</div>
+
+		</div>
+
+		<?php
+		$form = $this->form;
+		$form->prepare();
+		echo $this->form()->openTag($form);
+		echo $this->formElement($form->get('id'));
+		?>
+
+		<div id="container-data-sign" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; display: block;">
+			<div class="card-content">
+				
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center"><?php echo $this->translate('Access data')?><!--Datos de acceso--></h5>
+					</div>
+				</div>
+
+				<input type="text" id="type_user" name="type_user" placeholder="type user" style="display: none;" value="1" />
+
+				<div class="row">
+					
+					<div class="input-field col s12 m12 l6">
+						<i class="material-icons prefix">email</i>
+		          		<?php echo $this->formElement($form->get('email_user')); ?>
+		          		<label for="email_user"><?php echo $this->translate('E-mail')?><!--Correo Electr&oacute;nico--></label>
+		        	</div>
+
+		        	<div class="input-field col s12 m12 l6">
+						<i class="material-icons prefix">email</i>
+		          		<?php echo $this->formElement($form->get('repeat_email_user')); ?>
+		          		<label for="repeat_email_user"><?php echo $this->translate('Repeat Email')?><!--Repetir Correo electr&oacute;nico--></label>
+		        	</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="input-field col s12 m12 l6">
+						<i class="material-icons prefix">lock</i>
+		          		<?php echo $this->formElement($form->get('password_user')); ?>
+		          		<label for="password_user"><?php echo $this->translate('Password')?><!--Contrase&ntilde;a--></label>
+		        	</div>
+
+					<div class="input-field col s12 m12 l6">
+						<i class="material-icons prefix">lock</i>
+						<?php echo $this->formElement($form->get('repeat_password_user')); ?>
+		          		<label for="repeat_password_user"><?php echo $this->translate('Repeat password')?><!--Repetir Contrase&ntilde;a--></label>
+		        	</div>
+
+				</div>
+
+			</div>
+		</div>
+
+
+		<div id="container-data-contact-personal" class="card" style="border-top-width: 3px; border-top-color: #D41C76; border-top-style: solid; block: none;">
+			<div class="card-content">
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="center title-data-contact-personal"><?php echo $this->translate('Personal information')?><!--Datos personales--></h5>
+					</div>
+				</div>
+				
+				<div class="row">
+
+					<div class="input-field col s12 m12 l6">
+						<i class="material-icons prefix">perm_identity</i>
+		          		<?php echo $this->formElement($form->get('name_user')); ?>
+		          		<label id="label_name_user" for="name_user"><?php echo $this->translate('Name')?><!--Nombre--></label>
+		        	</div>
+
+		        	<div id="container_surname">
+						<div class="input-field col s12 m12 l6">
+							<i class="material-icons prefix">perm_identity</i>
+			       			<?php echo $this->formElement($form->get('surname')); ?>
+			        		<label for="surname"><?php echo $this->translate('Last name')?><!--Apellido paterno--></label>
+			        	</div>
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="input-field col s12 m12 l6">
+						<i class="material-icons prefix">phone</i>
+			          	<?php echo $this->formElement($form->get('phone')); ?>
+			          	<label for="phone"><?php echo $this->translate('Phone')?><!--
+                            Tel&eacute;fono--></label>
+			        </div>
+
+				</div>
+
+				<div class="row">
+					
+					<div class="input-field col s12 m12 l4">
+						<i class="material-icons prefix">location_on</i>
+    					<?php echo $this->formElement($form->get('state_of_mexico')); ?>
+    					<?php //echo $form->getElement("state_of_mexico")->setAttrib("disable", array(1)); ?>
+    					<label>Estado</label>
+  					</div>
+
+  					<div class="input-field col s12 m12 l4">
+  						<i class="material-icons prefix">location_on</i>
+    					<?php echo $this->formElement($form->get('district')); ?>
+    					<label>Delegaci&oacute;n / Municipio</label>
+  					</div>
+
+  					<div class="input-field col s12 m12 l4">
+  						<i class="material-icons prefix">location_on</i>
+    					<?php echo $this->formElement($form->get('neighborhood')); ?>
+    					<label>Colonia</label>
+  					</div>
+
+				</div>
+
+				<div class="row" align="center">
+
+					<!--<div class="input-field col s12 m6 l8">
+						<i class="material-icons prefix">streetview</i>
+						<?php echo $this->formElement($form->get('street')); ?>
+						<label for="street">Calle</label>
+					</div>
+
+					<div class="input-field col s6 m3 l2">
+			          	<?php echo $this->formElement($form->get('number_exterior')); ?>
+			          	<label for="number_exterior">Numero exterior</label>
+			        </div>-->
+					
+					<div class="input-field col s6 m3 l2">
+			          	<?php echo $this->formElement($form->get('postal_code')); ?>
+			          	<label for="postal_code">C&oacute;digo Postal</label>
+			        </div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div id="container-all-actions" class="card" style="display: block;">
+			<div class="card-content">
+
+				<!-- CAMBIAR reCAPTCHA SEGUN EL SERVIDOR QUE SE OCUPA, BASTA CON SOLO CAMBIAR EL data-sitekey
+				reCAPTCHA DE AMAZON
+	            <div class="g-recaptcha" data-sitekey="6Le-xBsUAAAAAAn9ab236oF31EJ1BK1gXV1-Cijn"></div>
+
+	            reCAPTCHA DE RECUPERA
+	            <div class="g-recaptcha" data-sitekey="6LeWVBkUAAAAAG4jSEKadauLuhIvht_EWYjg7Hmb"></div>
+
+	            reCAPTCHA DE LOCAL
+	            <div class="g-recaptcha" data-sitekey="6LehDRgUAAAAABvR9cuOWGp4P70goBgn2Q5zbbRG"></div>
+
+                reCAPTCHA DE LOCAL con cuenta cami
+	            <div class="g-recaptcha" data-sitekey="6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z"></div>
+
+	            reCAPTCHA DE DESARROLLO PET cuenta expendio
+	            <div class="g-recaptcha" data-sitekey="6Le2YlEUAAAAAIqFMo0pUzMDCcXThz8_oVmWUzNL"></div> 
+
+	        -->
+
+	            <div class="row">
+					<div class="col s12 m12 l12">
+						<div style="width: 302px; margin:auto;" class="g-recaptcha" data-sitekey="6LfPyiMUAAAAAN9GUixh4d3vnGitJSHAJ6QEsc7z"></div>
+					</div>
+				</div>
+						
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<p class="center">
+							
+						<input id="condiciones" class="condiciones"  name ="condiciones" type="checkbox" value="1" />
+						<label for="condiciones">
+						       
+						     
+					    	Al registrarte, aceptas nuestras
+                       		<a  href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>" target="_blank">Condiciones</a>
+					    		y nuestra
+							<a class="_m4qul" href="<?php echo $this->basePath('/Documents/Política de privacidad Recupera.net.pdf')?>" target="_blank">Política de privacidad</a>.
+							<!--<a class="btn btn-success" href="<?php echo $this->basePath('/Documents/Aviso Legal y Cond de uso Recupera.net.pdf')?>"> Descarga </a>-->
+						</label>
+						</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12 m12 l12 center">
+						<button type="submit" id="btn_register" class="waves-effect waves-light btn-large pink col s12 m6 l6 offset-m3 offset-l3" name="enviar" value="Enviar">Reg&iacute;strate ahora</button>
+					</div>
+				</div>
+
+				<div class="row" style="margin-bottom: 0;">
+					<div class="col s12 m12 l12">
+						<p class="center-align" style="font-size:25px;">
+							¿Ya tienes una cuenta?
+							<a href="<?php echo $this->basePath('/auth/login'); ?>">Iniciar sesi&oacute;n</a>
+						</p>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<?php
+		echo $this->form()->closeTag();
+		?>
+
+	</div>
+</div>
+
+<script src="<?php echo $this->basePath('/pegalinaslive/js/register/user.js'); ?>"></script>
+
+<script>
+// BasePath of project
+var $basePath = '<?php echo $this->basePath(); ?>';
+</script>
+<script src="<?php echo $this->basePath('/pegalinaslive/js/addresses/addresses.js'); ?>"></script>
+<script>
+// BasePath of project
+var $basePath 		= '<?php echo $this->basePath(); ?>';
+var $district    	= 0;
+var $neighborhood 	= 0;
+// Inicializar combos
+$('select').material_select();
+</script>

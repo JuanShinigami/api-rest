@@ -11,7 +11,8 @@ return array(
         'Application',
         'Supplier',
         'DatosProveedor',
-        'Auth'
+        'Auth',
+        'Users'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

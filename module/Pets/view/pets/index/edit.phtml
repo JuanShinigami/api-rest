@@ -1,0 +1,459 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery.formatCurrency-1.4.0/jquery.formatCurrency-1.4.0.min.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+</style>
+
+<div class="row">
+
+	<div class="col s12 m12 l12 left-align" style="margin-bottom: 35px;">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Modifica tu mascota</h3><br>
+	</div>
+
+	<!-- FORMULARIO DE CODIGO QR -->
+	<div id="container_form_code_qr" class="col s12 m12 l12" style="display: none;">
+		
+		<div class="card-panel">
+
+			<div class='circle-icon'>
+				<i class="material-icons fa fa-qrcode"></i>
+			</div>
+			
+			<?php 
+			$formQR = $this->formQR;
+			$formQR->prepare();
+			echo $this->form()->openTag($formQR);
+			?>
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa el codigo que esta en tu pegalina.</h4>
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12 m12 l12">
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('code_article')); ?>
+							<label for="code_article">C&oacute;digo</label>
+						</div>
+
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('repeat_code_article')); ?>
+							<label for="repeat_code_article">Repetir C&oacute;digo</label>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						<div class="col s6 m6 l6">
+							<button type="submit" id="btn_validate_codeQR" class="waves-effect waves-light btn-large teal col s12 m12 l12">Enviar</button>
+							<?php //echo $this->formElement($form->get('submitbutton')); ?>
+						</div>
+
+						<div class="col s6 m6 l6">
+							<a id="btn_cancel_validate_codeQR" href="<?php echo $this->basePath()."/articles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($formQR); ?>
+
+		</div>
+
+	</div>
+
+	<!-- FORMULARIO DE MASCOTA -->
+	<div id="container_form_pets" class="col s12 m12 l12">
+
+		<div class="card-panel">
+
+			<div class='circle-icon'>	
+				<i class="material-icons">description</i>   
+			</div>
+
+			<?php 
+			$form = $this->form;
+			$form->prepare();
+			echo $this->form()->openTag($form);
+			echo $this->formElement($form->get('id'));
+			echo $this->formElement($form->get('id_register_qr'));
+			?>
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos de tu mascota.</h4>
+				</div>
+
+				<div class="row" style="margin-bottom:0;">
+
+					<div class="col s12 m12 l6">
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('type_pet')); ?>
+							<label for="type_pet">Tipo de mascota:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('name_pet')); ?>
+							<label for="name_pet">Nombre:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('breed_pet')); ?>
+							<label for="breed_pet">Raza:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('color_pet')); ?>
+							<label for="color_pet">Color:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('size_pet')); ?>
+							<label for="size_pet">Tamaño:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('weight')); ?>
+							<label for="weight">Peso:</label>
+						</div>
+						
+					</div>
+
+					<div class="col s12 m12 l6">
+
+						<div class="file-field input-field col s12 m12 l12">
+
+		      				<div class="btn">
+		        				<span>Imagen de mascota</span>
+		        				<?php echo $this->formElement($form->get('img_pet')); ?>
+		      				</div>
+
+		      				<div class="file-path-wrapper">
+		        				<input class="file-path validate" type="text">
+		      				</div>
+
+		      				<div id="container_img_pet" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+		      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_img_pet" src="<?php echo $this->basePath('img/icon_pet_real.png'); ?>">	
+		      				</div>
+
+		    			</div>
+						
+					</div>
+
+				</div>
+
+				<div class="row" style="margin-bottom:0;">
+
+					<div class="col s12 m6 l6">
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('age_pet')); ?>
+							<label for="age_pet">Edad:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('name_vet')); ?>
+							<label for="name_vet">Nombre veterinario:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('microchip_pet')); ?>
+							<label for="microchip_pet">N° Microchip:</label>
+						</div>
+
+					</div>
+
+					<div class="col s12 m6 l6">
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('birthday_pet')); ?>
+							<label for="birthday_pet">Cumplea&ntilde;os:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('phone_vet')); ?>
+							<label for="phone_vet">Tel&eacute;fono veterinario:</label>
+						</div>
+
+						<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('reward')); ?>
+							<label for="reward">Recompensa:</label>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<div class="input-field col s12 m12 l12">
+
+							<?php echo $this->formElement($form->get('description_pet')); ?>
+							<label for="description_pet">Descripci&oacute;n:</label>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						
+						<div class="col s12 m6 l6">
+							<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+						</div>
+
+						<div class="col s12 m6 l6">
+							<a href="<?php echo $this->basePath()."/pets" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+						
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($form); ?>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+
+	// Formulario mascotas
+	var $form_pets = $("#form_pets");
+
+	// Codigo del QR
+	var $code_qr_article        = $("#code_article");
+
+	// Codigo del QR
+	var $repeat_code_qr_article = $("#repeat_code_article");
+
+	// btn_validate_codeQR
+	var $btn_validate_codeQR = $("#btn_validate_codeQR");
+
+	// btn_cancel_validate_codeQR
+	var $btn_cancel_validate_codeQR = $("#btn_cancel_validate_codeQR");
+
+	// VALOR DE LA IMAGEN
+	var $imagePet = "<?php echo $this->imagePet; ?>";
+
+	// ***********************************************************************
+	// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+	// ***********************************************************************
+	$(document)
+		.ajaxStart(function () {
+			console.log("Inicia Ajax");
+
+			// Iniciamos panel de carga
+			$.LoadingOverlay("show");
+		})
+		.ajaxStop(function () {
+			console.log("Termina Ajax");
+
+			// ocultamos panel de carga
+			$.LoadingOverlay("hide");
+		});
+
+	// ***********************************************************************
+	// Cuando el documento esta listo
+	// ***********************************************************************
+	$(document).ready(function() {
+
+		$('.datepicker').pickadate({
+			format: 'dd-mm-yyyy',
+    		selectMonths: true, // Creates a dropdown to control month
+    		selectYears: 15, // Creates a dropdown of 15 years to control year
+			monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+			weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+			weekdaysShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+			today: 'Hoy',
+			clear: 'Limpiar',
+			close: 'Cerrar',
+  		});
+
+		//$(".ui-datepicker-month").addClass("browser-default");
+
+		// ***********************************************************************
+		// DATAPICKER FECHA DE CUMPLEAÑOS MASCOTA
+		// ***********************************************************************
+		/*$( "#birthday_pet" ).datepicker({
+			changeMonth: false,
+			changeYear: false,
+			dateFormat: "dd-mm-yy",
+			showAnim: "clip",
+			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+			dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+			dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+		});*/
+
+		// ***********************************************************************
+		// INICIALIZAMOS LOS COMBOS
+		// ************************************************************************
+		$('#type_pet, #size_pet').material_select(); //inicializar el select de materialize
+		//$('select').material_select('destroy');
+
+		// ***********************************************************************
+		// PERMITIR SOLO NUMEROS EN EL CAMPO RECOMPENSA
+		// ************************************************************************
+		/*$("#reward, #phone_vet").keyup(function (e){
+			this.value = (this.value).replace(/[^0-9-.]/g, '');
+		});
+
+		// ************************************************************************
+		// FORMATO MONEDA EL CAMPO RECOMPENSA
+		// ************************************************************************
+		$('#reward').blur(function(){
+			$('#reward').formatCurrency({ colorize:true });
+		});
+
+		// ************************************************************************
+		// DAMOS FORMATO DE MONEDA AL CAMPO RECOMPENA SI TENEMOS ALGUN VALOR
+		// ************************************************************************
+		if ($("#reward").val() != '') {
+			$('#reward').formatCurrency({ colorize:true });
+		}*/
+
+		// Deshabilitamos el campo codigo
+		$code_qr_article.prop("disabled", true);
+
+		// Deshabilitamos el campo codigo
+		$repeat_code_qr_article.prop("disabled", true);
+
+		$btn_validate_codeQR.prop("disabled", true);
+
+		$btn_cancel_validate_codeQR.attr("disabled", true);
+
+		// ***********************************************************************
+		// CARGAR IMAGENES DE ARTICULOS SI ES QUE EXITEN
+		// ***********************************************************************
+		if ($imagePet != '' && $imagePet != null) {
+			// CARGAMOS UNA IMAGEN
+			//$("#preview_img_pet").attr('src', 'data:image/jpg;base64,'+$imagePet);
+			$("#preview_img_pet").attr('src', $basePath + '/images/pets/' + $imagePet);
+		};
+
+		// ************************************************************************
+		// Al hacer un cambio en el input imagen
+		// ************************************************************************
+		$("#img_pet").change(function () {
+			// LLamamos a la funcion
+			previewImgArticle(this,"preview_img_pet");
+		});
+
+		// ***********************************************************************
+		// FUNCION QUE GENERA UNA PREVIEW DE LA IMAGEN
+		// ***********************************************************************
+		function previewImgArticle(input, img_art) {
+
+			if (typeof (FileReader) != "undefined") {
+
+				var image_preview = $("#"+img_art);
+
+				// Limpiar img preview
+		 		image_preview.empty();
+
+		 		var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                image_preview.attr('src', e.target.result);
+	            }
+	            //image_holder.show();
+	            reader.readAsDataURL(input.files[0]);
+
+	 		} else {
+	            alert("Este navegador no admite FileReader.");
+	        }
+		}
+
+		// ************************************************************************
+		// VALIDAR FORMULARIO DE MASCOTAS
+		// ************************************************************************
+		$form_pets.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/pets/edit',
+	        			type: 'POST',
+	        			dataType: 'json',
+	        			contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(response);
+	        			//console.log("success");
+						// Validamos response
+	        			if (response.status == 'ok') {
+							// Redireccionamos a la vista de mascotas
+	        				window.location = $basePath + '/pets';
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+						swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+		});
+
+	});
+</script>
