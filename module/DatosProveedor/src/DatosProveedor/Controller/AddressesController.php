@@ -4,6 +4,7 @@ namespace DatosProveedor\Controller;
 use DatosProveedor\Services\DistrictService;
 use DatosProveedor\Services\NeighborhoodService;
 use DatosProveedor\Model\DistrictModel;
+use DatosProveedor\Model\NeighborhoodModel;
 
 class AddressesController extends BaseController
 {
@@ -35,7 +36,7 @@ class AddressesController extends BaseController
     // Colonias
     public function getallneighborhoodAction()
     {
-    	$neighborhoodService = new NeighborhoodService();
+    	$neighborhoodService = new NeighborhoodModel();
     	$request              = $this->getRequest();
     	$response             = $this->getResponse();
     

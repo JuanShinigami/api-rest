@@ -99,7 +99,7 @@ function getAllDistrict($id_state)
 
 	// Llamada ajax
 	$.ajax({
-		url 		: $basePath + "/application/addresses/getalldistrict",
+		url 		: $basePath + "/datosProveedor/addresses/getalldistrict",
 		type 		: 'POST',
 		dataType 	: 'json',
 		data 		: {id_state : $id_state},
@@ -161,7 +161,7 @@ function getAllNeighborhood($id_district)
 
 	// Llamada ajax
 	$.ajax({
-		url 		: $basePath + "/application/addresses/getallneighborhood",
+		url 		: $basePath + "/datosProveedor/addresses/getallneighborhood",
 		type 		: 'POST',
 		dataType 	: 'json',
 		data 		: {id_district: $id_district},
@@ -224,7 +224,7 @@ function loadDistrictSelected()
 
 		// Llamada ajax
 		$.ajax({
-			url 		: $basePath + "/application/addresses/getalldistrict",
+			url 		: $basePath + "/datosProveedor/addresses/getalldistrict",
 			type 		: 'POST',
 			dataType 	: 'json',
 			data 		: {id_state : $id_state_selected},
@@ -279,7 +279,7 @@ function loadNeighborhoodSelected()
 
 		// Llamada ajax
 		$.ajax({
-			url 		: $basePath + "/application/addresses/getallneighborhood",
+			url 		: $basePath + "/datosProveedor/addresses/getallneighborhood",
 			type 		: 'POST',
 			dataType 	: 'json',
 			data 		: {id_district: $district},
