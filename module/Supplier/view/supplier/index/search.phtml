@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<?php echo $this->basePath('/css/materialize.min.css'); ?>">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="<?php echo $this->basePath('/js/materialize.min.js'); ?>"></script>
+
 <style>
 	.input-field .prefix ~ .select-wrapper {
 	  margin-left:3rem; 
@@ -323,6 +324,8 @@
 
 <script>
 
+
+var $basePath               = '<?php echo $this->basePath(); ?>';
 	// ***********************************************************************
 	// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
 	// ***********************************************************************
@@ -561,7 +564,7 @@
 			data 		: {id_state : $id_state},
 		})
 		.done(function(response) {
-			//console.log("success");
+			console.log("success");
 
 			// Validamos la respuesta
 			if (response.response == "ok") {

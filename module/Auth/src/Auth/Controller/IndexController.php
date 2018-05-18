@@ -177,7 +177,7 @@ class IndexController extends AbstractActionController
 				//"response" => "ok", 
 				//"tries" => $try, 
 				"data" => $authentication, 
-				//"status" => "Correcto", 
+				"status" => "Correcto", 
 				//"data" => $dataView
 			)));
 			

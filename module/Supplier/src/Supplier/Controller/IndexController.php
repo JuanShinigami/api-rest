@@ -2,10 +2,10 @@
 namespace Supplier\Controller;
 
 use DatosProveedor\Controller\BaseController;
-use DatosProveedor\Form\UsersForm;
-use DatosProveedor\Service\UsersService;
-// use Users\Form\UsersForm;
-// use Users\Service\UsersService;
+// use DatosProveedor\Form\UsersForm;
+// use DatosProveedor\Service\UsersService;
+use Users\Form\UsersForm;
+use Users\Service\UsersService;
 use DatosProveedor\Services\PetActivitySectorService;
 use DatosProveedor\Services\TypePetService;
 use Supplier\Service\CompanySectorActivityService;
@@ -68,11 +68,11 @@ class IndexController extends BaseController
         $profileUser    = (int) $this->getPerfilUserSesion();
 
         // PERFIL
-        $profile        = $this->getUsersServices()->getAll($idUser);//(15); //($idUser);
+        $profile        = $this->getUsersServices()->getAll(15); //($idUser);
         //echo "<pre>"; print_r($profile); exit;
 
         // OBTENER PROVEEDOR POR ID
-        $supplier       = $this->getSupplierService()->getSupplierById($idUser);//(15); //($idUser);
+        $supplier       = $this->getSupplierService()->getSupplierById(15); //($idUser);
         //echo "<pre>"; print_r($supplier); exit;
 
         // Anuncios de compania

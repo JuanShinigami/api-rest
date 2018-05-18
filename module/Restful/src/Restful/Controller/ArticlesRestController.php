@@ -2,7 +2,7 @@
 
 namespace Restful\Controller;
      
-use Application\Controller\BaseController;
+use DatosProveedor\Controller\BaseController;
 use Zend\View\Model\JsonModel;
 use Articles\Service\ArticlesService;
 use Articles\Service\CodeQRService;

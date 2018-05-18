@@ -3,6 +3,7 @@ namespace DatosProveedor\Controller;
 
 use DatosProveedor\Services\DistrictService;
 use DatosProveedor\Services\NeighborhoodService;
+use DatosProveedor\Model\DistrictModel;
 
 class AddressesController extends BaseController
 {
@@ -12,7 +13,7 @@ class AddressesController extends BaseController
 	// Municipios y delegaciones
     public function getalldistrictAction()
     {
-    	$districtService = new DistrictService();
+    	$districtService = new DistrictModel();
     	$request          = $this->getRequest();
         $response         = $this->getResponse();
 

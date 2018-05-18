@@ -78,16 +78,16 @@ class PetsModel extends TableGateway
 		$select
 			->columns(array('id', 'type_pet', 'name_pet', 'breed_pet', 'color_pet', 'size_pet', 'description_pet', 'age_pet', 'img_pet', 'image_name'))
 			->from(array('pet' => $this->table))
-			->join(array('breed_pet' => 'breeds_of_pet'), 'pet.breed_pet = breed_pet.id', array('breed_pet_two' => 'name_breed'), 'Left')
+// 			->join(array('breed_pet' => 'breeds_of_pet'), 'pet.breed_pet = breed_pet.id', array('breed_pet_two' => 'name_breed'), 'Left')
 			//->join(array('c' => 'color'), 'a.id_color = c.id', array('name_color' => 'name'), 'Inner')
 			//->join(array('cat' => 'category'), 'a.id_category = cat.id', array('name_category' => 'namecategory'), 'Inner')
 			//->join(array('cat2' => 'category'), 'a.name_article = cat2.id', array('name_article_two' => 'namecategory'), 'Left')
-			->join(array('r_q' => 'register_qr'), 'pet.id_register_qr = r_q.id', array('id_register_qr' => 'id', 'code_article'=>'foliocodeqr', 'id_status'), 'Inner')
-			->join(array('s' => 'status'), 'r_q.id_status = s.id', array('name_status' => 'name'), 'Inner')
+// 			->join(array('r_q' => 'register_qr'), 'pet.id_register_qr = r_q.id', array('id_register_qr' => 'id', 'code_article'=>'foliocodeqr', 'id_status'), 'Inner')
+// 			->join(array('s' => 'status'), 'r_q.id_status = s.id', array('name_status' => 'name'), 'Inner')
 			->where(array('pet.id_users' => $idUser))
 			//->where(array('own_alien' => (int) 1))
-			->order('pet.id ASC')
-			->where->notIn("r_q.id_status", $arrayStatusArticles);
+			->order('pet.id ASC');
+// 			->where->notIn("r_q.id_status", $arrayStatusArticles);
 
 		$selectString = $sql->getSqlStringForSqlObject($select);
 		//print_r($selectString); exit;

@@ -1,20 +1,19 @@
 <?php
 namespace Users\Service;
 
-use Zend\Crypt\Password\Bcrypt;
-
-use Users\Model\UsersModel;
-use Application\Services\AddressService;
-use Application\Services\AddressUsersService;
-use Supplier\Service\CompanyTypePetService;
-use Supplier\Service\CompanySectorActivityService;
+use DatosProveedor\Services\AddressService;
+use DatosProveedor\Services\AddressUsersService;
 use Supplier\Service\CompanyNoticeService;
-
+use Supplier\Service\CompanySectorActivityService;
+use Supplier\Service\CompanyTypePetService;
+use Users\Model\UsersModel;
+use Zend\Crypt\Password\Bcrypt;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
-use Zend\Mail\Transport\SmtpOptions;
+use Exception;
 
 const TYPE_USER_COMPANY = '3';
 

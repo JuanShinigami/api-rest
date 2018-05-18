@@ -4,7 +4,7 @@ namespace Pets\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Application\Controller\BaseController;
+use DatosProveedor\Controller\BaseController;
 use Pets\Service\PetsService;
 use Articles\Service\CodeQRService;
 use Pets\Form\PetsForm;
