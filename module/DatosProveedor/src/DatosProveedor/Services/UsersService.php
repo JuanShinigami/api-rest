@@ -1,5 +1,5 @@
 <?php
-namespace DatosProveedor\Service;
+namespace DatosProveedor\Services;
 
 use DatosProveedor\Model\UsersModel;
 use DatosProveedor\Services\AddressService;

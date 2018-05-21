@@ -30,37 +30,37 @@ class IndexController extends BaseController
     // Instnciamos servicio de proveedores
     private function getSupplierService()
     {
-        return $this->supplierService = new SupplierModel();
+        return $this->supplierService = new SupplierService();
     }
 
 	// Instanciamos servicio de companias
     public function getUsersServices()
     {
-        return $this->usersServices = new UsersModel();
+        return $this->usersServices = new UsersService();
     }
 
     // Instanciamos servicio de tipos de mascota
     private function getTypePetService()
     {
-        return $this->typePetService = new TypePetModel();
+        return $this->typePetService = new TypePetService();
     }
 
     // Instanciamos servicio de sector de actividad
     private function getPetActivitySectorService()
     {
-        return $this->petActivitySector = new PetActivitySectorModel();
+        return $this->petActivitySector = new PetActivitySectorService();
     }
 
     // Instaciamos servicio de company type pet service
     private function getCompanyTypePetService()
     {
-        return $this->companyTypePetService = new CompanyTypePetModel();
+        return $this->companyTypePetService = new CompanyTypePetService();
     }
 
     // Instanciamos servicio de company activity sector
     private function getCompanySectorActivityService()
     {
-        return $this->companySectorActivityService = new CompanySectorActivityModel();
+        return $this->companySectorActivityService = new CompanySectorActivityService();
     }
 
 	public function indexAction()
