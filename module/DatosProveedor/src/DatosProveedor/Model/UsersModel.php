@@ -169,7 +169,6 @@ class UsersModel extends TableGateway
 	 */
 	public function verifyEmailExists($email)
 	{
-// 		$emailFull   = $email['email'];
 		
 	    $consult = $this->dbAdapter->query("SELECT count(email) as count FROM users WHERE email='$email'",Adapter::QUERY_MODE_EXECUTE);
 		

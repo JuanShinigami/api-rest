@@ -34,7 +34,8 @@ class SupplierModel extends TableGateway
 		$result       = $execute->toArray();
 		return $result;
 	}
-
+	
+	
 	public function getSupplierById($idUser)
 	{
 	    $getSupplier 	= $this->getSupplier($idUser);
@@ -93,45 +94,45 @@ class SupplierModel extends TableGateway
 	    return $new_result;
 	}
 	
-	
+
 	// Obtener proveedor por id de usuraio
 	public function getSupplier($idUser)
 	{
-	    // 	    print_r($idUser);
-	    
-	    $sql = new Sql($this->dbAdapter);
-	    $select = $sql->select();
-	    $select
-	    ->columns(array('id_company', 'name_company', 'company_description', 'website'))
-	    ->from(array('c' => $this->table))
-	    
-	    // JOIN TABLE ADDRESSES
-	    ->join(array('address' => 'addresses'), 'c.id_company = address.company_id', array('id_address', 'street', 'postalcode', 'number', 'state_id', 'district', 'neighborhood'), 'Inner')
-	    
-	    // JOIN TABLE COMPANY TYPE PET
-	    //->join(array('c_t_p' => 'company_type_pet'), 'c.id_company = c_t_p.id_company', array('id_type_pet', 't_p_status' => 'status'), 'Inner')
-	    
-	    // JOIN TABLE COMPANY ACTIVITY SECTOR
-	    //->join(array('c_a_s' => 'company_activity_sector'), 'c.id_company = c_a_s.id_company', array('id_activity_sector', 'a_s_status' => 'status'), 'Inner')
-	    
-	    // JOIN TABLA DE ANUNCIOS DE PROVEEDOR
-	    ->join(array('img_comp' => 'images_company'), 'c.id_company = img_comp.id_company', array('id_img' => 'id', 'img_name' => 'name', 'img_desc' => 'description'), 'Inner')
-	    
-	    // JOIN TABLE USERS
-	    ->join(array('u' => 'users'), 'c.id_users = u.id', array('email', 'profile' => 'perfil'), 'Inner')
-	    
-	    // JOIN TABLE USERS DETAILS
-	    ->join(array('u_d' => 'users_details'), 'u.id = u_d.id_user', array('id_user' => 'id', 'name', 'surname', 'phone'), 'Inner')
-	    
-	    ->where(array('c.id_users' => $idUser));
-	    //->where(array('r_q.foliocodeqr' => $codeQR));
-	    
-	    $selectString = $sql->getSqlStringForSqlObject($select);
-	    $execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
-	    $result       = $execute->toArray();
-	    
-	    return $result;
-	    
+// 	    print_r($idUser);
+
+		$sql = new Sql($this->dbAdapter);
+    	$select = $sql->select();
+    	$select
+      		->columns(array('id_company', 'name_company', 'company_description', 'website'))
+      		->from(array('c' => $this->table))
+
+      		// JOIN TABLE ADDRESSES
+      		->join(array('address' => 'addresses'), 'c.id_company = address.company_id', array('id_address', 'street', 'postalcode', 'number', 'state_id', 'district', 'neighborhood'), 'Inner')
+
+      		// JOIN TABLE COMPANY TYPE PET
+      		//->join(array('c_t_p' => 'company_type_pet'), 'c.id_company = c_t_p.id_company', array('id_type_pet', 't_p_status' => 'status'), 'Inner')
+
+      		// JOIN TABLE COMPANY ACTIVITY SECTOR
+      		//->join(array('c_a_s' => 'company_activity_sector'), 'c.id_company = c_a_s.id_company', array('id_activity_sector', 'a_s_status' => 'status'), 'Inner')
+
+      		// JOIN TABLA DE ANUNCIOS DE PROVEEDOR
+			->join(array('img_comp' => 'images_company'), 'c.id_company = img_comp.id_company', array('id_img' => 'id', 'img_name' => 'name', 'img_desc' => 'description'), 'Inner')
+
+      		// JOIN TABLE USERS
+      		->join(array('u' => 'users'), 'c.id_users = u.id', array('email', 'profile' => 'perfil'), 'Inner')
+
+      		// JOIN TABLE USERS DETAILS
+      		->join(array('u_d' => 'users_details'), 'u.id = u_d.id_user', array('id_user' => 'id', 'name', 'surname', 'phone'), 'Inner')
+
+      		->where(array('c.id_users' => $idUser));
+      		//->where(array('r_q.foliocodeqr' => $codeQR));
+  
+    	$selectString = $sql->getSqlStringForSqlObject($select);
+    	$execute      = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+    	$result       = $execute->toArray();
+
+    	return $result;
+		
 	}
 
 	// Obtener proveedor por id de proveedor

@@ -4,11 +4,11 @@ var $password_user         = $("#password_user");
 // Variable para almacenar el input repetir contrasena
 var $repeat_password_user  = $("#repeat_password_user");
 
-// FORMULARIO contraseña sesion para email 
+// FORMULARIO contraseña sesion para email
 $form_validate_email       = $("#form_validate_email");
 $form_update_email         = $("#form_update_email");
 
-// FORMULARIO contraseña sesion 
+// FORMULARIO contraseña sesion
 $form_validate_pass        = $("#form_validate_pass");
 $form_update_pass          = $("#form_update_pass");
 
@@ -34,7 +34,7 @@ $('select').material_select();
 $(document).ready(function() {
 
    // Vista actual
-   //console.log("currentView: " + currentView);
+   // console.log("currentView: " + currentView);
    $('.modal').modal();
 
    // Validamos la vista actual
@@ -61,7 +61,6 @@ $(document).ready(function() {
           		
             // Validamos si las contrasenas son iguales
           	if ($password_user.val() != $repeat_password_user.val()) {
-
           		// Mostramos alerta
 				swal(
 		  			'Atención',
@@ -70,9 +69,7 @@ $(document).ready(function() {
 				).catch(swal.noop);
 
 			} else {
-
 				if (grecaptcha.getResponse().length == 0) {
-					
 					// Mostramos alerta
 	          		swal(
 				  		'Opsss..',
@@ -80,18 +77,22 @@ $(document).ready(function() {
 				  		'warning'
 					).catch(swal.noop);
 
-	          	} else {
-
+	         } else {
+	        	 console.log();
                var parametros = new FormData($(this.form)[0]);
-	          		
+	          	
+               console.dir(parametros);
+               
 	          	// iniciamos peticion
 					$.ajax({
 		        			url        : $basePath + '/supplier/register',
 		        			type       : 'POST',
 		        			dataType   : 'json',
-                     contentType: false, //importante enviar este parametro en false
-                     processData: false, //importante enviar este parametro en false
-		        			data       : parametros//$(this.form).serialize(),
+                     contentType: false, // importante enviar este parametro
+											// en false
+                     processData: false, // importante enviar este parametro
+											// en false
+		        			data       : parametros// $(this.form).serialize(),
 		        	})
 		        	.done(function(response) {
 		        		console.log("success");
@@ -155,9 +156,9 @@ $(document).ready(function() {
             url         : $basePath + '/supplier/index',
             type        : 'POST',
             dataType    : 'json',
-            contentType : false, //importante enviar este parametro en false
-            processData : false, //importante enviar este parametro en false
-            data        : parametros//$(this.form).serialize(),
+            contentType : false, // importante enviar este parametro en false
+            processData : false, // importante enviar este parametro en false
+            data        : parametros// $(this.form).serialize(),
          })
          .done(function(response) {
             
@@ -194,7 +195,8 @@ $(document).ready(function() {
       }
    });
 
-   // VALIDAR FORMULARIO PARA COMPROBAR SI LA CONTRASEÑA ACTUAL DE INICIO DE SESION ES CORRECTA (Cambiar pass)
+   // VALIDAR FORMULARIO PARA COMPROBAR SI LA CONTRASEÑA ACTUAL DE INICIO DE
+	// SESION ES CORRECTA (Cambiar pass)
    $form_validate_pass.validetta({
       bubblePosition: 'bottom',
       bubbleGapTop: 10,
@@ -211,7 +213,7 @@ $(document).ready(function() {
             data: $(this.form).serialize(),
          })
          .done(function(response) {
-            //console.log(response.password[0].count);
+            // console.log(response.password[0].count);
 
             // Validamos la respuesta
             if (response.password[0].count == 1) {
@@ -238,7 +240,8 @@ $(document).ready(function() {
       }
    });
 
-   // VALIDAR FORMULARIO PARA COMPROBAR SI LA CONTRASEÑA ACTUAL DE INICIO DE SESION ES CORRECTA (Cambiar email)
+   // VALIDAR FORMULARIO PARA COMPROBAR SI LA CONTRASEÑA ACTUAL DE INICIO DE
+	// SESION ES CORRECTA (Cambiar email)
    $form_validate_email.validetta({
       bubblePosition: 'bottom',
       bubbleGapTop: 10,
@@ -255,7 +258,7 @@ $(document).ready(function() {
             data: $(this.form).serialize(),
          })
          .done(function(response) {
-            //console.log(response.password[0].count);
+            // console.log(response.password[0].count);
             
             // Validamos la respuesta
             if (response.password[0].count == 1) {
@@ -309,16 +312,18 @@ $(document).ready(function() {
                   url         : $basePath + '/users/updatepass',
                   type        : 'POST',
                   dataType    : 'json',
-                  contentType : false, //importante enviar este parametro en false
-                  processData : false, //importante enviar este parametro en false
-                  data        : parametros//$(this.form).serialize(),
+                  contentType : false, // importante enviar este parametro en
+										// false
+                  processData : false, // importante enviar este parametro en
+										// false
+                  data        : parametros// $(this.form).serialize(),
                })
                .done(function(response) {
-                  //console.log(response);
-                  //console.log("success");
+                  // console.log(response);
+                  // console.log("success");
                   if (response.status == 'ok') {
 
-                     //window.location = $basePath + '/users/perfil';
+                     // window.location = $basePath + '/users/perfil';
                      // Mostramos alerta
                      swal(
                         'Correcto',
@@ -375,13 +380,15 @@ $(document).ready(function() {
                url            : $basePath + '/users/updateemail',
                type           : 'POST',
                dataType       : 'json',
-               contentType    : false, //importante enviar este parametro en false
-               processData    : false, //importante enviar este parametro en false
-               data           : parametros//$(this.form).serialize(),
+               contentType    : false, // importante enviar este parametro en
+										// false
+               processData    : false, // importante enviar este parametro en
+										// false
+               data           : parametros// $(this.form).serialize(),
             })
             .done(function(response) {
-               //console.log(response);   
-               //console.log("success");
+               // console.log(response);
+               // console.log("success");
 
                if (response.status == 'ok') {
                   swal(
@@ -434,10 +441,10 @@ $(document).ready(function() {
    // ************************************************************************
    // Al hacer un cambio en el input imagen
    // ************************************************************************
-   /*$(".change_image_preview").change(function () {
-      // LLamamos a la funcion
-      previewImgArticle(this,"preview_img_pet");
-   });*/
+   /*
+	 * $(".change_image_preview").change(function () { // LLamamos a la funcion
+	 * previewImgArticle(this,"preview_img_pet"); });
+	 */
 
 });
 

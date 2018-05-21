@@ -1,6 +1,5 @@
 // Cuando carga el documento
 $(document).ready(function() {
-
 	// CARGAR DELEGACION O MUNICIPIO SI YA SE TIENE ASIGNADO UNO
 	loadDistrictSelected();
 	
@@ -64,6 +63,7 @@ $(document).ready(function() {
 	// AL HACER UN CAMBIO EN EL COMBO COLONIA
 	$("#neighborhood").change(function(event) {
 		
+		
 		// Opcion seleccionada
 		var $optionSelectedNeighborhood = $("#neighborhood option:selected");
 
@@ -98,6 +98,7 @@ function getAllDistrict($id_state)
 	var $optionsComboDistrict 	= '<option value="0">seleccione</option>';
 
 	// Llamada ajax
+	
 	$.ajax({
 		url 		: $basePath + "/datosProveedor/addresses/getalldistrict",
 		type 		: 'POST',

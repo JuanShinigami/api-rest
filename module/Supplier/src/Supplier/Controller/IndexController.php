@@ -2,19 +2,19 @@
 namespace Supplier\Controller;
 
 use DatosProveedor\Controller\BaseController;
-use DatosProveedor\Form\UsersForm;
-use DatosProveedor\Service\UsersService;
-// use Users\Form\UsersForm;
-// use Users\Service\UsersService;
-// use DatosProveedor\Services\PetActivitySectorService;
+// use DatosProveedor\Form\UsersForm;
+// use DatosProveedor\Service\UsersService;
+use Users\Form\UsersForm;
+use Users\Service\UsersService;
+use DatosProveedor\Services\PetActivitySectorService;
 use DatosProveedor\Services\TypePetService;
 use Supplier\Service\CompanySectorActivityService;
 use Supplier\Service\CompanyTypePetService;
 use Supplier\Service\SupplierService;
 use Zend\View\Model\ViewModel;
+use DatosProveedor\Model\TypePetModel;
 use Supplier\Model\SupplierModel;
 use DatosProveedor\Model\UsersModel;
-use DatosProveedor\Model\TypePetModel;
 use DatosProveedor\Model\PetActivitySectorModel;
 use Supplier\Model\CompanyTypePetModel;
 use Supplier\Model\CompanySectorActivityModel;
@@ -30,42 +30,36 @@ class IndexController extends BaseController
     // Instnciamos servicio de proveedores
     private function getSupplierService()
     {
-//         return $this->supplierService = new SupplierService();
         return $this->supplierService = new SupplierModel();
     }
 
 	// Instanciamos servicio de companias
     public function getUsersServices()
     {
-//         return $this->usersServices = new UsersService();
         return $this->usersServices = new UsersModel();
     }
 
     // Instanciamos servicio de tipos de mascota
     private function getTypePetService()
     {
-//         return $this->typePetService = new TypePetService();
         return $this->typePetService = new TypePetModel();
     }
 
     // Instanciamos servicio de sector de actividad
     private function getPetActivitySectorService()
     {
-//         return $this->petActivitySector = new PetActivitySectorService();
         return $this->petActivitySector = new PetActivitySectorModel();
     }
 
     // Instaciamos servicio de company type pet service
     private function getCompanyTypePetService()
     {
-//         return $this->companyTypePetService = new CompanyTypePetService();
         return $this->companyTypePetService = new CompanyTypePetModel();
     }
 
     // Instanciamos servicio de company activity sector
     private function getCompanySectorActivityService()
     {
-//         return $this->companySectorActivityService = new CompanySectorActivityService();
         return $this->companySectorActivityService = new CompanySectorActivityModel();
     }
 
@@ -80,12 +74,12 @@ class IndexController extends BaseController
         $profileUser    = (int) $this->getPerfilUserSesion();
 
         // PERFIL
-        $profile        = $this->getUsersServices()->getAll($idUser);//(15); //($idUser);
+        $profile        = $this->getUsersServices()->getAll($idUser); //($idUser);
         //echo "<pre>"; print_r($profile); exit;
 
         // OBTENER PROVEEDOR POR ID
-        $supplier       = $this->getSupplierService()->getSupplierById($idUser);//(15); //($idUser);
-        //echo "<pre>"; print_r($supplier); exit;
+        $supplier       = $this->getSupplierService()->getSupplierById($idUser); //($idUser);
+//         echo "<pre>"; print_r($supplier); exit;
 
         // Anuncios de compania
         $getCompanyNotice           = $supplier[0]['imgs_company'];
@@ -173,12 +167,12 @@ class IndexController extends BaseController
 	{
 		$layout   = $this->layout();
 		$layout->setTemplate('layout/layoutPets');
-
+		
 		$form     = new UsersForm("company_form");
-
+		
         // Obtenemos lista de typos de mascota
         $getAllTypePet = $this->getTypePetService()->fetchAll();
-        //echo "<pre>"; print_r($getAllTypePet); exit;
+//         echo "<pre>"; print_r($getAllTypePet); exit;
 
         // Obtenemos lista de sector de actividad
         $getAllPetActivitySector = $this->getPetActivitySectorService()->fetchAll();
@@ -198,7 +192,7 @@ class IndexController extends BaseController
                 $request->getFiles()->toArray()
             );
 
-    		//echo "<pre>"; print_r($formData); exit;
+//     		echo "<pre>"; print_r($formData); exit;
 
     		// Verificar el correo electronico
     		$verifyEmail = $this->getUsersServices()->verifyEmailExists($formData['email_user']);
