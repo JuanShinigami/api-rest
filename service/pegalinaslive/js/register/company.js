@@ -151,6 +151,7 @@ $(document).ready(function() {
          // Datos del formulario
          var parametros = new FormData($(this.form)[0]);
                   
+         console.log(parametros);
          // iniciamos peticion
          $.ajax({
             url         : $basePath + '/supplier/index',

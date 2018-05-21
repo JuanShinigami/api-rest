@@ -2,22 +2,14 @@
 namespace Supplier\Controller;
 
 use DatosProveedor\Controller\BaseController;
-// use DatosProveedor\Form\UsersForm;
-// use DatosProveedor\Service\UsersService;
-use Users\Form\UsersForm;
-use Users\Service\UsersService;
+use DatosProveedor\Form\UsersForm;
 use DatosProveedor\Services\PetActivitySectorService;
 use DatosProveedor\Services\TypePetService;
+use DatosProveedor\Services\UsersService;
 use Supplier\Service\CompanySectorActivityService;
 use Supplier\Service\CompanyTypePetService;
 use Supplier\Service\SupplierService;
 use Zend\View\Model\ViewModel;
-use DatosProveedor\Model\TypePetModel;
-use Supplier\Model\SupplierModel;
-use DatosProveedor\Model\UsersModel;
-use DatosProveedor\Model\PetActivitySectorModel;
-use Supplier\Model\CompanyTypePetModel;
-use Supplier\Model\CompanySectorActivityModel;
 
 class IndexController extends BaseController
 {

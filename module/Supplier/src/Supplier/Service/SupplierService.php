@@ -1,12 +1,9 @@
 <?php
 namespace Supplier\Service;
 
-use Supplier\Model\SupplierModel;
 use DatosProveedor\Services\AddressService;
-use Supplier\Service\CompanyTypePetService;
-use Supplier\Service\CompanySectorActivityService;
-use Supplier\Service\CompanyNoticeService;
-use DatosProveedor\Service\UsersService;
+use DatosProveedor\Services\UsersService;
+use Supplier\Model\SupplierModel;
 
 class SupplierService
 {
