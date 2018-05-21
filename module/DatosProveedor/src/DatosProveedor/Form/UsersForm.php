@@ -2,15 +2,10 @@
 
 namespace DatosProveedor\Form;
 
-use Zend\Form\Form;
-use DatosProveedor\Services\StatesService;
-// use Application\Services\PetService;
-// use Application\Services\TypePetService;
-// use Application\Services\PetActivitySectorService;
-use DatosProveedor\Services\TypePetService;
 use DatosProveedor\Services\PetActivitySectorService;
-use DatosProveedor\Model\TypePetModel;
-use DatosProveedor\Model\PetActivitySectorModel;
+use DatosProveedor\Services\StatesService;
+use DatosProveedor\Services\TypePetService;
+use Zend\Form\Form;
 
 class UsersForm extends Form
 {
@@ -326,23 +321,23 @@ class UsersForm extends Form
 	// Obtener todos los estados de mexico
 	private function getAllStatesOfMexico()
 	{
-// 		$statesService 	= new StatesService();
-// 		$statesOfMexico = $statesService->fetchAll();
-// 		//echo "<pre>"; print_r($statesOfMexico); exit;
-// 		$result 		= array();
+		$statesService 	= new StatesService();
+		$statesOfMexico = $statesService->fetchAll();
+		//echo "<pre>"; print_r($statesOfMexico); exit;
+		$result 		= array();
 
-// 		// Reecorrer datos
-// 		foreach($statesOfMexico as $state) {
-// 			$result[$state['id']] = $state['state'];
-// 		}
+		// Reecorrer datos
+		foreach($statesOfMexico as $state) {
+			$result[$state['id']] = $state['state'];
+		}
 
-// 		return $result;
+		return $result;
 	}
 
 	// Obtener los tipos de mascotas
 	private function getAllPetType()
 	{
-		$typePetService 	= new TypePetModel();
+		$typePetService 	= new TypePetService();
 		$typePet 			= $typePetService->fetchAll();
 		$result 			= array();
 
@@ -357,7 +352,7 @@ class UsersForm extends Form
 	// Obtener los sectores de actividad
 	private function getAllActivitySector()
 	{
-		$sectorActivityService 	= new PetActivitySectorModel();
+		$sectorActivityService 	= new PetActivitySectorService();
 		$sectorActivity 		= $sectorActivityService->fetchAll();
 		$result 				= array();
 

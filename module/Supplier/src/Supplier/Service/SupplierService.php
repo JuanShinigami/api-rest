@@ -353,7 +353,7 @@ class SupplierService
     private function resizeSupplierNotice($img_supplier, $nameImg)
     {
         // Ruta donde se almacenaran las imagenes
-        $path_img	= "./public/images/supplier/";
+        $path_img	= "./service/images/supplier/";
         
         //print_r(file_exists($path_img . $nameImg)); exit();
         
