@@ -1,0 +1,30 @@
+<h1>Sector</h1>
+<?php 
+$flash=$this->flashMessenger()
+            ->setMessageOpenFormat('<div%s>')
+            ->setMessageSeparatorString('')
+            ->setMessageCloseString('</div>');
+?>
+<table class="table">
+    <tr>
+        <td colspan="7">
+            <a class="btn btn-success" href="<?=$this->basePath()?>/crud/add">Añadir usuario</a> 
+              <?php echo $flash->render('add_correcto',array('btn', 'btn-success'));?>
+              <?php echo $flash->render('eliminado',array('btn', 'btn-success'));?>
+              
+        </td>
+    </tr>
+    <tr>
+        <th>ID</th>
+        <th>Sector</th>
+    </tr>
+    <?php foreach($sectorActivity as $sector){ ?>
+    <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0","#FFFFFF"))->next()?>">
+        <td><?=$sector["id"]?></td>
+        <td><?=$sector["sector"]?></td>
+        <td><a class="btn btn-primary" href="<?=$this->basePath()?>/crud/modificar/<?=$sector["id"]?>">Modificar</a></td>
+        <td><a class="btn btn-danger" href="<?=$this->basePath()?>/crud/eliminar/<?=$sector["id"]?>">Eliminar</a></td>
+        
+    </tr>
+    <?php } ?>
+</table>

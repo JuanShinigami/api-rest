@@ -20,4 +20,10 @@ class TypePetService
 		return $typePets;
 	}
 	
+	public function deletebyId($id)
+	{
+	    $tipoArticulo = $this->getTypePetModel()->deleteById($id);
+	    return $tipoArticulo;
+	}
+	
 }

@@ -1,0 +1,30 @@
+<h1>Modificar Sector</h1>
+<hr/>
+<?php 
+$flash=$this->flashMessenger()
+            ->setMessageOpenFormat('<div%s>')
+            ->setMessageSeparatorString('')
+            ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("Modificar sector");
+$form = $this->form;
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+echo $this->form()->openTag($form);
+echo $flash->render('duplicado',array('btn', 'btn-danger'));
+?>
+<div class="form_element">
+<?php
+    $sector = $form->get('sector');
+    echo $formLabel->openTag().$sector->getOption('label')." ";
+    echo $this->formInput($sector);
+    echo $this->formElementErrors($sector);
+    echo $formLabel->closeTag();
+?>
+</div>
+ 	
+<?php 
+echo $this->formElement($form->get('submit'));
+echo $this->form()->closeTag(); 
+?>

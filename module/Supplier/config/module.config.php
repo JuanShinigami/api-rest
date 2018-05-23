@@ -4,31 +4,66 @@ return array(
     'controllers'=>array(
         'invokables'=>array(
             'Supplier\Controller\Index'=>'Supplier\Controller\IndexController',
-         ),
-     ),
-     
-     'router'=>array(
-        'routes'=>array(
-            'supplier'=>array(
-                 'type'=>'Segment',
-                    'options'=>array(
-                        'route' => '/supplier[/[:action][/:id]]',
-                        'constraints' => array(
-                                'action'  =>  '[a-zA-Z][a-zA-Z0-9_-]*',
-                        ),
-                        
-                        'defaults'  =>  array(
-                                'controller' => 'Supplier\Controller\Index',
-                                'action'     => 'index'
-                         
-                        ),
-                    ),
-           ),
-       ),
+            'Supplier\Controller\Crud'=>'Supplier\Controller\CrudController',
+            'Supplier\Controller\Articulo'=>'Supplier\Controller\ArticuloController',
+        ),
     ),
     
-   //Cargamos el view manager
-   'view_manager' => array(
+    'router'=>array(
+        'routes'=>array(
+            'supplier'=>array(
+                'type'=>'Segment',
+                'options'=>array(
+                    'route' => '/supplier[/[:action][/:id]]',
+                    'constraints' => array(
+                        'action'  =>  '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    
+                    'defaults'  =>  array(
+                        'controller' => 'Supplier\Controller\Index',
+                        'action'     => 'index'
+                        
+                    ),
+                ),
+            ),
+            
+            //Nueva ruta para el nuevo controlador
+            'crud'=>array(
+                'type'=>'Segment',
+                'options'=>array(
+                    'route' => '/crud[/[:action][/:id]]',
+                    'constraints' => array(
+                        'action'  =>  '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults'  =>  array(
+                        'controller' => 'Supplier\Controller\Crud',
+                        'action'     => 'index'
+                        
+                    ),
+                ),
+            ),
+            
+            //Nueva ruta para el nuevo controlador
+            'articulo'=>array(
+                'type'=>'Segment',
+                'options'=>array(
+                    'route' => '/articulo[/[:action][/:id]]',
+                    'constraints' => array(
+                        'action'  =>  '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults'  =>  array(
+                        'controller' => 'Supplier\Controller\Articulo',
+                        'action'     => 'index'
+                        
+                    ),
+                ),
+            ),
+            
+        ),
+    ),
+    
+    //Cargamos el view manager
+    'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
@@ -41,7 +76,7 @@ return array(
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
-          'supplier' =>  __DIR__ . '/../view',
+            'supplier' =>  __DIR__ . '/../view',
         ),
-    ), 
- );                               
+    ),
+);                               

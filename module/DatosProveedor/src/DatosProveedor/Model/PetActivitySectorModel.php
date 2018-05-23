@@ -33,4 +33,10 @@ class PetActivitySectorModel extends TableGateway
 		$result       = $execute->toArray();
 		return $result;
 	}
+	
+	/* Borrar dato*/
+	public function deleteById($id)
+	{
+	    return $this->delete(array("id"=>$id));
+	}
 }
