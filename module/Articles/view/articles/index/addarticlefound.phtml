@@ -1,0 +1,1036 @@
+<!--<link rel="stylesheet" href="<?php //echo $this->basePath('/pegalinaslive/jQuery-autoComplete-master/jquery.auto-complete.css'); ?>">
+
+<script src="<?php //echo $this->basePath('/pegalinaslive/jQuery-autoComplete-master/jquery.auto-complete.js'); ?>"></script>-->
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery.formatCurrency-1.4.0/jquery.formatCurrency-1.4.0.min.js'); ?>"></script>
+<script src="<?php echo $this->basePath('/pegalinaslive/jquery-loading-overlay-master/src/loadingoverlay.min.js'); ?>"></script>
+
+<style>
+.circle-icon .material-icons {
+	position: absolute;
+	margin-top: -58px;
+	margin-left: -46px;
+	background-color: #009688;
+	color: white;
+	padding: 8px;
+	font-size: 3em;
+	/*border-radius: 50%; */
+	transform: rotate(15deg);
+}
+</style>
+<div class="row">
+
+	<div class="col s12 m12 l12 left-align" style="margin-bottom: 35px;">
+		<h3 class="grey-text text-darken-2 text-architects-daughter">Registra el art&iacute;culo encontrado</h3><br>
+	</div>
+
+	<div id="container_form_code_qr" class="col s12 m12 l12" style="margin-bottom: 35px;">
+		
+		<div class="card-panel">
+
+			<div class='circle-icon'>
+				<i class="material-icons fa fa-qrcode"></i>
+			</div>
+			
+
+			<?php 
+			$formQR = $this->formQR;
+			$formQR->prepare();
+			echo $this->form()->openTag($formQR);
+			?>
+
+
+				<div class="row">
+					<h4 class="grey-text" style="padding-left: 15px;">Ingresa el codigo que esta en la pegalina.</h4>
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12 m12 l12">
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('code_article')); ?>
+							<label for="code_article">C&oacute;digo</label>
+						</div>
+
+						<div class="input-field col s6 m6 l6">
+							<?php echo $this->formElement($formQR->get('repeat_code_article')); ?>
+							<label for="repeat_code_article">Repetir C&oacute;digo</label>
+						</div>
+					</div>
+
+
+				</div>
+
+
+				<div class="row" style="margin-top: 35px;">
+					
+					<div class="col s12 m12 l12">
+						<div class="col s6 m6 l6">
+							<button type="submit" id="btn_validate_codeQR" class="waves-effect waves-light btn-large teal col s12 m12 l12">Enviar</button>
+							<?php //echo $this->formElement($form->get('submitbutton')); ?>
+						</div>
+
+						<div class="col s6 m6 l6">
+							<a id="btn_cancel_validate_codeQR" href="<?php echo $this->basePath()."/articles/findarticles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+						</div>
+					</div>
+
+				</div>
+
+			<?php echo $this->form()->closeTag($formQR); ?>
+
+		</div>
+
+
+	</div>
+
+	<div class="col s12 m12 l12">
+
+		<div id="container_form_articles" style="display: none;">
+		
+			<div class="card-panel">
+
+				<div class='circle-icon'>	
+					<i class="material-icons">description</i>   
+				</div>
+
+				<?php 
+				$form = $this->form;
+				$form->prepare();
+				echo $this->form()->openTag($form);
+				echo $this->formElement($form->get('id'));
+				echo $this->formElement($form->get('id_register_qr'));
+				?>
+
+					<div class="row">
+						<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos del art&iacute;culo.</h4>
+					</div>
+
+					<div class="row">
+
+						<div class="col s12 m12 l6">
+
+							<div class="input-field col s12 m12 l12" style="display:none;">
+								<input type="text" name="asignated_to" id="asignated_to">
+								<label for="asignated_to">Asignado a:</label>
+							</div>
+							<div class="input-field col s12 m12 l12">
+							<?php echo $this->formElement($form->get('event_articles')); ?>
+							<label for="event_articles">Evento:</label>
+						</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('category')); ?>
+								<label for="category">Categor&iacute;a:</label>
+							</div>
+
+							<div style="display: none;" id="container_clothes_size" class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('clothes_size')); ?>
+								<label for="clothes_size">Talla:</label>
+							</div>
+
+							<div id="container_name_article" class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('name_article')); ?>
+								<label for="name_article">Art&iacute;culo:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('brand')); ?>
+								<label for="brand">Marca:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('color')); ?>
+								<label for="color">Color:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('model_serie')); ?>
+								<label for="model_serie">Modelo / N&uacute;mero de serie:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('reward')); ?>
+								<label for="reward">Recompensa $:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<?php echo $this->formElement($form->get('description')); ?>
+								<label for="description">Descripci&oacute;n:</label>
+							</div>
+
+								<!--<div class="input-field col s12 m6 l6">
+									<input type="hidden" name="type_hs" id="type_hs" class="validate" value="111">
+									<input type="hidden" name="id_status_hs" id="id_status_hs" class="validate" value="7">
+									<input type="hidden" name="id_articles_hs" id="id_articles_hs" class="validate">
+								</div>-->
+
+							
+							<div class="input-field col s12 m6 l6">
+									<input type="text" name="warehouse" id="warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el almac&eacute;n">
+									<label for="warehouse">Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m6 l6">
+								<input type="text" name="phone_warehouse" id="phone_warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el teléfono del almac&eacute;n">
+								<label for="phone_warehouse">Tel&eacute;fono Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<textarea id="comment" class="materialize-textarea" name="comment" data-validetta="required" data-vd-message-required="Ingresa algún comentario"></textarea>
+								<label for="comment">Comentario del almac&eacute;n:</label>
+							</div>
+							
+						</div>
+
+						<div class="col s12 m12 l6">
+
+							<div class="file-field input-field col s12 m12 l12">
+
+			      				<div class="btn">
+			        				<span>Imagen 1</span>
+			        				<!--<input type="file" name="imageone">-->
+			        				<?php echo $this->formElement($form->get('imageone')); ?>
+			      				</div>
+
+			      				<div class="file-path-wrapper">
+			        				<input class="file-path validate" type="text">
+			      				</div>
+
+			      				<div id="container_image_one" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+			      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image_one" src="https://canna-pet.com/wp-content/plugins/ajax-search-pro/img/default.jpg">	
+			      				</div>
+
+			    			</div>
+
+			    			<div class="file-field input-field col s12 m12 l12">
+
+			      				<div class="btn">
+			        				<span>Imagen 2</span>
+			        				<!--<input type="file" name="imagetwo">-->
+			        				<?php echo $this->formElement($form->get('imagetwo')); ?>
+			      				</div>
+
+			      				<div class="file-path-wrapper">
+			        				<input class="file-path validate" type="text">
+			      				</div>
+
+			      				<div id="container_image_two" class="center z-depth-4" style="height: 280px; width: 280px; margin: auto auto 2rem;">
+			      					<img class="" style="width: 100%; height: 100%; vertical-align: bottom; padding: 6px;" id="preview_image_two" src="https://canna-pet.com/wp-content/plugins/ajax-search-pro/img/default.jpg">	
+			      				</div>
+
+			    			</div>
+							
+						</div>
+
+					</div>
+
+					<div class="row" style="margin-top: 35px;">
+						
+						<div class="col s12 m12 l12">
+							
+							<div class="col s12 m6 l6">
+								<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+								<?php //echo $this->formElement($form->get('submitbutton')); ?>
+							</div>
+
+
+							<div class="col s12 m6 l6">
+								<a href="<?php echo $this->basePath()."/articles/findarticles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+							</div>
+							
+						</div>
+
+					</div>
+
+				<?php echo $this->form()->closeTag($form); ?>
+
+			</div>
+
+		</div>
+
+		<div id="container_form_articles_found" style="display: none;">
+
+			<div class="card-panel">
+
+				<div class='circle-icon'>	
+					<i class="material-icons">description</i>   
+				</div>
+
+				<form id="form_articles_found">
+
+					<div class="row">
+						<h4 class="grey-text" style="padding-left: 15px;">Ingresa los datos que se te solicitan.</h4>
+						<p class="grey-text" style="padding-left: 15px;">Para poder avisar al dueño del art&iacute;culo que fue localizado.</p>
+					</div>
+
+					<div class="row">
+
+						<div class="col s12 m12 l12">
+							<div class="input-field col s12 m6 l6">
+								<input type="hidden" name="type_hs" id="type_hs" class="validate" value="111">
+								<input type="hidden" name="id_status_hs" id="id_status_hs" class="validate" value="7">
+								<input type="hidden" name="id_articles_hs" id="id_articles_hs" class="validate">
+								<input type="hidden" name="id_code_qr" id="id_code_qr" class="validate">
+							</div>
+						</div>
+
+						<div class="col s12 m12 l12">
+
+							<div class="input-field col s12 m6 l6">
+								<input type="text" name="warehouse" id="warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el almac&eacute;n">
+								<label for="warehouse">Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m6 l6">
+								<input type="text" name="phone_warehouse" id="phone_warehouse" class="validate" data-validetta="required" data-vd-message-required="Ingresa el teléfono del almac&eacute;n">
+								<label for="phone_warehouse">Tel&eacute;fono Almac&eacute;n:</label>
+							</div>
+
+							<div class="input-field col s12 m12 l12">
+								<textarea id="comment" class="materialize-textarea" name="comment" data-validetta="required" data-vd-message-required="Ingresa algún comentario"></textarea>
+								<label for="comment">Comentario:</label>
+							</div>
+							
+						</div>
+						
+					</div>
+
+					<div class="row" style="margin-top: 35px;">
+						
+						<div class="col s12 m12 l12">
+								
+							<div class="col s12 m6 l6">
+								<button type="submit"  class="waves-effect waves-light btn-large teal col s12 m12 l12">Guardar</button>
+							</div>
+
+							<div class="col s12 m6 l6">
+								<a href="<?php echo $this->basePath()."/articles/findarticles" ?>" class="waves-effect waves-light btn-large red col s12 m12 l12">Cancelar</a>
+							</div>
+								
+						</div>
+
+					</div>
+
+				</form>
+				
+			</div>
+			
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+
+// *****************************************************
+// VALIDAR SI SE PUEDE OBTENER LA UBICACION 
+// *****************************************************
+if ("geolocation" in navigator) {
+	/* geolocation is available */
+	console.log('Geolocalización está disponible');
+} else {
+	/* geolocaiton IS NOT available */
+	console('La geolocalización no está disponible');
+}
+
+// Formulario Articulos
+var $form_articles                 = $("#articles");
+
+// Formulario Codigo QR
+var $form_QR                       = $("#form_codeqr");
+
+// Formulario Articulo encontrado
+var $form_articles_found           = $("#form_articles_found");
+
+// Codigo del QR
+var $code_qr_article               = $("#code_article");
+
+// Codigo del QR
+var $repeat_code_qr_article        = $("#repeat_code_article");
+
+// container_form_articles
+var $container_form_articles       = $("#container_form_articles");
+
+// container_form_articles_found
+var $container_form_articles_found = $("#container_form_articles_found");
+
+// btn_validate_codeQR
+var $btn_validate_codeQR           = $("#btn_validate_codeQR");
+
+// btn_cancel_validate_codeQR
+var $btn_cancel_validate_codeQR    = $("#btn_cancel_validate_codeQR");
+
+// id_register_qr
+var $id_register_qr                = $("#id_register_qr");
+
+// CONTENEDOR DEL FORMULARIO QR
+var $container_form_code_qr        = $("#container_form_code_qr");
+
+// NOMBRE ARTICULO
+var $name_article                  = $("#name_article");
+
+// CATEGORIA
+var $category                      = $("#category");
+
+// clothes_size
+var $clothes_size                  = $("#clothes_size");
+
+// container_clothes_size
+var $container_clothes_size        = $("#container_clothes_size");
+
+// ES UN ARTICULO NUEVO;
+var isNewAticle 				   = false;
+
+var id_article_val;
+var id_user_val;
+var email_owner_val;
+
+// *****************************************************
+// CORRECTO AL OBTENER UBICACION
+// *****************************************************
+function success(position)
+{
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    //console.log("Latitude: " + latitude + " Longitude: " + longitude);
+
+    // OBJETO CON LOS DATOS DE LA UBICACION
+    var $objDataLocationArticle = {
+    	id_articles : $("#id_articles_hs").val(),
+    	latitude    : latitude,
+    	longitude   : longitude,
+    	addres      : ""
+    };
+
+    // LLAMAMOS A LA FUNCION QUE GUARDAR LA UBICACION DEL ARTICULO
+    saveLastLocationArticle($objDataLocationArticle);
+};
+
+// *****************************************************
+// ERROR AL OBTENER UBICACION
+// *****************************************************
+  function error()
+  {
+    //console.log("No se puede recuperar tu ubicación");
+
+    // OBJETO CON LOS DATOS DE LA UBICACION
+    var $objDataLocationArticleNot = {
+    	id_articles : $("#id_articles_hs").val(),
+    	latitude    : 0,
+    	longitude   : 0,
+    	addres      : ""
+    };
+
+    // LLAMAMOS A LA FUNCION QUE GUARDAR LA UBICACION DEL ARTICULO
+    saveLastLocationArticle($objDataLocationArticleNot);
+  };
+
+	// *****************************************************
+	// GUARDAR LA UBICACION DE LA PERSONA QUE ESCANEA EL CODIGO
+	// *****************************************************
+	function saveLastLocationArticle($dataLocation)
+	{
+		//console.log("VOY A GUARDAR TU UBICACION");
+		//console.log("dataLocation: " + JSON.stringify($dataLocation));
+		
+		$.ajax({
+			url      : $basePath + '/articles/savelastlocation',
+			type     : 'POST',
+			dataType : 'json',
+			data     : JSON.stringify($dataLocation),
+		})
+		.done(function(response) {
+				
+			//console.log(JSON.stringify(response));
+
+		})
+		.fail(function() {
+			//console.log("error!!!");
+		})
+		.always(function() {
+			//console.log("complete");
+		});
+
+	};
+
+// ***********************************************************************
+// EVENTOS QUE SE EJECUTAN CUANDO INICIA UN AJAX Y CUANDO TERMINA
+// ***********************************************************************
+$(document)
+	.ajaxStart(function () {
+		console.log("Inicia Ajax");
+
+		// Iniciamos panel de carga
+		$.LoadingOverlay("show");
+	})
+	.ajaxStop(function () {
+		console.log("Termina Ajax");
+
+		// ocultamos panel de carga
+		$.LoadingOverlay("hide");
+	});
+
+// ***********************************************************************
+// Cuando el documento esta listo
+// ***********************************************************************
+$(document).ready(function() {
+
+	// ***********************************************************************
+	// INICIALIZAMOS LOS COMBOS
+	// ************************************************************************
+	$('#category, #clothes_size, #color, #name_article').material_select(); //inicializar el select de materialize
+
+	// ************************************************************************
+	// PERMITIR SOLO NUMEROS EN EL CAMPO RECOMPENSA
+	// ************************************************************************
+	$("#reward").keyup(function (e){
+ 		this.value = (this.value).replace(/[^0-9-.]/g, '');
+	});
+
+	// ************************************************************************
+	// FORMATO MONEDA EL CAMPO RECOMPENSA
+	// ************************************************************************
+	$('#reward').blur(function(){
+		$('#reward').formatCurrency({ colorize:true });
+	});
+
+	// ************************************************************************
+	// CAMBIO EN EL CAMPO DE CATEGORIA
+	// ************************************************************************
+	$category.on('change', function(e){
+
+		// Valor del elemento sseleccionado
+		var $valCat  = $(this).val();
+		//console.log("Valor de la categoria: " + $valCat);
+		// Texto del elemento seleccionado
+		var $txtCat  = $( "#category option:selected" ).text();
+
+		// Si la categoria es diferente de vacio
+		if ($valCat != "") {
+
+			// Validamos el tipo de categoria
+			if ($valCat == 1 && $txtCat == "Ropa") {
+
+				// FUNCION QUE GENERA LAS OPCIONES DEL SELECT NOMBRE
+				getNameArticlesByIdCategory($valCat);
+
+				// Mostramos la talla
+				$container_clothes_size.show();
+
+				// Agregamos atributo de requerido
+				$clothes_size.attr('data-validetta', 'required');
+
+				// Agregamos un mensaje al atributo
+				$clothes_size.attr('data-vd-message-required', 'Por favor ingresa la talla!');
+
+				$('#clothes_size').val("");
+	        	$('#clothes_size').material_select();
+
+	        	// Limpiamos el campo de nombre
+	        	//$name_article.val("");
+
+			} else if($valCat == 65 || $txtCat == "Varios" || $txtCat == "varios") {
+
+				/***********************************************/
+				// MODIFICAMOS EL TIPO DE CAMPO DE SELECT INPUT
+				/***********************************************/
+
+				// Eliminamos el combo y creamos una caja de texto
+				$('#container_name_article').html('<input name="name_article" id="name_article" class="validate" type="text" value="" /><label for="name_article">Artículo</label>');
+
+				// Ocultamos la talla
+				$container_clothes_size.hide();
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-validetta');
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-vd-message-required');
+
+				$('#clothes_size').val("");
+	        	$('#clothes_size').material_select();
+
+			} else {
+
+				// FUNCION QUE GENERA LAS OPCIONES DEL SELECT NOMBRE
+				getNameArticlesByIdCategory($valCat);
+
+				// Ocultamos la talla
+				$container_clothes_size.hide();
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-validetta');
+
+				// Quitamos atributo
+				$clothes_size.removeAttr('data-vd-message-required');
+
+				$('#clothes_size').val("");
+	        	$('#clothes_size').material_select();
+
+			}
+
+		} else {
+
+			// LIMPIAMOS EL SELECT DE NOMBRE DE ARTICULO
+			$('#name_article')
+				.empty()
+				.append('<option selected="selected" value="">Selecciona un artículo</option>');
+
+			// Seteamos por default una opcion
+			$('#name_article').val("");
+
+			// Inicializamos nuevamente el select de nombre de articulo
+			$('#name_article').material_select();
+
+		}
+
+	});
+
+	// ************************************************************************
+	// funcion que obtiene los nombres de los articulos dependiendo la catgoria
+	// ************************************************************************
+	function getNameArticlesByIdCategory($id_category)
+	{
+		// Creamos un select dinamico
+		$name_article_dynamic = $('<select class="validate" name="name_article" id="name_article"><option name="name_article" selected="selected" value="">Selecciona un artículo</option></select><label for="name_article">Art&iacute;culo:</label>');
+
+		// Agregamos al contenedor el select
+		$('#container_name_article').html($name_article_dynamic).promise().done(function(){
+
+			// Inicializamos el combo
+			$('#name_article').material_select();
+
+			$.ajax({
+				url: $basePath + '/articles/getallsubcategorys',
+				type: 'POST',
+				dataType: 'json',
+				data: {id_parent: $id_category},
+			})
+			.done(function(response) {
+
+				// LLENAMOS DINAMICAMENTE EL COMBO DE ARTICULO
+				$.each(response.subCategorys, function(index, el) {
+					$('#name_article').append('<option value="'+el.id+'">'+el.namecategory+'</option>');
+				});
+
+				// Seteamos por default una opcion
+				$('#name_article').val("");
+
+				// Inicializamos nuevamente el select de nombre de articulo
+				$('#name_article').material_select();
+
+			})
+			.fail(function() {
+				//console.log("error");
+			})
+			.always(function() {
+				//console.log("complete");
+			});
+
+     	});
+		
+	}
+
+	// ************************************************************************
+	// FUNCION QUE GENERA UNA PREVIEW DE LA IMAGEN
+	// ************************************************************************
+	function previewImgArticle(input, img_art) {
+
+		if (typeof (FileReader) != "undefined") {
+
+			var image_preview = $("#"+img_art);
+
+			// Limpiar img preview
+	 		image_preview.empty();
+
+	 		var reader = new FileReader();
+
+            reader.onload = function (e) {
+                image_preview.attr('src', e.target.result);
+            }
+            //image_holder.show();
+            reader.readAsDataURL(input.files[0]);
+
+ 		} else {
+            alert("Este navegador no admite FileReader.");
+        }
+	}
+
+	// ************************************************************************
+	// Al hacer un cambio en el input imagen 2
+	// ************************************************************************
+    $("#imagetwo").change(function () {
+    	// LLamamos a la funcion
+        previewImgArticle(this,"preview_image_two");
+    });
+
+    // ************************************************************************
+    // Al hacer un cambio en el input imagen 1
+    // ************************************************************************
+	$("#imageone").on('change', function () {
+		// LLamamos a la funcion
+        previewImgArticle(this,"preview_image_one");
+    });
+
+	// ************************************************************************
+	// VALIDAR FORMULARIO DE ARTICULOS
+	// ************************************************************************
+	$form_articles.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/addarticlefound',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(JSON.stringify(response));
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+	        				
+	        				window.location = $basePath + '/articles/findarticles';
+
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        			swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+	});
+
+	// ************************************************************************
+	// VALIDAR FORMULARIO DE ARTICULOS ENCONTRADOS
+	// ************************************************************************
+	$form_articles_found.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+					
+					var parametros = new FormData($(this.form)[0]);
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/addarticlefound',
+	        			type: 'POST',
+	        			dataType: 'json',
+						contentType: false, //importante enviar este parametro en false
+						processData: false, //importante enviar este parametro en false
+	        			data: parametros//$(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			console.log(JSON.stringify(response));
+	        			//console.log("success");
+	        			if (response.status == 'ok') {
+
+	        				var textAlertAddArt = "El artículo encontrado se agregó exitósamente!";
+
+	        				// VALIDAMOS SI EL ARTICULO ES NUEVO O YA ESTA ASIGNADO
+	        				// SI ESTA ASIGNADO ENVIAMOS UNA NOTIFICACION
+	        				if (!isNewAticle) {
+
+								textAlertAddArt = "El artículo encontrado se agregó exitósamente, Y se notificó al dueño!";
+
+								//enviarNotificacion();
+								//console.log(textAlertAddArt);
+
+								var comentario         = "Encontramos tu artículo.  ";
+								var almacen            = $("#container_form_articles_found #warehouse").val();
+								var telefono_almacem   = $("#container_form_articles_found #phone_warehouse").val();
+								var comentario_almacen = $("#container_form_articles_found #comment").val();
+
+								// ARREGLO CON LOS DATOS DE LA NOTIFICACION
+								var arrayDataArticleFound = {
+									id_article			: id_article_val,
+									id_user				: id_user_val,
+									email_owner			: email_owner_val,
+									id_code_qr			: $('#id_code_qr').val(),
+									name_p				: "",//appSettings.getString("current_nameUser"),
+									email_p				: "",//appSettings.getString("current_mailUser"),
+									phone_p				: "",//appSettings.getString("current_phoneUser"),
+									comment_p			: "Una institución encontro tu artículo.",
+									isFound				: true,
+									warehouse			: almacen,
+									phone_warehouse		: telefono_almacem,
+									comment_warehouse	: comentario_almacen
+								};
+
+								//console.log("arrayDataArticleFound:" + JSON.stringify(arrayDataArticleFound));
+
+								$.ajax({
+				        			url: $basePath + '/articles/sendemailarticleowner',
+				        			type: 'POST',
+				        			dataType: 'json',
+				        			data: JSON.stringify(arrayDataArticleFound),
+				        		})
+				        		.done(function(response) {
+				        			//console.log(JSON.stringify(response));
+
+				        			if (response.status == 'ok') {
+
+				        				swal({
+										  title: 'Artículo Encontrado',
+										  text: textAlertAddArt,
+										  type: 'info',
+										  showCancelButton: false,
+										  confirmButtonColor: '#3085d6',
+										  //cancelButtonColor: '#d33',
+										  confirmButtonText: 'Aceptar'
+										}).catch(swal.noop).then(function () {
+											// Redirigimos a la lista de articulos encontrados
+											window.location = $basePath + '/articles/findarticles';
+										});
+
+				        			} else {
+				        				window.location = $basePath + '/articles/findarticles';
+				        			}
+				        			
+				        		})
+				        		.fail(function() {
+				        			//console.log("error");
+				        			window.location = $basePath + '/articles/findarticles';
+				        			/*swal(
+						  				'Opsss..',
+						  				'¡Ocurrio un error intentalo de nuevo!',
+						  				'error'
+									).catch(swal.noop);*/
+				        		})
+				        		.always(function() {
+				        			//console.log("complete");
+				        		});
+
+							} else {
+								//console.log(textAlertAddArt);
+							};
+
+	        			} else if(response.status == 'fail'){
+	        				swal(
+			  					'Opsss..',
+			  					'¡Ocurrio un error intentalo de nuevo!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        			swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+
+
+        	}
+	});
+
+	// ************************************************************************
+	// VALIDAR FORMULARIO DE CODIGO QR
+	// ************************************************************************
+	$form_QR.validetta({
+    		bubblePosition: 'bottom',
+    		bubbleGapTop: 10,
+        	bubbleGapLeft: 0,
+			realTime : true,
+			onValid : function( event ) {
+
+				event.preventDefault();
+
+				// Validamos si los codigos qr son correctos
+				if ($code_qr_article.val() != $repeat_code_qr_article.val()) {
+					// Mostramos alerta
+					swal(
+		  				'Atención',
+		  				'¡Los codigos no coinciden!',
+		  				'error'
+					).catch(swal.noop);
+						
+				} else {
+
+	        		$.ajax({
+	        			url: $basePath + '/articles/validatecodeqr',
+	        			type: 'POST',
+	        			dataType: 'json',
+	        			data: $(this.form).serialize(),
+	        		})
+	        		.done(function(response) {
+	        			//console.log(JSON.stringify(response));
+	        			
+	        			// VALIDAMOS SI EL CODIGO INGRESADO EXISTE
+	        			if (response.data[0].count == 1) {
+
+	        				// VALIDAMOS QR (ARTICULOS - MASCOTAS)
+	        				if(response.data[0].type_qr == 1) {
+
+		     					// VALIDAMOS EL ESTATUS DEL CODIGO
+		     					if (response.data[0]['id_status'] == 1 && response.data[0]['id_article'] == -1) {
+
+		     						//Cambiamos bandera que indica que el artículo es nuevo
+									isNewAticle = true;
+		     						
+			        				swal(
+					  					'Correcto..',
+					  					'¡El código ingresado es valido!',
+					  					'success'
+									).catch(swal.noop);
+
+									// OCULTAMOS EL CONTENEDOR DEL FORM CODIGO QR
+									$container_form_code_qr.slideUp();
+
+									$container_form_articles.show("slow");
+
+									$code_qr_article.prop("disabled", true);
+
+									$repeat_code_qr_article.prop("disabled", true);
+
+									$btn_validate_codeQR.prop("disabled", true);
+
+									$btn_cancel_validate_codeQR.attr("disabled", true);
+
+									// Añadimos un valor al campo $id_register_qr
+									$id_register_qr.val(response.data[0]['id']);
+
+		     					} else if(response.data[0]['id_status'] != 1 && response.data[0]['id_article'] != -1) {
+
+		     						//Cambiamos bandera que indica que el artículo esta registrado por otro usuario
+									isNewAticle = false;
+
+									// OBTENEMOS UBICACION
+									navigator.geolocation.getCurrentPosition(success, error);
+
+		     						swal(
+					  					'Correcto..',
+					  					'¡El código ingresado es valido. Pero ya esta asignado a un artículo!',
+					  					'success'
+									).catch(swal.noop);
+
+									// OCULTAMOS EL CONTENEDOR DEL FORM CODIGO QR
+									$container_form_code_qr.slideUp();
+
+		     						// MOSTRAMOS EL CONTENEDOR DEL FORM DE ARTICULOS ENCONTRADOS
+									$container_form_articles_found.show('slow');
+
+									$code_qr_article.prop("disabled", true);
+
+									$repeat_code_qr_article.prop("disabled", true);
+
+									$btn_validate_codeQR.prop("disabled", true);
+
+									$btn_cancel_validate_codeQR.attr("disabled", true);
+
+									// ASIGNAMOS UN VALOR AL CAMPO id_articles_hs
+									$('#id_articles_hs').val(response.data[0].id_article);
+
+									// ASIGNAMOS UN VALOR AL CAMPO id_code_qr
+									$('#id_code_qr').val(response.data[0].id);
+
+									// Asignamos valores para poder enviar una notificacion
+									id_article_val 	= response.data[0].id_article;
+									id_user_val 	= response.data[0].id_user;
+									email_owner_val = response.data[0].email_owner;
+		     					}
+
+	     					} else if(response.data[0].type_qr == 2) {
+								swal(
+									'Opsss..',
+									'¡El código ingresado es para agregar una mascota!. Intenta con otro.',
+									'warning'
+								).catch(swal.noop);
+							} else {
+								swal(
+									'Opsss..',
+									'¡El código ingresado no es valido!',
+									'warning'
+								).catch(swal.noop);
+							};
+
+	        			} else if(response.data[0].count == 0) {
+	        				swal(
+			  					'Opsss..',
+			  					'¡El código ingresado no es valido!',
+			  					'error'
+							).catch(swal.noop);
+	        			}
+
+	        		})
+	        		.fail(function() {
+	        			console.log("error");
+	        			swal(
+			  				'Opsss..',
+			  				'¡Ocurrio un error intentalo de nuevo!',
+			  				'error'
+						).catch(swal.noop);
+	        		})
+	        		.always(function() {
+	        			console.log("complete");
+	        		});
+
+        		}
+        	}
+	});
+
+});
+	
+</script>

@@ -34,6 +34,35 @@ class TypePetModel extends TableGateway
 		return $result;
 	}
 	
+	public function addArticulo($articulo){
+	    $insert = $this->insert(array(
+	        "type" => $articulo,
+	        "registration_date"=> date("Y-m-d H:i:s"),
+	        "registration_update"=> date("Y-m-d H:i:s")
+	    ));
+	    return $insert;
+	}
+	public function getArticulo($id){
+	    $sql = new Sql($this->dbAdapter);
+	    $select = $sql->select();
+	    $select->columns(array('articulo' =>'type'))
+	    ->from($this->table)
+	    ->where(array('id' => $id));
+	    
+	    $selectString = $sql->getSqlStringForSqlObject($select);
+	    $execute = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
+	    $result=$execute->toArray();
+	    return $result[0];
+	}
+	
+	public function updateArticulo($id,$articulo){
+	    $update=$this->update(array(
+	        "type"    => $articulo
+	    ),
+	        array("id"=>$id));
+	    return $update;
+	}
+	
 	/* Borrar dato*/
 	public function deleteById($id)
 	{

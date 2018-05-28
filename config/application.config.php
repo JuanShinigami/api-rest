@@ -13,7 +13,9 @@ return array(
         'DatosProveedor',
         'Auth',
         'Users',
-        'Pets'
+        'Pets',
+        'Articles'
+        
     ),
 
     // These are various options for the listeners attached to the ModuleManager

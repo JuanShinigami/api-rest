@@ -1,0 +1,31 @@
+<h1>Modificar Articulo</h1>
+<hr/>
+<?php 
+$flash=$this->flashMessenger()
+            ->setMessageOpenFormat('<div%s>')
+            ->setMessageSeparatorString('')
+            ->setMessageCloseString('</div>');
+?>
+<?php
+$this->headTitle("Modificar articulo");
+$form = $this->form;
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+echo $this->form()->openTag($form);
+echo $flash->render('duplicado',array('btn', 'btn-danger'));
+?>
+<div class="form_element">
+<?php
+// print_r($form);exit;
+    $articulo = $form->get('articulo');
+    echo $formLabel->openTag().$articulo->getOption('label')." ";
+    echo $this->formInput($articulo);
+    echo $this->formElementErrors($articulo);
+    echo $formLabel->closeTag();
+?>
+</div>
+ 	
+<?php 
+echo $this->formElement($form->get('submit'));
+echo $this->form()->closeTag(); 
+?>

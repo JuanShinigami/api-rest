@@ -20,6 +20,18 @@ class TypePetService
 		return $typePets;
 	}
 	
+	public function addArticulo($articulo){
+	    return $this->getTypePetModel()->addArticulo($articulo);
+	}
+	
+	public function getArticulo($id){
+	    return $this->getTypePetModel()->getArticulo($id);
+	}
+	
+	public function updateArticulo($id,$articulo){
+	    return $this->getTypePetModel()->updateArticulo($id, $articulo);
+	}
+	
 	public function deletebyId($id)
 	{
 	    $tipoArticulo = $this->getTypePetModel()->deleteById($id);
