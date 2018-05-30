@@ -9,7 +9,7 @@
 	}
 	.background-image-one {
 		/*background-image: url(https://images.pexels.com/photos/374825/pexels-photo-374825.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);*/
-		background-image: url('https://images.pexels.com/photos/341378/pexels-photo-341378.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');
+		background-image: url('https://static.wixstatic.com/media/54dde9_0c4915832a664c398e2bf6e71384f511~mv2.png/v1/fill/w_600,h_253,al_c,usm_0.66_1.00_0.01/54dde9_0c4915832a664c398e2bf6e71384f511~mv2.png');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -82,6 +82,13 @@
 	ul.dropdown-content .select-dropdown .active {
 		z-index: 900 !important;
 	}*/
+	
+	.orange{
+	   background-color: #F70025;
+	}
+	nav{
+	   background-color: #F70025;
+	}
 </style>
 
 <div class="row">
@@ -186,7 +193,7 @@
 				
 				<div class="row">
 					<div class="col s12 m12 l12">
-						<h5 class="center white-text">La mejor guía para consentir a tus mascotas</h5>
+						<h5 class="center white-text">La mejor guía para conseguir articulos</h5>
 						<p class="center white-text">Los campos con * son obligatorios</p>
 					</div>
 				</div>
@@ -231,7 +238,7 @@
 
 				<div class="row" style="margin-bottom: 0;">
 					<div class="col s12 m12 l12 center">
-						<button type="submit" id="btn_serch" class="waves-effect waves-light btn-large pink col s12 m6 l6 offset-m3 offset-l3">Buscar</button>
+						<button type="submit" id="btn_serch" class="waves-effect waves-light btn-large col s12 m6 l6 offset-m3 offset-l3 orange">Buscar</button>
 					</div>
 				</div>
 
@@ -475,7 +482,7 @@ var $basePath               = '<?php echo $this->basePath(); ?>';
 
 	  							});
 
-	                			$contentHtml 	+= '<div class="card" style="border-bottom-width: 3px; border-bottom-color: #D41C76; border-bottom-style: solid; height: 300px;">'
+	                			$contentHtml 	+= '<div class="card" style="border-bottom-width: 3px; border-bottom-color: #F25C00; border-bottom-style: solid; height: 300px;">'
 	                							+	'<div class="card-content" style="height: 100%;">'
 	                							+ 		'<div class="row" style="margin-bottom: 0; height: 100%;">'
 	                							+			'<div class="col s12 m4 l4" style="height: 100%;">'
@@ -486,9 +493,9 @@ var $basePath               = '<?php echo $this->basePath(); ?>';
 	                							+			'<div class="col s12 m8 l8" style="height: 100%;">'
 	                							+				'<h5 class="center blue-grey-text text-darken-3">' + supplier.name_company + '</h5>'
 	                							/*+ 				'<hr class="flair">'*/
-	                							+ 				'<p style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">&#xE0C8;</i>' + $addressCompany + '<p/>'
-	                							+				'<p style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #00acc1;" class="material-icons">&#xE873;</i>' + supplier.company_description + '</p>'
-	                							+				'<a href="' + $basePath + '/supplier/profile/' + supplier.id_company + '" class="waves-effect waves-light btn pink" style="position: absolute; bottom: 24px; right: 24px;">Ver mas</a>'
+	                							+ 				'<p style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #F25C00;" class="material-icons">&#xE0C8;</i>' + $addressCompany + '<p/>'
+	                							+				'<p style="text-align: justify;" class="blue-grey-text text-darken-2"><i style="color: #F25C00;" class="material-icons">&#xE873;</i>' + supplier.company_description + '</p>'
+	                							+				'<a href="' + $basePath + '/supplier/profile/' + supplier.id_company + '" class="waves-effect waves-light btn " style="position: absolute; bottom: 24px; right: 24px;">Ver mas</a>'
 	                							+			'</div>'
 	                							+		'</div>'
 	                							+	'</div>'

@@ -40,7 +40,7 @@
     .footer-main{
         padding-top: 70px;
         padding-bottom: 50px;
-        background-color: #263238;
+        background-color: #F70025;
     }
     .footer-main a img {
         width: 280px;
@@ -158,8 +158,8 @@
         height: 40px;
         line-height: 40px;
         text-align: center;
-        background-color: #37474f;
-        color:#bdbdbd;
+        background-color:#F7EFE2;
+        color:#F9A603;
         font-size: 20px;
         border-radius: 50%;
         -webkit-border-radius: 50%;
@@ -172,12 +172,12 @@
         z-index: 1;
     }
     .footer-social li a i:hover{
-        background-color: #F44336;
-        color:#fff;
+        background-color: #F9A603;
+        color: #F7EFE2;
     }
     .copyrights{
         display: block;
-        color: #bdbdbd;
+        color: #F7EFE2;
         font-weight: 300;
     }
     @media only screen and (max-width: 767px) {

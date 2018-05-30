@@ -201,7 +201,7 @@ class UsersForm extends Form
 			'name' => 'pet_type',
 			'type' => 'Select',
 			'options' => array(
-				'label' => 'Tipo mascota',
+				'label' => 'Tipo articulo',
 				'empty_option' => 'seleccione',
 				'value_options' => $this->getAllPetType()
 			),

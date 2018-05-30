@@ -2160,7 +2160,7 @@ download-section .center-heading h3 {
 .footer-main{
     padding-top: 80px;
     padding-bottom: 30px;
-    background-color: #263238;
+    background-color: #F70025;
 }
 .footer-main a img {
     width: 280px;
@@ -2278,8 +2278,8 @@ download-section .center-heading h3 {
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background-color: #37474f;
-    color:#bdbdbd;
+    background-color: #F7EFE2;
+    color:#F25C00;
     font-size: 20px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -2297,7 +2297,7 @@ download-section .center-heading h3 {
 }
 .copyrights{
     display: block;
-    color: #bdbdbd;
+    color: #17202A;
     font-weight: 300;
 }
 @media only screen and (max-width: 767px) {
