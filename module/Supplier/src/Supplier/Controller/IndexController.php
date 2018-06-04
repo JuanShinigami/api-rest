@@ -272,4 +272,21 @@ class IndexController extends BaseController
         
         return new ViewModel($view);
     }
+
+    public function listaAction(){
+        $listaProveedores = $this->getSupplierService()->fetchAll();
+        $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+            "response" => $listaProveedores,
+        )));
+        
+        return $response;
+    }
 }
+
+
+
+
+
+
+
+
