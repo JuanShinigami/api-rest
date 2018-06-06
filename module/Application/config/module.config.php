@@ -84,7 +84,8 @@ return array(
             'Application\Controller\VoluntarySimulacrum' => Controller\VoluntarySimulacrumController::class,
             'Application\Controller\RecoverFolio' => Controller\RecoverFolioController::class,
             'Application\Controller\VoluntarySimulacrumIndividual' => Controller\VoluntarySimulacrumIndividualController::class,
-            'Application\Controller\FechaHora' => Controller\FechaHoraController::class
+            'Application\Controller\FechaHora' => Controller\FechaHoraController::class,
+            'Application\Controller\Clientes' => Controller\ClientesController::class
         ),
     ),
     'view_manager' => array(
