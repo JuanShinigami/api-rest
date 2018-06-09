@@ -507,10 +507,11 @@ section::before {
 }
 
 .home-sectiontwo::before {
-    background-image: url('../img/pets/perro1500x660.png');
+    background-image: url('../img/voluntario/combo1.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-size:cover;
+    width: 72%;
 }
 @media only screen and (max-width: 750px) {
 .home-sectiontwo::before {
@@ -2346,4 +2347,43 @@ download-section .center-heading h3 {
     .error-block .details h3 {
         font-size: 28px;
     }
+}
+
+
+.call2action{
+    background:#ffffff;
+    padding:60px 0;
+    text-align: center;
+}
+.call2action h3{
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.call2action p{
+    font-weight: 400;
+    letter-spacing: 0.1px;
+}
+.call2action i {
+    background: none repeat scroll 0 0 #F7EFE2;
+    border-radius: 50% 50% 50% 50%;
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 45px;
+    -webkit-transition:all 0.4s ease-in-out;
+    -moz-transition:all 0.4s ease-in-out;
+    -o-transition:all 0.4s ease-in-out;
+    transition:all 0.4s ease-in-out;
+}
+.call2action .col-md-4:hover i{
+    background: #F9A603;
+    color:#ffffff;
+}
+.call2action .col-md-4:hover h3{
+    color: #F9A603;
+}
+.purchase .container {
+	padding:0 20px;
+}
+.purchase .container .span9 {
+	margin-right:20px;
 }

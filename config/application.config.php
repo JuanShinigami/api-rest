@@ -14,7 +14,8 @@ return array(
         'Auth',
         'Users',
         'Pets',
-        'Articles'
+        'Articles',
+        'Experto',
         
     ),
 
