@@ -14,7 +14,7 @@ class TokenModel extends TableGateway
     public function __construct()
     {
         $this->dbAdapter = \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
-        $this->table = 'token';
+        $this->table = 'tokenExperto';
         $this->featureSet = new Feature\FeatureSet();
         $this->featureSet->addFeature(new Feature\GlobalAdapterFeature());
         $this->initialize();
@@ -29,7 +29,7 @@ class TokenModel extends TableGateway
         $select = $sql->select();
         $select->columns(array(
             'id',
-            'idVoluntario',
+            'idCliente',
             'token',
             'estatus'
         ))->from(array(
@@ -49,33 +49,34 @@ class TokenModel extends TableGateway
         $flag = false;
         $respuesta = array();
         
-        // print_r($dataToken);exit;
+//         print_r($arrayResponse);exit;
         
         try {
             $sql = new Sql($this->dbAdapter);
-            $insertar = $sql->insert('token');
+            $insertar = $sql->insert($this->table);
             $array = array(
-                'idVoluntario' => $id,
+                'idClientes' => $id,
                 'token' => $dataToken,
                 'estatus' => 1,
                 'fecha'=>$arrayResponse['fecha'],
                 'hora'=>$arrayResponse['hora']
             );
-            // print_r($array);
-            // exit;
+//             print_r($array);
+//             exit;
             $insertar->values($array);
             $selectString = $sql->getSqlStringForSqlObject($insertar);
             $results = $this->dbAdapter->query($selectString, Adapter::QUERY_MODE_EXECUTE);
             $flag = true;
             // echo "BIEN";
         } catch (\PDOException $e) {
-            // echo "First Message " . $e->getMessage() . "<br/>";
+            echo "First Message " . $e->getMessage() . "<br/>";
             $flag = false;
         } catch (\Exception $e) {
-            // echo "Second Message: " . $e->getMessage() . "<br/>";
+            echo "Second Message: " . $e->getMessage() . "<br/>";
         }
         $respuesta['status'] = $flag;
         // echo print_r($results->toArray());
+//         print_r($flag);exit;
         
         // $results = $execute->toArray();
         
@@ -86,7 +87,7 @@ class TokenModel extends TableGateway
     {
         try {
             
-            $consulta = $this->dbAdapter->query("UPDATE token SET estatus=2 WHERE idVoluntario= '" . $id["idVoluntario"] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
+            $consulta = $this->dbAdapter->query("UPDATE tokenExperto SET estatus=2 WHERE idCliente= '" . $id["idCliente"] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
             
             $flag = true;
         } catch (\PDOException $e) {
@@ -105,7 +106,7 @@ class TokenModel extends TableGateway
 //             print_r($datos[2]);exit;
             
             $consulta = $this->dbAdapter->query(
-                "UPDATE token SET fecha= '" . $id["fecha"] . "' , hora= '" . $id["hora"] . "'  WHERE idVoluntario= '" . $datos[2] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
+                "UPDATE tokenExperto SET fecha= '" . $id["fecha"] . "' , hora= '" . $id["hora"] . "'  WHERE idCliente= '" . $datos[2] . "' and token ='" . $id["token"] . "'", Adapter::QUERY_MODE_EXECUTE);
             $flag = true;
         } catch (\PDOException $e) {
             $flag = false;

@@ -1,10 +1,8 @@
 <?php
 namespace Experto\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Experto\Service\RecordsService;
-use Experto\Service\RecomendacionesService;
 use Experto\Service\FotosService;
+use Zend\Mvc\Controller\AbstractActionController;
 
 class FotosController extends AbstractActionController
 {

@@ -57,13 +57,16 @@ class IndexController extends BaseController
 
 	public function indexAction()
 	{
+	    
         // ID DE USUARIO DE SESION
         $form           = new UsersForm("company_update_form");
 
+        
         $idUser         = (int) $this->getIdUserSesion();
 
         // TIPO DE USUARIO
         $profileUser    = (int) $this->getPerfilUserSesion();
+        
 
         // PERFIL
         $profile        = $this->getUsersServices()->getAll($idUser); //($idUser);
@@ -76,17 +79,18 @@ class IndexController extends BaseController
         // Anuncios de compania
         $getCompanyNotice           = $supplier[0]['imgs_company'];
 
+        
         // Obtenemos lista de tipos de mascotas por id de proveedor
         $getCompanyTypePet          = $this->getCompanyTypePetService()->getCompanyTypePetById($supplier[0]['id_company']);
         //echo "<pre>"; print_r($getCompanyTypePet); exit;
 
         // Obtenemos lista de sector de actividad por id de proveedor
         $getCompanySectorActivity   = $this->getCompanySectorActivityService()->getCompanySectorActivityById($supplier[0]['id_company']);
-        //echo "<pre>"; print_r($getCompanySectorActivity); exit;
+//         echo "<pre>"; print_r($getCompanySectorActivity); exit;
 
         // REQUEST
         $request                    = $this->getRequest();
-
+ 
         // VALIDAR EL TIPO DE PETICION
         if ($request->isPost()) {
 

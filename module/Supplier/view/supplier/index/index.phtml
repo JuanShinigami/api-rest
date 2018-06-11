@@ -326,7 +326,7 @@
 						} else if($type['status'] == 0) {
 							$selectedCheck = "";
 						}
-
+						
 					?>
 						
 						<div class="col s6 m4 l3" style="margin-top: 10px; margin-bottom: 10px;">
@@ -336,7 +336,7 @@
 	    					</p>
 						</div>
 			
-					<?php endforeach; ?>
+					<?php endforeach;  ?>
 				</div>
 				
 			</div>
@@ -357,6 +357,7 @@
 
 				<div class="row container-checkbox-sector_activity">
 					<?php
+					
 					foreach($this->sector_activity as $key => $sector) : 
 
 						if($sector['status'] == 1) {
@@ -508,7 +509,7 @@
 		</div>
 
 		<?php
-		echo $this->form()->closeTag();
+		echo $this->form()->closeTag(); 
 		?>
 
 	</div>
@@ -551,6 +552,7 @@
                                 
              		</div>
 				</form>
+				
 
             	<form id="form_update_pass" method="post">
             		<div id="div_update_pass" style="display:none;" class="row">
@@ -599,6 +601,7 @@
 		<h4 class="center">Cambiar correo electr&oacute;nico</h4>
 		<p class="center">En esta ventana podrás cambiar tu cuenta de correo electrónico con la que inicias sesión en recupera pet</p>
 
+
 		<div class="row" style="margin-top: 20px;">
 			<div class="col s12 m12 l12">
 						      		
@@ -628,8 +631,10 @@
                                 
                             			</div>
                 </form>
+                
 
 				<form id="form_update_email">
+				
                              			<div id="div_update_email" style="display:none;" class="row">
 
                                 			<div class="col s12 m6 l6 offset-m3 offset-l3 left-align">
@@ -667,11 +672,14 @@
 		</div>
 
 	</div>
+	
 </div>
 
 <script src="<?php echo $this->basePath('/pegalinaslive/js/register/company.js'); ?>"></script>
+
 <script src="<?php echo $this->basePath('/pegalinaslive/js/addresses/addresses.js'); ?>"></script>
 
+<?php // print_r($this->neighborhood);exit;?>
 <script>
 // BasePath of project
 var $basePath 		= '<?php echo $this->basePath(); ?>';

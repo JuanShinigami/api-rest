@@ -1,7 +1,6 @@
 <?php
 namespace Experto\Service;
 
-use Experto\Model\RecomendacionesModel;
 use Experto\Model\FotosModel;
 
 class FotosService

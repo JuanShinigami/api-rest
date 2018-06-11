@@ -189,7 +189,7 @@ class VoluntarioCreadorService
 
     public function registroVoluntario($decodePostData)
     {
-        
+//         print_r($decodePostData);exit;
         // if ($this->getValidarToken()->validaToken($decodePostData)){
         $array = array();
         $pass=$this->password($decodePostData['contrasena']);

@@ -19,11 +19,11 @@ class ValidarTokenService
 
     public function generarToken($arrayResponse, $id)
     {
-        // var_dump($arrayResponse,$id);
+//         var_dump($arrayResponse, $id);
         
-        // var_dump($arrayResponse,$id);
+//         var_dump($arrayResponse,$id);
         
-        // exit;
+//         exit;
         // ['datos'][0]['id']
         $numero = rand(1, 100);
         // var_dump(rand(1, 100));exit;

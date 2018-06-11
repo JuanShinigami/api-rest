@@ -9,13 +9,13 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
+        'Experto',
         'Supplier',
         'DatosProveedor',
         'Auth',
         'Users',
         'Pets',
         'Articles',
-        'Experto',
         
     ),
 

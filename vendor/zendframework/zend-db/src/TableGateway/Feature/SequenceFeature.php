@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -60,7 +60,7 @@ class SequenceFeature extends AbstractFeature
             return $insert;
         }
 
-        $insert->values(array($this->primaryKeyField => $this->sequenceValue),  Insert::VALUES_MERGE);
+        $insert->values([$this->primaryKeyField => $this->sequenceValue], Insert::VALUES_MERGE);
         return $insert;
     }
 
@@ -91,7 +91,7 @@ class SequenceFeature extends AbstractFeature
             case 'PostgreSQL':
                 $sql = 'SELECT NEXTVAL(\'"' . $this->sequenceName . '"\')';
                 break;
-            default :
+            default:
                 return;
         }
 
@@ -119,7 +119,7 @@ class SequenceFeature extends AbstractFeature
             case 'PostgreSQL':
                 $sql = 'SELECT CURRVAL(\'' . $this->sequenceName . '\')';
                 break;
-            default :
+            default:
                 return;
         }
 

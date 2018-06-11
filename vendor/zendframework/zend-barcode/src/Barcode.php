@@ -12,6 +12,7 @@ namespace Zend\Barcode;
 use Traversable;
 use Zend\Barcode\Renderer\RendererInterface;
 use Zend\Stdlib\ArrayUtils;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Class for generate Barcode
@@ -50,8 +51,8 @@ abstract class Barcode
      */
     public static function getObjectPluginManager()
     {
-        if (!static::$objectPlugins instanceof ObjectPluginManager) {
-            static::$objectPlugins = new ObjectPluginManager();
+        if (! static::$objectPlugins instanceof ObjectPluginManager) {
+            static::$objectPlugins = new ObjectPluginManager(new ServiceManager);
         }
 
         return static::$objectPlugins;
@@ -64,8 +65,8 @@ abstract class Barcode
      */
     public static function getRendererPluginManager()
     {
-        if (!static::$rendererPlugins instanceof RendererPluginManager) {
-            static::$rendererPlugins = new RendererPluginManager();
+        if (! static::$rendererPlugins instanceof RendererPluginManager) {
+            static::$rendererPlugins = new RendererPluginManager(new ServiceManager);
         }
 
         return static::$rendererPlugins;
@@ -99,8 +100,8 @@ abstract class Barcode
     public static function factory(
         $barcode,
         $renderer = 'image',
-        $barcodeConfig = array(),
-        $rendererConfig = array(),
+        $barcodeConfig = [],
+        $rendererConfig = [],
         $automaticRenderError = true
     ) {
         /*
@@ -128,10 +129,10 @@ abstract class Barcode
         try {
             $barcode  = static::makeBarcode($barcode, $barcodeConfig);
             $renderer = static::makeRenderer($renderer, $rendererConfig);
-        } catch (Exception\ExceptionInterface $e) {
-            if ($automaticRenderError && !($e instanceof Exception\RendererCreationException)) {
-                $barcode  = static::makeBarcode('error', array('text' => $e->getMessage()));
-                $renderer = static::makeRenderer($renderer, array());
+        } catch (\Exception $e) {
+            if ($automaticRenderError && ! ($e instanceof Exception\RendererCreationException)) {
+                $barcode  = static::makeBarcode('error', ['text' => $e->getMessage()]);
+                $renderer = static::makeRenderer($renderer, []);
             } else {
                 throw $e;
             }
@@ -149,7 +150,7 @@ abstract class Barcode
      * @throws Exception\InvalidArgumentException
      * @return Object\ObjectInterface
      */
-    public static function makeBarcode($barcode, $barcodeConfig = array())
+    public static function makeBarcode($barcode, $barcodeConfig = [])
     {
         if ($barcode instanceof Object\ObjectInterface) {
             return $barcode;
@@ -177,7 +178,7 @@ abstract class Barcode
         /*
          * Verify that barcode parameters are in an array.
          */
-        if (!is_array($barcodeConfig)) {
+        if (! is_array($barcodeConfig)) {
             throw new Exception\InvalidArgumentException(
                 'Barcode parameters must be in an array or a Traversable object'
             );
@@ -186,7 +187,7 @@ abstract class Barcode
         /*
          * Verify that a barcode name has been specified.
          */
-        if (!is_string($barcode) || empty($barcode)) {
+        if (! is_string($barcode) || empty($barcode)) {
             throw new Exception\InvalidArgumentException(
                 'Barcode name must be specified in a string'
             );
@@ -203,7 +204,7 @@ abstract class Barcode
      * @throws Exception\RendererCreationException
      * @return Renderer\RendererInterface
      */
-    public static function makeRenderer($renderer = 'image', $rendererConfig = array())
+    public static function makeRenderer($renderer = 'image', $rendererConfig = [])
     {
         if ($renderer instanceof Renderer\RendererInterface) {
             return $renderer;
@@ -229,7 +230,7 @@ abstract class Barcode
         /*
          * Verify that barcode parameters are in an array.
          */
-        if (!is_array($rendererConfig)) {
+        if (! is_array($rendererConfig)) {
             throw new Exception\RendererCreationException(
                 'Barcode parameters must be in an array or a Traversable object'
             );
@@ -238,7 +239,7 @@ abstract class Barcode
         /*
          * Verify that a barcode name has been specified.
          */
-        if (!is_string($renderer) || empty($renderer)) {
+        if (! is_string($renderer) || empty($renderer)) {
             throw new Exception\RendererCreationException(
                 'Renderer name must be specified in a string'
             );
@@ -258,8 +259,8 @@ abstract class Barcode
     public static function render(
         $barcode,
         $renderer,
-        $barcodeConfig = array(),
-        $rendererConfig = array()
+        $barcodeConfig = [],
+        $rendererConfig = []
     ) {
         static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
     }
@@ -276,8 +277,8 @@ abstract class Barcode
     public static function draw(
         $barcode,
         $renderer,
-        $barcodeConfig = array(),
-        $rendererConfig = array()
+        $barcodeConfig = [],
+        $rendererConfig = []
     ) {
         return static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
     }

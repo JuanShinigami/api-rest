@@ -1,11 +1,10 @@
 <?php
 namespace Experto\Service;
 
-use Application\Model\TokenModel;
+use Experto\Model\TokenModel;
 use Zend\Filter\Decrypt;
 use Zend\Filter\Encrypt;
 use Zend\Form\Element\DateTime;
-use DateInterval;
 
 class ValidarTokenService
 {
@@ -19,11 +18,11 @@ class ValidarTokenService
 
     public function generarToken($arrayResponse, $id)
     {
-        // var_dump($arrayResponse,$id);
+//         var_dump($arrayResponse,$id);
         
         // var_dump($arrayResponse,$id);
         
-        // exit;
+//         exit;
         // ['datos'][0]['id']
         $numero = rand(1, 100);
         // var_dump(rand(1, 100));exit;
@@ -31,6 +30,8 @@ class ValidarTokenService
         $fi = new Encrypt();
         $fi->setKey('key');
         $result = $fi($arrayResponse['correo'] . "/" . $id['datos'][0]['nombre'] . "/" . $id['datos'][0]['id'] . "/" . $numero);
+        
+//         print_r($result);exit;
         
         $guardaToken = $this->getGuardarTokenModel()->addToken($result, $id['datos'][0]['id'], $arrayResponse);
         

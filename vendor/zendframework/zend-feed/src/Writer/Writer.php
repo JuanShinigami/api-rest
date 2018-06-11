@@ -52,12 +52,12 @@ class Writer
      *
      * @var array
      */
-    protected static $extensions = array(
-        'entry'         => array(),
-        'feed'          => array(),
-        'entryRenderer' => array(),
-        'feedRenderer'  => array(),
-    );
+    protected static $extensions = [
+        'entry'         => [],
+        'feed'          => [],
+        'entryRenderer' => [],
+        'feedRenderer'  => [],
+    ];
 
     /**
      * Set plugin loader for use with Extensions
@@ -76,7 +76,7 @@ class Writer
      */
     public static function getExtensionManager()
     {
-        if (!isset(static::$extensionManager)) {
+        if (! isset(static::$extensionManager)) {
             static::setExtensionManager(new ExtensionManager());
         }
         return static::$extensionManager;
@@ -105,13 +105,16 @@ class Writer
                 return;
             }
         }
-        if (!$manager->has($feedName)
-            && !$manager->has($entryName)
-            && !$manager->has($feedRendererName)
-            && !$manager->has($entryRendererName)
+        if (! $manager->has($feedName)
+            && ! $manager->has($entryName)
+            && ! $manager->has($feedRendererName)
+            && ! $manager->has($entryRendererName)
         ) {
-            throw new Exception\RuntimeException('Could not load extension: ' . $name
-                . 'using Plugin Loader. Check prefix paths are configured and extension exists.');
+            throw new Exception\RuntimeException(sprintf(
+                'Could not load extension "%s" using Plugin Loader. '
+                . 'Check prefix paths are configured and extension exists.',
+                $name
+            ));
         }
         if ($manager->has($feedName)) {
             static::$extensions['feed'][] = $feedName;
@@ -167,12 +170,12 @@ class Writer
     public static function reset()
     {
         static::$extensionManager = null;
-        static::$extensions   = array(
-            'entry'         => array(),
-            'feed'          => array(),
-            'entryRenderer' => array(),
-            'feedRenderer'  => array(),
-        );
+        static::$extensions   = [
+            'entry'         => [],
+            'feed'          => [],
+            'entryRenderer' => [],
+            'feedRenderer'  => [],
+        ];
     }
 
     /**
@@ -189,6 +192,7 @@ class Writer
         static::registerExtension('WellFormedWeb');
         static::registerExtension('Threading');
         static::registerExtension('ITunes');
+        static::registerExtension('GooglePlayPodcast');
     }
 
     public static function lcfirst($str)

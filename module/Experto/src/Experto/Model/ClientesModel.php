@@ -38,7 +38,7 @@ class ClientesModel extends TableGateway
 		return $result;
 	}
 	
-	public function addCliente($dataCliente){
+	public function addCliente($dataCliente,$pass){
 // 		print_r($dataCliente);exit;
 	    $flag = false;
 	    $respuesta = array();
@@ -52,7 +52,7 @@ class ClientesModel extends TableGateway
 	          
 	            'nombre'=>$dataCliente["nombre"],
 	            'correo'=>$dataCliente["correo"],
-	            'contrasena'=>$dataCliente["contrasena"]
+	            'contrasena'=>$pass
 	        );
 	        //		print_r($array);
 	        //		exit;
@@ -158,6 +158,37 @@ class ClientesModel extends TableGateway
 	    
 	}
 	
+	
+	public function loginClientes($correo,$pass)
+	{
+// 	           print_r($correo);
+// 	           print_r("   -----   >   ");
+// 	           print_r($pass);
+// 	           exit;
+	    $flag = false;
+	    $respuesta = array();
+	    
+	    try {
+	        
+	        $consulta = $this->dbAdapter->query("select * FROM clientes where correo = '" . $correo['correo'] . "' and contrasena = '" . $pass . "'", Adapter::QUERY_MODE_EXECUTE);
+	        
+	        $res = $consulta->toArray();
+	        
+	        if(!empty($res)){
+	            
+	            $flag = true;
+	            
+	        }
+	    } catch (\PDOException $e) {
+	        // echo "First Message " . $e->getMessage() . "<br/>";
+	        $flag = false;
+	    } catch (\Exception $e) {
+	        // echo "Second Message: " . $e->getMessage() . "<br/>";
+	    }
+	    $respuesta['status'] = $flag;
+	    $respuesta['datos'] = $res;
+	    return $respuesta;
+	}
 	
 
 }

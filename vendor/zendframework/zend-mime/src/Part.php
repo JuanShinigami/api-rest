@@ -26,7 +26,7 @@ class Part
     public $language;
     protected $content;
     protected $isStream = false;
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * create a new Mime Part.
@@ -38,17 +38,7 @@ class Part
      */
     public function __construct($content = '')
     {
-        if (! is_string($content) && ! is_resource($content)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                "'%s' must be string or resource",
-                $content
-            ));
-        }
-
-        $this->content = $content;
-        if (is_resource($content)) {
-            $this->isStream = true;
-        }
+        $this->setContent($content);
     }
 
     /**
@@ -265,10 +255,10 @@ class Part
     public function setContent($content)
     {
         if (! is_string($content) && ! is_resource($content)) {
-            throw new Exception\InvalidArgumentException(
-                "'%s' must be string or resource",
-                $content
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Content must be string or resource; received "%s"',
+                is_object($content) ? get_class($content) : gettype($content)
+            ));
         }
         $this->content = $content;
         if (is_resource($content)) {
@@ -303,7 +293,7 @@ class Part
      * @param array $filters
      * @return self
      */
-    public function setFilters($filters = array())
+    public function setFilters($filters = [])
     {
         $this->filters = $filters;
         return $this;
@@ -355,10 +345,10 @@ class Part
                     $this->content,
                     'convert.quoted-printable-encode',
                     STREAM_FILTER_READ,
-                    array(
+                    [
                         'line-length'      => 76,
                         'line-break-chars' => $EOL
-                    )
+                    ]
                 );
                 $this->filters[Mime::ENCODING_QUOTEDPRINTABLE] = $filter;
                 if (! is_resource($filter)) {
@@ -373,10 +363,10 @@ class Part
                     $this->content,
                     'convert.base64-encode',
                     STREAM_FILTER_READ,
-                    array(
+                    [
                         'line-length'      => 76,
                         'line-break-chars' => $EOL
-                    )
+                    ]
                 );
                 $this->filters[Mime::ENCODING_BASE64] = $filter;
                 if (! is_resource($filter)) {
@@ -431,7 +421,7 @@ class Part
      */
     public function getHeadersArray($EOL = Mime::LINEEND)
     {
-        $headers = array();
+        $headers = [];
 
         $contentType = $this->type;
         if ($this->charset) {
@@ -443,14 +433,14 @@ class Part
                           . " boundary=\"" . $this->boundary . '"';
         }
 
-        $headers[] = array('Content-Type', $contentType);
+        $headers[] = ['Content-Type', $contentType];
 
         if ($this->encoding) {
-            $headers[] = array('Content-Transfer-Encoding', $this->encoding);
+            $headers[] = ['Content-Transfer-Encoding', $this->encoding];
         }
 
         if ($this->id) {
-            $headers[]  = array('Content-ID', '<' . $this->id . '>');
+            $headers[]  = ['Content-ID', '<' . $this->id . '>'];
         }
 
         if ($this->disposition) {
@@ -458,19 +448,19 @@ class Part
             if ($this->filename) {
                 $disposition .= '; filename="' . $this->filename . '"';
             }
-            $headers[] = array('Content-Disposition', $disposition);
+            $headers[] = ['Content-Disposition', $disposition];
         }
 
         if ($this->description) {
-            $headers[] = array('Content-Description', $this->description);
+            $headers[] = ['Content-Description', $this->description];
         }
 
         if ($this->location) {
-            $headers[] = array('Content-Location', $this->location);
+            $headers[] = ['Content-Location', $this->location];
         }
 
         if ($this->language) {
-            $headers[] = array('Content-Language', $this->language);
+            $headers[] = ['Content-Language', $this->language];
         }
 
         return $headers;

@@ -1,6 +1,6 @@
 <?php
 namespace Experto\Controller;
-use Application\Service\ClientesService;
+use Experto\Service\ClientesService;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class ClientesController extends AbstractActionController
@@ -46,6 +46,27 @@ class ClientesController extends AbstractActionController
             return $response;
         }
 
+        exit;
+    }
+    
+    public function loginAction(){
+        
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) {
+            $postData       = $this->getRequest()->getContent();
+            $decodePostData = json_decode($postData, true);
+            
+            $result = $this->getClienteService()->loginCliente($decodePostData);
+            
+            $response = $this->getResponse()->setContent(\Zend\Json\Json::encode(array(
+                "response" => $result,
+            )));
+            
+            return $response;
+        }
+        
+        
         exit;
     }
     

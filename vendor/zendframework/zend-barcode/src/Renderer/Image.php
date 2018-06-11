@@ -21,9 +21,11 @@ class Image extends AbstractRenderer
      * List of authorized output format
      * @var array
      */
-    protected $allowedImageType = array('png',
+    protected $allowedImageType = [
+        'png',
         'jpeg',
-        'gif'  );
+        'gif',
+    ];
 
     /**
      * Image format
@@ -69,7 +71,7 @@ class Image extends AbstractRenderer
      */
     public function __construct($options = null)
     {
-        if (!function_exists('gd_info')) {
+        if (! function_exists('gd_info')) {
             throw new RendererCreationException(__CLASS__ . ' requires the GD extension');
         }
 
@@ -81,11 +83,11 @@ class Image extends AbstractRenderer
      *
      * @param null|int $value
      * @throws Exception\OutOfRangeException
-     * @return Image
+     * @return self Provides a fluent interface
      */
     public function setHeight($value)
     {
-        if (!is_numeric($value) || intval($value) < 0) {
+        if (! is_numeric($value) || intval($value) < 0) {
             throw new Exception\OutOfRangeException(
                 'Image height must be greater than or equals 0'
             );
@@ -109,11 +111,11 @@ class Image extends AbstractRenderer
      *
      * @param mixed $value
      * @throws Exception\OutOfRangeException
-     * @return self
+     * @return self Provides a fluent interface
      */
     public function setWidth($value)
     {
-        if (!is_numeric($value) || intval($value) < 0) {
+        if (! is_numeric($value) || intval($value) < 0) {
             throw new Exception\OutOfRangeException(
                 'Image width must be greater than or equals 0'
             );
@@ -136,7 +138,7 @@ class Image extends AbstractRenderer
      * Set an image resource to draw the barcode inside
      *
      * @param resource $image
-     * @return Image
+     * @return self Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function setResource($image)
@@ -155,7 +157,7 @@ class Image extends AbstractRenderer
      *
      * @param string $value
      * @throws Exception\InvalidArgumentException
-     * @return Image
+     * @return self Provides a fluent interface
      */
     public function setImageType($value)
     {
@@ -163,7 +165,7 @@ class Image extends AbstractRenderer
             $value = 'jpeg';
         }
 
-        if (!in_array($value, $this->allowedImageType)) {
+        if (! in_array($value, $this->allowedImageType)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid type "%s" provided to setImageType()',
                 $value
@@ -331,14 +333,14 @@ class Image extends AbstractRenderer
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
-        $newPoints = array($points[0][0] + $this->leftOffset,
+        $newPoints = [$points[0][0] + $this->leftOffset,
             $points[0][1] + $this->topOffset,
             $points[1][0] + $this->leftOffset,
             $points[1][1] + $this->topOffset,
             $points[2][0] + $this->leftOffset,
             $points[2][1] + $this->topOffset,
             $points[3][0] + $this->leftOffset,
-            $points[3][1] + $this->topOffset,   );
+            $points[3][1] + $this->topOffset,   ];
 
         $allocatedColor = imagecolorallocate(
             $this->resource,
@@ -409,7 +411,7 @@ class Image extends AbstractRenderer
             }
             imagestring($this->resource, $font, $positionX, $positionY, $text, $color);
         } else {
-            if (!function_exists('imagettfbbox')) {
+            if (! function_exists('imagettfbbox')) {
                 throw new Exception\RuntimeException(
                     'A font was provided, but this instance of PHP does not have TTF (FreeType) support'
                 );
